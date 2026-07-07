@@ -46,7 +46,7 @@
 <div>@TempData["Message"]</div>
 
 <form method="get" class="row mt-3">
-    <div class="col-md-3">
+    <div class="col-md-3 d-none">
         <select name="sortOrder" class="form-control form-select">
             <option value="DateDesc">Date Descending</option>
             <option value="DateAsc">Date Ascending</option>
@@ -55,7 +55,7 @@
         </select>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 d-none">
         <select name="fileType" class="form-control form-select">
             <option value="All">All Media Items</option>
             <option value=".jpg">Images</option>
@@ -65,11 +65,11 @@
     </div>
 
     <div class="col-md-4">
-        <input type="text" name="search" placeholder="Type to search" value="@Model.SearchTerm" class="form-control" />
+        <input type="text" id="searchText" name="search" placeholder="Type to search" value="@Model.SearchTerm" class="form-control" />
     </div>
 
     <div class="col-md-2">
-        <button class="btn btn-secondary w-100">Search</button>
+        <button class="btn btn-secondary w-100" type="button" id="btnSearchMedia">Search</button>
     </div>
 </form>
 
