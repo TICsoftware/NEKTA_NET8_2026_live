@@ -76,8 +76,7 @@
                     @if (item.status == 1)
                     {
                         <a asp-action="Deactivate" asp-route-Id="@CryptoEngine.Encrypt(item.id.ToString())" 
-                           onclick="return confirm('Deactivate this field?');"
-                           class="btn btn-sm btn-outline-danger ms-2">Deactivate</a>
+                           class="btn btn-sm btn-outline-danger ms-2 js-confirm-deactivate">Deactivate</a>
                     }
                 </td>
             </tr>
@@ -95,3 +94,7 @@
         }
     </ul>
 </nav>
+
+@section Scripts {
+    <script src="~/Assets/scripts/contextfield_index.js"></script>
+}

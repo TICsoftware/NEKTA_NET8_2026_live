@@ -29,8 +29,11 @@
 
     <partial name="_ContextFieldForm" model="Model" />
 
-    <button type="submit" class="btn btn-success cms-btn-custom" onclick="return prepareJSON()">Update</button>
+    <button type="submit" class="btn btn-success cms-btn-custom js-prepare-json">Update</button>
     <a href="@Url.Action("Index")" class="btn btn-secondary ms-2 cms-btnsecondary-custom">Cancel</a>
 }
 
-<script src="~/js/contextfields.js"></script>
+@section Scripts {
+    <script src="~/js/contextfields.js"></script>
+    <script src="~/Assets/scripts/contextfield_form.js"></script>
+}

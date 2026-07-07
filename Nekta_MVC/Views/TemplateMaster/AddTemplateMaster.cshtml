@@ -1,4 +1,4 @@
-@model Nekta_MVC.Models.Manage_Model.Model_Template_Master
+@model Oncopathology_MVC.Models.Manage_Model.Model_Template_Master
 @{
     Layout = "~/Views/Shared/Manage/_Layout_RHS.cshtml";
     ViewData["Title"] = "Add Template Master";
@@ -18,11 +18,11 @@
                     </div>
 
     <div class="form-horizontal row">
-        @Html.ValidationSummary(true)
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
         <div class="col-md-4">
             <!-- Language Master -->
-            <div class="form-group">
-                <label asp-for="Language_Master_ID">Language</label>
+            <div class="form-group mb-3">
+                <label asp-for="Language_Master_ID" class="control-label required"></label>
                 <select asp-for="Language_Master_ID" class="form-control form-select" asp-items="@(new SelectList(ViewBag.Languages, "ID", "Language_Name"))">
                     <option value="">-- Select --</option>
                 </select>
@@ -31,24 +31,25 @@
         </div>
         <div class="col-md-4">
             <!-- Template Name -->
-            <div class="form-group">
+            <div class="form-group mb-3">
                 @Html.LabelFor(model => model.Name, new { @class = "control-label required" })
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter Template Name" })
-                    @Html.ValidationMessageFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Enter Template Name" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-md-4">
             <!-- Status -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2 required" })
-                    @Html.DropDownListFor(model => model.Status,
-                        new List<SelectListItem>
-                        {
-                            new SelectListItem{ Text="Active", Value = "1" },
-                            new SelectListItem{ Text="Inactive", Value = "0" }
-                        },
-                        new { id = "ddStatus", @class = "form-control form-select" })
-                    @Html.ValidationMessageFor(model => model.Status)
+            <div class="form-group mb-3">
+                @Html.LabelFor(model => model.Status, new { @class = "control-label required" })
+                @Html.DropDownListFor(model => model.Status,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Active", Value = "1" },
+                        new SelectListItem{ Text="Inactive", Value = "0" }
+                    },
+                    "--Select--",
+                    new { id = "ddStatus", @class = "form-control form-select" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -69,12 +70,9 @@
 </section>
 }
 
-@{
-    var message = TempData["AlertMessage"] ?? string.Empty;
-}
+<div id="template-master-alert-message" data-message="@(TempData["AlertMessage"] ?? string.Empty)" hidden></div>
 
-<script type="text/javascript">
-    var message = '@message';
-    if (message)
-        alert(message);
-</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/Assets/scripts/template_master.js"></script>
+}

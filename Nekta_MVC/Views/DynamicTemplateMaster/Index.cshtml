@@ -83,8 +83,7 @@
                     @if (item.Status == 1)
                     {
                         <a asp-action="Deactivate" asp-route-Id="@CryptoEngine.Encrypt(item.ID.ToString())"
-                           class="btn btn-sm btn-outline-danger"
-                           onclick="return confirm('Deactivate?')">Deactivate</a>
+                           class="btn btn-sm btn-outline-danger js-confirm-deactivate">Deactivate</a>
                     }
                 </td>
             </tr>
@@ -106,29 +105,5 @@
 </nav>
 
 @section Scripts {
-    <script>
-        (function () {
-            var form = document.getElementById("searchForm");
-            var input = document.getElementById("search");
-            var message = document.getElementById("searchValidationMessage");
-            if (!form || !input || !message) return;
-
-            form.addEventListener("submit", function (e) {
-                var value = (input.value || "").trim();
-                message.textContent = "";
-
-                if (value.length === 0) {
-                    e.preventDefault();
-                    message.textContent = "Search Input is required.";
-                    return;
-                }
-
-                input.value = value;
-                if (!input.checkValidity()) {
-                    e.preventDefault();
-                    message.textContent = "Search must be 2-100 valid characters.";
-                }
-            });
-        })();
-    </script>
+    <script src="~/Assets/scripts/dynamic_template_master_index.js"></script>
 }

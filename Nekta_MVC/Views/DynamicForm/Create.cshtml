@@ -1,6 +1,6 @@
-@model Nekta_MVC.Models.Manage_Model.DynamicFormViewModel
-@using Nekta_MVC.Models.Manage_Model;
-@using Nekta_MVC.Controllers
+@model Oncopathology_MVC.Models.Manage_Model.DynamicFormViewModel
+@using Oncopathology_MVC.Models.Manage_Model;
+@using Oncopathology_MVC.Controllers
 @using System.Reflection
 
 @using Microsoft.AspNetCore.Mvc.ViewFeatures
@@ -42,7 +42,7 @@
     {
         
 var modelExp = ModelExpr.CreateModelExpression(
-    (ViewDataDictionary<Nekta_MVC.Models.Manage_Model.DynamicFormViewModel>)ViewData,
+    (ViewDataDictionary<Oncopathology_MVC.Models.Manage_Model.DynamicFormViewModel>)ViewData,
     prop.Name
 );
         var attr = prop.GetCustomAttribute<DynamicFieldAttribute>();

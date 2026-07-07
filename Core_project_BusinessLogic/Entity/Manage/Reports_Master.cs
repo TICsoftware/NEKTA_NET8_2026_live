@@ -22,6 +22,6 @@ namespace Core_project_BusinessLogic.Entity
         public int Id { get; set; }
         public string? Title { get; set; }
         public string? Mail_title { get; set; }
-        public int Parent_id { get; set; }
+        public int? Parent_id { get; set; }
     }
 }

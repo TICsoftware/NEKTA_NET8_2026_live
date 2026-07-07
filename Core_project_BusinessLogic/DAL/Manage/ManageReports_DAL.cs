@@ -61,12 +61,12 @@ public class ManageReports_DAL : DBHelper
         }
     }
 
-    protected DataTable Report_categories_List_DAL()
+    protected DataTable Report_categories_List_DAL(int parent_id)
     {
         DataTable dt = new();
         try
         {
-            dt = GetDataSet("Report_categories_List").Tables[0];
+            dt = GetDataSet("Report_categories_List","@parent_id",parent_id.ToString()).Tables[0];
             return dt;
         }
         catch

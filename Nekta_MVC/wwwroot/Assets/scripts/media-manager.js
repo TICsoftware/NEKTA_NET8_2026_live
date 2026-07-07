@@ -887,4 +887,44 @@ $(document).off("click", "#btnLoadMore").on("click", "#btnLoadMore", function ()
 
 
 
+    $(document).off("click", "#btnSearchMedia").on("click", "#btnSearchMedia", function (e) {
+        e.preventDefault();
+    
+        $.ajax({
+            url: "/MediaManager/SearchMedia",
+            type: "GET",
+            data: {
+                sortOrder: $("#sortOrder").val(),
+                fileType: $("#searchFileType").val(),
+                search: $("#searchText").val(),
+                page: 1
+            },
+            beforeSend: function () {
+                $(".row.g-3").html("<div class='text-center p-3'>Loading...</div>");
+            },
+            success: function (html) {
+                
+                // remove old button
+                $("#btnLoadMore").remove();
+
+                // append new items ONLY
+                $(".row.g-3").empty();
+                $(".row.g-3").append(html);
+
+                // update page
+                $("#currentPage").val(1);
+    
+            },
+            error: function () {
+                alert("Search failed.");
+            }
+        });
+    
+    });
+
+
+
+
+
+
 })();

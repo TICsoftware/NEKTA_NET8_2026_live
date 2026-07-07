@@ -33,29 +33,26 @@ public class ManageReports_BAL : ManageReports_DAL
     }
 
 
-    public List<Report_Category_Master> Report_categories_List_BAL()
+    public List<Report_Category_Master> Report_categories_List_BAL(int parent_id)
     {
         List<Report_Category_Master> obj = new();
         DataTable dt = new();
         try
         {
-            dt = Report_categories_List_DAL();
+            dt = Report_categories_List_DAL(parent_id);
+            obj.Add(new Report_Category_Master { Title = "Select", Parent_id = 0 });
             if (dt.Rows.Count > 0)
             {
-                foreach(DataRow row in dt.Rows)
+                foreach (DataRow row in dt.Rows)
                 {
-                    obj.Add(new Report_Category_Master{ Title="Select" ,Parent_id = -1 });
                     obj.Add(new Report_Category_Master
                     {
-                        Title=row["Title"].ToString(), 
-                        Parent_id=Convert.ToInt32(row["Parent_Id"])
+                        Title = row["Title"].ToString(),
+                        Parent_id = Convert.ToInt32(row["Parent_Id"])
                     });
                 }
             }
-            else
-            {
 
-            }
             return obj;
         }
         catch (System.Exception)
