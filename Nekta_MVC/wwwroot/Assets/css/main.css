@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+@source "../../../Views/**/*.cshtml";
+@source "../../../Pages/**/*.cshtml";
+@source "../../../wwwroot/**/*.{html,js,ts,jsx,tsx}";
+
+@theme{
+  /* ── Font ── */
+  --font-body: "Poppins", sans-serif;
+
+  /* ── Font Scale ── */
+  --text-h1:    clamp(2rem, 1.482rem + 2.21vw, 3.25rem); /* 32px → 52px */
+  --text-h2:    clamp(1.75rem, 1.284rem + 1.99vw, 2.875rem);  /* 28px → 46px */
+  --text-h3:    clamp(1.25rem, 1.198rem + 0.22vw, 1.375rem);/* 20px → 22px */
+  --text-h4:    clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);/* 18px → 20px */
+  --text-p:      clamp(1rem, 0.948rem + 0.22vw, 1.125rem);     /* 16px → 18px */
+  --text-small:   clamp(0.875rem, 0.35vw + 0.7rem,  0.875rem);
+  --text-button:  clamp(1rem,  0.948rem + 0.22vw, 1.125rem);
+  --text-20:     clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem); /* 18px → 20px */
+  --text-12: clamp(0.7rem, 0.65rem + 0.2vw, 0.75rem);
+  --text-intro: clamp(1.125rem, 1.021rem + 0.44vw, 1.375rem); /* 18px → 22px */
+  
+
+
+
+  /* ── Brand Colors ── */
+  --color-primary: #EBE3C8;   /**CREAM**/
+  --color-secondary: #748D6E; /**Green**/
+  --color-third: #FC713C;     /**Orange**/  
+
+
+  /* ── Base Colors / Backgrounds ── */
+  --color-text:  #454545;  /**TEXT GRAY**/
+  --color-text-heading: #1C1918; /**DARK BLACK**/
+  --color-text-dark: #384634; /**dark green**/
+
+ 
+}
+
+
+
+/* ---------------------------------------
+   FLUID TYPOGRAPHY TOKENS
+--------------------------------------- */
+/* .dark {
+  --color-text-heading:  #ffffff;
+  --color-text-body:     #131313;
+  --color-text-muted:    #9a9a9a;
+  --color-text-mid:      #e5e5e5;
+  --color-surface:       #0f0f0f;
+  --color-surface-alt:   #1a1a1a;
+  --color-border:        rgba(255, 255, 255, 0.12);
+  --color-white:  #ffffff;
+  --bg-light-primary: #555;
+} 
+
+.dark body { background-color: rgb(19, 19, 19);}
+.dark .title-heading-anim {color: #fff;}
+.dark .title-heading-anim .highlight-span {color: #a6a6a6;}
+
+
+.dark p {color: var(--text-white);} */
+
+
+/* ---------------------------------------
+   OPTIONAL BASE STYLES
+--------------------------------------- */
+p { font-family: var(--font-body); font-size: var(--text-p); margin-bottom: 20px;}
+/* p:first-child { margin-bottom: 0; } */
+p:last-child { margin-bottom: 0; }
+
+/* -----------------------------------------------
+   RESET
+------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+ font-family: var(--font-body); 
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+   transition:background-color 0.35s ease,color 0.35s ease;
+   font-weight: 400;
+   background-color: var(--color-surface);
+  }
+
+
+@layer base {
+/* -----------------------------------------------
+   TYPOGRAPHY BASE
+------------------------------------------------- */
+h1{font-weight: 500;}
+h2, h3, h4, h5 {font-weight: 600;}
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-body);
+  color: var(--color-secondary);
+  line-height: 1.15;
+}
+
+
+
+/* -----------------------------------------------
+   LINKS & MEDIA
+------------------------------------------------- */
+a { text-decoration: none; color: inherit;font-size: var(--text-p); }
+button { font-family: inherit; font-size: var(--text-button); cursor: pointer; }
+
+img, picture, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+}
+
+
+/* -----------------------------------------------
+   CUSTOM CONTAINER
+------------------------------------------------- */
+@layer componants  {
+  .container {    
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+       
+  width: 90%;
+  max-width: 1680px;
+  margin-inline: auto; /* centers it */
+}
+
+
+  .container-fluid{padding-left: 1.25rem; padding-right: 1.25rem;}
+  
+}
+
+@layer utilities {  
+  .rounded-lg {border-radius:1.5rem;  }
+
+
+  .text-secondary {color: var(--color-text-secondary);}
+  .bg-light-primary {background-color: var(--bg-light-primary);}
+  .dark .bg-light-primary h3 {color: #fff;}
+
+   .section-spacing {
+    @apply py-10 md:py-15 2xl:py-20;
+  }
+  .section-pt {
+    @apply pt-10 md:pt-15  2xl:pt-20;
+  }
+   .section-pb {
+    @apply pb-10 md:pb-15  2xl:pb-20;
+  }
+/* Hide system cursor on desktop */
+
+
+
+
+/* ------------------------
+    Theme Button
+------------------------*/
+.btn-primary,
+.btn-secondary {
+    min-height: 44px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition:
+        transform var(--motion-fast) var(--ease-premium),
+        box-shadow var(--motion-fast) var(--ease-premium),
+        background-color var(--motion-fast) var(--ease-premium),
+        border-color var(--motion-fast) var(--ease-premium),
+        color var(--motion-fast) var(--ease-premium);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-cream);
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.icon-button:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background: var(--color-green);
+    border-color: var(--color-green);
+    color: var(--color-cream);
+    box-shadow: 0 14px 28px rgb(116 141 110 / 0.24);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    background: #5f7a64;
+    border-color: #5f7a64;
+}
+
+.btn-primary img {
+    transition: transform var(--motion-fast) var(--ease-premium);
+}
+
+.btn-primary:hover img,
+.btn-primary:focus-visible img {
+    transform: translateX(3px);
+}
+
+.btn-secondary:focus-visible,
+.btn-primary:focus-visible{  outline: 2px solid var(--color-green); outline-offset: 4px;}
+
+
+
+/* =========================
+   PREMIUM LEFT → RIGHT FILL
+========================= */
+
+.btn-slide-fill{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    transition:
+        transform .45s ease,
+        color .45s ease;
+}
+
+/* animated layer */
+.btn-slide-fill::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background: linear-gradient( 90deg, #f7e9d5 0%, #fff4e5 45%, #f7e9d5 100% );
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition:
+        transform .7s cubic-bezier(.22,1,.36,1);
+
+    z-index:0;
+}
+
+/* content stays above */
+.btn-slide-fill span,
+.btn-slide-fill img{
+    position:relative;
+    z-index:2;
+
+    transition: all .5s ease;
+}
+
+/* Hover */
+.btn-slide-fill:hover{
+    transform: translateY(-2px);
+}
+
+.btn-slide-fill:hover::before{
+    transform: scaleX(1);
+}
+
+/* text + arrow */
+.btn-slide-fill:hover span{
+    color:#1b1b1b;
+}
+
+.btn-slide-fill:hover img{
+    transform: translateX(8px);
+}
+
+/* press */
+.btn-slide-fill:active{
+    transform: scale(.98);
+}
+
+
+
+}
+
