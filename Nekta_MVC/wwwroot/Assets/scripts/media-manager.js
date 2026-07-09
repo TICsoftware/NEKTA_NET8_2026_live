@@ -350,7 +350,17 @@
                     $("#dropZone").html(defaultText);
     
                     $("#uploadMessage").html(`<span class='text-success'>${res.message}</span>`);
-                    $("#mediaManagerModalBody").load("/MediaManager/IndexPartial");
+
+                    var $target = $("#mediaManagerModalBody");
+                    
+
+                    if ($target.length > 0) {
+                        $target.load("/MediaManager/IndexPartial");
+                    } else {
+                        $("#DivMedia").load("/MediaManager/IndexPartial");
+                    }
+
+                    //$("#mediaManagerModalBody").load("/MediaManager/IndexPartial");
     
                 } else {
                     $("#uploadMessage").html(`<span class='text-danger'>${res.message}</span>`);

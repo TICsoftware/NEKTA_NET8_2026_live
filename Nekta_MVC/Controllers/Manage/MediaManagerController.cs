@@ -56,62 +56,75 @@ namespace Nekta_MVC.Controllers.Manage
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(List<IFormFile> files, string fileType)
         {
-            if (string.IsNullOrEmpty(fileType))
-                return Json(new { success = false, message = "Please select file type." });
-
-            if (files == null || files.Count == 0)
-                return Json(new { success = false, message = "No files selected." });
-
-            string folderName = fileType.ToLower() switch
+            try
             {
-                "masthead" => "masthead",
-                "thumbnail" => "thumbnail",
-                "background" => "background",
-                "icon" => "icons",
-                "pdf" => "pdf",
-                "video" => "video",
-                "doc" => "documents",
-                "investor" => "investor",
-                "press" => "pressrelease",
-                _ => "others"
-            };
+                if (string.IsNullOrEmpty(fileType))
+                    return Json(new { success = false, message = "Please select file type." });
 
-            string basePath = Path.Combine(_env.WebRootPath, "uploads", folderName);
+                if (files == null || files.Count == 0)
+                    return Json(new { success = false, message = "No files selected." });
 
-            if (!Directory.Exists(basePath))
-                Directory.CreateDirectory(basePath);
-
-            foreach (var file in files)
-            {
-                string ext = Path.GetExtension(file.FileName);
-                string newName = file.FileName;  // use same name
-                string fullPath = Path.Combine(basePath, newName);
-
-                string dbPath = $"/uploads/{folderName}/{newName}";
-
-                var media = new MediaItem
+                string folderName = fileType.ToLower() switch
                 {
-                    media_file_name = file.FileName,
-                    file_path = dbPath,
-                    file_type = ext.Replace(".", ""),
-                    //file_size = Math.Round(file.Length / 1024.0, 2) + " KB",
-                    file_size = file.Length.ToString(),
-                    Created_UserID = 1,
-                    status = 2
+                    "masthead" => "masthead",
+                    "thumbnail" => "thumbnail",
+                    "background" => "background",
+                    "icon" => "icons",
+                    "pdf" => "pdf",
+                    "video" => "video",
+                    "doc" => "documents",
+                    "investor" => "investor",
+                    "press" => "pressrelease",
+                    _ => "others"
                 };
 
+                string basePath = Path.Combine(_env.WebRootPath, "uploads", folderName);
+
+                if (!Directory.Exists(basePath))
+                    Directory.CreateDirectory(basePath);
+
+                foreach (var file in files)
+                {
+                    string ext = Path.GetExtension(file.FileName);
+                    string newName = file.FileName;  // use same name
+                    string fullPath = Path.Combine(basePath, newName);
+
+                    string dbPath = $"/uploads/{folderName}/{newName}";
+
+                    var media = new MediaItem
+                    {
+                        media_file_name = file.FileName,
+                        file_path = dbPath,
+                        file_type = ext.Replace(".", ""),
+                        //file_size = Math.Round(file.Length / 1024.0, 2) + " KB",
+                        file_size = file.Length.ToString(),
+                        Created_UserID = 1,
+                        status = 2
+                    };
 
 
-                int result = _repo.Add_Media_bal(media);
 
-                if (result <= 0)
-                    return Json(new { success = false, message = "File already exists!" });
+                    int result = _repo.Add_Media_bal(media);
 
-                using var fs = new FileStream(fullPath, FileMode.Create);
-                await file.CopyToAsync(fs);
+                    if (result <= 0)
+                        return Json(new { success = false, message = "File already exists!" });
+
+                    using var fs = new FileStream(fullPath, FileMode.Create);
+                    await file.CopyToAsync(fs);
+                }
+
+                return Json(new { success = true, message = "Files uploaded successfully!" });
+
             }
-
-            return Json(new { success = true, message = "Files uploaded successfully!" });
+            catch (Exception ex)
+            {
+                FileLogger.LogError("/Upload :", ex);
+                return Json(new { success = true, message = "Files uploaded faileds!" });
+            }
+            finally
+            {
+                //_repo.Dispose();
+            }
         }
 
 
