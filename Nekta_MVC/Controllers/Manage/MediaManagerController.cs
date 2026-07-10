@@ -119,7 +119,7 @@ namespace Nekta_MVC.Controllers.Manage
             catch (Exception ex)
             {
                 FileLogger.LogError("/Upload :", ex);
-                return Json(new { success = true, message = "Files uploaded faileds!" });
+                return Json(new { success = true, message = "Files uploaded faileds!" + ex.Message.ToString() });
             }
             finally
             {
