@@ -15,15 +15,7 @@
      
 }
 <link rel="stylesheet" href="/Assets/ckeditor5/ckeditor5.css" />
-<style>
-    /* Ensure CKEditor is visible inside the spot-templates modal (scrollable modal body can clip min-height) */
-    #spotTemplatesModalBody .ck.ck-editor__editable {
-        min-height: 180px;
-    }
-    #spotTemplatesModalBody .ck.ck-editor {
-        min-height: 200px;
-    }
-</style>
+<link rel="stylesheet" href="~/Assets/css/dynamic_data_add_temp.css" />
 @if (mode == "Main")
 {
     <h2>Main Component: @(reference?.Context_Title ?? "Reference")</h2>
@@ -135,120 +127,6 @@ else
     <button class="btn btn-primary">Save</button>
 </form>
 
-<script>
-(function () {
-    $(document)
-        .off("submit.addDataTemp", "#addContextDetailsFormTemp")
-        .on("submit.addDataTemp", "#addContextDetailsFormTemp", function (e) {
-            e.preventDefault();
-
-            console.log("EDIT SUBMIT CALLED");
-
-            // 🔥 CKEDITOR SYNC
-            if (window.syncCkEditorsToSource) {
-                window.syncCkEditorsToSource(
-                    document.getElementById("addContextDetailsFormTemp")
-                );
-            }
-
-
-             
-            @* if (typeof window.syncCkEditorsToSource === "function") {
-                window.syncCkEditorsToSource(document.getElementById("addContextDetailsFormTemp"));
-            } *@
-
-            if (!validateDynamicFormTemp()) {
-                return;
-            }
-
-            var $form = $(this);
-            $.ajax({
-                url: $form.attr("action"),
-                type: "POST",
-                data: $form.serialize(),
-                success: function (response) {
-                    if (response.success) {
-                        alert("Data added successfully");
-                        if (typeof window.hideSpotTemplatesModal === "function") {
-                           var modalEl = document.getElementById('modal_spottemplates');
-var modal = bootstrap.Modal.getInstance(modalEl);
-
-if (modal) {
-    modal.hide();
-}
-                        }
-                        if (typeof window.Refresh_context_details === "function") {
-                            window.Refresh_context_details(false);
-                        } else if (window.parent && typeof window.parent.hideSpotTemplatesModal === "function") {
-                            window.parent.hideSpotTemplatesModal();
-                            window.parent.Refresh_context_details(false);
-                        }
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function () {
-                    alert("Error occurred");
-                }
-            });
-        });
-})();
-</script>
-<script>
-
-function validateDynamicFormTemp() {
-
-    let isValid = true;
-    $(".error-msg").remove();
-
-    $(".dynamic-field").each(function () {
-
-        let value = ($(this).val() || "").toString();
-        let required = $(this).data("required") === true || $(this).data("required") === "true";
-        let validation = $(this).data("validation");
-        let message = $(this).data("message");   // 🔹 custom message
-        let name = $(this).data("name");
-
-        // 🔹 REQUIRED VALIDATION
-        if (required && (!value || value.trim() === "")) {
-
-            let msg = message || (name + " is required");
-
-           // alert(msg);
-           $(this).after(`<span class="error-msg text-danger">${msg}</span>`);
-           this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-$(this).focus();
-            isValid = false;
-            return false;
-        }
-
-        // 🔹 REGEX VALIDATION
-        if (validation && value) {
-            try {
-                let regex = new RegExp(validation);
-
-                if (!regex.test(value)) {
-
-                    let msg = message || (name + " is invalid");
-
-                    //alert(msg);
-                    $(this).after(`<span class="error-msg text-danger">${msg}</span>`);
-                   this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-$(this).focus();
-                    isValid = false;
-                    return false;
-                }
-            }
-            catch (e) {
-                console.error("Invalid regex for field:", name);
-            }
-        }
-
-    });
-
-    return isValid;
-}
-
-</script>
+<script src="~/Assets/scripts/dynamic_data_add_temp.js"></script>
 
   
