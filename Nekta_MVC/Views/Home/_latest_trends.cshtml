@@ -1,0 +1,116 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+@{
+    var Component = Model
+    .Where(x => x.IsBlock == 0)
+    .OrderBy(x => x.Sequence)
+    .FirstOrDefault();
+}
+
+<section class="bg-[#F6F4E6] section-spacing overflow-hidden">
+    <div class="container">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center max-w-6xl mx-auto">
+            <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(Component.DisplayTitle)
+                ? Component.DisplayTitle.CleanParagraphTags()
+                : Component.Title)
+            </h2>
+            <p>@Html.Raw(Component.Intro.CleanParagraphTags())</p>
+        </div>
+
+        <!-- Swiper Slider -->
+        <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
+            <div class="swiper-wrapper">
+                <!-- Card 1 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group blogs-cards-wrapper">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                            <img loading="lazy" src="/assets/images/insights/trend1.png" alt="Catering Trends"
+                                class="w-full object-cover" />
+                        </div>
+                        <div class="py-6 blogs-cards-content">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
+                                Study</span>
+                            <h3 class="insight-title line-clamp-2">
+                                Top Catering Trends Transforming
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="/assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                            <img loading="lazy" src="/assets/images/insights/chef-creativity.png" alt="Chef Creativity"
+                                class="w-full object-cover" />
+                        </div>
+                        <div class="py-6">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Blogs</span>
+                            <h3 class="insight-title line-clamp-2">
+                                How Our Chefs Craft Authentic
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="/assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                            <img loading="lazy" src="/assets/images/insights/premium-catering.png"
+                                alt="Premium Catering" class="w-full object-cover" />
+                        </div>
+                        <div class="py-6">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Blogs</span>
+                            <h3 class="insight-title line-clamp-2">
+                                Featured for Excellence in Premium
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="/assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blogs-slider-nav">
+                <button class="blogs-prev" aria-label="Previous">
+                    <img src="/assets/images/arrows/swiperLeft.png" alt="swiperLeft" class="max-w-full">
+                </button>
+
+                <button class="blogs-next" aria-label="Next">
+                    <img src="/assets/images/arrows/swiperRight.png" alt="swiperRight" class="max-w-full">
+                </button>
+            </div>
+
+        </div>
+        <!-- View All Button -->
+        <div class="flex justify-center mt-6">
+            <a href="#" class="common-btn flex items-center gap-2 btn-slide-fill">
+                <span>View All Blogs</span>
+                <img loading="lazy" src="/assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+            </a>
+        </div>
+    </div>
+</section>

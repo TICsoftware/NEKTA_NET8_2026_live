@@ -1,0 +1,96 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+@{
+    var Component = Model
+    .Where(x => x.IsBlock == 0)
+    .OrderBy(x => x.Sequence)
+    .FirstOrDefault();
+}
+
+
+<section class="about-section section-spacing overflow-hidden">
+    <div class="container">
+        <div class="about-grid grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <!-- Left Text -->
+            <div class="space-y-6 md:space-y-8">
+                <div class="section-title-outer">
+                    <h2 class="title-section  text-h2 " data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(Component.DisplayTitle)
+                        ? Component.DisplayTitle.CleanParagraphTags()
+                        : Component.Title)
+                    </h2>
+                </div>
+
+                <div class="about-copy space-y-6 px-0 md:px-8 relative">
+                    @Html.Raw(Component.Content)
+
+                    @if (!string.IsNullOrWhiteSpace(Component.Url))
+                    {
+                        <div class="flex justify-start mt-6">
+                            <a href="@Component.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                                <span>@Component.Url_Text</span>
+                                <img loading="lazy" src="/assets/images/arrows/creamarrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    }
+
+                    <div class="leafimg leaf-field pointer-events-none absolute z-20 overflow-visible">
+                        <img loading="lazy" src="/assets/images/leafimg.png" alt="leafImg"
+                            class="leaf-motion leaf-image absolute top-0 left-0 opacity-0 transform-gpu will-change-transform select-none" />
+                    </div>
+                </div>
+            </div>
+            <!-- Right Image Collage -->
+            <div class="image-collage-sway collage-stage relative w-full mx-auto lg:ml-auto overflow-visible">
+                <!-- First image - no animation -->
+                <img loading="lazy" src="@Component.component_icon_image" alt="@Component.component_icon_image_alt"
+                    class="collage-turn absolute z-20 select-none" />
+
+
+                <!-- Top Right Image -->
+                <div data-range="30" data-hover="20" data-idle="12" data-scale="1.03" data-dir="rtl"
+                    class="sync-pan-item collage-item-top absolute right-0 z-20 cursor-pointer">
+                    <div
+                        class="media-frame lefttop relative overflow-hidden bg-transparent rounded-lg border-8 border-(--color-darkcream)">
+                        <img loading="lazy" src="@Component.ComponentThumbnail"
+                            alt="@Component.ComponentThumbnailAltText" aria-hidden="true"
+                            class="block w-full h-auto opacity-0 pointer-events-none select-none" />
+                        <img loading="lazy" src="@Component.ComponentThumbnail"
+                            alt="@Component.ComponentThumbnailAltText"
+                            class="sync-pan-inner pan-image-top absolute inset-0 h-full max-w-none object-cover transform-gpu will-change-transform pointer-events-none select-none" />
+                        <div
+                            class="overlay-base overlay-rounded absolute inset-0 bg-black/20 opacity-0 pointer-events-none">
+                        </div>
+                        <div
+                            class="overlay-sweep overlay-sweep-right overlay-rounded absolute inset-y-0 bg-gradient-to-l from-black/30 via-black/15 to-transparent opacity-0 pointer-events-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Left Image -->
+                <div data-range="30" data-hover="20" data-idle="12" data-scale="1.03" data-dir="ltr"
+                    class="sync-pan-item collage-item-bottom absolute z-10 cursor-pointer">
+                    <div
+                        class="media-frame leftbottom relative overflow-hidden bg-transparent rounded-lg border-8 border-(--color-darkcream)">
+                        <img loading="lazy" src="@Component.Component_right_image"
+                            alt="@Component.Component_right_image_alt" aria-hidden="true"
+                            class="block w-full h-auto opacity-0 pointer-events-none select-none" />
+                        <img loading="lazy" src="@Component.Component_right_image"
+                            alt="@Component.Component_right_image_alt"
+                            class="sync-pan-inner pan-image-bottom absolute inset-0 h-full max-w-none object-cover transform-gpu will-change-transform pointer-events-none select-none" />
+                        <div
+                            class="overlay-base overlay-rounded absolute inset-0 bg-black/20 opacity-0 pointer-events-none">
+                        </div>
+                        <div
+                            class="overlay-sweep overlay-sweep-left overlay-rounded absolute inset-y-0 bg-gradient-to-r from-black/30 via-black/15 to-transparent opacity-0 pointer-events-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
