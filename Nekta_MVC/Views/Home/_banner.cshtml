@@ -8,7 +8,7 @@
     <div class="hero-media-swiper swiper absolute inset-0 w-full h-full">
         <div class="swiper-wrapper">
 
-            @foreach (var item in Model.Where(x => x.IsBlock == 0))
+            @foreach (var item in Model.Where(x => x.IsBlock == 1))
             {
                 @if (!string.IsNullOrEmpty(item.Video_path))
                 {

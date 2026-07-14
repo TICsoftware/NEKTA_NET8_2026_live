@@ -24,7 +24,7 @@
         <!-- Swiper Slider -->
         <div class="swiper edgeSwiper px-4 py-6">
             <div class="swiper-wrapper py-4 pb-2">
-                @foreach (var item in Model.Where(x => x.IsBlock == 0))
+                @foreach (var item in Model.Where(x => x.IsBlock == 1))
                 {
                     <div class="swiper-slide">
                         <div class="edge-card group backdrop-blur-sm opacity-50 transition-all duration-700">
