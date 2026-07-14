@@ -7,6 +7,8 @@
     var mode = ViewBag.Mode as string ?? "Block";
 }
 
+<link rel="stylesheet" href="~/Assets/css/dynamic_data_reprocess.css" />
+
 <div class="page-heading">
 
     <h2>
@@ -96,8 +98,8 @@
                   <input type="hidden" name="@($"{f.name_key}_new")" />
                     <input type="hidden" name="@($"{f.name_key}_existing")" value="@f.File_path" />
 
-                    <img src="@f.File_path_name" style="max-height:120px"  class="imgPreview" />
-                       <img src="@f.File_path_name" style="max-height:120px"  />
+                    <img src="@f.File_path_name" class="dynamic-data-preview-img imgPreview" />
+                       <img src="@f.File_path_name" class="dynamic-data-preview-img" />
                 }
 
                 <input type="hidden" name="@($"{f.name_key}_detail_id")" value="@f.detail_id" />
@@ -111,140 +113,4 @@
     </form>
 </div>
 
-<!-- ============================
-     ❌ REMOVE importmap + module
-     ============================ -->
-
-<!-- ============================
-     ✅ SCRIPT SECTION (FIXED)
-     ============================ -->
-<script>
-
-(function () {
-
-    // ============================
-    // 🔹 VALIDATION
-    // ============================
-    window.validateDynamicForm = function () {
-
-        let isValid = true;
-        $(".error-msg").text("");
-
-        $(".dynamic-field").each(function () {
-
-            let value = ($(this).val() || "").toString();
-            let required = $(this).data("required") == "true";
-            let validation = $(this).data("validation");
-            let message = $(this).data("message");
-            let name = $(this).data("name");
-
-            let errorContainer = $(this).closest(".mb-3").find(".error-msg");
-
-            // REQUIRED
-            if (required && value.trim() === "") {
-
-                errorContainer.text(message || (name + " is required"));
-                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                $(this).focus();
-
-                isValid = false;
-                return false;
-            }
-
-            // REGEX
-            if (validation && value) {
-                try {
-                    let regex = new RegExp(validation);
-
-                    if (!regex.test(value)) {
-
-                        errorContainer.text(message || (name + " is invalid"));
-                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        $(this).focus();
-
-                        isValid = false;
-                        return false;
-                    }
-                }
-                catch {
-                    console.error("Invalid regex for", name);
-                }
-            }
-
-        });
-
-        return isValid;
-    };
-
-
-    // ============================
-    // 🔹 FORM SUBMIT (FIXED)
-    // ============================
-    $(document)
-        .off("submit.editData", "#EditContextDetailsForm")
-        .on("submit.editData", "#EditContextDetailsForm", function (e) {
-
-            e.preventDefault();
-
-            console.log("EDIT SUBMIT CALLED");
-
-            // 🔥 CKEDITOR SYNC
-            if (window.syncCkEditorsToSource) {
-                window.syncCkEditorsToSource(
-                    document.getElementById("EditContextDetailsForm")
-                );
-            }
-
-            if (!validateDynamicForm()) return;
-
-            var $form = $(this);
-
-            $.ajax({
-                url: $form.attr("action"),
-                type: "POST",
-                data: $form.serialize(),
-
-                success: function (response) {
-
-                    if (response.success) {
-
-                        alert("Data updated successfully");               
-                       // window.parent.Load_Edit_context_Temp_details(false);         
-
-                        // var modalEl = document.getElementById('modal_spottemplates');
-                       // if (modalEl) {
-                        //    var modal = bootstrap.Modal.getInstance(modalEl);
-                        //    if (modal) modal.hide();
-                       // }
-
-                        // 🔥 REFRESH
-                        
-                       // if (window.parent && window.parent.Load_Edit_context_Temp_details) {
-                            window.parent.Load_Edit_context_Published_details(true);
-                       // }               
-            
-
-                    } else {
-                        alert(response.message);
-                    }
-                },
-
-                error: function () {
-                    alert("Error occurred");
-                }
-            });
-
-        });
-
-
-    // ============================
-    // 🔹 CKEDITOR INIT (IMPORTANT)
-    // ============================
-    setTimeout(function () {
-        if (window.initCkEditors) {
-            window.initCkEditors(document);
-        }
-    }, 200);
-
-})();
-</script>
+<script src="~/Assets/scripts/dynamic_data_reprocess_edit.js"></script>

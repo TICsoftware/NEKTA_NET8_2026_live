@@ -4,6 +4,7 @@
 @using Core_project_BusinessLogic.Entity
 @{
     Layout = null;
+    var cspNonce = Context.Items["CSPNonce"]?.ToString();
 
     var fields = ViewBag.Fields as List<ContextFieldDefinition>
     ?? new List<ContextFieldDefinition>();
@@ -14,6 +15,8 @@
     var mode = ViewBag.Mode as string ?? "block";
 
 }
+
+<link rel="stylesheet" href="~/Assets/css/dynamic_data_reprocess.css" />
 
 <h2>
     @if (mode == "Main")
@@ -94,8 +97,8 @@
                     <button type="button" id="btnFile" class="btn btn-outline-primary d-block select-media"> Select
                         File</button>
                         <input type="hidden" name="@($"{f.name_key}_existing")" />
-                        <img src="@f.image_previewname" style="max-height:120px" />
-                        <img src="@f.image_previewname" style="max-height:120px" class="imgPreview" />
+                        <img src="@f.image_previewname" class="dynamic-data-preview-img" />
+                        <img src="@f.image_previewname" class="dynamic-data-preview-img imgPreview" />
                 </div>
 
             }
@@ -139,109 +142,14 @@
     </div>
 
 
- 
-    <link rel="stylesheet" href="/Assets/ckeditor5/ckeditor5.css" />
-    <script type="importmap">
-        {
-            "imports": {
-                "ckeditor5": "@Url.Content("~/Assets/ckeditor5/ckeditor5.js")",
-                "ckeditor5/": "@Url.Content("~/Assets/ckeditor5/")"
-            }
+<link rel="stylesheet" href="/Assets/ckeditor5/ckeditor5.css" />
+<script type="importmap" nonce="@cspNonce">
+    {
+        "imports": {
+            "ckeditor5": "@Url.Content("~/Assets/ckeditor5/ckeditor5.js")",
+            "ckeditor5/": "@Url.Content("~/Assets/ckeditor5/")"
         }
-    </script>
-    <script src="~/Assets/scripts/add_ck_editor.js" type="module"></script>
-
- 
-    <script>
-        $("#addContextDetailsForm").submit(function (e) {
-            e.preventDefault();
-            console.log("EDIT SUBMIT CALLED");
-
-            // 🔥 CKEDITOR SYNC
-            if (window.syncCkEditorsToSource) {
-                window.syncCkEditorsToSource(
-                document.getElementById("addContextDetailsForm")
-                );
-            }
-
-            if (!validateDynamicForm()) {
-                return;
-            }
-            $.ajax({
-                url: $(this).attr("action"),
-                type: "POST",
-                data: $(this).serialize(),
-
-                success: function (response) {
-                    if (response.success) {
-                    alert("Data added successfully");
-                    window.parent.Load_Edit_context_Published_details(true);
-                    } else {
-                    alert(response.message); // 🔹 show validation message
-                    }
-                },
-
-                error: function () {
-                    alert("Error occurred");
-                }
-            });
-        }); 
-    </script>
-    <script>
-
-        function validateDynamicForm() {
-
-            let isValid = true;
-            $(".error-msg").text(""); // clear old errors
-            $(".dynamic-field").each(function () {
-
-                let value = $(this).val();
-                let required = $(this).data("required") === true || $(this).data("required") === "true";
-                let validation = $(this).data("validation");
-                let message = $(this).data("message");   // 🔹 custom message
-                let name = $(this).data("name");
-
-                // 🔹 REQUIRED VALIDATION
-                if (required && (!value || value.trim() === "")) {
-
-                    let msg = message || (name + " is required");
-                    // alert(msg);
-                    $(this).next(".error-msg").remove();
-                    $(this).after(`<span class="error-msg text-danger">${msg}</span>`);
-                    $(this).focus();
-                    isValid = false;
-                    return false;
-                }
-
-                // 🔹 REGEX VALIDATION
-                if (validation && value) {
-                    try {
-                        let regex = new RegExp(validation);
-
-                        if (!regex.test(value)) {
-                            let msg = message || (name + " is invalid");
-                            //alert(msg);
-                            $(this).next(".error-msg").remove();
-                            $(this).after(`<span class="error-msg text-danger">${msg}</span>`);
-                            $(this).focus();
-                            isValid = false;
-                            return false;
-                        }
-                    }
-                    catch (e) {
-                    console.error("Invalid regex for field:", name);
-                    }
-                }
-            });
-
-            return isValid;
-        }
-
-    </script>
-
-
- 
-   
-
-
-  
+    }
+</script>
+<script src="~/Assets/scripts/add_ck_editor.js" type="module"></script>
+<script src="~/Assets/scripts/dynamic_data_reprocess_add.js"></script>
