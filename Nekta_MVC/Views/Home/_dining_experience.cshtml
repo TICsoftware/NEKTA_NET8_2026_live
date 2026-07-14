@@ -1,0 +1,35 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+@{
+    var Component = Model
+    .Where(x => x.IsBlock == 0)
+    .OrderBy(x => x.Sequence)
+    .FirstOrDefault();
+}
+
+<section class="bg-darkcream section-spacing  text-center overflow-hidden">
+    <div class="container">
+        <div class="section-title-outer mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(Component.DisplayTitle)
+                ? Component.DisplayTitle.CleanParagraphTags()
+                : Component.Title
+                                )
+            </h2>
+            <p>@Html.Raw(Component.Intro.CleanParagraphTags())</p>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(Component.Url))
+        {
+            <a href="@Component.Url" class="common-btn mt-8 md:mt-12 btn-slide-fill" type="button"
+                data-modal-open="contactModal">
+                <span>@Component.Url_Text</span>
+                <img loading="lazy" src="/assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+            </a>
+        }
+
+    </div>
+</section>

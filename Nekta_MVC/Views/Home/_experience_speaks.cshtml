@@ -1,0 +1,62 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+@{
+    var Component = Model
+    .Where(x => x.IsBlock == 0)
+    .OrderBy(x => x.Sequence)
+    .FirstOrDefault();
+}
+
+<section class="bg-darkcream section-spacing overflow-hidden ">
+    <div class="container px-0!">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center max-w-6xl mx-auto">
+            <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(Component.DisplayTitle)
+                ? Component.DisplayTitle.CleanParagraphTags()
+                : Component.Title)
+            </h2>
+            <p>@Html.Raw(Component.Intro.CleanParagraphTags())</p>
+        </div>
+    </div>
+
+    <div class="container-fluid px-0!">
+        <!-- Swiper Slider -->
+        <div class="swiper testimonialSwiper py-6 px-2 md:px-6 overflow-visible">
+            <div class="swiper-wrapper items-center overflow-visible">
+                @foreach (var item in Model.Where(x => x.IsBlock == 0))
+                {
+                    <div class="swiper-slide h-auto">
+                        <div class="testimonial-card group">
+                            <div class="mt-4 md:mt-6 mb-6 md:mb-8 flex justify-center">
+                                <img loading="lazy" src="/assets/images/arrows/comma.png" alt="comma" class="quote-icon" />
+                            </div>
+
+                            <p>@Html.Raw(Component.Content.CleanParagraphTags())</p>
+
+                            <div>
+                                <h5>@item.Title</h5>
+                                <p class="text-14">@item.Designation</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Slider Navigation (Dots & Arrows) -->
+            <div class="flex justify-center items-center gap-4 md:gap-6 mt-8 md:mt-12 pb-8 md:pb-12">
+                <div
+                    class="testimonial-prev cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full bg-green flex items-center justify-center text-cream transition-all hover:scale-110">
+                    <img loading="lazy" src="/assets/images/arrows/swiperLeft.png" alt="swiperLeft" />
+                </div>
+                <div class="testimonial-pagination flex items-center justify-center gap-3 md:gap-4"></div>
+                <div
+                    class="testimonial-next cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full bg-green flex items-center justify-center text-cream transition-all hover:scale-110">
+                    <img loading="lazy" src="/assets/images/arrows/swiperRight.png" alt="swiperRight" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

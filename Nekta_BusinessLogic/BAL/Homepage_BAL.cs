@@ -13,7 +13,7 @@ namespace Nekta_BusinessLogic.BAL
     public class Homepage_BAL : Homepage_DAL
     {
         private readonly IConfiguration _configuration;
-        public Homepage_BAL(IConfiguration configuration) : base(configuration) 
+        public Homepage_BAL(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
@@ -44,24 +44,25 @@ namespace Nekta_BusinessLogic.BAL
                 model.Home_Components = groupedData;
 
                 model.Banners = MapComponentCommon(groupedData, 1);
-                model.ChooseYourJourney_List = MapComponentCommon(groupedData, 2);
-                model.CancerDiagnosis_List = MapComponentCommon(groupedData, 3);
-                model.FindTest_List = MapComponentCommon(groupedData, 4);
-                var headerData = MapComponentCommon(groupedData, 5);
-                model.AnitaBorges_List = MapComponentCommon(groupedData, 6);
-                model.Academy_List = MapComponentCommon(groupedData, 7);
-                model.TrustQuality_List = MapComponentCommon(groupedData, 8);
-                model.Testimonials_List = MapComponentCommon(groupedData, 9);
-                model.OurValues_List = MapComponentCommon(groupedData, 10);
+                model.DiningExperience_List = MapComponentCommon(groupedData, 2);
+                model.FoodInbetween_List = MapComponentCommon(groupedData, 3);
+                model.SingularSpirit_List = MapComponentCommon(groupedData, 4);
+                model.HospitalityExcellance_List = MapComponentCommon(groupedData, 5);
+                model.NektaEdge_List = MapComponentCommon(groupedData, 6);
+                model.ExperienceSpeaks_List = MapComponentCommon(groupedData, 7);
+                model.ClientsWeServe_List = MapComponentCommon(groupedData, 8);
+                model.LatestTrends_List = MapComponentCommon(groupedData, 9);
 
-                if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
-                {
-                    var ourTeamData = GetGroupedComponents(ds.Tables[2]);
-                    var teamData = MapComponentCommon(ourTeamData, 1);
 
-                    // Merge both
-                    model.OurTeam_List = headerData.Concat(teamData).ToList();
-                }
+                // var headerData = MapComponentCommon(groupedData, 5);
+                // if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                // {
+                //     var ourTeamData = GetGroupedComponents(ds.Tables[2]);
+                //     var teamData = MapComponentCommon(ourTeamData, 1);
+
+                //     // Merge both
+                //     model.OurTeam_List = headerData.Concat(teamData).ToList();
+                // }
 
             }
 
@@ -138,6 +139,8 @@ namespace Nekta_BusinessLogic.BAL
                 Content = Config_Application_Website.GetValue(dict, "Content", "Component Content"),
                 ComponentThumbnail = Config_Application_Website.GetPath(group, "Component Thumbnail image"),
                 ComponentThumbnailAltText = Config_Application_Website.GetValue(dict, "Component thumbnail image alt"),
+                Component_Background_image = Config_Application_Website.GetPath(group, "Component Background image"),
+                Component_background_image_alt = Config_Application_Website.GetValue(dict, "Component background image alt"),
                 ThumbnailImage = Config_Application_Website.GetPath(group, "Thumbnail Image"),
                 ThumbnailAltText = Config_Application_Website.GetValue(dict, "thumbnail image alt"),
                 Url = Config_Application_Website.GetValue(dict, "Url", "Component URL"),
@@ -154,6 +157,13 @@ namespace Nekta_BusinessLogic.BAL
                 //Sequence = group.Fields.First().sequence,
                 IsBlock = group.Fields.First().IsBlock,
                 Section_title = Config_Application_Website.GetValue(dict, "Block Title", "Section title"),
+                banner_image_webp = Config_Application_Website.GetPath(group, "banner image webp"),
+                banner_mobile_image = Config_Application_Website.GetPath(group, "banner mobile image"),
+                Component_right_image = Config_Application_Website.GetPath(group, "Component right image"),
+                Component_right_image_alt = Config_Application_Website.GetPath(group, "Component Right image alt"),
+                component_icon_image = Config_Application_Website.GetPath(group, "component icon image"),
+                component_icon_image_alt = Config_Application_Website.GetPath(group, "component icon image alt"),
+                Designation = Config_Application_Website.GetPath(group, "Designation"),
             });
         }
 

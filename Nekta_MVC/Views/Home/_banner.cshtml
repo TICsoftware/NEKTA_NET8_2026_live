@@ -1,0 +1,106 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+<section class="hero-section relative h-[75svh] md:h-screen flex items-center justify-center overflow-hidden">
+
+    <!-- HERO MEDIA SLIDER (image + video slides) -->
+    <div class="hero-media-swiper swiper absolute inset-0 w-full h-full">
+        <div class="swiper-wrapper">
+
+            @foreach (var item in Model.Where(x => x.IsBlock == 0))
+            {
+                @if (!string.IsNullOrEmpty(item.Video_path))
+                {
+
+                    <div class="swiper-slide hero-slide">
+                        <video class="hero-media" muted playsinline preload="auto">
+                            <source src="@item.Video_path" type="video/mp4" />
+                        </video>
+
+                        <!-- Caption: stays centered and syncs with the active slide -->
+                        <div
+                            class="hero-caption-overlay absolute inset-0 flex items-center justify-center text-center px-4 pointer-events-none z-30">
+                            <div class="hero-caption-inner section-title-outer ">
+                                <h1 class="hero-caption-title title-section text-letters-slide">@Html.Raw(
+                                                                !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                                                                ? item.DisplayTitle.CleanParagraphTags()
+                                                                : item.Title
+                                                                )</h1>
+
+                        <p class="hero-caption-text"> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+
+                        @if (!string.IsNullOrWhiteSpace(item.Url))
+                                {
+                                    <a href="@item.Url" class="common-btn mt-8 md:mt-12 btn-slide-fill" type="button">
+                                        <span>@item.Url_Text</span>
+                                        <img loading="lazy" src="/assets/images/arrows/creamarrow-long-right.png"
+                                            alt="rightArrow" />
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="swiper-slide hero-slide" data-caption="">
+                        <img loading="lazy" src="@item.banner_image_webp" alt="@item.ThumbnailAltText" class="hero-media" />
+
+                        <!-- Caption: stays centered and syncs with the active slide -->
+                        <div
+                            class="hero-caption-overlay absolute inset-0 flex items-center justify-center text-center px-4 pointer-events-none z-30">
+                            <div class="hero-caption-inner">
+                                <h1 class="hero-caption-title title-section"> @Html.Raw(
+                                                                !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                                                                ? item.DisplayTitle.CleanParagraphTags()
+                                                                : item.Title
+                                                                )</h1>
+
+
+                        <p class="hero-caption-text"> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+                        @if (!string.IsNullOrWhiteSpace(item.Url))
+                                {
+                                    <a href="@item.Url" class="common-btn mt-8 md:mt-12 btn-slide-fill" type="button">
+                                        <span>@item.Url_Text</span>
+                                        <img loading="lazy" src="/assets/images/arrows/creamarrow-long-right.png"
+                                            alt="rightArrow" />
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+
+    <!-- Slide break: solid panel that wipes left-to-right on load and on every slide change -->
+    <div class="hero-slide-break" aria-hidden="true"></div>
+
+
+    <!-- Slider controls: shown by JS only when there is more than one slide -->
+    <div class="hero-swiper-controls">
+        <button type="button" class="hero-swiper-prev" aria-label="Previous slide"></button>
+        <div class="hero-swiper-pagination"></div>
+        <button type="button" class="hero-swiper-next" aria-label="Next slide"></button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10 pointer-events-none">
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="absolute inset-0 pointer-events-none z-10">
+        <div
+            class="particle absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full top-1/4 left-5 md:left-10 opacity-30">
+        </div>
+        <div class="particle absolute w-1 h-1 bg-green-400 rounded-full top-1/3 left-1/4 md:left-1/3 opacity-40"
+            style="animation-delay: 3s"></div>
+        <div class="particle absolute w-2 h-2 md:w-3 md:h-3 bg-green-400 rounded-full top-2/3 left-3/4 md:left-2/3 opacity-20"
+            style="animation-delay: 7s"></div>
+    </div>
+</section>

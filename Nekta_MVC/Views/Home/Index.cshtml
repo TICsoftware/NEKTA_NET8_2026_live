@@ -11,12 +11,10 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
-
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="" />
     <meta name="twitter:title" content="" />
     <meta name="twitter:description" content="" />
-    
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nekta" />
@@ -41,7 +39,6 @@
 }
 
 @section Styles {
-
     <link rel="preload" href="~/Assets/css/swiper-bundle.min.css" as="style">
     <link rel="stylesheet" href="~/Assets/css/swiper-bundle.min.css" />
 
@@ -50,11 +47,86 @@
 
     <link rel="preload" href="~/Assets/css/swiper-custom.css" as="style">
     <link rel="stylesheet" href="~/Assets/css/swiper-custom.css" />
+
 }
 
-<div>Home</div>
+<!--============================================
+         1: HERO SECTION 
+         =============================================-->
 
 
+@if (Model?.Banners != null && Model.Banners.Any())
+{
+    @await Html.PartialAsync("_banner", Model.Banners)
+}
+
+
+
+<!--========================================
+         2: Seeking an Elevated Dining Experience
+         ========================================-->
+@if (Model?.DiningExperience_List != null && Model.DiningExperience_List.Any())
+{
+    @await Html.PartialAsync("_dining_experience", Model.DiningExperience_List)
+}
+
+
+<!-- ==================== ===========
+         3: From the house trusted on air to delighting on ground Serving up a beautiful world of  food inbetween
+         =================================== -->
+
+@if (Model?.FoodInbetween_List != null && Model.FoodInbetween_List.Any())
+{
+    @await Html.PartialAsync("_foodIn_between", Model.FoodInbetween_List)
+}
+
+
+
+<!-- ==================================
+         4: Diverse Playgrounds. Singular Spirit
+         =================================== -->
+
+@if (Model?.SingularSpirit_List != null && Model.SingularSpirit_List.Any())
+{
+    @await Html.PartialAsync("_singular_spirit", Model.SingularSpirit_List)
+}
+
+
+<!-- ==================== 
+         5: Built on Culinary Precision. Delivered With Hospitality Excellence.
+         ==================== -->
+
+@if (Model?.HospitalityExcellance_List != null && Model.HospitalityExcellance_List.Any())
+{
+    @await Html.PartialAsync("_hospitality_excellence", Model.HospitalityExcellance_List)
+}
+
+<!-- ==================== 
+         6: Nekta’s EDGE SLIDER SECTION
+         ==================== -->
+
+@if (Model?.NektaEdge_List != null && Model.NektaEdge_List.Any())
+{
+    @await Html.PartialAsync("_nekta_edge", Model.NektaEdge_List)
+}
+
+<!-- ==================== 
+         7: TESTIMONIALS SECTION 
+         ==================== -->
+
+@if (Model?.ExperienceSpeaks_List != null && Model.ExperienceSpeaks_List.Any())
+{
+    @await Html.PartialAsync("_experience_speaks", Model.ExperienceSpeaks_List)
+}
+
+
+<!-- ==================== LATEST TRENDS & INSIGHTS SECTION ==================== -->
+
+
+@if (Model?.LatestTrends_List != null && Model.LatestTrends_List.Any())
+{
+    @await Html.PartialAsync("_latest_trends", Model.LatestTrends_List)
+}
 
 
 @section Scripts {

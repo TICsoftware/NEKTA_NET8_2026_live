@@ -1,0 +1,43 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<HomeCommonModel>
+
+@{
+    var Component = Model
+    .Where(x => x.IsBlock == 0)
+    .OrderBy(x => x.Sequence)
+    .FirstOrDefault();
+}
+
+<section class="signature-section section-spacing relative overflow-hidden group h-[100vh] md:h-[100vh]">
+    <div class="container signature-content ">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center max-w-6xl mx-auto relative z-10">
+            <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+              @Html.Raw(
+                !string.IsNullOrWhiteSpace(Component.DisplayTitle)
+                ? Component.DisplayTitle.CleanParagraphTags()
+                : Component.Title)
+            </h2>
+            <p>@Html.Raw(Component.Intro.CleanParagraphTags())</p>
+        </div>
+
+        <!-- Main Plate Image Container -->
+
+        <div class="plate-outer">
+            <div
+                class="newbox signature-bg bg-cream absolute left-1/2 transform -translate-x-1/2 top-[5vw] bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out ">
+                <img src="@Component.Component_Background_image" alt="@Component.Component_background_image_alt" class="signature-img" />
+            </div>
+
+            <img src="/assets/images/garlic.svg" alt="Signature Background" class="signature-garlic-img" />
+            <img src="/assets/images/leaf.svg" alt="Signature Background" class="signature-leaf-img" />
+
+            <img loading="lazy" src="@Component.ComponentThumbnail" alt="@Component.ComponentThumbnailAltText"
+                class="signature-plate-image w-full h-auto mx-auto transition-all duration-700 ease-out " />
+
+        </div>
+
+
+    </div>
+</section>

@@ -17,30 +17,34 @@ public class HomeController : Controller
     {
         _logger = logger;
         _bal = new Homepage_BAL(configuration);
-       
+
     }
 
 
     public IActionResult Index()
     {
-          //string connstr = "user id=sa;data source=192.168.2.25;persist security info=True;initial catalog=cop_live_backup_13_5;password=TicWorks@2026!A;Encrypt=True;TrustServerCertificate=True";
-          
-          //string connstr = "user id=sa;data source=TIC_DBNET;persist security info=True;initial catalog=Nekta_2026;password=DB#SqL2023TiC;Encrypt=True;TrustServerCertificate=True";
-         string connstr1 = "user id=sa;data source=192.168.2.6;persist security info=True;initial catalog=Nekta_2026;password=26%TiC@SqL20;Encrypt=True;TrustServerCertificate=True";
-         
-           //ViewBag.encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr);
-         //  string connstr = "user id=sa;data source=49.50.111.21;persist security info=True;initial catalog=Oncopath_2026;password=D#$%%6QWe@@#4;Encrypt=True;TrustServerCertificate=True";
-          string encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr1);
+        //string connstr = "user id=sa;data source=192.168.2.25;persist security info=True;initial catalog=cop_live_backup_13_5;password=TicWorks@2026!A;Encrypt=True;TrustServerCertificate=True";
+
+        //string connstr = "user id=sa;data source=TIC_DBNET;persist security info=True;initial catalog=Nekta_2026;password=DB#SqL2023TiC;Encrypt=True;TrustServerCertificate=True";
+        string connstr1 = "user id=sa;data source=192.168.2.6;persist security info=True;initial catalog=Nekta_2026;password=26%TiC@SqL20;Encrypt=True;TrustServerCertificate=True";
+
+        //ViewBag.encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr);
+        //  string connstr = "user id=sa;data source=49.50.111.21;persist security info=True;initial catalog=Oncopath_2026;password=D#$%%6QWe@@#4;Encrypt=True;TrustServerCertificate=True";
+        string encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr1);
+
+
+
+
         var data = _bal.GetHomepage_BAL(1, 1);
-      //  ViewBag.TestFinder = _Testbal.Fetch_Tests_Details_BAL();
+        //  ViewBag.TestFinder = _Testbal.Fetch_Tests_Details_BAL();
         return View(data);
     }
 
     public IActionResult encruptIndex()
     {
         //CryptoEngine CryptoObj = new CryptoEngine();    
-       // string connstr = "user id=sa;data source=49.50.111.21;persist security info=True;initial catalog=COP_2026_Live;password=D#$%%6QWe@@#4;Encrypt=True;TrustServerCertificate=True";
-         string connstr = "user id=sa;data source=192.168.2.25;persist security info=True;initial catalog=cop_live_backup_13_5;password=TicWorks@2026!A;Encrypt=True;TrustServerCertificate=True";
+        // string connstr = "user id=sa;data source=49.50.111.21;persist security info=True;initial catalog=COP_2026_Live;password=D#$%%6QWe@@#4;Encrypt=True;TrustServerCertificate=True";
+        string connstr = "user id=sa;data source=192.168.2.25;persist security info=True;initial catalog=cop_live_backup_13_5;password=TicWorks@2026!A;Encrypt=True;TrustServerCertificate=True";
         //"constr":  "LYHwUvWZBu-mf-hePWJNeNSK0LoqcOEVhAICADizA2lXXNZ5E7PAzkQeH4nugWKijXvgYWaznBEpMI9-jyoYGkq7py---n6luJGp5cEf2AgXxDPuO_hFd-y0eD8oNxJpcBDJCwzkxRs4wRfnYY4HsdFgxzK2dkK1z7-z8_fbw-RQmrw6_Eedj0fvm4AUppfDPFHSZFig81Sc1O0GnvT4FQ$$"
 
 
