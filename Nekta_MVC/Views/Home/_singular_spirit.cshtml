@@ -27,7 +27,7 @@
         <div class="swiper mySwiper three-box-slider px-0 md:px-4 pt-10">
             <div class="swiper-wrapper">
 
-                @foreach (var item in Model.Where(x => x.IsBlock == 0))
+                @foreach (var item in Model.Where(x => x.IsBlock == 1))
                 {
                     <div class="swiper-slide group cursor-pointer">
                         <div class="feature-card">

@@ -27,7 +27,7 @@
         <!-- Swiper Slider -->
         <div class="swiper testimonialSwiper py-6 px-2 md:px-6 overflow-visible">
             <div class="swiper-wrapper items-center overflow-visible">
-                @foreach (var item in Model.Where(x => x.IsBlock == 0))
+                @foreach (var item in Model.Where(x => x.IsBlock == 1))
                 {
                     <div class="swiper-slide h-auto">
                         <div class="testimonial-card group">
