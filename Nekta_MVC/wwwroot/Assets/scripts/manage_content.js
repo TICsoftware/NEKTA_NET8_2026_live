@@ -808,6 +808,36 @@ function validate_form() {
     return true;
 }
 
+window.validate_form = validate_form;
+
+$(document)
+    .off("click.contentThumbPrevent", ".content-thumb-link")
+    .on("click.contentThumbPrevent", ".content-thumb-link", function (e) {
+        e.preventDefault();
+    });
+
+$(document)
+    .off("click.contentValidate", ".js-validate-content-form")
+    .on("click.contentValidate", ".js-validate-content-form", function (e) {
+        if (!validate_form()) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+$(document)
+    .off("click.contentSpotClose", "#btnsubmit_spot_templates")
+    .on("click.contentSpotClose", "#btnsubmit_spot_templates", function () {
+        var action = $(this).attr("data-close-action");
+        if (action === "refresh" && typeof window.Refresh_context_details === "function") {
+            window.Refresh_context_details(true);
+        } else if (action === "temp" && typeof window.Load_Edit_context_Temp_details === "function") {
+            window.Load_Edit_context_Temp_details(true);
+        } else if (action === "published" && typeof window.Load_Edit_context_Published_details === "function") {
+            window.Load_Edit_context_Published_details(true);
+        }
+    });
+
 
 window.Load_Edit_context_Published_details = function (isrefresh, _templateid, _language_id, _Id_encrypt_val) {
 

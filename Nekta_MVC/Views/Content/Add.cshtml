@@ -136,7 +136,7 @@
                                                   </div>
                                                 </div>
                                                
-                                                <div class="col-md-6 col-12" id="div_language_sections" style="display:@(Model.Language_master_id > 1 ? "block": "none");">
+                                                <div class="col-md-6 col-12@(Model.Language_master_id > 1 ? "" : " d-none")" id="div_language_sections">
                                                     <div class="form-group mb-3">
                                                         <label for="ddLanguage_Sections" class="form-label">Select Language Section</label>
                                                         <div class="row">
@@ -469,8 +469,8 @@
                                                         <label for="Thumb_image" class="form-label">Landing page thumbnail <span class="mute small"> (Max. size 500KB)</span></label>
                                                         <button type="button" id="btnFile" class="btn btn-outline-primary d-block select-media" > Select image</button>
                                                         @Html.HiddenFor(model => model.Thumb_image_id)  
-                                                        <img src="@Model.Thumb_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height" title="@Model.Thumb_image_alttext" style="display:none;" />                                                    
-                                                        <a  href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link" id="thumb_image_Remove" style="display:none;" ></a>
+                                                        <img src="@Model.Thumb_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height d-none" title="@Model.Thumb_image_alttext" />                                                    
+                                                        <a  href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link d-none" id="thumb_image_Remove"></a>
                                                         @Html.HiddenFor(model => model.Thumb_image_IsDelete)
                                                         @Html.HiddenFor(model => model.Thumb_image)
                                                         @Html.ValidationMessageFor(model => model.Thumb_image)   
@@ -492,8 +492,8 @@
                                                         <label for="Small_Icon_Thumb_image" class="form-label">Small icon thumbnail / Video preview Image / Mouseover image </label>
                                                         <button type="button" id="btnFile_Small_Icon_image" class="btn btn-outline-primary d-block select-media" > Select image</button>
                                                         @Html.HiddenFor(model => model.Small_Icon_Thumb_image_id)
-                                                        <img src="@Model.Small_Icon_Thumb_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height" title="@Model.Thumb_image_alttext" style="display:none;"/>
-                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link" id="small_icon_thumb_image_Remove" style="display:none;"></a>
+                                                        <img src="@Model.Small_Icon_Thumb_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height d-none" title="@Model.Thumb_image_alttext"/>
+                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link d-none" id="small_icon_thumb_image_Remove"></a>
                                                         @Html.HiddenFor(model => model.Small_Icon_Thumb_image_IsDelete)
                                                         @Html.HiddenFor(model => model.Small_Icon_Thumb_image)
                                                         @Html.ValidationMessageFor(model => model.Small_Icon_Thumb_image) 
@@ -516,8 +516,8 @@
                                                         <label for="Masthead_image" class="form-label">Masthead image <span class="mute small"> (Max. size 1MB)</span> </label>
                                                         <button type="button" id="btnFile_Masthead_image" class="btn btn-outline-primary d-block select-media" > Select image</button>
                                                         @Html.HiddenFor(model => model.Masthead_image_id) 
-                                                        <img src="@Model.Masthead_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height" title="@Model.Masthead_image_alttext" style="display:none;" />                                                       
-                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link" id="masthead_image_Remove" style="display:none;"></a>                                                
+                                                        <img src="@Model.Masthead_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height d-none" title="@Model.Masthead_image_alttext" />                                                       
+                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link d-none" id="masthead_image_Remove"></a>                                                
                                                         @Html.HiddenFor(model => model.Masthead_image_IsDelete)
                                                         @Html.HiddenFor(model => model.Masthead_image)
                                                         @Html.ValidationMessageFor(model => model.Masthead_image) 
@@ -528,8 +528,8 @@
                                                         <label for="Mobile_Masthead_image" class="form-label">Masthead Mobile image<span class="mute small"> (Max. size 1MB)</span> </label>
                                                         <button type="button" id="btnFile_Mobile_Masthead_image" class="btn btn-outline-primary d-block select-media" > Select image</button>                                                   
                                                         @Html.HiddenFor(model => model.Mobile_Masthead_image_id) 
-                                                        <img src="@Model.Mobile_Masthead_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height" title="@Model.Masthead_image_alttext" style="display:none;" />                                                        
-                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link" id="Mobile_Masthead_image_Remove" style="display:none;"></a>                                                
+                                                        <img src="@Model.Mobile_Masthead_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height d-none" title="@Model.Masthead_image_alttext" />                                                        
+                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link d-none" id="Mobile_Masthead_image_Remove"></a>                                                
                                                         @Html.HiddenFor(model => model.Mobile_Masthead_image_IsDelete) 
                                                         @Html.HiddenFor(model => model.Mobile_Masthead_image)
                                                         @Html.ValidationMessageFor(model => model.Mobile_Masthead_image)
@@ -552,8 +552,8 @@
                                                         <label for="Background_image" class="form-label">Background image<span class="mute small"> (Max. size 1MB)</span> </label>
                                                         <button type="button" id="btnFile_Background_image" class="btn btn-outline-primary d-block select-media" > Select image</button>
                                                         @Html.HiddenFor(model => model.Background_image_id)                                                   
-                                                        <img src="@Model.Background_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height" style="display:none;" />                                                 
-                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link" id="Background_image_Remove" style="display:none;"></a>
+                                                        <img src="@Model.Background_image" class="imgPreview img-responsive img-thumbnail content-img-thumbnail-height d-none" />                                                 
+                                                        <a href="javascript:void(0)" title="Click here to remove file" class="glyphicon glyphicon-trash content-thumb-link d-none" id="Background_image_Remove"></a>
                                                         @Html.HiddenFor(model => model.Background_image_IsDelete) 
                                                         @Html.HiddenFor(model => model.Background_image)
                                                         @Html.ValidationMessageFor(model => model.Background_image)
@@ -597,8 +597,8 @@
                     </div>
                 </div>
                 <div class="col-sm-12 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-primary me-1 mb-1" name="Command" value="Save" onclick="return validate_form();" ><i class="bi bi-save me-1" ></i> Save</button>
-                    <button type="submit" class="btn btn-outline-primary me-1 mb-1" name="Command" value="Save and publish" onclick="return validate_form();" ><i class="bi bi-rocket-takeoff me-1"></i> Save and publish</button>
+                    <button type="submit" class="btn btn-outline-primary me-1 mb-1 js-validate-content-form" name="Command" value="Save"><i class="bi bi-save me-1" ></i> Save</button>
+                    <button type="submit" class="btn btn-outline-primary me-1 mb-1 js-validate-content-form" name="Command" value="Save and publish"><i class="bi bi-rocket-takeoff me-1"></i> Save and publish</button>
                 </div>
             </div>
         }
@@ -615,7 +615,7 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-end gap-2">                  
-                    <button  type="button" class="btn btn-secondary" id="btnsubmit_spot_templates" onclick="Refresh_context_details(true);" >
+                    <button  type="button" class="btn btn-secondary" id="btnsubmit_spot_templates" data-close-action="refresh">
                         Close
                     </button>
                   
@@ -649,41 +649,4 @@
             </div>
         </div>
     </div>
- 
- @section head{
-    @* <link rel="stylesheet" href="/Assets/ckeditor5/ckeditor5.css" />
-    <style type="text/css">
-        #Intro + .ck-editor .ck-editor__editable {
-        min-height: 150px !important;
-        }
-
-        #Hmpg_intro + .ck-editor .ck-editor__editable {
-        min-height: 150px !important;
-        }
-
-         #Content + .ck-editor .ck-editor__editable {
-        min-height: 350px !important;
-        }
-
-        #Masthead_image_alttext + .ck-editor .ck-editor__editable {
-        min-height: 80px !important;
-        }
-
-         #Background_image_Alttext + .ck-editor .ck-editor__editable {
-        min-height: 80px !important;
-        }
-
-    </style> 
-        <script type="importmap">
-         {
-            "imports": {
-            "ckeditor5": "/Assets/ckeditor5/ckeditor5.js",
-            "ckeditor5/": "/Assets/ckeditor5/"
-            }
-        }
-    </script>
-    <script src="~/Assets/scripts/add_ck_editor.js" type="module"></script> *@
-        @* <script src="~/Assets/scripts/manage_content.js" type="module"></script> *@
-}
- 
  

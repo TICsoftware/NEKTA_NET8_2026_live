@@ -127,11 +127,11 @@
                                                     <a asp-action="EditReprocessed"
                                                         asp-route-Id="@encrypt_reprocess_id"
                                                         class="btn btn-sm btn-outline-secondary">Edit</a>
-                                                    <a href="javascript:"
+                                                    <a href="#"
                                                         data-encId="@encrypt_reprocess_id"
                                                         class="btn btn-sm btn-outline-secondary publish_reprocess_content_List">Publish</a>
 
-                                                    <a  href="javascript:" data-encId="@encrypt_reprocess_id" data-contenttype="section"
+                                                    <a  href="#" data-encId="@encrypt_reprocess_id" data-contenttype="section"
                                                         class="btn btn-sm btn-outline-danger ms-2 reprocessed-delete-content">Delete</a>
                                                 </td>
                                             </tr>
@@ -183,10 +183,10 @@
                                                 <a asp-action="EditReprocessed"
                                                         asp-route-Id="@encrypt_reprocess_id"
                                                         class="btn btn-sm btn-outline-secondary">Edit</a>
-                                                <a href="javascript:"
+                                                <a href="#"
                                                         data-encId="@encrypt_reprocess_id"
                                                         class="btn btn-sm btn-outline-secondary publish_reprocess_content_List">Publish</a>
-                                                <a  href="javascript:" data-encId="@encrypt_reprocess_id" data-contenttype="article"
+                                                <a  href="#" data-encId="@encrypt_reprocess_id" data-contenttype="article"
                                                     class="btn btn-sm btn-outline-danger ms-2 reprocessed-delete-content">Delete</a>
                                             </td>
                                         </tr>
@@ -204,8 +204,8 @@
                             </p>
                         }
                         <input type="hidden" id="PublishcontentreprocessId" name="PublishcontentreprocessId" />
-                        <input type="submit" value="Publish" name="Command" id="btnsubmit" style="display: none;" />
-                        <input type="submit" value="Delete" name="Command" id="btndelete" style="display: none;" />
+                        <input type="submit" value="Publish" name="Command" id="btnsubmit" class="d-none" />
+                        <input type="submit" value="Delete" name="Command" id="btndelete" class="d-none" />
                     </div>
                 </div>
             </div>
@@ -220,10 +220,7 @@
     <script src="~/Assets/scripts/manage_reprocess_content.js" type="module"></script>
     @if (ViewBag.alert_message != null)
     {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                alert("@ViewBag.alert_message");
-            });
-        </script>
+        <div id="edit-content-alert" class="d-none" data-message="@ViewBag.alert_message"></div>
+        <script src="~/Assets/scripts/edit_content_alert.js"></script>
     }
 }

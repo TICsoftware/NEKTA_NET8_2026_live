@@ -115,10 +115,7 @@
      <script src="~/Assets/scripts/CMS_paging.js" type="module"></script>
     @if (ViewBag.alert_message != null)
     {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                alert("@ViewBag.alert_message");
-            });
-        </script>
+        <div id="edit-content-alert" class="d-none" data-message="@ViewBag.alert_message"></div>
+        <script src="~/Assets/scripts/edit_content_alert.js"></script>
     }
 }

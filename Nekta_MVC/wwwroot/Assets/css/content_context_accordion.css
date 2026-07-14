@@ -1,0 +1,34 @@
+.custom-accordion .accordion-item {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.custom-accordion .accordion-header {
+    background: #f8f9fa;
+    font-weight: 500;
+}
+
+.custom-accordion .accordion-header:hover {
+    background: #eef3f8;
+}
+
+.custom-accordion .accordion-body {
+    background: #fff;
+}
+
+.custom-accordion .arrow {
+    transition: transform 0.3s;
+}
+
+.custom-accordion .accordion-collapse {
+    display: none;
+}
+
+.custom-accordion .accordion-collapse.show {
+    display: block;
+}
+
+.content-accordion-header {
+    cursor: pointer;
+}

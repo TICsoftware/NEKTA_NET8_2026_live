@@ -5,6 +5,8 @@
     Layout = null;
 }
 
+<link rel="stylesheet" href="~/Assets/css/content_context_accordion.css" />
+
 @if (Model.Components != null)
 {
     int i = 1, j=1;
@@ -21,8 +23,8 @@
                     <div class="accordion-item shadow-sm rounded h-100">
 
                         <!-- HEADER (CUSTOM CLICK - NO BOOTSTRAP TOGGLE) -->
-                        <div class="accordion-header d-flex justify-content-between align-items-start p-3"
-                             style="cursor:pointer;" onclick="toggleAccordion(event, '@collapseId')">
+                        <div class="accordion-header content-accordion-header js-toggle-accordion d-flex justify-content-between align-items-start p-3"
+                             data-collapse-id="@collapseId">
 
                             <div class="d-flex gap-2">
                                 <span class="arrow" id="icon_@collapseId">▶</span>
@@ -44,14 +46,14 @@
                                     {
                                         if (item.field_Id > 0)
                                         {
-                                            <a href="javascript:"
+                                            <a href="#"
                                             data-encId="@Core_project_BusinessLogic.CryptoEngine.Encrypt(item.CTR_Id.ToString())"
                                             data-groupid="@item.group_id"
                                             class="btn btn-sm btn-outline-secondary publish_edit_component">Edit component</a> 
                                         }
                                         else
                                         {
-                                             <a href="javascript:"
+                                             <a href="#"
                                             data-encId="@Core_project_BusinessLogic.CryptoEngine.Encrypt(item.CTR_Id.ToString())"
                                             class="btn btn-sm btn-outline-secondary publish_add_component">Add component</a>
                                             show_block = 0; 
@@ -59,14 +61,14 @@
                                     }
                                     @if (item.block_field_count > 0 && show_block == 1)
                                     {  
-                                         <a href="javascript:"
+                                         <a href="#"
                                             data-encId="@Core_project_BusinessLogic.CryptoEngine.Encrypt(item.CTR_Id.ToString())"
                                             class="btn btn-sm btn-outline-success publish-add-spottemplate">Add data</a>  
                                    
                                     }
                                    
-                                    <button type="button" class="btn btn-sm btn-outline-primary"
-                                            onclick="showLayout('@Core_project_BusinessLogic.CryptoEngine.Encrypt(item.CTR_Id.ToString())')">
+                                    <button type="button" class="btn btn-sm btn-outline-primary js-show-layout"
+                                            data-enc-id="@Core_project_BusinessLogic.CryptoEngine.Encrypt(item.CTR_Id.ToString())">
                                         View Layout
                                     </button>
 
@@ -95,12 +97,12 @@
 
                                             <div class="d-flex gap-1">
 
-                                                <a href="javascript:" data-encId="@subitem_Id" data-groupid="@subitem.context_group_id"
+                                                <a href="#" data-encId="@subitem_Id" data-groupid="@subitem.context_group_id"
                                                        class="btn btn-sm btn-outline-secondary publish-edit-spottemplate">
                                                     Edit
                                                 </a>
 
-                                                <a href="javascript:" data-encId="@subitem_Id" data-groupid="@subitem.context_group_id"
+                                                <a href="#" data-encId="@subitem_Id" data-groupid="@subitem.context_group_id"
                                                        class="btn btn-sm btn-outline-danger publish-delete-spottemplate">
                                                     Delete
                                                 </a>
@@ -137,3 +139,5 @@
         }   
     
 }
+
+<script src="~/Assets/scripts/content_context_accordion.js"></script>
