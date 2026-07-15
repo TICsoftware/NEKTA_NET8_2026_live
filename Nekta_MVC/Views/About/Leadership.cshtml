@@ -1,0 +1,274 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.AboutModel
+@{
+    ViewData["Title"] = "Leadership";
+}
+
+@section head {
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="/Assets/css/leadership.css" />
+}
+
+
+
+<section class="relative inside-banner-outer overflow-hidden">
+    <div class="inside-banner-inner banner-animation relative ">
+
+        <!-- Banner -->
+        <div
+            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+            <!-- Parallax Image -->
+            <picture>
+                <!-- Desktop -->
+                <source media="(min-width:1024px)" srcset="@Model.Content.MastheadImage">
+
+                <!-- Tablet -->
+                <source media="(min-width:768px)" srcset="@Model.Content.MobileMastheadImage">
+
+                <!-- Mobile -->
+                <img src="@Model.Content.MobileMastheadImage" alt="@Model.Content.Masthead_image_Alt_text"
+                    class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover" loading="eager"
+                    fetchpriority="high">
+            </picture>
+
+            <!-- Keep Existing Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+            <div class="container pb-12 md:pb-15">
+                <div class="max-w-4xl text-left">
+
+                    <nav class="mb-4" aria-label="Breadcrumb">
+                        @Html.Raw(Model.Content.BreadcrumPath)
+                    </nav>
+
+                    <h1 class="innerbanner-title text-h1 text-white">
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(Model.Content.Cont_hmpg_intro)
+                        ? Model.Content.Cont_hmpg_intro.CleanParagraphTags()
+                        : Model.Content.ContTitle)
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- HERO BANNER END -->
+
+<div class="ld-leaf-wrapper">
+    <img src="/Assets/images/leadership/green_leaf.svg" alt="" aria-hidden="true" class=" leaf-travel-anim">
+
+
+    <!-- ==================== QUOTE 1 ==================== -->
+    @foreach (var item in Model.leadership_intro_1_List.Where(x => x.IsBlock == 0))
+    {
+        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="80"
+            data-leaf-rotation="-20">
+            <!-- Background Pattern -->
+            <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
+            <!-- Decorative Leaf -->
+
+            <div class="container relative z-10">
+                <div class="max-w-6xl mx-auto">
+
+                    <div class="ld-quote-wrapper">
+                        <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
+
+                        <p class="ld-quote my-4">
+                            @Html.Raw(item.Content.CleanParagraphTags())
+                        </p>
+
+                        <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
+                    </div>
+
+                    <div class="ld-quote-author">
+                        <h2 class="ld-author-name">@item.Title</h2>
+                        <p class="ld-author-role">
+                            @Html.Raw(@item.Component_Designation.CleanParagraphTags())
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <!-- ==================== BOARD OF DIRECTORS ==================== -->
+
+    <section class="ld-board-section section-spacing ld-leaf-waypoint" data-leaf-x="20" data-leaf-rotation="15">
+        <div class="container relative z-10">
+            @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 0))
+            {
+                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+                        }
+
+            <div class="ld-grid">
+                @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 1))
+                {
+                    <div class="ld-card">
+                        <div class="ld-card-arch">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-sketch" />
+                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-color" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUOTE 2 ==================== -->
+    @foreach (var item in Model.leadership_intro_2_List.Where(x => x.IsBlock == 0))
+    {
+        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="75"
+            data-leaf-rotation="-10">
+            <!-- Background Pattern -->
+            <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
+
+            <div class="container relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="ld-quote-wrapper">
+                        <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
+
+                        <p class="ld-quote my-4">
+                            @Html.Raw(item.Content.CleanParagraphTags())
+                        </p>
+                        <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
+                    </div>
+                    <div class="ld-quote-author">
+                        <h2 class="ld-author-name">@item.Title</h2>
+                        <p class="ld-author-role">@item.Component_Designation</p>
+                        <p class="text-base">@item.Component_Designation2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <!-- ==================== CORE TEAM ==================== -->
+    <section class="ld-team-section section-spacing ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
+        <div class="container relative z-10">
+            @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 0))
+            {
+                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+                        }
+            <div class="ld-grid">
+                @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 1))
+                {
+                    <div class="ld-card">
+                        <div class="ld-card-arch">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-sketch" />
+                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-color" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MANAGEMENT TEAM ==================== -->
+    <section class="ld-team-section section-pb ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
+        <div class="container relative z-10">
+            @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 0))
+            {
+                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+                        }
+            <div class="ld-grid">
+                @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 1))
+                {
+                    <div class="ld-card">
+                        <div class="ld-card-arch">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-sketch" />
+                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-color" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/leaf-travel-anim.js"></script>
+    <script src="~/Assets/js/leadership-script.js"></script>
+}

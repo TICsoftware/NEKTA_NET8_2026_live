@@ -12,6 +12,20 @@ namespace Nekta_MVC.Routes
             // ✅ Custom routes first
 
 
+
+
+
+            app.MapControllerRoute(
+                          name: "leadership",
+                          pattern: "about-us/leadership",
+                          defaults: new { controller = "About", action = "Leadership", title = "leadership" }
+                      );
+
+
+
+
+
+
             app.MapControllerRoute(
                           name: "TestDirectory",
                           pattern: "test-directory",
@@ -27,11 +41,11 @@ namespace Nekta_MVC.Routes
                            defaults: new { controller = "Events", action = "Index", title = "events-and-cme" }
                        );
 
-                app.MapControllerRoute(
-                    name: "LoadMoreSearch",
-                    pattern: "Search/LoadMoreSearch",
-                    defaults: new { controller = "Search", action = "LoadMoreSearch" }
-                );
+            app.MapControllerRoute(
+                name: "LoadMoreSearch",
+                pattern: "Search/LoadMoreSearch",
+                defaults: new { controller = "Search", action = "LoadMoreSearch" }
+            );
 
             app.MapControllerRoute(
                 name: "search",
@@ -41,11 +55,11 @@ namespace Nekta_MVC.Routes
 
 
 
- app.MapControllerRoute(
-               name: "LoadMoreAnnualArticles",
-               pattern: "Updates/LoadMoreAnnualArticles",
-               defaults: new { controller = "Updates", action = "LoadMoreAnnualArticles" }
-           );
+            app.MapControllerRoute(
+                          name: "LoadMoreAnnualArticles",
+                          pattern: "Updates/LoadMoreAnnualArticles",
+                          defaults: new { controller = "Updates", action = "LoadMoreAnnualArticles" }
+                      );
 
             app.MapControllerRoute(
                name: "updates",
@@ -116,11 +130,11 @@ namespace Nekta_MVC.Routes
                 pattern: "legal-disclaimer",
                 defaults: new { controller = "pagearticle", action = "article", id = "legal-disclaimer" }
             );
-              app.MapControllerRoute(
-                name: "sitemap",
-                pattern: "sitemap",
-                defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
-            );
+            app.MapControllerRoute(
+              name: "sitemap",
+              pattern: "sitemap",
+              defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
+          );
             app.MapControllerRoute(
                 name: "fellowshipsandtraining",
                 pattern: "academy-and-research/fellowships-and-training",
