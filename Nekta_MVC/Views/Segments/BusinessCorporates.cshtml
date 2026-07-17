@@ -1,0 +1,475 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SegmentsModel
+@{
+    ViewData["Title"] = "Business & Corporates";
+}
+
+@section head {
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
+    <link rel="stylesheet" href="~/Assets/css/business-corporates.css" />
+}
+
+
+<!-- HERO BANNER END-->
+<section class="relative inside-banner-outer overflow-hidden">
+    <div class="inside-banner-inner banner-animation relative ">
+
+        <!-- Banner -->
+        <div
+            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+            <!-- Parallax Image -->
+            <picture>
+                <!-- Desktop -->
+                <source media="(min-width:1024px)" srcset="@Model.Content.MastheadImage">
+
+                <!-- Tablet -->
+                <source media="(min-width:768px)" srcset="@Model.Content.MobileMastheadImage">
+
+                <!-- Mobile -->
+                <img src="@Model.Content.MobileMastheadImage" alt="@Model.Content.Masthead_image_Alt_text"
+                    class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover" loading="eager"
+                    fetchpriority="high">
+            </picture>
+
+            <!-- Keep Existing Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+            <div class="container pb-12 md:pb-15">
+                <div class="max-w-5xl text-left">
+
+                    <nav class="mb-4" aria-label="Breadcrumb">
+                        @Html.Raw(Model.Content.BreadcrumPath)
+                    </nav>
+
+                    <h1 class="innerbanner-title text-h1 text-white">
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(Model.Content.Cont_hmpg_intro)
+                        ? Model.Content.Cont_hmpg_intro.CleanParagraphTags()
+                        : Model.Content.ContTitle)
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- HERO BANNER END -->
+
+<!-- ==================== DELIVERING EXPERIENCES ==================== -->
+@foreach (var item in Model.Delivering_Experiences_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+        <!-- Decorative sushi platter on far right -->
+        <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Title"
+            class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
+        <div class="container relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left: plate in circle -->
+                <div class="relative">
+                    <div class="bc-plate-wrap">
+                        <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ThumbnailAltText"
+                            class="bc-plate-img" />
+                        <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
+                            class="bc-plate-mini" aria-hidden="true" />
+                    </div>
+                </div>
+                <!-- Right: copy -->
+                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                    </h2>
+
+                </div>
+                <div class="intro-outer-wrapper sm:pl-15">
+                    @if (!string.IsNullOrWhiteSpace(item.Intro))
+                        {
+                            <p> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(item.Url))
+                        {
+                            <div class="flex justify-start mt-5">
+                                <a href="@item.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                                    <span>@(!string.IsNullOrWhiteSpace(item.Url_Text) ? item.Url_Text : "Get in Touch")</span>
+                                    <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png"
+                                        alt="rightArrow" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ==================== CORPORATE DINING EXCELLENCE ==================== -->
+@foreach (var item in Model.Corporate_Dining_Excellence_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-dining-section section-pb curveshape-wrap">
+        <div class="curveSvg-bg">
+            <svg class="curveSvg" viewBox="0 0 1000 400" preserveAspectRatio="none" overflow="visible">
+                <path class="curvePath" data-max-curve="140" d="M0,144 L1000,144 L1000,400 L0,400 Z" fill="#e8e0c4"></path>
+            </svg>
+        </div>
+        <!-- Tilted polaroids -->
+        <div class="outer-polaroids-icons">
+            <div class="outer-polaroids">
+                <img loading="lazy" src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                    class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
+                <div class="bc-polaroid bc-polaroid--left">
+
+                    <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText" />
+                </div>
+            </div>
+            <div class="bc-polaroid bc-polaroid--right">
+                <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt" />
+            </div>
+
+
+            <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
+                class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
+        </div>
+
+
+        <div class="container relative z-10">
+            <!-- Section Heading -->
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+            </h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto text-center">
+            @Html.Raw(item.Content)
+        </div>
+    </div>
+</section>
+}
+
+<!-- ==================== LIFE IS A BEAUTIFUL PLATE (GALLERY) ==================== -->
+@if (Model?.Life_Beautiful_Plate_List != null && Model.Life_Beautiful_Plate_List.Any())
+{
+    @await Html.PartialAsync("_life_beautiful_plate", Model.Life_Beautiful_Plate_List)
+}
+
+
+<!-- ==================== NEKTA'S EDGE ==================== -->
+<section class="bc-edge-section section-pt">
+    @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+    {
+        <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText"
+            class="bc-deco hidden xl:block -left-0 top-30" aria-hidden="true" />
+        <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
+            class="bc-deco hidden xl:block -right-0 top-4" aria-hidden="true" />
+
+        <div class="container relative z-10 ">
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                }
+            </div>
+        </div>
+    }
+
+
+    <div class="bc-arch-grid">
+        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
+        {
+            <div class="bc-arch-card">
+                <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" aria-hidden="true" />
+                <h3>@item.Title</h3>
+                <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+            </div>
+        }
+    </div>
+
+</section>
+
+<!-- ==================== TECHNOLOGY SECTION ==================== -->
+<section class="bg-green center-slider relative section-spacing overflow-hidden">
+    <div class="inner-center-slider">
+        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+        {
+            <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
+                <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+            </h2>
+        </div>
+                }
+        <!-- Swiper Slider -->
+        <div class="swiper edgeSwiper px-4 py-6">
+            <div class="swiper-wrapper py-4 pb-2">
+                <!-- Slide 1 -->
+                @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
+                {
+                    <div class="swiper-slide">
+                        <div class="edge-card group backdrop-blur-sm opacity-50 transition-all duration-700">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="edge-card-image border-8 w-full aspect-video object-cover transition-all duration-700" />
+                            <div
+                                class="edge-arrow-bar absolute w-full -translate-y-1/4 flex justify-between items-center gap-8 mt-0 edgeArrow hidden">
+                                <div
+                                    class="edge-swiper-prev edge-prev cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenLeft.png" alt="GreenLeft" />
+                                </div>
+                                <div
+                                    class="edge-swiper-next edge-next cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenRight.png" alt="GreenRight" />
+                                </div>
+                            </div>
+                            <div
+                                class="edge-details p-0 pt-1 flex flex-col md:flex-row items-start justify-between opacity-0 invisible transition-all duration-500">
+                                <div>
+                                    <h3 class="edge-card-title">
+                                        @item.Title
+                                    </h3>
+                                    <p class="edge-card-text">
+                                        @Html.Raw(item.Intro.CleanParagraphTags())
+                                    </p>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="edge-nav-arrows">
+                <div
+                    class="edge-swiper-prev cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-cream border border-green flex items-center justify-center transition-all">
+                    <img loading="lazy" src="/Assets/images/arrows/GreenLeft.png" alt="GreenLeft" />
+                </div>
+                <div
+                    class="edge-swiper-next cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-cream border border-green flex items-center justify-center transition-all">
+                    <img loading="lazy" src="/Assets/images/arrows/GreenRight.png" alt="GreenRight" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== PROOF IS ON THE PLATE ==================== -->
+<section class="section-spacing relative overflow-hidden">
+    <img src="assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+    <div class="container">
+        <!-- Section Heading -->
+        @foreach (var item in Model.Proof_Plate_List.Where(x => x.IsBlock == 1))
+        {
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                }
+            </div>
+        }
+
+        <!-- Swiper Slider -->
+        <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
+            <div class="swiper-wrapper">
+                <!-- Card 1 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group blogs-cards-wrapper">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                            <img loading="lazy" src="assets/images/insights/trend1.png" alt="Catering Trends"
+                                class="w-full object-cover" />
+                        </div>
+                        <div class="py-6 blogs-cards-content">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
+                                Study</span>
+                            <h3 class="insight-title line-clamp-2">
+                                Top Catering Trends Transforming Modern Celebrations
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                            <img loading="lazy" src="assets/images/insights/chef-creativity.png" alt="Chef Creativity"
+                                class="w-full object-cover" />
+                        </div>
+                        <div class="py-6">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
+                                Study</span>
+                            <h3 class="insight-title line-clamp-2">
+                                How Our Chefs Craft Authentic Flavours with Creativity
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="swiper-slide h-auto">
+                    <div class="insight-card group">
+                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                            <img loading="lazy" src="assets/images/insights/premium-catering.png" alt="Premium Catering"
+                                class="w-full object-cover" />
+                        </div>
+                        <div class="py-6">
+                            <span
+                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
+                                Study</span>
+                            <h3 class="insight-title line-clamp-2">
+                                Featured for Excellence in Premium Catering Experiences
+                            </h3>
+                            <a href="#" class="link-md link-primary mt-4">
+                                <span class="underline">Read More
+                                </span>
+                                <img loading="lazy" src="assets/images/arrows/orangearrow-long-right.png"
+                                    alt="rightArrow" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blogs-slider-nav">
+                <button class="blogs-prev" aria-label="Previous">
+                    <img src="assets/images/arrows/swiperLeft.png" alt="swiperLeft" class="max-w-full">
+                </button>
+
+                <button class="blogs-next" aria-label="Next">
+                    <img src="assets/images/arrows/swiperRight.png" alt="swiperRight" class="max-w-full">
+                </button>
+            </div>
+
+        </div>
+        <!-- View All Button -->
+        <div class="flex justify-center mt-6">
+            <a href="#" class="common-btn flex items-center gap-2 btn-slide-fill">
+                <span>View All Case Study</span>
+                <img loading="lazy" src="assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+@foreach (var item in Model.Seeking_Elevated_DE_List.Where(x => x.IsBlock == 1))
+{
+    <section class="cta-section bg-darkcream section-spacing relative overflow-hidden">
+        <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+        <div class="container">
+            <!-- Section Heading -->
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    <p> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+                }
+            </div>
+            <!-- View All Button -->
+            @if (!string.IsNullOrWhiteSpace(item.Url))
+            {
+                <div class="flex justify-center mt-6">
+                    <a href="@item.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                        <span>@(!string.IsNullOrWhiteSpace(item.Url_Text) ? item.Url_Text : "Partner with Us")</span>
+                        <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="Right Arrow" />
+                    </a>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/center-mode-slider.js"></script>
+    <script src="~/Assets/js/blogs-cards-slider.js"></script>
+    <script src="~/Assets/js/thumb-slider.js"></script>
+    <script src="~/Assets/js/business-corporates.js"></script>
+}

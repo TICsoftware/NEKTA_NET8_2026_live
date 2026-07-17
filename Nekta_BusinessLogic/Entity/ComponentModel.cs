@@ -35,7 +35,8 @@ namespace Nekta_BusinessLogic.Entity
 
         public string Icon_Image { get; set; }
         public string Component_Icon_Image { get; set; }
-
+        public string Component_Icon2_Image { get; set; }
+        public string Component_Icon_alt_Image { get; set; }
         public string Popup_Content { get; set; }
         public string Popup_Display_Title { get; set; }
 

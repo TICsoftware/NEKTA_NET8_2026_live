@@ -96,6 +96,8 @@ namespace Nekta_BusinessLogic.BAL
                 Video_poster = Config_Application_Website.GetPath(group, "Video poster"),
                 Icon_Image = Config_Application_Website.GetPath(group, "Icon image"),
                 Component_Icon_Image = Config_Application_Website.GetPath(group, "component icon image"),
+                Component_Icon2_Image = Config_Application_Website.GetPath(group, "component icon 2"),
+                Component_Icon_alt_Image = Config_Application_Website.GetPath(group, "component icon image alt"),
                 Popup_Content = Config_Application_Website.GetValue(dict, "popup content"),
                 Popup_Display_Title = Config_Application_Website.GetValue(dict, "Popup Display title"),
                 Sequence = Config_Application_Website.GetIntValue(dict, "Sequence"),
