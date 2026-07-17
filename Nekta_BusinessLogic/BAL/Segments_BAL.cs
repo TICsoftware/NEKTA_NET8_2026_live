@@ -10,15 +10,15 @@ using Nekta_BusinessLogic;
 
 namespace Nekta_BusinessLogic.BAL
 {
-    public class About_BAL : BasePageBAL
+    public class Segments_BAL : BasePageBAL
     {
-        public About_BAL(IConfiguration configuration) : base(configuration)
+        public Segments_BAL(IConfiguration configuration) : base(configuration)
         {
         }
 
-        public AboutModel GetLeadership_BAL(string pagename, int languageId, int geographyId)
+        public SegmentsModel GetBusinessCorporates_BAL(string pagename, int languageId, int geographyId)
         {
-            var model = new AboutModel();
+            var model = new SegmentsModel();
             var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
 
             // Content
@@ -33,14 +33,14 @@ namespace Nekta_BusinessLogic.BAL
                 var groupedData = GetGroupedComponents(ds.Tables[1]);
                 model.Components = groupedData;
 
-                model.leadership_intro_1_List = MapComponents(groupedData, 1);
-                model.Core_team_List = MapComponents(groupedData, 2);
-                model.Support_Functions_List = MapComponents(groupedData, 3);
-                model.leadership_intro_2_List = MapComponents(groupedData, 4);
-                model.Board_of_directors_List = MapComponents(groupedData, 5);
+                model.Delivering_Experiences_List = MapComponents(groupedData, 1);
+                model.Corporate_Dining_Excellence_List = MapComponents(groupedData, 2);
+                model.Life_Beautiful_Plate_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_List = MapComponents(groupedData, 4);
+                model.Technology_That_Runs_List = MapComponents(groupedData, 5);
+                model.Proof_Plate_List = MapComponents(groupedData, 6);
+                model.Seeking_Elevated_DE_List = MapComponents(groupedData, 7);
             }
-
-            
 
             return model;
         }

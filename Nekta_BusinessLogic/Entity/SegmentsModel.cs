@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Nekta_BusinessLogic.Entity
+{
+    public class SegmentsModel
+    {
+        public ContentViewModel? Content { get; set; }
+        public List<ComponentGroup> Components { get; set; } = new();
+        public List<ComponentGroup> Components2 { get; set; } = new();
+
+
+        //Business & Corporates
+        public List<ComponentModel> Delivering_Experiences_List { get; set; } = new();
+        public List<ComponentModel> Corporate_Dining_Excellence_List { get; set; } = new();
+        public List<ComponentModel> Life_Beautiful_Plate_List { get; set; } = new();
+        public List<ComponentModel> Nektas_Edge_List { get; set; } = new();
+        public List<ComponentModel> Technology_That_Runs_List { get; set; } = new();
+        public List<ComponentModel> Proof_Plate_List { get; set; } = new();
+        public List<ComponentModel> Seeking_Elevated_DE_List { get; set; } = new();
+
+
+        public int TotalCount { get; set; }
+
+    }
+
+
+}
