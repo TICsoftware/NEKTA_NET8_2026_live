@@ -27,6 +27,8 @@ namespace Nekta_BusinessLogic.Entity
         public string Url { get; set; }
         public string Url_Text { get; set; }
 
+        public string MediafilePath { get; set; }
+
         public int Sequence { get; set; }
         public int IsBlock { get; set; }
 
@@ -36,6 +38,7 @@ namespace Nekta_BusinessLogic.Entity
         public string Icon_Image { get; set; }
         public string Component_Icon_Image { get; set; }
         public string Component_Icon2_Image { get; set; }
+        public string Component_Icon3_Image { get; set; }
         public string Component_Icon_alt_Image { get; set; }
         public string Popup_Content { get; set; }
         public string Popup_Display_Title { get; set; }
@@ -48,5 +51,33 @@ namespace Nekta_BusinessLogic.Entity
         public string Component_Designation2 { get; set; }
         public string Designation { get; set; }
         public string Thumbnail_color_image { get; set; }
+        public string Component_LHS_thumbnail { get; set; }
+        public string Component_LHS_thumbnail_image_alt { get; set; }
     }
+
+
+    public class ArticleModel
+    {
+        public int ContId { get; set; }
+        public int ContParentId { get; set; }
+
+        public string Title { get; set; }
+        public string Intro { get; set; }
+        public string HmpgIntro { get; set; }
+
+        public string PageName { get; set; }
+
+        public string ThumbnailImage { get; set; }
+        public string ThumbnailAltText { get; set; }
+
+        public string ExternalUrl { get; set; }
+        public string MediafilePath { get; set; }
+
+        public string Url { get; set; }
+        public string UrlTarget { get; set; }
+
+        public DateTime? DisplayDate { get; set; }
+        public int Sequence { get; set; }
+    }
+
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Nekta_BusinessLogic.Entity;
@@ -80,6 +81,77 @@ namespace Nekta_BusinessLogic
                 return path;
 
             return $"{baseUrl?.TrimEnd('/')}/{path.TrimStart('/')}";
+        }
+
+
+        public static string GetArticleUrl(DataRow row)
+        {
+            var externalUrl = row["cont_external_url"]?.ToString();
+            var mediaFile = row["MediafilePath"]?.ToString();
+            var pageUrl = row["pageurl"]?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(externalUrl))
+                return externalUrl;
+
+            if (!string.IsNullOrWhiteSpace(mediaFile))
+                return mediaFile;
+
+            return pageUrl?.Replace("/global", "");
+        }
+
+        public static string GetArticleTarget(DataRow row)
+        {
+            var externalUrl = row["cont_external_url"]?.ToString();
+            var mediaFile = row["MediafilePath"]?.ToString();
+            var pageTarget = row["pageurl"]?.ToString();
+
+            if (!string.IsNullOrWhiteSpace(externalUrl) ||
+                !string.IsNullOrWhiteSpace(mediaFile))
+            {
+                return "_blank";
+            }
+
+            return string.Equals(pageTarget, "self", StringComparison.OrdinalIgnoreCase)
+                ? "_self"
+                : "_blank";
+        }
+
+
+        public static List<ArticleModel> MapArticleList(DataTable table)
+        {
+            if (table == null || table.Rows.Count == 0)
+                return new List<ArticleModel>();
+
+            return table.AsEnumerable()
+                .Select(row => new ArticleModel
+                {
+                    ContId = row.Field<int>("cont_id"),
+                    ContParentId = row.Field<int>("cont_parent_id"),
+
+                    Title = string.IsNullOrWhiteSpace(row["cont_hmpg_title"]?.ToString())
+                        ? row["cont_title"]?.ToString()
+                        : row["cont_hmpg_title"]?.ToString(),
+
+                    Intro = row["cont_intro"]?.ToString(),
+                    HmpgIntro = row["cont_hmpg_intro"]?.ToString(),
+                    PageName = row["cont_pagename"]?.ToString(),
+
+                    ThumbnailImage = row["Hmpg_thumbnail"]?.ToString(),
+                    ThumbnailAltText = row["Hmpg_thumbnail_alt_text"]?.ToString(),
+
+                    ExternalUrl = row["cont_external_url"]?.ToString(),
+                    MediafilePath = row["MediafilePath"]?.ToString(),
+
+                    Url = GetArticleUrl(row),
+                    UrlTarget = GetArticleTarget(row),
+
+                    DisplayDate = table.Columns.Contains("cont_displaydate")
+                        ? row.Field<DateTime?>("cont_displaydate")
+                        : null,
+
+                    Sequence = row.Field<int?>("cont_sequence") ?? 0
+                })
+                .ToList();
         }
 
 
