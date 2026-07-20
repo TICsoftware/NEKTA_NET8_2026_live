@@ -44,20 +44,6 @@ namespace Nekta_MVC.Routes
 
 
 
-            app.MapControllerRoute(
-                          name: "TestDirectory",
-                          pattern: "test-directory",
-                          defaults: new { controller = "TestDirectory", action = "Index" }
-                      );
-
-
-
-
-            app.MapControllerRoute(
-                           name: "eventsandcme",
-                           pattern: "academy-and-research/events-and-cme",
-                           defaults: new { controller = "Events", action = "Index", title = "events-and-cme" }
-                       );
 
             app.MapControllerRoute(
                 name: "LoadMoreSearch",
@@ -79,53 +65,7 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "Updates", action = "LoadMoreAnnualArticles" }
                       );
 
-            app.MapControllerRoute(
-               name: "updates",
-               pattern: "about-cop/updates",
-               defaults: new { controller = "Updates", action = "Index", title = "updates" }
-           );
-
-            app.MapControllerRoute(
-                name: "mediainside",
-                pattern: "about-cop/updates/media/{id?}",
-                defaults: new { controller = "Updates", action = "MediaInside" }
-                );
-
-            app.MapControllerRoute(
-                name: "publicationsandresources",
-                pattern: "academy-and-research/publications-and-resources",
-                defaults: new { controller = "AcademyResearch", action = "PublicationsResources", title = "publications-and-resources" }
-            );
-
-            app.MapControllerRoute(
-                name: "partnerscollaborators",
-                pattern: "about-cop/partners-and-collaborators",
-                defaults: new { controller = "About", action = "PartnersCollaborators", title = "partners-and-collaborators" }
-            );
-
-            app.MapControllerRoute(
-                           name: "careers",
-                           pattern: "about-cop/careers",
-                           defaults: new { controller = "About", action = "Careers", title = "careers" }
-                       );
-
-            app.MapControllerRoute(
-                name: "aboutcop",
-                pattern: "about-cop",
-                defaults: new { controller = "About", action = "About_Cop" }
-            );
-
-            app.MapControllerRoute(
-                name: "testsandservices",
-                pattern: "tests-and-services",
-                defaults: new { controller = "TestsServices", action = "Index" }
-            );
-
-            app.MapControllerRoute(
-                           name: "caseconsults",
-                           pattern: "clinical-expertise/case-consults",
-                           defaults: new { controller = "ClinicalExpertise", action = "CaseConsults", title = "case-consults" }
-                       );
+ 
 
             app.MapControllerRoute(
                 name: "ourteam",
@@ -153,24 +93,7 @@ namespace Nekta_MVC.Routes
               pattern: "sitemap",
               defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
           );
-            app.MapControllerRoute(
-                name: "fellowshipsandtraining",
-                pattern: "academy-and-research/fellowships-and-training",
-                defaults: new { controller = "AcademyResearch", action = "FellowshipsTraining", title = "fellowships-and-training" }
-            );
-
-            app.MapControllerRoute(
-                name: "dranitaborges",
-                pattern: "academy-and-research/dr-anita-borges",
-                defaults: new { controller = "AcademyResearch", action = "AnitaBorges", title = "dr-anita-borges" }
-            );
-
-
-            app.MapControllerRoute(
-                name: "forpatients",
-                pattern: "for-patients",
-                defaults: new { controller = "ForPatients", action = "Index" }
-            );
+          
 
             app.MapControllerRoute(
                 name: "Error",

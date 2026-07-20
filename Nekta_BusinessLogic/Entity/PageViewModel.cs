@@ -46,7 +46,7 @@ namespace Nekta_BusinessLogic.Entity
         public string PageName { get; set; }
         public string MastheadImage { get; set; }
         public string MobileMastheadImage { get; set; }
-         public string MobileMastheadImage_mobile { get; set; }
+
 
         // Optional (from SP)
         public string ContIntro { get; set; }
