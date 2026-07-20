@@ -14,11 +14,22 @@ namespace Nekta_MVC.Routes
 
 
 
+            app.MapControllerRoute(
+                          name: "about",
+                          pattern: "about-us",
+                          defaults: new { controller = "About", action = "AboutUs", title = "about-us" }
+                      );
 
             app.MapControllerRoute(
                           name: "leadership",
                           pattern: "about-us/leadership",
                           defaults: new { controller = "About", action = "Leadership", title = "leadership" }
+                      );
+
+                        app.MapControllerRoute(
+                          name: "companyinformation",
+                          pattern: "about-us/company-information",
+                          defaults: new { controller = "About", action = "CompanyInformation", title = "company-information" }
                       );
 
 

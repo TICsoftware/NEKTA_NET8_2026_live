@@ -1,0 +1,199 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.AboutModel
+@{
+    ViewData["Title"] = "Company Information";
+}
+
+@section head {
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="assets/css/company-info.css" />
+}
+
+<section class="relative inside-banner-outer overflow-hidden">
+    <div class="inside-banner-inner banner-animation relative ">
+
+        <!-- Banner -->
+        <div
+            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+            <!-- Parallax Image -->
+            <picture>
+                <!-- Desktop -->
+                <source media="(min-width:1024px)" srcset="@Model.Content.MastheadImage">
+
+                <!-- Tablet -->
+                <source media="(min-width:768px)" srcset="@Model.Content.MobileMastheadImage">
+
+                <!-- Mobile -->
+                <img src="@Model.Content.MobileMastheadImage" alt="@Model.Content.Masthead_image_Alt_text"
+                    class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover" loading="eager"
+                    fetchpriority="high">
+            </picture>
+
+            <!-- Keep Existing Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+            <div class="container pb-12 md:pb-15">
+                <div class="max-w-4xl text-left">
+
+                    <nav class="mb-4" aria-label="Breadcrumb">
+                        @Html.Raw(Model.Content.BreadcrumPath)
+                    </nav>
+
+                    <h1 class="innerbanner-title text-h1 text-white">
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(Model.Content.Cont_hmpg_intro)
+                        ? Model.Content.Cont_hmpg_intro.CleanParagraphTags()
+                        : Model.Content.ContTitle)
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- HERO BANNER END -->
+
+<!-- ==================== COMPANY DETAILS SECTION ==================== -->
+
+<section class="company-details-section relative section-spacing overflow-hidden">
+    <!-- Background Image -->
+    <img src="assets/images/company_info/bg_image.webp" alt=""
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" loading="lazy">
+    <!-- Overlay to soften bg under cards -->
+    <div class="absolute inset-0 bg-cream/90"></div>
+    <div class="container relative z-10">
+        <!-- Intro -->
+
+
+        <div class="text-center mb-10 md:mb-14 into-section-wrapper into-section-center-wrapper">
+            <p>
+                @Html.Raw(Model.Content.ContIntro.CleanParagraphTags())
+            </p>
+        </div>
+
+<div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
+        @foreach (var item in Model.Company_Details_List.Where(x => x.IsBlock == 1))
+        {
+            
+                <!-- LEFT: Company Details Card -->
+                <div class="info-card relative">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 info-card-title" data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                       </h2>
+                    </div>
+
+
+                @Html.Raw(item.Content)
+
+
+                <!-- Decorative leaf -->
+                <img src="/Assets/images/company_info/green_leaf.svg" alt=""
+                    class="info-card-leaf absolute pointer-events-none select-none">
+            </div>
+
+        }
+
+            <!-- RIGHT: Policies + Annual Return -->
+            <div class="flex flex-col gap-6 md:gap-8">
+                <!-- Policies Card -->
+                <div class="info-card">
+                @foreach (var item in Model.Policies_List.Where(x => x.IsBlock == 1))
+                {
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 info-card-title info-card-title--italic" data-leaf-target
+                            letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                        </h2>
+                    </div>
+                }
+
+
+                <ul class="policy-list">
+                    @foreach (var item in Model.Policies_List.Where(x => x.IsBlock == 0))
+                    {
+                        <li class="policy-item">
+                            <a href="@item.MediafilePath" target="_blank" rel="noopener"
+                                class="policy-link" download>
+                                <span class="policy-icon">
+                                    <img src="/Assets/images/company_info/pdf.svg" alt="Document Icon" class="icon-sm">
+                                </span>
+                                <p>@item.Title</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                </div>
+                <!-- Annual Return Card -->
+                @foreach (var item in Model.AnnualReturn_List)
+                {
+                    <a href="@item.MediafilePath" target="_blank" rel="noopener"
+                        class="info-card annual-return-card flex items-center gap-3">
+                        <span class="policy-icon"><img src="/Assets/images/company_info/pdf.svg" alt="Document Icon"
+                                class="icon-md"></span>
+                        <h3 class="info-card-title text-h3">
+                            @Html.Raw(
+                                !string.IsNullOrWhiteSpace(item.HmpgIntro)
+                                ? item.HmpgIntro.CleanParagraphTags()
+                                : item.Title)
+                        </h3>
+                    </a>
+                }
+            </div>
+        </div>
+</div>
+</section>
+
+
+@section Scripts {
+        <script src="~/Assets/js/inner-banner-script.js"></script>
+    }

@@ -29,6 +29,25 @@ public class AboutController : Controller
         return View();
     }
 
+    public IActionResult AboutUs(string title)
+    {
+        try
+        {
+            //string pageName = HttpContext?.Request?.Path.Value?.Trim('/') ?? string.Empty;
+            var data = _bal.GetAboutUs_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/About_Cop :", ex);
+            return View(new AboutModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
     public IActionResult Leadership(string title)
     {
         try
@@ -48,6 +67,26 @@ public class AboutController : Controller
         }
     }
 
-  
+
+    public IActionResult CompanyInformation(string title)
+    {
+        try
+        {
+            //string pageName = HttpContext?.Request?.Path.Value?.Trim('/') ?? string.Empty;
+            var data = _bal.CompanyInformation_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/About_Cop :", ex);
+            return View(new AboutModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
+
 
 }
