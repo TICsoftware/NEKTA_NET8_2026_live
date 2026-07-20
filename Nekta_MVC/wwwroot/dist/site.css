@@ -18,6 +18,7 @@
     --spacing: 0.25rem;
     --container-xl: 36rem;
     --container-2xl: 42rem;
+    --container-3xl: 48rem;
     --container-4xl: 56rem;
     --container-5xl: 64rem;
     --container-6xl: 72rem;
@@ -328,6 +329,12 @@
   .top-2\/3 {
     top: calc(2 / 3 * 100%);
   }
+  .top-4 {
+    top: calc(var(--spacing) * 4);
+  }
+  .top-30 {
+    top: calc(var(--spacing) * 30);
+  }
   .top-50 {
     top: calc(var(--spacing) * 50);
   }
@@ -339,6 +346,9 @@
   }
   .top-\[15\%\] {
     top: 15%;
+  }
+  .-right-0 {
+    right: calc(var(--spacing) * -0);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -357,6 +367,9 @@
   }
   .bottom-100 {
     bottom: calc(var(--spacing) * 100);
+  }
+  .-left-0 {
+    left: calc(var(--spacing) * -0);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -1118,6 +1131,9 @@
   .w-25 {
     width: calc(var(--spacing) * 25);
   }
+  .w-40 {
+    width: calc(var(--spacing) * 40);
+  }
   .w-50 {
     width: calc(var(--spacing) * 50);
   }
@@ -1144,6 +1160,9 @@
   }
   .max-w-2xl {
     max-width: var(--container-2xl);
+  }
+  .max-w-3xl {
+    max-width: var(--container-3xl);
   }
   .max-w-4xl {
     max-width: var(--container-4xl);
@@ -1240,6 +1259,9 @@
   .resize {
     resize: both;
   }
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -1266,6 +1288,9 @@
   }
   .items-start {
     align-items: flex-start;
+  }
+  .items-stretch {
+    align-items: stretch;
   }
   .justify-between {
     justify-content: space-between;
@@ -1302,6 +1327,9 @@
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
+  }
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
   }
   .space-y-1 {
     :where(& > :not(:last-child)) {
@@ -2119,6 +2147,11 @@
       --tw-ring-color: var(--color-black);
     }
   }
+  .sm\:mt-5 {
+    @media (width >= 40rem) {
+      margin-top: calc(var(--spacing) * 5);
+    }
+  }
   .sm\:h-10 {
     @media (width >= 40rem) {
       height: calc(var(--spacing) * 10);
@@ -2127,6 +2160,11 @@
   .sm\:w-10 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 10);
+    }
+  }
+  .sm\:max-w-\[35vw\] {
+    @media (width >= 40rem) {
+      max-width: 35vw;
     }
   }
   .sm\:max-w-\[60vw\] {
@@ -2166,6 +2204,11 @@
   .sm\:pb-10 {
     @media (width >= 40rem) {
       padding-bottom: calc(var(--spacing) * 10);
+    }
+  }
+  .sm\:pl-15 {
+    @media (width >= 40rem) {
+      padding-left: calc(var(--spacing) * 15);
     }
   }
   .sm\:text-2xl {
@@ -2452,6 +2495,11 @@
       gap: calc(var(--spacing) * 4);
     }
   }
+  .lg\:gap-12 {
+    @media (width >= 64rem) {
+      gap: calc(var(--spacing) * 12);
+    }
+  }
   .lg\:gap-15 {
     @media (width >= 64rem) {
       gap: calc(var(--spacing) * 15);
@@ -2484,6 +2532,11 @@
   .lg\:text-\[200px\] {
     @media (width >= 64rem) {
       font-size: 200px;
+    }
+  }
+  .xl\:block {
+    @media (width >= 80rem) {
+      display: block;
     }
   }
   .xl\:px-6 {
