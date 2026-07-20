@@ -4,10 +4,10 @@
 
 @{
     var component = Model
-        .FirstOrDefault(x => x.IsBlock == 1);
+        .FirstOrDefault(x => x.IsBlock == 0);
 
     var blocks = Model
-        .Where(x => x.IsBlock == 0)
+        .Where(x => x.IsBlock == 1)
         .OrderBy(x => x.Sequence)
         .ToList();
 }
@@ -128,7 +128,7 @@
                             <h3>@item.Title</h3>
 
                             <div class="read-more-content" data-lines="12">
-                                @Html.Raw(item.Content)
+                                @Html.Raw(item.Intro)
                             </div>
 
                         </template>

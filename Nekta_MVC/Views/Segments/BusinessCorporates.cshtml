@@ -134,7 +134,7 @@
                 <div class="intro-outer-wrapper sm:pl-15">
                     @if (!string.IsNullOrWhiteSpace(item.Intro))
                         {
-                            <p> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+                            @Html.Raw(item.Intro)
                         }
 
                         @if (!string.IsNullOrWhiteSpace(item.Url))
@@ -196,7 +196,7 @@
         </div>
 
         <div class="max-w-3xl mx-auto text-center">
-            @Html.Raw(item.Content)
+            @Html.Raw(item.Intro)
         </div>
     </div>
 </section>
@@ -211,7 +211,7 @@
 
 <!-- ==================== NEKTA'S EDGE ==================== -->
 <section class="bc-edge-section section-pt">
-    @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+    @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
     {
         <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText"
             class="bc-deco hidden xl:block -left-0 top-30" aria-hidden="true" />
@@ -236,7 +236,7 @@
 
 
     <div class="bc-arch-grid">
-        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
+        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
         {
             <div class="bc-arch-card">
                 <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" aria-hidden="true" />
@@ -251,7 +251,7 @@
 <!-- ==================== TECHNOLOGY SECTION ==================== -->
 <section class="bg-green center-slider relative section-spacing overflow-hidden">
     <div class="inner-center-slider">
-        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+        @foreach (var item in Model.Technology_That_Runs_List.Where(x => x.IsBlock == 0))
         {
             <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
                 <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
@@ -266,9 +266,10 @@
         <div class="swiper edgeSwiper px-4 py-6">
             <div class="swiper-wrapper py-4 pb-2">
                 <!-- Slide 1 -->
-                @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
+                @foreach (var item in Model.Technology_That_Runs_List.Where(x => x.IsBlock == 1))
                 {
-                    <div class="swiper-slide">
+                    if(@item.Sequence == 1)
+                    {    <div class="swiper-slide">
                         <div class="edge-card group backdrop-blur-sm opacity-50 transition-all duration-700">
                             <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
                                 class="edge-card-image border-8 w-full aspect-video object-cover transition-all duration-700" />
@@ -298,7 +299,44 @@
                                 </div>
                             </div>
                         </div>
+                    </div>}
+                    else
+                    {
+                     <div
+                        class="swiper-slide transition-all duration-700">
+                        <div
+                           class="edge-card group relative backdrop-blur-sm opacity-50 transition-all duration-700"
+                           >
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="edge-card-image border-8 w-full aspect-video object-cover transition-all duration-700" />
+                            <div
+                                class="edge-arrow-bar absolute w-full -translate-y-1/4 flex justify-between items-center gap-8 mt-0 edgeArrow hidden">
+                                <div
+                                    class="edge-swiper-prev edge-prev cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenLeft.png" alt="GreenLeft" />
+                                </div>
+                                <div
+                                    class="edge-swiper-next edge-next cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenRight.png" alt="GreenRight" />
+                                </div>
+                            </div>
+                            <div
+                                class="edge-details p-0 pt-1 flex flex-col md:flex-row items-start justify-between opacity-0 invisible transition-all duration-500">
+                                <div>
+                                    <h3 class="edge-card-title">
+                                        @item.Title
+                                    </h3>
+                                    <p class="edge-card-text">
+                                        @Html.Raw(item.Intro.CleanParagraphTags())
+                                    </p>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    }
                 }
             </div>
 
@@ -321,7 +359,7 @@
     <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
     <div class="container">
         <!-- Section Heading -->
-        @foreach (var item in Model.Proof_Plate_List.Where(x => x.IsBlock == 1))
+        @foreach (var item in Model.Proof_Plate_List.Where(x => x.IsBlock == 0))
         {
             <div class="section-title-outer text-center max-w-6xl mx-auto">
                 <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
@@ -332,13 +370,13 @@
             </h2>
             @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
-                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                    @Html.Raw(item.Intro)
                 }
             </div>
         }
 
         <!-- Swiper Slider -->
-        <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
+        @* <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
             <div class="swiper-wrapper">
                 <!-- Card 1 -->
                 <div class="swiper-slide h-auto">
@@ -421,7 +459,7 @@
                 </button>
             </div>
 
-        </div>
+        </div> *@
         <!-- View All Button -->
         <div class="flex justify-center mt-6">
             <a href="#" class="common-btn flex items-center gap-2 btn-slide-fill">
@@ -433,7 +471,7 @@
 </section>
 
 <!-- ==================== CTA ==================== -->
-@foreach (var item in Model.Seeking_Elevated_DE_List.Where(x => x.IsBlock == 1))
+@foreach (var item in Model.Seeking_Elevated_DE_List.Where(x => x.IsBlock == 0))
 {
     <section class="cta-section bg-darkcream section-spacing relative overflow-hidden">
         <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
@@ -448,7 +486,7 @@
             </h2>
             @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
-                    <p> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+                  @Html.Raw(item.Intro.CleanParagraphTags())
                 }
             </div>
             <!-- View All Button -->
