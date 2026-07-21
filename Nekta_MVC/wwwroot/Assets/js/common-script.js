@@ -1,1273 +1,347 @@
+const headerWrap = document.getElementById('headerWrap');
+  const navBar = document.getElementById('navBar');
+  const navViewport = document.getElementById('navViewport');
+  const dropdownAnchor = document.getElementById('dropdownAnchor');
+  const desktopNav = document.getElementById('desktopNav');
+  let menuItems = [...desktopNav.querySelectorAll('.nav-item[data-menu]')];
+  const panels = [...document.querySelectorAll('.nav-panel')];
 
- 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
-const dropdowns = document.querySelectorAll(".nav-dropdown");
+  let activeMenu = null;
+  let prevIndex = null;
+  let closeTimer = null;
 
-const isDesktop = () => window.innerWidth >= 1024;
-
-// Mobile menu toggle
-// Guarded: some pages (e.g. the home layout) render without the
-// site header, so #menuToggle/#mainNav won't exist there. Without
-// this check the script threw on load and every later block below
-// (sliders, modal, marquee, animations) silently never ran.
-if (menuToggle && mainNav) {
-    menuToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = mainNav.classList.toggle("is-open");
-        menuToggle.setAttribute("aria-expanded", isOpen);
-        menuToggle
-            .querySelector(".menu-icon-open")
-            ?.classList.toggle("hidden", isOpen);
-        menuToggle
-            .querySelector(".menu-icon-close")
-            ?.classList.toggle("hidden", !isOpen);
-        if (!isOpen) closeAllDropdowns();
+  function bindDesktopMenuEvents(){
+    menuItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openMenu(item));
+      item.addEventListener('focusin', () => openMenu(item));
+      const btn = item.querySelector('button');
+      if (!btn) return;
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        activeMenu === item.dataset.menu ? closeMenu() : openMenu(item);
+      });
     });
-}
+  }
 
-dropdowns.forEach((dropdown) => {
-    const trigger = dropdown.querySelector(".dropdown-trigger");
-    if (!trigger) return;
-    let closeTimer = null;
+  function wireMobileAccordions(){
+    document.querySelectorAll('[data-accordion]').forEach(row => {
+      const trigger = row.querySelector('.accordion-trigger');
+      const panel = row.querySelector('.accordion-panel');
+      const inner = row.querySelector('.accordion-panel-inner');
+      if (!trigger || !panel || !inner) return;
 
-    // MOBILE: click to open/close accordion
-    trigger.addEventListener("click", (e) => {
-        if (isDesktop()) return; 
-        e.stopPropagation();
-        const isOpen = dropdown.classList.contains("is-open");
-        closeAllDropdowns();
+      trigger.addEventListener('click', () => {
+        const isOpen = row.classList.contains('open');
+
+        document.querySelectorAll('[data-accordion]').forEach(r => {
+          r.classList.remove('open');
+          const p = r.querySelector('.accordion-panel');
+          const t = r.querySelector('.accordion-trigger');
+          if (p) p.style.maxHeight = '0';
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+
         if (!isOpen) {
-            dropdown.classList.add("is-open");
-            trigger.setAttribute("aria-expanded", "true");
+          row.classList.add('open');
+          panel.style.maxHeight = inner.scrollHeight + 'px';
+          trigger.setAttribute('aria-expanded', 'true');
         }
+      });
     });
- 
-    // DESKTOP: hover to open/close, with a small delay so moving
-    // from trigger -> panel across the gap doesn't close it
-    dropdown.addEventListener("mouseenter", () => {
-        if (!isDesktop()) return;
-        clearTimeout(closeTimer);
-        closeAllDropdowns();
-        dropdown.classList.add("is-open");
-        trigger.setAttribute("aria-expanded", "true");
+  }
+
+  function measurePanel(panel){
+    const clone = panel.cloneNode(true);
+    clone.classList.add('is-active');
+    clone.style.cssText = 'position:fixed;left:-9999px;top:0;display:block;visibility:hidden;pointer-events:none;';
+    document.body.appendChild(clone);
+    const w = clone.offsetWidth;
+    const h = clone.offsetHeight;
+    document.body.removeChild(clone);
+    return { w, h };
+  }
+
+  function applySize(panel){
+    const { w, h } = measurePanel(panel);
+    navViewport.style.width = w + 'px';
+    navViewport.style.minHeight = h + 'px';
+  }
+
+  function showPanel(panel, direction){
+    panels.forEach(p => p.classList.remove('is-active','from-start','from-end'));
+    panel.classList.add('is-active');
+    if (direction) panel.classList.add(direction);
+    applySize(panel);
+  }
+
+  function positionViewportToItem(item){
+    const btn = item.querySelector('button');
+    if (!btn) return;
+    const btnRect = btn.getBoundingClientRect();
+    const anchorRect = dropdownAnchor.getBoundingClientRect();
+    const centerX = btnRect.left + (btnRect.width / 2) - anchorRect.left;
+    navViewport.style.left = centerX + 'px';
+  }
+
+  function openMenu(item){
+    clearTimeout(closeTimer);
+    const menu = item.dataset.menu;
+    const index = Number(item.dataset.index);
+    const panel = document.getElementById('panel-' + menu);
+    if (!panel) return;
+
+    const direction = activeMenu && prevIndex !== null
+      ? (index > prevIndex ? 'from-end' : 'from-start') : '';
+
+    menuItems.forEach(i => {
+      i.classList.toggle('open', i === item);
+      const btn = i.querySelector('button');
+      if (btn) btn.setAttribute('aria-expanded', i === item ? 'true' : 'false');
     });
- 
-    dropdown.addEventListener("mouseleave", () => {
-        if (!isDesktop()) return;
-        closeTimer = setTimeout(() => {
-            dropdown.classList.remove("is-open");
-            trigger.setAttribute("aria-expanded", "false");
-        }, 150); // small buffer so it doesn't feel twitchy
+
+    positionViewportToItem(item);
+    showPanel(panel, direction);
+    navViewport.classList.add('open');
+    navViewport.setAttribute('aria-hidden', 'false');
+    activeMenu = menu;
+    prevIndex = index;
+  }
+
+  function closeMenu(){
+    clearTimeout(closeTimer);
+    menuItems.forEach(i => {
+      i.classList.remove('open');
+      const btn = i.querySelector('button');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
     });
-});
- 
-function closeAllDropdowns() {
-    dropdowns.forEach((dropdown) => {
-        dropdown.classList.remove("is-open");
-        dropdown
-            .querySelector(".dropdown-trigger")
-            ?.setAttribute("aria-expanded", "false");
+    navViewport.classList.remove('open');
+    navViewport.setAttribute('aria-hidden', 'true');
+    activeMenu = null;
+    prevIndex = null;
+    closeTimer = setTimeout(() => {
+      panels.forEach(p => p.classList.remove('is-active','from-start','from-end'));
+      navViewport.style.width = '';
+      navViewport.style.minHeight = '';
+    }, 160);
+  }
+
+  function scheduleClose(){
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(closeMenu, 220);
+  }
+
+  headerWrap.addEventListener('mouseleave', scheduleClose);
+  headerWrap.addEventListener('focusout', e => {
+    if (!headerWrap.contains(e.relatedTarget)) scheduleClose();
+  });
+  dropdownAnchor.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+
+  // Header content is now static in _Header.cshtml; JS handles behavior only.
+  menuItems = [...desktopNav.querySelectorAll('.nav-item[data-menu]')];
+  bindDesktopMenuEvents();
+  wireMobileAccordions();
+
+function updateScrolledState(){
+    const isScrolled = window.scrollY > 8;
+    navBar.classList.toggle('elevated', isScrolled);
+    headerWrap.classList.toggle('scrolled', isScrolled);
+  }
+
+  window.addEventListener('scroll', updateScrolledState);
+  updateScrolledState(); // set correct state immediately on page load
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  const drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer(){
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (drawer.classList.contains('active')) closeDrawer();
+    else closeMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    const p = panels.find(x => x.classList.contains('is-active'));
+    if (p && navViewport.classList.contains('open')) applySize(p);
+    if (activeMenu) {
+      const activeItem = menuItems.find(i => i.dataset.menu === activeMenu);
+      if (activeItem) positionViewportToItem(activeItem);
+    }
+    document.querySelectorAll('[data-accordion].open').forEach(row => {
+      const panel = row.querySelector('.accordion-panel');
+      const inner = row.querySelector('.accordion-panel-inner');
+      if (!panel || !inner) return;
+      panel.style.maxHeight = inner.scrollHeight + 'px';
     });
-}
+  });
 
-function closeMobileMenu() {
-    if (!menuToggle || !mainNav) return;
-    mainNav.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.querySelector(".menu-icon-open")?.classList.remove("hidden");
-    menuToggle.querySelector(".menu-icon-close")?.classList.add("hidden");
-}
- 
-document.addEventListener("click", (e) => {
-    const clickedInsideHeader = e.target.closest(".site-header");
-    if (!clickedInsideHeader) {
-        closeAllDropdowns();
-        closeMobileMenu();
-    } else if (!e.target.closest(".nav-dropdown") && !isDesktop()) {
-        closeAllDropdowns();
+
+// --------------------------------------------
+// FOOTER YEAR
+// --------------------------------------------
+document.getElementById("year-foot").innerHTML = (new Date().getFullYear());
+
+  // --------------------------------------------
+  // GSAP + ScrollTrigger + Lenis Setup
+  // --------------------------------------------
+  gsap.registerPlugin(ScrollTrigger);
+  
+  const isMobile = window.matchMedia("(max-width: 992px)").matches;
+  
+  /** Same scroll root as Lenis default (wrapper: window Ã¢â€ â€™ classes + scroll on documentElement). */
+  const scrollRootEl = document.documentElement;
+  
+  let lenis;
+  
+  if (!isMobile) {
+  
+    lenis = new Lenis({
+      smoothWheel: true,
+      smoothTouch: false,
+  
+      // PERFECT NO-LAG SETTINGS
+      lerp: 0.05,              // fast response, no delay
+      wheelMultiplier: 1.02,   // mouse feels natural
+      normalizeWheel: true,
+      syncTouch: false,
+        prevent: (node) => {
+        return node.closest('.testimonial-content');
+      }
+    });
+  
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-});
- 
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-        closeAllDropdowns();
-        closeMobileMenu();
-    }
-});
- 
- 
-
-
-
-
-
-// Header animation
-window.addEventListener("load",()=>{
-
-const tl = gsap.timeline();
-
-
-/* LOGO */
-
-tl.fromTo(
-".header-logo",
-
-{
-opacity:0,
-y:-20,
-scale:.96
-},
-
-{
-opacity:1,
-y:0,
-scale:1,
-duration:.45,
-ease:"power3.out"
-}
-);
-
-
-
-/* MENU */
-
-tl.fromTo(
-".header-menu > *",
-
-{
-opacity:0,
-y:-15
-},
-
-{
-opacity:1,
-y:0,
-duration:.35,
-stagger:.05,
-ease:"power2.out"
-},
-
-"-=.25"
-);
-
-
-
-/* BUTTON */
-
-tl.fromTo(
-".header-btn",
-
-{
-opacity:0,
-y:-10,
-scale:.96
-},
-
-{
-opacity:1,
-y:0,
-scale:1,
-duration:.35,
-ease:"back.out(1.4)"
-},
-
-"-=.15"
-);
-
-});
-
-
-
-(function () {
-    "use strict";
-
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    const qs = (selector, scope = document) => scope.querySelector(selector);
-    const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-    const hasGSAP = () => window.gsap && window.ScrollTrigger;
-
-    function initImages() {
-        qsa("img").forEach((img, index) => {
-            if (index > 2 && !img.hasAttribute("loading")) {
-                img.loading = "lazy";
-            }
-            img.decoding = "async";
-        });
-
-        const decorativeSources = [
-            "/arrows/",
-            "/Clients/",
-            "logo.png",
-            "footerLogo.png",
-            "assistant.png",
-            "leafimg.png",
-            "turnImg.png",
-        ];
-
-        qsa(".feature-card img, .edgeSwiper img, .insight-card img")
-            .filter((img) => {
-                const source = img.getAttribute("src") || "";
-                return !decorativeSources.some((part) => source.includes(part));
-            })
-            .forEach((img) => {
-                img.classList.add("js-image-parallax");
-            });
-    }
-
-    function setExpanded(button, expanded) {
-        button?.setAttribute("aria-expanded", String(expanded));
-    }
-    function initLenis() {
-        if (!window.Lenis || prefersReducedMotion) return;
-
-        const lenis = new Lenis({
-            duration: 1.1,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-        });
-
-        lenis.on("scroll", () => {
-            window.ScrollTrigger?.update();
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-    }
-
-    function initContactModal() {
-        const modal = qs("#contactModal");
-        if (!modal) return;
-
-        const panel = qs(".modal-panel", modal);
-        const closeTargets = qsa("[data-modal-close]", modal);
-        const openTargets = qsa("[data-modal-open]");
-        const form = qs(".enquiry-form", modal);
-        let lastFocused = null;
-
-        const closeMobileNav = () => {
-            const mobileMenu = qs("#mobileMenu");
-            const menuToggle = qs("#menuToggle");
-            const openIcon = qs(".menu-icon-open", menuToggle);
-            const closeIcon = qs(".menu-icon-close", menuToggle);
-
-            if (mobileMenu) mobileMenu.hidden = true;
-            setExpanded(menuToggle, false);
-            menuToggle?.setAttribute("aria-label", "Open navigation menu");
-            openIcon?.classList.remove("hidden");
-            closeIcon?.classList.add("hidden");
+    requestAnimationFrame(raf);
+  
+    window.lenis = lenis;
+  
+    // ---- GSAP SYNC ----
+    ScrollTrigger.scrollerProxy(scrollRootEl, {
+      scrollTop(value) {
+        return arguments.length
+          ? lenis.scrollTo(value, { immediate: true })
+          : lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: scrollRootEl.clientWidth,
+          height: scrollRootEl.clientHeight
         };
-
-        const openModal = () => {
-            lastFocused = document.activeElement;
-            closeMobileNav();
-            modal.hidden = false;
-            document.body.classList.add("modal-open");
- 
-            if (hasGSAP() && !prefersReducedMotion) {
-                gsap.fromTo(
-                    panel,
-                    { autoAlpha: 0, x: 60 },          // starts off to the right
-                    {
-                        autoAlpha: 1,
-                        x: 0,
-                        duration: 0.42,
-                        ease: "power3.out",
-                    },
-                );
-            }
- 
-            requestAnimationFrame(() => {
-                panel?.focus();
-            });
-        };
- 
-        const closeModal = () => {
-            if (modal.hidden) return;
- 
-            const finish = () => {
-                modal.hidden = true;
-                document.body.classList.remove("modal-open");
-                if (lastFocused && typeof lastFocused.focus === "function") {
-                    lastFocused.focus();
-                }
-            };
- 
-            if (hasGSAP() && !prefersReducedMotion) {
-                gsap.to(panel, {
-                    autoAlpha: 0,
-                    x: 60,                            // exits back off to the right
-                    duration: 0.24,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        gsap.set(panel, { clearProps: "all" });
-                        finish();
-                    },
-                });
-            } else {
-                finish();
-            }
-        };
- 
-
-        openTargets.forEach((trigger) => {
-            trigger.addEventListener("click", openModal);
-        });
-
-        closeTargets.forEach((target) => {
-            target.addEventListener("click", closeModal);
-        });
-
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && !modal.hidden) {
-                closeModal();
-            }
-        });
-
-        form?.addEventListener("submit", (event) => {
-            event.preventDefault();
-            closeModal();
-        });
-    }
-
-    function initSliders() {
-        if (!window.Swiper) return;
-
-        new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination-custom",
-                clickable: true,
-                renderBullet: (index, className) =>
-                    index < 3 ? `<span class="${className}"></span>` : "",
-            },
-            navigation: {
-                nextEl: ".swiper-button-next-custom",
-                prevEl: ".swiper-button-prev-custom",
-            },
-            breakpoints: {
-                640: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 },
-            },
-        });
-
-        const edgeSwiper = new Swiper(".edgeSwiper", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            loop: true,
-            centeredSlides: true,
-            navigation: {
-                nextEl: ".edge-swiper-next",
-                prevEl: ".edge-swiper-prev",
-            },
-            breakpoints: {
-                290: { slidesPerView: 1.1, centeredSlides: true, spaceBetween: 2 },
-                768: { slidesPerView: 2.6, centeredSlides: true, spaceBetween: 30 },
-            },
-            on: {
-                init: updateEdgeArrows,
-                slideChange: updateEdgeArrows,
-            },
-        });
-
-        function updateEdgeArrows(swiper = edgeSwiper) {
-            qsa(".edgeArrow").forEach((item) => item.classList.add("hidden"));
-            qs(".edgeArrow", swiper.slides[swiper.activeIndex])?.classList.remove(
-                "hidden",
-            );
-        }
-
-        const testimonialSwiper = new Swiper(".testimonialSwiper", {
-            slidesPerView: 1,
-            spaceBetween: 32,
-            centeredSlides: true,
-            loop: true,
-            pagination: {
-                el: ".testimonial-pagination",
-                clickable: true,
-                renderBullet: (index, className) =>
-                    index < 2 ? `<span class="${className}"></span>` : "",
-            },
-            navigation: {
-                nextEl: ".testimonial-next",
-                prevEl: ".testimonial-prev",
-            },
-            breakpoints: {
-                640: { slidesPerView: 2, centeredSlides: false },
-                1024: { slidesPerView: 3.2, centeredSlides: false },
-                1280: { slidesPerView: 3.8, centeredSlides: false },
-            },
-            on: {
-                init: updateTestimonialDepth,
-                slideChange: updateTestimonialDepth,
-            },
-        });
-
-        function updateTestimonialDepth(swiper = testimonialSwiper) {
-            qsa(".group", swiper.el).forEach((card) => {
-                card.classList.remove("is-muted");
-            });
-
-            qs(".group", swiper.slides[swiper.activeIndex])?.classList.add(
-                "is-muted",
-            );
-        }
-
-        new Swiper(".insightsSwiper", {
-            slidesPerView: 1.1,
-            spaceBetween: 20,
-            centeredSlides: true,
-            loop: true,
-            breakpoints: {
-                768: { slidesPerView: 2.2, centeredSlides: false },
-                1024: {
-                    slidesPerView: 3,
-                    centeredSlides: false,
-                    spaceBetween: 30,
-                },
-            },
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        initImages();
-        initLenis();
-        initContactModal();
-        initSliders();
-        window.ScrollTrigger?.refresh();
+      }
     });
-})();
-
-
-// Client Slider
-document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.getElementById("marqueeWrapper");
-    const track = document.getElementById("marqueeTrack");
- 
-    // Duplicate the items once so the loop has no visible seam
-    track.innerHTML += track.innerHTML;
- 
-    // Style items based on screen size (4 / 3 / 2 visible)
-    function setItemWidths() {
-        let widthPercent;
-        if (window.innerWidth >= 1024) widthPercent = 25;       // 4 visible
-        else if (window.innerWidth >= 768) widthPercent = 33.333; // 3 visible
-        else widthPercent = 50;                                  // 2 visible
- 
-        document.querySelectorAll(".marquee-item").forEach(item => {
-            item.style.flex = "0 0 auto";
-            item.style.width = `${(wrapper.offsetWidth * widthPercent) / 100}px`;
-            item.style.display = "flex";
-            item.style.alignItems = "center";
-            item.style.justifyContent = "center";
-            item.style.padding = "0 2rem";
-        });
- 
-        document.querySelectorAll(".marquee-item img").forEach(img => {
-            img.style.height = "3rem";
-            img.style.filter = "grayscale(100%)";
-            img.style.transition = "filter 0.3s ease";
-        });
-    }
- 
-    setItemWidths();
-    window.addEventListener("resize", setItemWidths);
- 
-    let position = 0;
-    let speed = 2;          // pixels per frame — increase for faster scroll
-    let isPaused = false;
-    let halfWidth = 0;
-    let inView = true; // performance fix: don't animate when marquee is off-screen
- 
-    function calcHalfWidth() {
-        halfWidth = track.scrollWidth / 2; // since content is duplicated
-    }
-    calcHalfWidth();
-    window.addEventListener("resize", calcHalfWidth);
- 
-    // Pause the marquee while it's scrolled out of view or the tab is
-    // in the background — no point moving pixels nobody can see, and
-    // this stops the loop from silently burning CPU/battery forever.
-    const marqueeObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            inView = entry.isIntersecting;
-        });
-    });
-    marqueeObserver.observe(wrapper);
- 
-    function animate() {
-        if (!isPaused && inView && !document.hidden) {
-            position -= speed;
-            if (Math.abs(position) >= halfWidth) {
-                position = 0; // seamless reset right at the duplicate point
-            }
-            track.style.transform = `translateX(${position}px)`;
-        }
-        requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
- 
-    wrapper.addEventListener("mouseenter", () => {
-        isPaused = true;
-    });
-    wrapper.addEventListener("mouseleave", () => {
-        isPaused = false;
-    });
- 
-    // grayscale hover-to-color effect on individual logos
-    track.addEventListener("mouseover", (e) => {
-        if (e.target.tagName === "IMG") e.target.style.filter = "grayscale(0%)";
-    });
-    track.addEventListener("mouseout", (e) => {
-        if (e.target.tagName === "IMG") e.target.style.filter = "grayscale(100%)";
-    });
-});
- 
-
-document.addEventListener("DOMContentLoaded", () => {
-
-const aboutSection =
-document.querySelector(".about-section");
-
-if (!aboutSection) return;
-
-const collage =
-aboutSection.querySelector(
-".image-collage-sway"
-);
-
-if (!collage) return;
-
-const itemEls = [
-...collage.querySelectorAll(
-".sync-pan-item"
-)];
-
-const leafEl =
-aboutSection.querySelector(
-".leaf-motion"
-);
-
-const lerp =
-(a,b,t)=>
-a+(b-a)*t;
-
-let sectionHovered=false;
-let hoveredItem=null;
-let swayLoopRunning=false; // performance fix: track if the rAF loop is active
-
-
-
-// IMAGE
-const items =
-itemEls.map((el)=>{
-
-const inner =
-el.querySelector(
-".sync-pan-inner"
-);
-
-if(inner){
-
-inner.style.position =
-"absolute";
-
-inner.style.left =
-"50%";
-
-inner.style.top =
-"50%";
-
-inner.style.width =
-"125%";
-
-inner.style.height =
-"125%";
-
-inner.style.objectFit =
-"cover";
-
-inner.style.objectPosition =
-"center";
-
-inner.style.transform =
-`
-translate(
--50%,
--50%
-)
-`;
-
-inner.style.willChange =
-"transform";
-
-}
-
-return{
-
-el,
-
-inner,
-
-dir:
-el.dataset.dir||
-"rtl",
-
-currentX:0,
-
-targetX:0
-
-};
-
-});
-
-
-
-
-
-// LEAF (OLD)
-const leaf =
-leafEl
-?{
-
-el:leafEl,
-
-startX:0,
-startY:0,
-
-endX:350,
-endY:150,
-
-currentProgress:0,
-
-targetProgress:0,
-
-currentOpacity:0,
-
-targetOpacity:0,
-
-currentRotate:-14,
-
-targetRotate:-14
-
-}
-
-:null;
-
-
-
-
-
-aboutSection.addEventListener(
-"mouseenter",
-()=>{
-sectionHovered=true;
-if(!swayLoopRunning){
-swayLoopRunning=true;
-animate();
-}
-}
-);
-
-aboutSection.addEventListener(
-"mouseleave",
-()=>{
-sectionHovered=false;
-hoveredItem=null;
-}
-);
-
-
-
-
-collage.addEventListener(
-"mousemove",
-
-(e)=>{
-
-hoveredItem=
-e.target.closest(
-".sync-pan-item"
-);
-
-if(!swayLoopRunning){
-swayLoopRunning=true;
-animate();
-}
-
-}
-
-);
-
-
-
-collage.addEventListener(
-"mouseleave",
-
-()=>{
-
-hoveredItem=
-null;
-
-}
-
-);
-
-
-
-
-
-function updateTargets(){
-
-items.forEach(
-(item)=>{
-
-
-item.targetX=
-
-hoveredItem===
-item.el
-
-?
-
-(
-
-item.dir==="rtl"
-
-?
-
--22
-
-:
-
-22
-
-)
-
-:0;
-
-});
-
-
-
-if(leaf){
-
-const active=
-
-sectionHovered||
-
-hoveredItem;
-
-
-leaf.targetProgress=
-
-active
-
-?
-
-1
-
-:0;
-
-
-
-leaf.targetOpacity=
-
-active
-
-?
-
-1
-
-:0;
-
-
-
-leaf.targetRotate=
-
-active
-
-?
-
-12
-
-:-14;
-
-}
-
-}
-
-
-
-
-
-function animate(){
-
-updateTargets();
-
-
-
-
-// IMAGE
-items.forEach(
-(item)=>{
-
-
-item.currentX=
-
-lerp(
-
-item.currentX,
-
-item.targetX,
-
-0.045
-
-);
-
-
-
-if(item.inner){
-
-item.inner.style.transform=
-
-`
-translate(
-calc(
--50% +
-${item.currentX}px
-),
-
--50%
-)
-`;
-
-}
-
-});
-
-
-
-
-
-
-// LEAF
-if(leaf){
-
-leaf.currentProgress=
-
-lerp(
-leaf.currentProgress,
-leaf.targetProgress,
-0.03
-);
-
-
-leaf.currentOpacity=
-
-lerp(
-leaf.currentOpacity,
-leaf.targetOpacity,
-0.03
-);
-
-
-leaf.currentRotate=
-
-lerp(
-leaf.currentRotate,
-leaf.targetRotate,
-0.03
-);
-
-
-const p=
-
-leaf.currentProgress*
-
-leaf.currentProgress*
-
-(
-3-
-2*
-leaf.currentProgress
-);
-
-
-const x=
-
-leaf.startX+
-
-(
-leaf.endX-
-leaf.startX
-)
-
-*
-p;
-
-
-const y=
-
-leaf.startY+
-
-(
-leaf.endY-
-leaf.startY
-)
-
-*
-p;
-
-
-leaf.el.style.opacity=
-
-leaf.currentOpacity;
-
-
-leaf.el.style.transform=
-
-`
-translate3d(
-${x}px,
-${y}px,
-0
-)
-
-rotate(
-${leaf.currentRotate}deg
-)
-`;
-
-}
-
-
-
-// performance fix: once everything has settled back to rest and
-// nothing is being hovered, stop scheduling frames instead of
-// looping forever in the background. mouseenter/mousemove above
-// will restart the loop the moment it's needed again.
-const settled = items.every(
-(item)=> Math.abs(item.currentX-item.targetX) < 0.05
-) && (!leaf || Math.abs(leaf.currentProgress-leaf.targetProgress) < 0.001);
-
-if(!sectionHovered && !hoveredItem && settled){
-swayLoopRunning=false;
-return;
-}
-
-requestAnimationFrame(
-animate
-);
-
-}
-
-
-
-swayLoopRunning=true;
-animate();
-
-});
-
-
-
-
-//All H2 Animation
-
-document.querySelectorAll(".text-reveal").forEach((el)=>{
-
-const text = el.textContent.trim();
-
-el.innerHTML = "";
-
-text.split("").forEach((letter,index)=>{
-
-const span=document.createElement("span");
-
-span.classList.add("char");
-
-span.innerHTML=
-letter===" "
-? "&nbsp;"
-: letter;
-
-span.style.animationDelay=
-`${index*0.05}s`;
-
-el.appendChild(span);
-
-});
-
-
-const observer =
-new IntersectionObserver((entries)=>{
-
-entries.forEach((entry)=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.remove("active");
-
-/* restart animation */
-setTimeout(()=>{
-entry.target.classList.add("active");
-},50);
-
-}
-
-/* scroll up → reset */
-else{
-
-entry.target.classList.remove("active");
-
-}
-
-});
-
-},{
-threshold:0.5
-});
-
-observer.observe(el);
-
-});
-
-
-/* ==========================
-   ABOUT IMAGE REVEAL
-========================== */
-
-gsap.registerPlugin(ScrollTrigger);
-
-
-
-/* initial state */
-
-gsap.set([
-".collage-item-top",
-".collage-turn"
-], {
-opacity: 0
-});
-
-
-/* bottom image visible */
-
-gsap.set(".collage-item-bottom",{
-opacity:1,
-scale:1
-});
-
-
-
-
-const aboutTimeline = gsap.timeline({
-
-scrollTrigger: {
-trigger: ".about-section",
-start: "top 72%",
-toggleActions: "play none none none"
-}
-
-});
-
-
-
-
-/* DECORATIVE IMAGE */
-
-aboutTimeline.fromTo(
-
-".collage-turn",
-
-{
-opacity: 0,
-scale: .92
-},
-
-{
-opacity: 1,
-scale: 1,
-
-duration: 1,
-
-ease: "expo.out"
-}
-
-);
-
-
-
-
-
-/* TOP IMAGE → RIGHT TO POSITION */
-
-aboutTimeline.fromTo(
-
-".collage-item-top",
-
-{
-opacity: 0,
-x: 140,
-scale: 1.08
-},
-
-{
-opacity: 1,
-x: 0,
-scale: 1,
-
-duration: 1.8,
-
-ease: "expo.out"
-},
-
-"-=.4"
-
-);
-
-/* ======================
-   PREMIUM PLAYGROUND
-====================== */
-document.addEventListener("DOMContentLoaded", () => {
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = document.querySelector("#playgrounds-section");
-
-    if (!section) return;
-
-    // Sirf original slides
-    const cards = gsap.utils.toArray(
-        "#playgrounds-section .swiper-slide:not(.swiper-slide-duplicate)"
-    );
-
-    gsap.from(cards, {
-
-        opacity: 0,
-
-        y: 120,
-
-        scale: 0.96,
-
-        rotationX: 8,
-
-        force3D: true,
-
-        transformOrigin: "center bottom",
-
-        duration: 1.15,
-
-        ease: "power4.out",
-
-        stagger: {
-            each: 0.18,
-            from: "start"
-        },
-
-        scrollTrigger: {
-
-            trigger: section,
-
-            start: "top 65%",
-
-            once: true,
-
-            invalidateOnRefresh: true
-
-        }
-
-    });
-
-});
-
-
-/* ======================
-   INSIGHT SECTION
-====================== */
-document.addEventListener("DOMContentLoaded", () => {
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = document.querySelector(".insightsSwiper");
-
-    if (!section) return;
-
-    const cards = gsap.utils.toArray(".insightsSwiper .swiper-slide");
-
-    // Initial state
-    gsap.set(cards, {
-        opacity: 0,
-        y: 120,
-        scale: 0.9,
-        rotateX: 8,
-        transformPerspective: 1000,
-        transformOrigin: "center bottom"
-    });
-
-    const tl = gsap.timeline({
-
-        scrollTrigger: {
-
-            trigger: section,
-
-            start: "top 78%",
-
-            once: true
-
-        }
-
-    });
-
-    tl.to(cards, {
-
-        opacity: 1,
-
-        y: 0,
-
-        scale: 1,
-
-        rotateX: 0,
-
-        duration: 1.15,
-
-        ease: "power4.out",
-
-        stagger: {
-
-            each: 0.22
-
-        }
-
-    });
-
-});
-
-
-
+  
+    // ScrollTriggers must use the same element Lenis proxies Ã¢â‚¬â€ otherwise scrub/toggle use native scroll and wonÃ¢â‚¬â„¢t match smooth scroll.
+    ScrollTrigger.defaults({ scroller: scrollRootEl });
+  
+    lenis.on("scroll", ScrollTrigger.update);
+    ScrollTrigger.addEventListener("refresh", () => lenis.resize());
+    ScrollTrigger.refresh();
+  
+  } else {
+    document.body.classList.add("native-scroll");
+    // Mobile: keep true native window/document scroll (no scrollerProxy).
+    // Proxying documentElement can interfere with touch scrolling on some mobile browsers.
+    ScrollTrigger.defaults({ scroller: window });
+    ScrollTrigger.refresh();
+  }
+  
 
 /* ======================
    FOOTER SECTION
 ====================== */
-
 document.addEventListener("DOMContentLoaded", () => {
-
-gsap.registerPlugin(ScrollTrigger);
 
 const footer =
 document.querySelector("footer");
 
 if(!footer) return;
+
+function initFooterAccordions(){
+  const sections = [...footer.querySelectorAll('.footer-quick-link-click')];
+  if (!sections.length) return;
+
+  const desktopMq = window.matchMedia('(min-width: 768px)');
+
+  function closeAll(){
+    sections.forEach(section => {
+      section.classList.remove('open');
+      const list = section.querySelector('.footer-nav-list');
+      const heading = section.querySelector('h4');
+      if (list) list.style.maxHeight = '0';
+      if (heading) heading.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function resetForDesktop(){
+    if (!desktopMq.matches) return;
+    sections.forEach(section => {
+      section.classList.remove('open');
+      const list = section.querySelector('.footer-nav-list');
+      if (list) list.style.maxHeight = '';
+    });
+  }
+
+  sections.forEach(section => {
+    const heading = section.querySelector('h4');
+    const list = section.querySelector('.footer-nav-list');
+    if (!heading || !list) return;
+
+    heading.setAttribute('role', 'button');
+    heading.setAttribute('tabindex', '0');
+    heading.setAttribute('aria-expanded', 'false');
+
+    const toggle = () => {
+      if (desktopMq.matches) return;
+
+      const isOpen = section.classList.contains('open');
+      closeAll();
+
+      if (!isOpen) {
+        section.classList.add('open');
+        list.style.maxHeight = list.scrollHeight + 'px';
+        heading.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    heading.addEventListener('click', toggle);
+    heading.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      toggle();
+    });
+  });
+
+  desktopMq.addEventListener('change', resetForDesktop);
+  resetForDesktop();
+}
+
+initFooterAccordions();
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 /* reset */
