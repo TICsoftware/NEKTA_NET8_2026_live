@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Nekta_MVC;
 
 
-namespace Oncopathology_MVC.Controllers;
+namespace Nekta_MVC.Controllers;
 
 public class AboutController : Controller
 {

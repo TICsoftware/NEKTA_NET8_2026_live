@@ -266,7 +266,9 @@
         <div class="swiper edgeSwiper px-4 py-6">
             <div class="swiper-wrapper py-4 pb-2">
                 <!-- Slide 1 -->
-                @foreach (var item in Model.Technology_That_Runs_List.Where(x => x.IsBlock == 1))
+                @foreach (var item in Model.Technology_That_Runs_List
+                    .Where(x => x.IsBlock == 1)
+                    .OrderBy(x => x.Sequence))
                 {
                     if(@item.Sequence == 1)
                     {    <div class="swiper-slide">
@@ -374,92 +376,95 @@
                 }
             </div>
         }
-
-        <!-- Swiper Slider -->
-        @* <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
-            <div class="swiper-wrapper">
-                <!-- Card 1 -->
-                <div class="swiper-slide h-auto">
-                    <div class="insight-card group blogs-cards-wrapper">
-                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
-                            <img loading="lazy" src="/Assets/images/insights/trend1.png" alt="Catering Trends"
-                                class="w-full object-cover" />
-                        </div>
-                        <div class="py-6 blogs-cards-content">
-                            <span
-                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
-                                Study</span>
-                            <h3 class="insight-title line-clamp-2">
+      <!-- Swiper Slider -->
+               <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
+                  <div class="swiper-wrapper">
+                     <!-- Card 1 -->
+                     <div class="swiper-slide h-auto">
+                        <div class="insight-card group blogs-cards-wrapper">
+                           <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                              <img loading="lazy" src="/Assets/images/insights/trend1.png" alt="Catering Trends"
+                                 class="w-full object-cover" />
+                           </div>
+                           <div class="py-6 blogs-cards-content"> 
+                              <span class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case Study</span>
+                              <h3
+                                 class="insight-title line-clamp-2"
+                                 >
                                 Top Catering Trends Transforming Modern Celebrations
-                            </h3>
-                            <a href="#" class="link-md link-primary mt-4">
-                                <span class="underline">Read More
-                                </span>
-                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
-                                    alt="rightArrow" />
-                            </a>
+                              </h3>
+                              <a
+                                 href="#"
+                                 class="link-md link-primary mt-4"
+                                 >
+                              <span class="underline">Read More
+                              </span>
+                              <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                              </a>
+                           </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="swiper-slide h-auto">
-                    <div class="insight-card group">
-                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
-                            <img loading="lazy" src="/Assets/images/insights/chef-creativity.png" alt="Chef Creativity"
-                                class="w-full object-cover" />
-                        </div>
-                        <div class="py-6">
-                            <span
-                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
-                                Study</span>
-                            <h3 class="insight-title line-clamp-2">
+                     </div>
+                     <!-- Card 2 -->
+                     <div class="swiper-slide h-auto">
+                        <div class="insight-card group">
+                           <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                              <img loading="lazy" src="/Assets/images/insights/chef-creativity.png" alt="Chef Creativity"
+                                 class="w-full object-cover" />
+                           </div>
+                           <div class="py-6">
+                              <span class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case Study</span>
+                              <h3
+                                 class="insight-title line-clamp-2"
+                                 >
                                 How Our Chefs Craft Authentic Flavours with Creativity
-                            </h3>
-                            <a href="#" class="link-md link-primary mt-4">
-                                <span class="underline">Read More
-                                </span>
-                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
-                                    alt="rightArrow" />
-                            </a>
+                              </h3>
+                              <a
+                                 href="#"
+                                 class="link-md link-primary mt-4"
+                                 >
+                              <span class="underline">Read More
+                              </span>
+                              <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                              </a>
+                           </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="swiper-slide h-auto">
-                    <div class="insight-card group">
-                        <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
-                            <img loading="lazy" src="/Assets/images/insights/premium-catering.png" alt="Premium Catering"
-                                class="w-full object-cover" />
-                        </div>
-                        <div class="py-6">
-                            <span
-                                class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case
-                                Study</span>
-                            <h3 class="insight-title line-clamp-2">
+                     </div>
+                     <!-- Card 3 -->
+                     <div class="swiper-slide h-auto">
+                        <div class="insight-card group">
+                           <div class="media-frame overflow-hidden rounded-lg ratio-[531/315]">
+                              <img loading="lazy" src="/Assets/images/insights/premium-catering.png" alt="Premium Catering"
+                                 class="w-full object-cover" />
+                           </div>
+                           <div class="py-6">
+                              <span class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">Case Study</span>
+                              <h3 class="insight-title line-clamp-2">
                                 Featured for Excellence in Premium Catering Experiences
-                            </h3>
-                            <a href="#" class="link-md link-primary mt-4">
-                                <span class="underline">Read More
-                                </span>
-                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
-                                    alt="rightArrow" />
-                            </a>
+                              </h3>
+                              <a
+                                 href="#"
+                                 class="link-md link-primary mt-4"
+                                 >
+                              <span class="underline">Read More
+                              </span>
+                              <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                              </a>
+                           </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                     </div>
+                  </div>
+              
+                  <div class="blogs-slider-nav">
+                        <button class="blogs-prev" aria-label="Previous">
+                            <img src="/Assets/images/arrows/swiperLeft.png" alt="swiperLeft" class="max-w-full">
+                        </button>
 
-            <div class="blogs-slider-nav">
-                <button class="blogs-prev" aria-label="Previous">
-                    <img src="/Assets/images/arrows/swiperLeft.png" alt="swiperLeft" class="max-w-full">
-                </button>
-
-                <button class="blogs-next" aria-label="Next">
-                    <img src="/Assets/images/arrows/swiperRight.png" alt="swiperRight" class="max-w-full">
-                </button>
-            </div>
-
-        </div> *@
+                        <button class="blogs-next" aria-label="Next">
+                            <img src="/Assets/images/arrows/swiperRight.png" alt="swiperRight" class="max-w-full">
+                        </button>
+                  </div>
+                  
+               </div>
         <!-- View All Button -->
         <div class="flex justify-center mt-6">
             <a href="#" class="common-btn flex items-center gap-2 btn-slide-fill">
