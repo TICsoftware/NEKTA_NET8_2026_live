@@ -1,8 +1,0 @@
-/* Ensure CKEditor is visible inside the spot-templates modal (scrollable modal body can clip min-height) */
-#spotTemplatesModalBody .ck.ck-editor__editable {
-    min-height: 180px;
-}
-
-#spotTemplatesModalBody .ck.ck-editor {
-    min-height: 200px;
-}
