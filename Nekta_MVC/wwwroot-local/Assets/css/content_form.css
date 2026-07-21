@@ -1,0 +1,4 @@
+.imgPreview.is-visible,
+.content-thumb-link.is-visible {
+    display: block !important;
+}
