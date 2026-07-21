@@ -48,8 +48,7 @@
     <div class="inside-banner-inner banner-animation relative ">
 
         <!-- Banner -->
-        <div
-            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+        <div class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
 
             <!-- Parallax Image -->
             <picture>
@@ -110,9 +109,9 @@
 
 
         <div class="text-center mb-10 md:mb-14 into-section-wrapper into-section-center-wrapper">
-            <p>
-                @Html.Raw(Model.Content.ContIntro.CleanParagraphTags())
-            </p>
+         
+                @Html.Raw(Model.Content.ContIntro)
+           
         </div>
 
 <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
@@ -131,7 +130,7 @@
                     </div>
 
 
-                @Html.Raw(item.Content)
+                @Html.Raw(item.Intro)
 
 
                 <!-- Decorative leaf -->
