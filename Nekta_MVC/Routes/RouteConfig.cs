@@ -45,6 +45,12 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "Segments", action = "Education", title = "education" }
                       );
 
+                       app.MapControllerRoute(
+                          name: "healthcare",
+                          pattern: "segments/healthcare",
+                          defaults: new { controller = "Segments", action = "Healthcare", title = "healthcare" }
+                      );
+
 
 
 

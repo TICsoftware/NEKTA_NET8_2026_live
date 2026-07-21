@@ -67,5 +67,24 @@ public class SegmentsController : Controller
     }
 
 
+    public IActionResult Healthcare(string title)
+    {
+        try
+        {
+            var data = _bal.GetHealthcare_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Healthcare :", ex);
+            return View(new AboutModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
+
 
 }
