@@ -46,6 +46,35 @@ namespace Nekta_BusinessLogic.BAL
         }
 
 
+        public SegmentsModel GetEducations_BAL(string pagename, int languageId, int geographyId)
+        {
+            var model = new SegmentsModel();
+            var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+            // Content
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Content = MapContent(ds.Tables[0].Rows[0]);
+            }
+
+            // Components
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                var groupedData = GetGroupedComponents(ds.Tables[1]);
+                model.Components = groupedData;
+
+                model.Delivering_Experiences_Matter_List = MapComponents(groupedData, 1);
+                model.Campus_Dining_Excellence_List = MapComponents(groupedData, 2);
+                model.Life_beautiful_Plate_Education_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_Education_List = MapComponents(groupedData, 4);
+                model.Singular_Spirit_Education_List = MapComponents(groupedData, 5);
+                
+            }
+
+            return model;
+        }
+
+
 
     }
 }

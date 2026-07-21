@@ -7,12 +7,8 @@ namespace Nekta_BusinessLogic.Entity
 {
     public class PageViewModel
     {
-        public ContentViewModel Content { get; set; }
+        public ContentViewModel? Content { get; set; }
         public List<ComponentGroup> Components { get; set; } = new List<ComponentGroup>();
-
-
-
-
     }
 
 

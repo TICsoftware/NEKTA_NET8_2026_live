@@ -1,0 +1,69 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+<section id="playgrounds-section" class="bg-cream section-spacing relative overflow-hidden">
+    <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+    <div class="container">
+        <!-- Section Heading -->
+
+        <div class="section-title-outer text-center mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                ? component.DisplayTitle.CleanParagraphTags()
+                : component.Title)
+            </h2>
+        </div>
+
+
+        <!-- Swiper Slider Container -->
+        <div class="swiper mySwiper three-box-slider px-0 md:px-4 pt-10">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                @foreach (var item in Model.Where(x => x.IsBlock == 1))
+                {
+                    <div class="swiper-slide group cursor-pointer">
+                        <div class="feature-card">
+                            <div class="playground-media w-full overflow-hidden rounded-t-full mb-6 relative">
+                                <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                    class="playground-image w-full h-full object-cover transition-transform duration-700" />
+                                <div
+                                    class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/70 to-transparent  text-center">
+                                    <h3 class="text-white">@item.Title</h3>
+                                </div>
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(item.Url))
+                            {
+                                <a href="@item.Url" class="link-md link-dark">
+                                    <span class="underline">
+                                        @(string.IsNullOrWhiteSpace(item.Url_Text) ? "Learn More" : item.Url_Text)
+                                    </span>
+                                    <img loading="lazy" src="/Assets/images/arrows/blackarrow-long-right.png" alt="→" />
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- Slider Navigation -->
+                <div class="flex justify-center items-center gap-4 md:gap-6 mt-8 md:mt-12  w-auto!">
+                    <div
+                        class="swiper-button-prev-custom cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full bg-green flex items-center justify-center text-cream transition-all hover:scale-110">
+                        <img loading="lazy" src="/Assets/images/arrows/swiperLeft.png" alt="swiperLeft" />
+                    </div>
+                    <div class="swiper-pagination-custom flex items-center justify-center gap-3 md:gap-4"></div>
+                    <div
+                        class="swiper-button-next-custom cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full bg-green flex items-center justify-center text-cream transition-all hover:scale-110">
+                        <img loading="lazy" src="/Assets/images/arrows/swiperRight.png" alt="swiperRight" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>

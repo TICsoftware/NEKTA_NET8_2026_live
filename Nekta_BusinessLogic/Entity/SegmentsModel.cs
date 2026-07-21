@@ -22,6 +22,15 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Seeking_Elevated_DE_List { get; set; } = new();
 
 
+        //Educations
+        public List<ComponentModel> Delivering_Experiences_Matter_List { get; set; } = new();
+        public List<ComponentModel> Campus_Dining_Excellence_List { get; set; } = new();
+        public List<ComponentModel> Life_beautiful_Plate_Education_List { get; set; } = new();
+        public List<ComponentModel> Nektas_Edge_Education_List { get; set; } = new();
+        public List<ComponentModel> Singular_Spirit_Education_List { get; set; } = new();
+        
+
+
         public int TotalCount { get; set; }
 
     }

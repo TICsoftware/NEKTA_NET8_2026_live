@@ -1,0 +1,198 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SegmentsModel
+@{
+    ViewData["Title"] = "Business & Corporates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/three-box-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/three-tilt-card.css">
+    <link rel="stylesheet" href="~/Assets/css/education.css" />
+    <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
+    <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
+}
+
+<!-- HERO BANNER END-->
+
+@if (Model != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
+
+
+
+
+<!-- ====================Intro Section Delivering Experiences that Matter ==================== -->
+@foreach (var item in Model.Delivering_Experiences_Matter_List.Where(x => x.IsBlock == 0))
+{
+    <section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+
+        <div class="container relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left:img  -->
+                <div class="relative">
+                    <div class="nourish-media">
+                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                    </div>
+                </div>
+                <!-- Right: copy -->
+                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                    </h2>
+                </div>
+                <div class="intro-outer-wrapper sm:pl-15">
+                    @if (!string.IsNullOrWhiteSpace(item.Intro))
+                        {
+                            @Html.Raw(item.Intro)
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(item?.Url))
+                        {
+                            <div class="flex justify-start mt-5">
+                                <a href="@item.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                                    <span>@(string.IsNullOrWhiteSpace(item.Url_Text) ? "Get in Touch" : item.Url_Text)</span>
+                                    <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png"
+                                        alt="rightArrow" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Decorative leaf bottom-right -->
+                    <img loading="lazy" src="~/Assets/images/intro-leaf/green_leaf_travel.svg" alt=""
+                        class="bc-leaf-deco absolute -bottom-6 right-0 md:right-4 w-10 md:w-12" aria-hidden="true" />
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<!-- ==================== Campus Dining Excellence==================== -->
+
+@foreach (var item in Model.Campus_Dining_Excellence_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bg-darkcream cd-section section-spacing relative">
+        <div class="cd-band bg-green"></div>
+
+        <div class="container cd-inner relative">
+
+            <div class="cd-stamp cd-stamp-1" data-cd="stamp">
+
+                <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="bowl"
+                    aria-hidden="true" />
+
+            </div>
+
+            <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText"
+                class="cd-photo cd-photo-1" data-cd="photo" data-from="left" />
+
+            <div class="cd-copy">
+                <!-- Section Heading -->
+                <div class="section-title-outer text-center mx-auto max-w-7xl">
+                    <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    @Html.Raw(item.Intro)
+                }
+            </div>
+
+            <div class="cd-stamp cd-stamp-2" data-cd="stamp">
+                <img loading="lazy" src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image" class="bowl"
+                    aria-hidden="true" />
+            </div>
+
+            <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
+                class="cd-photo cd-photo-3" data-cd="photo" data-from="right" />
+            <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
+                class="cd-photo cd-photo-2" data-cd="photo" data-from="bottom" />
+
+        </div>
+    </section>
+}
+
+<!-- ==================== LIFE IS A BEAUTIFUL PLATE (GALLERY) ==================== -->
+@if (Model?.Life_beautiful_Plate_Education_List != null && Model.Life_beautiful_Plate_Education_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml", Model.Life_Beautiful_Plate_List)
+}
+
+
+<!-- ====================
+6: Who we are
+==================== -->
+@if (Model.Nektas_Edge_Education_List != null && Model.Nektas_Edge_Education_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Nektas_Edge_Education_List)
+}
+
+@* <section class="bg-darkcream center-slider relative section-spacing overflow-hidden"> *@
+
+
+<!-- ==================== DIVERSE PLAYGROUNDS SECTION ==================== -->
+
+@if (Model.Singular_Spirit_Education_List != null && Model.Singular_Spirit_Education_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_Education_List)
+}
+
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/center-mode-slider.js"></script>
+    <script src="~/Assets/js/three-box-slider.js"></script>
+    <script src="~/Assets/js/thumb-slider.js"></script>
+    <script src="~/Assets/js/education.js"></script>
+}

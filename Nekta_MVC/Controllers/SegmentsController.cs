@@ -47,6 +47,25 @@ public class SegmentsController : Controller
         }
     }
 
-  
+
+    public IActionResult Education(string title)
+    {
+        try
+        {
+            var data = _bal.GetEducations_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Education :", ex);
+            return View(new AboutModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
+
 
 }

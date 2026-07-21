@@ -1,0 +1,143 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model
+        .FirstOrDefault(x => x.IsBlock == 0);
+
+    var blocks = Model
+        .Where(x => x.IsBlock == 1)
+        .OrderBy(x => x.Sequence)
+        .ToList();
+}
+
+<section class="bg-green center-slider relative section-spacing overflow-hidden">
+    <div class="container">
+        <div class="relative z-10">
+
+            @if (component != null)
+            {
+                <!-- Section Title -->
+                <div class="section-title-outer text-center max-w-6xl mx-auto section-title--light-outer">
+                    <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                            !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                                ? component.DisplayTitle.CleanParagraphTags()
+                                : component.Title)
+                    </h2>
+                </div>
+            }
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch thumb-slider-outer">
+
+                <!-- Left Side -->
+                @if (component != null)
+                {
+                    <div class="merge-imgs">
+                        @if (!string.IsNullOrWhiteSpace(component.ComponentThumbnail))
+                        {
+                            <img class="merge-img merge-img--cup" src="@component.ComponentThumbnail" alt="@component.ComponentThumbnailAltText" loading="lazy" />
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(component.Component_Icon_Image))
+                        {
+                            <img class="merge-img merge-img--beans" src="@component.Component_Icon_Image" alt="@component.Component_Icon_alt_Image" loading="lazy" />
+                        }
+                    </div>
+                }
+
+                <!-- Main Image -->
+                @if (blocks.Any())
+                {
+                    var first = blocks.First();
+
+                    <div class="bc-life-frame bc-life-main thumb-slider-main">
+                        <img id="lifeMainImage" src="@first.ThumbnailImage" alt="@first.ThumbnailAltText" loading="lazy" />
+                    </div>
+                }
+
+                <!-- Right Side -->
+                <div class="flex flex-col gap-8 justify-start thumb-slider-thumbs">
+
+                    <div class="grid grid-cols-4 gap-3 md:gap-4 thumb-grid-wrapper"
+                         id="lifeThumbWrapper">
+
+                        <button type="button" class="thumb-arrow thumb-arrow--prev" id="thumbPrev" aria-label="Previous">
+                            ‹
+                        </button>
+
+                        <div class="thumb-track" id="lifeThumbTrack">
+
+                            @for (int i = 0; i < blocks.Count; i++)
+                            {
+                                var item = blocks[i];
+
+                                <button type="button"
+                                        class="bc-life-thumb @(i == 0 ? "is-active" : "")"
+                                        @(i == 0 ? "style=\"display:none;\"" : "")
+                                        data-frame-index="@(i + 1)"
+                                        data-life-image="@item.ThumbnailImage"
+                                        aria-label="@item.Title">
+
+                                    <img src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" loading="lazy" />
+
+                                </button>
+                            }
+
+                        </div>
+
+                        <button type="button"
+                                class="thumb-arrow thumb-arrow--next"
+                                id="thumbNext"
+                                aria-label="Next">
+                            ›
+                        </button>
+
+                    </div>
+
+                    <!-- Copy -->
+                    <div class="bc-life-copy sm:mt-5" id="lifeCopyBox">
+
+                        <div class="read-more-wrapper" id="lifeCopyWrapper">
+                            <!-- JS injects template -->
+                        </div>
+
+                        <div class="link-md link-light mt-5 read-more-toggle cursor-pointer">
+
+                            <span class="underline read-more-text">
+                                Read More
+                            </span>
+
+                            <img src="/Assets/images/plus-icon.svg"
+                                 alt="plus"
+                                 loading="lazy"
+                                 class="max-w-auto read-more-icon" />
+
+                        </div>
+
+                    </div>
+
+                    <!-- Templates -->
+                    @for (int i = 0; i < blocks.Count; i++)
+                    {
+                        var item = blocks[i];
+
+                        <template id="frameContent-@(i + 1)">
+
+                            <h3>@item.Title</h3>
+
+                            <div class="read-more-content" data-lines="12">
+                                @Html.Raw(item.Intro)
+                            </div>
+
+                        </template>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,75 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+<section class="bg-green center-slider relative section-spacing overflow-hidden">
+    <div class="inner-center-slider">
+
+        <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
+            <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                ? component.DisplayTitle.CleanParagraphTags()
+                : component.Title)
+            </h2>
+        </div>
+
+
+        <!-- Swiper Slider -->
+        <div class="swiper edgeSwiper px-4 py-6">
+            <div class="swiper-wrapper py-4 pb-2">
+                <!-- Slide 1 -->
+                @foreach (var item in Model.Where(x => x.IsBlock == 1))
+                {
+                    <div class="swiper-slide">
+                        <div class="edge-card group backdrop-blur-sm opacity-50 transition-all duration-700">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="edge-card-image border-8 w-full aspect-video object-cover transition-all duration-700" />
+                            <div
+                                class="edge-arrow-bar absolute w-full -translate-y-1/4 flex justify-between items-center gap-8 mt-0 edgeArrow hidden">
+                                <div
+                                    class="edge-swiper-prev edge-prev cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenLeft.png" alt="GreenLeft" />
+                                </div>
+                                <div
+                                    class="edge-swiper-next edge-next cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 relative rounded-full bg-cream border border-green flex items-center justify-center text-white transition-all">
+                                    <img loading="lazy" src="/Assets/images/arrows/GreenRight.png" alt="GreenRight" />
+                                </div>
+                            </div>
+                            <div
+                                class="edge-details p-0 pt-1 flex flex-col md:flex-row items-start justify-between opacity-0 invisible transition-all duration-500">
+                                <div>
+                                    <h3 class="edge-card-title">
+                                        @item.Title
+                                    </h3>
+                                    <p class="edge-card-text">
+                                        @Html.Raw(item.Intro.CleanParagraphTags())
+                                    </p>
+                                </div>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="edge-nav-arrows">
+                <div
+                    class="edge-swiper-prev cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-cream border border-green flex items-center justify-center transition-all">
+                    <img loading="lazy" src="/Assets/images/arrows/GreenLeft.png" alt="GreenLeft" />
+                </div>
+                <div
+                    class="edge-swiper-next cursor-pointer w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-cream border border-green flex items-center justify-center transition-all">
+                    <img loading="lazy" src="/Assets/images/arrows/GreenRight.png" alt="GreenRight" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
