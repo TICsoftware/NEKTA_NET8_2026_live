@@ -43,159 +43,204 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
-
-    <link rel="stylesheet" href="Assets/css/thumb-slider.css" />
-    <link rel="stylesheet" href="Assets/css/healthcare.css" />
-    <link rel="stylesheet" href="Assets/css/page-intro-section.css" />
-    <link rel="stylesheet" href="~/Assets/css/three-tilt-card.css">
-    <link rel="stylesheet" href="~/Assets/css/three-box-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
+    <link rel="stylesheet" href="~/Assets/css/outdoorevents.css" />
+    <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
 }
+
+
+
 
 <!-- HERO BANNER END-->
-@if (Model != null)
-{
-    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
-}
-<!-- HERO BANNER END -->
+<section class="relative inside-banner-outer overflow-hidden">
+    <div class="inside-banner-inner banner-animation relative ">
+
+        <!-- Banner -->
+        <div
+            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+            <!-- Parallax Image -->
+            <picture>
+                <!-- Desktop -->
+                <source media="(min-width:1024px)" srcset="Assets/images/banners/company-info-banner-desktop.webp">
+
+                <!-- Tablet -->
+                <source media="(min-width:768px)" srcset="Assets/images/banners/company-info-banner-mob.webp">
+
+                <!-- Mobile -->
+                <img src="Assets/images/banners/company-info-banner-mob.webp" alt="About Bubble Food"
+                    class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover" loading="eager"
+                    fetchpriority="high">
+            </picture>
+
+            <!-- Keep Existing Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
 
 
-<!-- ==================== INTR0- DELIVERING EXPERIENCES ==================== -->
-@foreach (var item in Model.Nutrition_That_Heals_List.Where(x => x.IsBlock == 0))
-{
-    <section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
-        <!-- Decorative sushi platter on far right -->
-        <img loading="lazy" src="Assets/images/business/icon-right.svg" alt=""
-            class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
-        <div class="container relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <!-- Left: plate in circle -->
-                <div class="relative">
-                    <div class="bc-plate-wrap">
-                        <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.ComponentThumbnailAltText"
-                            class="bc-plate-img" />
-                        <img loading="lazy" src="/Assets/images/business/coriander.svg" alt="" class="bc-plate-mini"
-                            aria-hidden="true" />
-                    </div>
+        </div>
+
+        <!-- Content -->
+
+        <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+            <div class="container pb-12 md:pb-15">
+                <div class="max-w-5xl text-left">
+
+                    <nav class="mb-4" aria-label="Breadcrumb">
+                        <ol class="flex items-center gap-2 text-sm">
+                            <li>
+                                <a href="/" class="text-white/70 hover:text-white transition">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li class="text-white/60">/</li>
+
+                            <li class="text-white">
+                                Business & Corporates
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <h1 class="innerbanner-title text-h1 text-white">
+                        Nekta —
+                        <span class="innerbanner-title-span">
+                            Business & Corporates
+                        </span>
+                    </h1>
+
                 </div>
-                <!-- Right: copy -->
-                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
-                    <div class="section-title-outer mx-auto max-w-5xl">
-                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
-                            @Html.Raw(
-                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                            ? item.DisplayTitle.CleanParagraphTags()
-                            : item.Title)
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- HERO BANNER END -->
+<!-- ====================INTRO DOUBLE IMAGE STRUCTURE CSS==================== -->
+<section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+
+    <div class="container relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left: layered photo composition -->
+            <div class="relative">
+                <div class="nourish-media-wrap relative">
+
+
+
+                    <!-- back photo: chef portrait -->
+                    <div class="nourish-photo nourish-photo-back">
+                        <img loading="lazy" src="assets/images/outdoorevents/outdoor_intro_behind.webp"
+                            alt="Nekta chef in the kitchen">
+                    </div>
+
+                    <!-- front photo: plating close-up, overlaps the back photo -->
+                    <div class="nourish-photo nourish-photo-front">
+                        <img loading="lazy" src="assets/images/outdoorevents/outdoor_intro_front.webp"
+                            alt="Chef plating a dish with precision">
+                    </div>
+
+                </div>
+            </div>
+            <!-- Right: copy -->
+            <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                <div class="section-title-outer mx-auto max-w-5xl">
+                    <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                        Outdoor Operations. <span class="text-letters-slide">Indoor Standards </span>
                     </h2>
 
                 </div>
                 <div class="intro-outer-wrapper sm:pl-15">
-                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
-
-                    @if (!string.IsNullOrWhiteSpace(item.Url))
-                        {
-                            <div class="flex justify-start mt-5">
-                                <a href="@item.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
-                                    <span>@(string.IsNullOrWhiteSpace(item?.Url_Text) ? "Get in Touch" : item.Url_Text)</span>
-                                    <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png"
-                                        alt="rightArrow" />
-                                </a>
-                            </div>
-                        }
-                    </div>
-                    <!-- Decorative leaf bottom-right -->
-                    <img loading="lazy" src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt=""
-                        class="bc-leaf-deco absolute -bottom-6 right-0 md:right-4 w-10 md:w-12" aria-hidden="true" />
+                    <p>Culinary excellence is at the heart of everything Nekta delivers. From globally inspired cuisines
+                        to regional classics, our culinary team brings together innovation, technique and tradition to
+                        create food experiences that delight at every scale. As a hospitality-backed catering company
+                        drawn from TajSATS catering services and the wider Tata catering company legacy, we treat food
+                        as craft, not commodity.</p>
 
                 </div>
+
             </div>
         </div>
-    </section>
-}
-<!-- ==================== THREE TILT CARD ==================== -->
-@foreach (var item in Model.Healthcare_Dining_Excellence_List.Where(x => x.IsBlock == 0))
-{
-    <section class="bg-darkcream story-gallery section-spacing">
-        <!-- Section Heading -->
-        <div class="section-title-outer text-center mx-auto max-w-5xl">
-            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
-                @Html.Raw(
-                !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                ? item.DisplayTitle.CleanParagraphTags()
-                : item.Title)
-            </h2 
-        </div>
-            <!-- Intro paragraphs -->
-            @if (!string.IsNullOrWhiteSpace(item?.Intro))
-            {
-                <div class="story-intro text-center max-w-5xl mx-auto mb-25 mt-10">
-                    @Html.Raw(item.Intro)
-                </div>
-            }
+    </div>
+</section>
 
-            <div class="container">
-                <div class="relative">
-                    <div class="story-gallery-left">
-                        <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
-                    </div>
-                    <div class="story-gallery-right">
-                        <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
-                            class="max-w-auto z-10 story-turmuric">
-                        <img src="@item.Component_Icon3_Image" alt="@item.Component_Icon_alt_Image"
-                            class="max-w-auto z-10 story-leaf">
-                    </div>
-                    <!-- Cards -->
-                    <div class="cards-wrapper relative flex justify-center items-center">
-                        <!-- Left -->
-                        <div class="gallery-card gallery-left">
-                            <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
-                        </div>
-                        <!-- Center -->
-                        <div class="gallery-card gallery-center">
-                            <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
-                        </div>
-                        <!-- Right -->
-                        <div class="gallery-card gallery-right">
-                            <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
-                        </div>
-                    </div>
+
+<!-- ==================== OUTDOOR CATERING EXCELLENCE ==================== -->
+<!-- ==================== OUTDOOR CATERING EXCELLENCE ==================== -->
+<section class="bc-catering-section relative  overflow-hidden">
+    <div class="container-fluid relative z-10">
+
+
+
+        <!-- Left side fork with pasta decorative image -->
+        <img loading="lazy" src="Assets/images/outdoorevents/fork-pasta-left.webp" alt=""
+            class="bc-catering-deco bc-catering-deco--fork" aria-hidden="true" />
+
+        <!-- Right side tomato splatter decorative image -->
+        <img loading="lazy" src="Assets/images/outdoorevents/tomato-splatter-right.webp" alt=""
+            class="bc-catering-deco bc-catering-deco--tomato" aria-hidden="true" />
+
+        <!-- Dome shape with background image + centered copy -->
+        <div class="bc-catering-dome">
+            <img loading="lazy" src="Assets/images/outdoorevents/catering-dome-bg.webp" alt=""
+                class="bc-catering-dome-bg" aria-hidden="true" />
+            <div class="bc-catering-dome-overlay"></div>
+            <div class="bc-catering-dome-content">
+                <div class="section-title-outer text-center mx-auto max-w-5xl">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        Outdoor Catering <span class="text-letters-slide">Excellence</span>
+                    </h2>
                 </div>
+
+                <p>Nekta designs and runs outdoor events with the same discipline followed at our central kitchen,
+                    controlling every variable, and utilizing the culinary expertise of TajSATS to elevate the event</p>
+                <p>Outdoor catering experiences are engineered around the audience, the setting and the moment, blending
+                    culinary craftsmanship, banquet-scale logistics and refined service to deliver events that feel
+                    effortless and memorable.</p>
+
             </div>
-    </section>
-}
+        </div>
 
-<!-- ==================== TECHNOLOGY SECTION ==================== -->
-@if (Model.Services_For_Healthcare_Clients_List != null && Model.Services_For_Healthcare_Clients_List.Any())
-{
-    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Services_For_Healthcare_Clients_List)
-}
 
-<!-- ==================== LIFE IS A BEAUTIFUL PLATE (GALLERY) ==================== -->
-@if (Model?.Nektas_Edge_For_Healthcare_List != null && Model.Nektas_Edge_For_Healthcare_List.Any())
+
+    </div>
+</section>
+
+
+
+
+
+<!-- ==================== Services for Outdoor Events ==================== -->
+@if (Model?.Services_For_Outdoor_Events_List != null && Model.Services_For_Outdoor_Events_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml",
-    Model.Nektas_Edge_For_Healthcare_List)
+    Model.Services_For_Outdoor_Events_List)
 }
 
 
-<!-- ==================== Last three box slider==================== -->
-@if (Model.Singular_Spirit_HC_List != null && Model.Singular_Spirit_HC_List.Any())
+
+<!-- ==================== TECHNOLOGY SECTION ==================== -->
+@if (Model.Nektas_Edge_For_Outdoor_Events_List != null && Model.Nektas_Edge_For_Outdoor_Events_List.Any())
 {
-    @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_HC_List)
+    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Nektas_Edge_For_Outdoor_Events_List)
 }
+
 
 <!-- ==================== CTA ==================== -->
-@if (Model?.Seeking_New_Experience_HC_List != null && Model.Seeking_New_Experience_HC_List.Any())
+@if (Model?.Proof_Is_On_The_Plate_Outdoor_List != null && Model.Proof_Is_On_The_Plate_Outdoor_List.Any())
 {
-    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Seeking_New_Experience_HC_List)
+    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Proof_Is_On_The_Plate_Outdoor_List)
 }
+
+
 
 
 
 @section Scripts {
     <script src="~/Assets/js/inner-banner-script.js"></script>
     <script src="~/Assets/js/center-mode-slider.js"></script>
+    <script src="~/Assets/js/blogs-cards-slider.js"></script>
     <script src="~/Assets/js/thumb-slider.js"></script>
-    <script src="~/Assets/js/three-tilt-card.js"></script>
-    <script src="~/Assets/js/three-box-slider.js"></script>
-    <script src="~/Assets/js/healthcare.js"></script>
+    <script src="~/Assets/js/outdoorevents.js"></script>
 }

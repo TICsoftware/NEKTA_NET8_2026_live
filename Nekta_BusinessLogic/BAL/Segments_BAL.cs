@@ -153,13 +153,11 @@ namespace Nekta_BusinessLogic.BAL
                 var groupedData = GetGroupedComponents(ds.Tables[1]);
                 model.Components = groupedData;
 
-                model.Nutrition_That_Heals_List = MapComponents(groupedData, 1);
-                model.Healthcare_Dining_Excellence_List = MapComponents(groupedData, 2);
-                model.Services_For_Healthcare_Clients_List = MapComponents(groupedData, 3);
-                model.Nektas_Edge_For_Healthcare_List = MapComponents(groupedData, 4);
-                model.Singular_Spirit_HC_List = MapComponents(groupedData, 5);
-                model.Seeking_New_Experience_HC_List = MapComponents(groupedData, 6);
-
+                model.Outdoor_Operation_List = MapComponents(groupedData, 1);
+                model.Outdoor_Catering_Excellence_List = MapComponents(groupedData, 2);
+                model.Services_For_Outdoor_Events_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_For_Outdoor_Events_List = MapComponents(groupedData, 4);
+                model.Proof_Is_On_The_Plate_Outdoor_List = MapComponents(groupedData, 5);
 
             }
 

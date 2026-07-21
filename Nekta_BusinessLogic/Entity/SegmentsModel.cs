@@ -47,6 +47,14 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Proof_Is_On_The_Plate_List { get; set; } = new();
 
 
+        //Outdoor
+        public List<ComponentModel> Outdoor_Operation_List { get; set; } = new();
+        public List<ComponentModel> Outdoor_Catering_Excellence_List { get; set; } = new();
+        public List<ComponentModel> Services_For_Outdoor_Events_List { get; set; } = new();
+        public List<ComponentModel> Nektas_Edge_For_Outdoor_Events_List { get; set; } = new();
+        public List<ComponentModel> Proof_Is_On_The_Plate_Outdoor_List { get; set; } = new();
+
+
         public int TotalCount { get; set; }
 
     }
