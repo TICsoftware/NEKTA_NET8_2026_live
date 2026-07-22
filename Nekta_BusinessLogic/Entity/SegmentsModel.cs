@@ -28,7 +28,23 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Life_beautiful_Plate_Education_List { get; set; } = new();
         public List<ComponentModel> Nektas_Edge_Education_List { get; set; } = new();
         public List<ComponentModel> Singular_Spirit_Education_List { get; set; } = new();
-        
+
+
+        //Healthcare
+        public List<ComponentModel> Nutrition_That_Heals_List { get; set; } = new();
+        public List<ComponentModel> Healthcare_Dining_Excellence_List { get; set; } = new();
+        public List<ComponentModel> Services_For_Healthcare_Clients_List { get; set; } = new();
+        public List<ComponentModel> Nektas_Edge_For_Healthcare_List { get; set; } = new();
+        public List<ComponentModel> Singular_Spirit_HC_List { get; set; } = new();
+        public List<ComponentModel> Seeking_New_Experience_HC_List { get; set; } = new();
+
+
+        //Sports
+        public List<ComponentModel> Delivering_Experiences_Sports_List { get; set; } = new();
+        public List<ComponentModel> Sports_Catering_Excellence_List { get; set; } = new();
+        public List<ComponentModel> Services_For_Sports_Clients_List { get; set; } = new();
+        public List<ComponentModel> Nektas_Edge_For_Sports_List { get; set; } = new();
+        public List<ComponentModel> Proof_Is_On_The_Plate_List { get; set; } = new();
 
 
         public int TotalCount { get; set; }

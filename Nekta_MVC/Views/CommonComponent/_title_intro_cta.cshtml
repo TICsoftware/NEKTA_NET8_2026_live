@@ -1,0 +1,37 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+
+<section class="cta-section bg-darkcream section-spacing relative overflow-hidden">
+    <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+    <div class="container">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center max-w-6xl mx-auto">
+            <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                ? component.DisplayTitle.CleanParagraphTags()
+                : component.Title)
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(component.Intro))
+            {
+                @Html.Raw(component.Intro.CleanParagraphTags())
+            }
+        </div>
+        <!-- View All Button -->
+        @if (!string.IsNullOrWhiteSpace(component.Url))
+        {
+            <div class="flex justify-center mt-6">
+                <a href="@component.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                    <span>@(!string.IsNullOrWhiteSpace(component.Url_Text) ? component.Url_Text : "Partner with Us")</span>
+                    <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="Right Arrow" />
+                </a>
+            </div>
+        }
+    </div>
+</section>
