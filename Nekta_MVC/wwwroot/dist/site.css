@@ -57,21 +57,34 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-body: "Poppins", sans-serif;
-    --text-h1: clamp(2rem, 1.482rem + 2.21vw, 3.25rem);
-    --text-h2: clamp(1.75rem, 1.284rem + 1.99vw, 2.875rem);
-    --text-h3: clamp(1.25rem, 1.198rem + 0.22vw, 1.375rem);
-    --text-h4: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
+    --font-heading: "Cormorant Garamond", serif;
+    --text-h1: clamp(3.75rem, 2rem + 5vw, 5.25rem);
+    --text-h2: clamp(3.125rem, 1.8rem + 4vw, 4.5rem);
+    --text-h3: clamp(1.625rem, 1rem + 2vw, 2.125rem);
+    --text-h4: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+    --text-h5: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
     --text-p: clamp(1rem, 0.948rem + 0.22vw, 1.125rem);
     --text-small: clamp(0.875rem, 0.35vw + 0.7rem,  0.875rem);
     --text-button: clamp(1rem,  0.948rem + 0.22vw, 1.125rem);
-    --text-20: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
+    --text-22: clamp(1.125rem, 1.021rem + 0.44vw, 1.375rem);
+    --text-12: clamp(0.7rem, 0.65rem + 0.2vw, 0.75rem);
     --text-intro: clamp(1.125rem, 1.021rem + 0.44vw, 1.375rem);
-    --color-primary: #EBE3C8;
+    --color-primary: #F6F4E6;
     --color-secondary: #748D6E;
     --color-third: #FC713C;
+    --color-accent: #FC713C;
+    --color-cream: #F6F4E6;
+    --color-green: #748D6E;
+    --color-orange: #fc713c;
+    --color-darkcream: #E6DBBD;
+    --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+    --motion-fast: 260ms;
+    --motion-base: 420ms;
+    --motion-slow: 720ms;
     --color-text: #454545;
     --color-text-heading: #1C1918;
     --color-text-dark: #384634;
+    --line: rgba(28,25,24,0.1);
   }
 }
 @layer base {
@@ -1451,8 +1464,14 @@
       border-color: color-mix(in oklab, var(--color-black) 25%, transparent);
     }
   }
+  .border-cream {
+    border-color: var(--color-cream);
+  }
   .border-gray-300 {
     border-color: var(--color-gray-300);
+  }
+  .border-green {
+    border-color: var(--color-green);
   }
   .border-primary {
     border-color: var(--color-primary);
@@ -1495,6 +1514,21 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-black) 70%, transparent);
     }
+  }
+  .bg-cream {
+    background-color: var(--color-cream);
+  }
+  .bg-cream\/90 {
+    background-color: color-mix(in srgb, #F6F4E6 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-cream) 90%, transparent);
+    }
+  }
+  .bg-darkcream {
+    background-color: var(--color-darkcream);
+  }
+  .bg-green {
+    background-color: var(--color-green);
   }
   .bg-green-400 {
     background-color: var(--color-green-400);
@@ -1794,6 +1828,9 @@
   .align-top {
     vertical-align: top;
   }
+  .font-heading {
+    font-family: var(--font-heading);
+  }
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -1875,6 +1912,9 @@
   }
   .text-black {
     color: var(--color-black);
+  }
+  .text-cream {
+    color: var(--color-cream);
   }
   .text-gray-400 {
     color: var(--color-gray-400);
@@ -2094,6 +2134,9 @@
     }
     .hover\:bg-gray-800:hover {
       background-color: var(--color-gray-800);
+    }
+    .hover\:text-green:hover {
+      color: var(--color-green);
     }
     .hover\:text-white:hover {
       color: var(--color-white);
@@ -2382,6 +2425,7 @@ p {
   font-family: var(--font-body);
   font-size: var(--text-p);
   margin-bottom: 20px;
+  line-height: 1.5;
 }
 p:last-child {
   margin-bottom: 0;
@@ -2396,11 +2440,11 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.25;
   color: var(--color-text);
   transition: background-color 0.35s ease,color 0.35s ease;
   font-weight: 400;
-  background-color: var(--color-surface);
+  background-color: var(--color-primary);
 }
 @layer base {
   h1 {
@@ -2410,9 +2454,40 @@ body {
     font-weight: 600;
   }
   h1, h2, h3, h4, h5 {
-    font-family: var(--font-body);
-    color: var(--color-secondary);
+    font-family: var(--font-heading) !important;
+    color: var(--color-text-heading);
     line-height: 1.15;
+  }
+  h1, .text-h1 {
+    font-size: var(--text-h1);
+  }
+  h2, .text-h2 {
+    font-size: var(--text-h2);
+    line-height: 1 !important;
+  }
+  h3, .text-h3 {
+    font-size: var(--text-h3);
+  }
+  h4, .text-h4 {
+    font-size: var(--text-h4);
+  }
+  h5, .text-h5 {
+    font-size: var(--text-h5);
+  }
+  .text-14 {
+    font-size: var(--text-small);
+  }
+  .poppins {
+    font-family: var(--font-body);
+  }
+  .cormorant {
+    font-family: var(--font-heading);
+  }
+  .bg-darkcream {
+    background: var(--color-darkcream);
+  }
+  .bg-green {
+    background: var(--color-green);
   }
   a {
     text-decoration: none;
@@ -2482,7 +2557,7 @@ body {
       padding-bottom: calc(var(--spacing) * 20);
     }
   }
-  .btn-primary, .btn-secondary {
+  .common-btn {
     min-height: 44px;
     border-radius: 999px;
     display: inline-flex;
@@ -2492,34 +2567,71 @@ body {
     font-size: 14px;
     font-weight: 500;
     border: 1px solid transparent;
-    transition: transform var(--motion-fast) var(--ease-premium), box-shadow var(--motion-fast) var(--ease-premium), background-color var(--motion-fast) var(--ease-premium), border-color var(--motion-fast) var(--ease-premium), color var(--motion-fast) var(--ease-premium);
-  }
-  .btn-primary {
-    background: var(--color-primary);
+    background: var(--color-accent);
     color: var(--color-cream);
     padding: 0.75rem 1.5rem;
+    transition: transform var(--motion-fast) var(--ease-premium), box-shadow var(--motion-fast) var(--ease-premium), background-color var(--motion-fast) var(--ease-premium), border-color var(--motion-fast) var(--ease-premium), color var(--motion-fast) var(--ease-premium);
   }
-  .btn-primary:hover, .btn-secondary:hover, .icon-button:hover {
+  .common-btn:hover, .icon-button:hover {
     transform: translateY(-2px);
   }
-  .btn-primary:hover, .btn-primary:focus-visible {
+  .common-btn:hover, .common-btn:focus-visible {
     background: var(--color-green);
     border-color: var(--color-green);
     color: var(--color-cream);
     box-shadow: 0 14px 28px rgb(116 141 110 / 0.24);
   }
-  .btn-primary:active {
+  .common-btn:active {
     transform: translateY(0);
     background: #5f7a64;
     border-color: #5f7a64;
   }
-  .btn-primary img {
+  .common-btn img {
     transition: transform var(--motion-fast) var(--ease-premium);
   }
-  .btn-primary:hover img, .btn-primary:focus-visible img {
+  .common-btn:hover img, .common-btn:focus-visible img {
     transform: translateX(3px);
   }
-  .btn-secondary:focus-visible, .btn-primary:focus-visible {
+  .common-btn:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 4px;
+  }
+  .link-md {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color var(--motion-fast) var(--ease-premium), transform var(--motion-fast) var(--ease-premium);
+  }
+  .link-md img {
+    transition: transform var(--motion-fast) var(--ease-premium);
+  }
+  .link-md:hover, .link-md:focus-visible {
+    transform: translateY(-1px);
+  }
+  .link-md:hover img, .link-md:focus-visible img {
+    transform: translateX(3px);
+  }
+  .link-primary {
+    color: var(--color-accent);
+  }
+  .link-primary:hover, .link-primary:focus-visible {
+    color: var(--color-green);
+  }
+  .link-dark {
+    color: var(--color-text-heading);
+  }
+  .link-dark:hover, .link-dark:focus-visible {
+    color: var(--color-green);
+  }
+  .link-light {
+    color: var(--color-cream);
+  }
+  .link-light:hover, .link-light:focus-visible {
+    color: var(--color-third);
+  }
+  .link-md:focus-visible {
     outline: 2px solid var(--color-green);
     outline-offset: 4px;
   }
@@ -2555,9 +2667,15 @@ body {
   }
   .btn-slide-fill:hover img {
     transform: translateX(8px);
+    filter: brightness(0) saturate(100%);
   }
   .btn-slide-fill:active {
     transform: scale(.98);
+  }
+}
+@media (max-width: 992px) {
+  .container {
+    width: 100%;
   }
 }
 @property --tw-translate-x {

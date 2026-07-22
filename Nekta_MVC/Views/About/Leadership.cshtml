@@ -119,9 +119,9 @@
                         <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
                             class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
 
-                        <p class="ld-quote my-4">
-                            @Html.Raw(item.Content.CleanParagraphTags())
-                        </p>
+                        @Html.Raw(item.Intro.ToString().Replace(oldValue: "<p>", newValue: "<p class=\"ld-quote my-4\">"))
+                          
+                   
 
                         <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
                             class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
@@ -165,7 +165,7 @@
                                 class="ld-img ld-img-color" />
                         </div>
                         <h3>@item.Title</h3>
-                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                        @Html.Raw(@item.Designation)
                     </div>
                 }
             </div>
@@ -186,9 +186,8 @@
                         <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
                             class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
 
-                        <p class="ld-quote my-4">
-                            @Html.Raw(item.Content.CleanParagraphTags())
-                        </p>
+                       
+                           @Html.Raw(item.Intro.ToString().Replace(oldValue: "<p>", newValue: "<p class=\"ld-quote my-4\">"))
                         <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
                             class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
                     </div>
@@ -227,7 +226,7 @@
                                 class="ld-img ld-img-color" />
                         </div>
                         <h3>@item.Title</h3>
-                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                       @Html.Raw(@item.Designation)
                     </div>
                 }
             </div>
@@ -259,7 +258,7 @@
                                 class="ld-img ld-img-color" />
                         </div>
                         <h3>@item.Title</h3>
-                        <p>@Html.Raw(@item.Designation.CleanParagraphTags())</p>
+                    @Html.Raw(@item.Designation)
                     </div>
                 }
             </div>
