@@ -12,7 +12,7 @@
         .ToList();
 }
 
-<section class="bg-green center-slider relative section-spacing overflow-hidden">
+<section class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-green" : component.bg_class) center-slider relative section-spacing overflow-hidden">
     <div class="container">
         <div class="relative z-10">
 
@@ -51,7 +51,6 @@
                 @if (blocks.Any())
                 {
                     var first = blocks.First();
-
                     <div class="bc-life-frame bc-life-main thumb-slider-main">
                         <img id="lifeMainImage" src="@first.ThumbnailImage" alt="@first.ThumbnailAltText" loading="lazy" />
                     </div>

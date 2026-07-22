@@ -6,7 +6,7 @@
     var component = Model.FirstOrDefault(x => x.IsBlock == 0);
 }
 
-<section class="bg-green center-slider relative section-spacing overflow-hidden">
+<section class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-green" : component.bg_class) center-slider relative section-spacing overflow-hidden">
     <div class="inner-center-slider">
 
         <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
