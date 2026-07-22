@@ -1,0 +1,201 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SegmentsModel
+@{
+    ViewData["Title"] = "Healthcare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
+
+    <link rel="stylesheet" href="Assets/css/thumb-slider.css" />
+    <link rel="stylesheet" href="Assets/css/healthcare.css" />
+    <link rel="stylesheet" href="Assets/css/page-intro-section.css" />
+    <link rel="stylesheet" href="~/Assets/css/three-tilt-card.css">
+    <link rel="stylesheet" href="~/Assets/css/three-box-slider.css">
+}
+
+<!-- HERO BANNER END-->
+@if (Model != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
+<!-- HERO BANNER END -->
+
+
+<!-- ==================== INTR0- DELIVERING EXPERIENCES ==================== -->
+@foreach (var item in Model.Nutrition_That_Heals_List.Where(x => x.IsBlock == 0))
+{
+    <section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+        <!-- Decorative sushi platter on far right -->
+        <img loading="lazy" src="Assets/images/business/icon-right.svg" alt=""
+            class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
+        <div class="container relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left: plate in circle -->
+                <div class="relative">
+                    <div class="bc-plate-wrap">
+                        <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.ComponentThumbnailAltText"
+                            class="bc-plate-img" />
+                        <img loading="lazy" src="/Assets/images/business/coriander.svg" alt="" class="bc-plate-mini"
+                            aria-hidden="true" />
+                    </div>
+                </div>
+                <!-- Right: copy -->
+                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                    </h2>
+
+                </div>
+                <div class="intro-outer-wrapper sm:pl-15">
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+
+                    @if (!string.IsNullOrWhiteSpace(item.Url))
+                        {
+                            <div class="flex justify-start mt-5">
+                                <a href="@item.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                                    <span>@(string.IsNullOrWhiteSpace(item?.Url_Text) ? "Get in Touch" : item.Url_Text)</span>
+                                    <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png"
+                                        alt="rightArrow" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+                    <!-- Decorative leaf bottom-right -->
+                    <img loading="lazy" src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt=""
+                        class="bc-leaf-deco absolute -bottom-6 right-0 md:right-4 w-10 md:w-12" aria-hidden="true" />
+
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<!-- ==================== THREE TILT CARD ==================== -->
+@foreach (var item in Model.Healthcare_Dining_Excellence_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bg-darkcream story-gallery section-spacing">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                ? item.DisplayTitle.CleanParagraphTags()
+                : item.Title)
+            </h2 
+        </div>
+            <!-- Intro paragraphs -->
+            @if (!string.IsNullOrWhiteSpace(item?.Intro))
+            {
+                <div class="story-intro text-center max-w-5xl mx-auto mb-25 mt-10">
+                    @Html.Raw(item.Intro)
+                </div>
+            }
+
+            <div class="container">
+                <div class="relative">
+                    <div class="story-gallery-left">
+                        <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
+                    </div>
+                    <div class="story-gallery-right">
+                        <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                            class="max-w-auto z-10 story-turmuric">
+                        <img src="@item.Component_Icon3_Image" alt="@item.Component_Icon_alt_Image"
+                            class="max-w-auto z-10 story-leaf">
+                    </div>
+                    <!-- Cards -->
+                    <div class="cards-wrapper relative flex justify-center items-center">
+                        <!-- Left -->
+                        <div class="gallery-card gallery-left">
+                            <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
+                        </div>
+                        <!-- Center -->
+                        <div class="gallery-card gallery-center">
+                            <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                        </div>
+                        <!-- Right -->
+                        <div class="gallery-card gallery-right">
+                            <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+}
+
+<!-- ==================== TECHNOLOGY SECTION ==================== -->
+@if (Model.Services_For_Healthcare_Clients_List != null && Model.Services_For_Healthcare_Clients_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Services_For_Healthcare_Clients_List)
+}
+
+<!-- ==================== LIFE IS A BEAUTIFUL PLATE (GALLERY) ==================== -->
+@if (Model?.Nektas_Edge_For_Healthcare_List != null && Model.Nektas_Edge_For_Healthcare_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml",
+    Model.Nektas_Edge_For_Healthcare_List)
+}
+
+
+<!-- ==================== Last three box slider==================== -->
+@if (Model.Singular_Spirit_HC_List != null && Model.Singular_Spirit_HC_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_HC_List)
+}
+
+<!-- ==================== CTA ==================== -->
+@if (Model?.Seeking_New_Experience_HC_List != null && Model.Seeking_New_Experience_HC_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Seeking_New_Experience_HC_List)
+}
+
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/center-mode-slider.js"></script>
+    <script src="~/Assets/js/thumb-slider.js"></script>
+    <script src="~/Assets/js/three-tilt-card.js"></script>
+    <script src="~/Assets/js/three-box-slider.js"></script>
+    <script src="~/Assets/js/healthcare.js"></script>
+}

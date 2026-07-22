@@ -68,11 +68,103 @@ namespace Nekta_BusinessLogic.BAL
                 model.Life_beautiful_Plate_Education_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_Education_List = MapComponents(groupedData, 4);
                 model.Singular_Spirit_Education_List = MapComponents(groupedData, 5);
-                
+
             }
 
             return model;
         }
+
+
+
+        public SegmentsModel GetHealthcare_BAL(string pagename, int languageId, int geographyId)
+        {
+            var model = new SegmentsModel();
+            var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+            // Content
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Content = MapContent(ds.Tables[0].Rows[0]);
+            }
+
+            // Components
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                var groupedData = GetGroupedComponents(ds.Tables[1]);
+                model.Components = groupedData;
+
+                model.Nutrition_That_Heals_List = MapComponents(groupedData, 1);
+                model.Healthcare_Dining_Excellence_List = MapComponents(groupedData, 2);
+                model.Services_For_Healthcare_Clients_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_For_Healthcare_List = MapComponents(groupedData, 4);
+                model.Singular_Spirit_HC_List = MapComponents(groupedData, 5);
+                model.Seeking_New_Experience_HC_List = MapComponents(groupedData, 6);
+
+
+            }
+
+            return model;
+        }
+
+
+        public SegmentsModel GetSports_BAL(string pagename, int languageId, int geographyId)
+        {
+            var model = new SegmentsModel();
+            var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+            // Content
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Content = MapContent(ds.Tables[0].Rows[0]);
+            }
+
+            // Components
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                var groupedData = GetGroupedComponents(ds.Tables[1]);
+                model.Components = groupedData;
+
+                model.Delivering_Experiences_Sports_List = MapComponents(groupedData, 1);
+                model.Sports_Catering_Excellence_List = MapComponents(groupedData, 2);
+                model.Services_For_Sports_Clients_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_For_Sports_List = MapComponents(groupedData, 4);
+                model.Proof_Is_On_The_Plate_List = MapComponents(groupedData, 5);
+
+            }
+
+            return model;
+        }
+
+
+        public SegmentsModel GetOutdoorEvents_BAL(string pagename, int languageId, int geographyId)
+        {
+            var model = new SegmentsModel();
+            var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+            // Content
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Content = MapContent(ds.Tables[0].Rows[0]);
+            }
+
+            // Components
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                var groupedData = GetGroupedComponents(ds.Tables[1]);
+                model.Components = groupedData;
+
+                model.Outdoor_Operation_List = MapComponents(groupedData, 1);
+                model.Outdoor_Catering_Excellence_List = MapComponents(groupedData, 2);
+                model.Services_For_Outdoor_Events_List = MapComponents(groupedData, 3);
+                model.Nektas_Edge_For_Outdoor_Events_List = MapComponents(groupedData, 4);
+                model.Proof_Is_On_The_Plate_Outdoor_List = MapComponents(groupedData, 5);
+
+            }
+
+            return model;
+        }
+
+
 
 
 
