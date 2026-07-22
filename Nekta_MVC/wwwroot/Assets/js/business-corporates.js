@@ -201,3 +201,241 @@ document.querySelectorAll('.outer-polaroids-icons').forEach((wrapper) => {
 
 
 });
+
+// Nekta edge center focued slider chanages
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-slider]').forEach(function (slider) {
+        const track = slider.querySelector('.bc-arch-track');
+        const viewport = slider.querySelector('.bc-arch-viewport');
+        const cards = Array.from(track.children);
+        const prevBtn = slider.querySelector('.bc-arch-prev');
+        const nextBtn = slider.querySelector('.bc-arch-next');
+        const dotsWrap = slider.querySelector('.bc-arch-dots');
+
+        let currentIndex = 0;
+        let cardsPerView = 4;
+        let maxIndex = 0;
+
+        function getCardsPerView() {
+            const w = window.innerWidth;
+            if (w <= 640) return 1;
+            if (w <= 1024) return 2;
+            return 4;
+        }
+
+        function buildDots() {
+            dotsWrap.innerHTML = '';
+            for (let i = 0; i <= maxIndex; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.addEventListener('click', () => goTo(i));
+                dotsWrap.appendChild(dot);
+            }
+            updateDots();
+        }
+
+        function updateDots() {
+            Array.from(dotsWrap.children).forEach((d, i) => {
+                d.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function updateNav() {
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === maxIndex;
+        }
+
+        function update() {
+            cardsPerView = getCardsPerView();
+            maxIndex = Math.max(0, cards.length - cardsPerView);
+            currentIndex = Math.min(currentIndex, maxIndex);
+
+            const cardWidth = cards[0].getBoundingClientRect().width;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const offset = currentIndex * (cardWidth + gap);
+
+            track.style.transform = `translateX(-${offset}px)`;
+            buildDots();
+            updateNav();
+        }
+
+        function goTo(index) {
+            currentIndex = Math.min(Math.max(index, 0), maxIndex);
+            update();
+        }
+
+        prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+        nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+        // touch/swipe support
+        let startX = 0;
+        let isDragging = false;
+
+        viewport.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            const diff = e.changedTouches[0].clientX - startX;
+            if (Math.abs(diff) > 40) {
+                diff < 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1);
+            }
+            isDragging = false;
+        });
+
+        window.addEventListener('resize', update);
+        update();
+    });
+
+
+
+
+
+    // newslider
+document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
+    const viewport = slider.querySelector('.bc-arch-viewport');
+    const track = slider.querySelector('.bc-arch-track');
+    const prevBtn = slider.querySelector('.bc-arch-prev');
+    const nextBtn = slider.querySelector('.bc-arch-next');
+    const dotsWrap = slider.querySelector('.bc-arch-dots');
+
+    const realCards = Array.from(track.children);
+    const realCount = realCards.length;
+    const GAP = 24;
+
+    // These MUST mirror your CSS values exactly — update both together if you change sizes
+    function getSizes() {
+        const isMobile = window.innerWidth <= 640;
+        return {
+            base: isMobile ? 200 : 260,
+            active: isMobile ? 260 : 600,
+            gap: isMobile ? 24 : GAP
+        };
+    }
+
+    const cardWidth = realCards[0].offsetWidth || 260;
+    const gap = parseFloat(getComputedStyle(track).gap) || 24;
+    const viewportWidth = viewport.getBoundingClientRect().width;
+    const peekCount = Math.max(2, Math.ceil((viewportWidth / 2) / (cardWidth + gap)) + 1);
+
+    const clonesStart = realCards.slice(-peekCount).map(c => {
+        const clone = c.cloneNode(true);
+        clone.classList.add('is-clone');
+        return clone;
+    });
+    const clonesEnd = realCards.slice(0, peekCount).map(c => {
+        const clone = c.cloneNode(true);
+        clone.classList.add('is-clone');
+        return clone;
+    });
+
+    clonesStart.forEach(c => track.insertBefore(c, track.firstChild));
+    clonesEnd.forEach(c => track.appendChild(c));
+
+    const cards = Array.from(track.children);
+    const offset = clonesStart.length;
+
+    let activeIndex = 0;
+
+    function renderedIndex(i) { return i + offset; }
+
+    function centerTrack(withTransition = true) {
+        track.style.transition = withTransition
+            ? 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1)'
+            : 'none';
+
+        const sizes = getSizes();
+        const vw = viewport.getBoundingClientRect().width;
+        const rIndex = renderedIndex(activeIndex);
+
+        // Use KNOWN target width, not offsetWidth (which lies mid-transition)
+        const activeWidth = sizes.active;
+
+        let offsetToCard = 0;
+        for (let i = 0; i < rIndex; i++) {
+            offsetToCard += sizes.base + sizes.gap;
+        }
+
+        const centerOffset = (vw / 2) - (activeWidth / 2);
+        track.style.transform = `translateX(${centerOffset - offsetToCard}px)`;
+    }
+
+    function updateClasses() {
+        const rIndex = renderedIndex(activeIndex);
+        cards.forEach((card, i) => {
+            const wasActive = card.classList.contains('is-active');
+            const willBeActive = (i === rIndex);
+
+            if (wasActive && !willBeActive) {
+                card.classList.remove('content-ready');
+            }
+
+            card.classList.remove('is-active', 'is-adjacent');
+
+            if (willBeActive) {
+                card.classList.add('is-active');
+                const onResizeDone = (e) => {
+                    if (e.propertyName === 'min-height' || e.propertyName === 'width') {
+                        card.classList.add('content-ready');
+                        card.removeEventListener('transitionend', onResizeDone);
+                    }
+                };
+                card.addEventListener('transitionend', onResizeDone);
+            } else if (Math.abs(i - rIndex) === 1) {
+                card.classList.add('is-adjacent');
+            }
+        });
+    }
+
+    function buildDots() {
+        dotsWrap.innerHTML = '';
+        realCards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+        });
+        updateDots();
+    }
+
+    function updateDots() {
+        Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+    }
+
+    function render(withTransition = true) {
+        updateClasses();
+        centerTrack(withTransition);
+        updateDots();
+    }
+
+    function goTo(index, withTransition = true) {
+        activeIndex = (index + realCount) % realCount;
+        render(withTransition);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
+    nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
+
+    cards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const i = Number(card.dataset.index);
+            if (!isNaN(i) && i !== activeIndex) goTo(i);
+        });
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => centerTrack(false), 100);
+    });
+
+    buildDots();
+    render(false);
+});
+
+
+});

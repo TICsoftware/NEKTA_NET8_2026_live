@@ -48,10 +48,145 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
 .bc-arch-card img {width: clamp(52px, 4.6vw, 88px); height: auto; margin-bottom: 12px; transition: transform var(--motion-base) var(--ease-premium);}
 .bc-arch-card h3 {font-family:var(--font-heading); font-weight: 500; font-size: var(--text-h4); max-width: 100%; margin-inline: auto;}
-.bc-arch-card p {font-size: 1rem; max-height: 0;  opacity: 0; overflow: hidden; transition: max-height var(--motion-base) var(--ease-premium),  opacity var(--motion-base) var(--ease-premium),  margin-top var(--motion-base) var(--ease-premium);}
-.bc-arch-card:hover { background-color: rgba(116, 141, 110, 0.10);}
+.bc-arch-card p {font-size: 1rem;max-height: 0;opacity: 0;overflow: hidden;}
+.bc-arch-card:hover p,
+.bc-arch-card.is-active p {max-height: 350px;opacity: 1; margin-top: 8px;}
 .bc-arch-card:hover img {transform: translateY(-4px) scale(1.05);}
-.bc-arch-card:hover p {max-height: 200px;opacity: 1; margin-top: 8px;}
+
+
+/* Nekta edge making slider */
+.bc-arch-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;   /* stack viewport above controls */
+    align-items: center;
+    gap: 12px;
+    padding: 20px 20px 40px;  /* less side padding now that arrows aren't floating on edges */
+}
+
+.bc-arch-center .bc-arch-viewport {
+    overflow: hidden;
+    width: 100%;
+    /* fixed height = tallest card's height + top/bottom breathing room */
+    height: 580px;           /* was: padding: 30px 0 (this let height float) */
+    padding:20px 0px ;
+}
+
+.bc-arch-center .bc-arch-track {
+    display: flex;
+    align-items: flex-end;   /* cards grow upward from a shared baseline */
+    gap: 24px;
+    height: 100%;
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+.bc-arch-center .bc-arch-card {
+    flex: 0 0 auto;
+    width: 260px;
+    min-height: 320px;
+    max-height: 420px;        /* cap so growth is predictable */
+    align-self: flex-end;     /* bottoms align regardless of height */
+    box-sizing: border-box;
+    cursor: pointer;
+    opacity: 0.45;
+    transform: scale(0.82);
+    transition: width 0.5s cubic-bezier(.25,.8,.25,1),
+                min-height 0.5s cubic-bezier(.25,.8,.25,1),
+                transform 0.5s cubic-bezier(.25,.8,.25,1),
+                opacity 0.5s ease,
+                filter 0.5s ease;
+    filter: grayscale(30%);
+    overflow: hidden;
+}
+
+.bc-arch-center .bc-arch-card.is-active {
+    width: 600px;
+    min-height: 560px;
+    opacity: 1;
+    transform: scale(1);
+
+    z-index: 3;
+
+    overflow: visible;
+}
+
+@media (max-width: 640px) {
+    .bc-arch-center .bc-arch-viewport {
+        height: 400px;         /* adjust to match your mobile min/max-height pair */
+    }
+    .bc-arch-center .bc-arch-card {
+        width: 200px;
+        min-height: 260px;
+        max-height: 340px;
+    }
+    .bc-arch-center .bc-arch-card.is-active {
+        width: 260px;
+        min-height: 340px;
+    }
+}
+
+/* remove old absolute positioning for nav buttons */
+.bc-arch-nav {
+    position: static;         /* no longer absolutely positioned */
+    transform: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.bc-arch-prev { left: 0; }
+.bc-arch-next { right: 0; }
+
+.bc-arch-nav:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+.bc-arch-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.bc-arch-dots {
+    position: static;         /* no longer absolutely positioned */
+    transform: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bc-arch-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bc-arch-dots button.active {
+    background: #7a8b6f;
+    width: 22px;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+
+
+
 
 @media (min-width: 768px) {
     .bc-arch-grid { grid-template-columns: repeat(3, minmax(0, 1fr));}
