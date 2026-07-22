@@ -6,7 +6,7 @@
     var component = Model.FirstOrDefault(x => x.IsBlock == 0);
 }
 
-<section id="playgrounds-section" class="bg-cream section-spacing relative overflow-hidden">
+<section id="playgrounds-section" class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-cream" : component.bg_class)  section-spacing relative overflow-hidden">
     <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
     <div class="container">
         <!-- Section Heading -->

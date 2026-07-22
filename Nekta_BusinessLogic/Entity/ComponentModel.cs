@@ -53,6 +53,7 @@ namespace Nekta_BusinessLogic.Entity
         public string Thumbnail_color_image { get; set; }
         public string Component_LHS_thumbnail { get; set; }
         public string Component_LHS_thumbnail_image_alt { get; set; }
+        public string bg_class { get; set; }
     }
 
 
