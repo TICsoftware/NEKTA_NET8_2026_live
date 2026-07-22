@@ -16,6 +16,7 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --container-xl: 36rem;
     --container-2xl: 42rem;
     --container-3xl: 48rem;
     --container-4xl: 56rem;
@@ -994,6 +995,9 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
+  .mb-25 {
+    margin-bottom: calc(var(--spacing) * 25);
+  }
   .mb-auto {
     margin-bottom: auto;
   }
@@ -1186,6 +1190,9 @@
   }
   .max-w-none {
     max-width: none;
+  }
+  .max-w-xl {
+    max-width: var(--container-xl);
   }
   .flex-1 {
     flex: 1;

@@ -234,7 +234,7 @@
         </div>
     }
 
-
+@* 
     <div class="bc-arch-grid">
         @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
         {
@@ -244,7 +244,35 @@
                 <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
             </div>
         }
+    </div> *@
+    
+@* newslider *@
+<div class="bc-arch-slider bc-arch-center" data-center-slider>
+
+    <div class="bc-arch-viewport">
+        <div class="bc-arch-track">
+            @{ int idx = 0; }
+            @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+            {
+                <div class="bc-arch-card" data-index="@idx">
+                    <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" aria-hidden="true" />
+                    <h3>@item.Title</h3>
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                </div>
+                idx++;
+            }
+        </div>
     </div>
+
+    <div class="bc-arch-controls">
+        <button class="bc-arch-nav bc-arch-prev" type="button" aria-label="Previous">&#10094;</button>
+        <div class="bc-arch-dots"></div>
+        <button class="bc-arch-nav bc-arch-next" type="button" aria-label="Next">&#10095;</button>
+    </div>
+
+</div>
+
+    
 
 </section>
 

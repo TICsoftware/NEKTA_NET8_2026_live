@@ -207,3 +207,62 @@ top: -25vw;
 }
 
 
+/* Readmore functionalit css */
+.sub-intro-wrapper {
+   position: relative;
+}
+
+.sub-intro-text-outer {
+   position: relative;
+   max-height: 10.8rem; /* approx 3 lines at 1.6 line-height */
+   overflow: hidden;
+   transition: max-height 0.5s ease;
+}
+
+.sub-intro-text-outer.expanded {
+   max-height: 1000px; /* large enough to fit full content */
+}
+
+.sub-intro-text {
+   color: #d7e4d1;
+   font-size: var(--text-22)
+   
+}
+
+/* Subtle, short fade — matches image 2 */
+.sub-intro-fade {
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   height: 4.6rem; /* shorter, just softens the last line edge */
+   background: linear-gradient(
+      to bottom,
+      rgba(126, 149, 115, 0) 0%,
+      rgba(126, 149, 115, 0.6) 55%,
+      rgba(126, 149, 115, 0.95) 100%
+   );
+   pointer-events: none;
+   opacity: 1;
+   transition: opacity 0.4s ease;
+}
+
+.sub-intro-text-outer.expanded .sub-intro-fade {
+   opacity: 0;
+}
+
+.read-more-btn {
+   display: inline-block;
+   margin-top: 0.75rem;
+   color: #d7e4d1;
+   text-decoration: underline;
+   font-size: 0.95rem;
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 0;
+}
+
+.read-more-btn:hover {
+   color: #ffffff;
+}

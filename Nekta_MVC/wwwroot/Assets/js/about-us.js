@@ -327,3 +327,37 @@ items.forEach((item) => {
     });
   });
 });
+
+
+
+// Readmore functionlity subheading
+document.querySelectorAll('[data-readmore-toggle]').forEach(function (btn) {
+   btn.addEventListener('click', function () {
+      var wrapper = btn.closest('.sub-intro-wrapper');
+      var outerEl = wrapper.querySelector('[data-subintro-outer]');
+      var innerEl = wrapper.querySelector('[data-subintro]');
+      var label = btn.querySelector('[data-readmore-label]');
+
+      var isExpanded = outerEl.classList.contains('expanded');
+
+      if (isExpanded) {
+         // Collapse: set max-height to actual collapsed height first, then transition
+         outerEl.style.maxHeight = '10.8rem';
+         outerEl.classList.remove('expanded');
+         label.textContent = 'Read More';
+      } else {
+         // Expand: set max-height to actual scrollHeight for smooth animation
+         outerEl.classList.add('expanded');
+         outerEl.style.maxHeight = innerEl.scrollHeight + 'px';
+         label.textContent = 'Read Less';
+
+         // After transition, allow natural resizing if content changes
+         outerEl.addEventListener('transitionend', function handler() {
+            if (outerEl.classList.contains('expanded')) {
+               outerEl.style.maxHeight = '1000px';
+            }
+            outerEl.removeEventListener('transitionend', handler);
+         });
+      }
+   });
+});
