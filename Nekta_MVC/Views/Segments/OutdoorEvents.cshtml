@@ -53,160 +53,102 @@
 
 
 <!-- HERO BANNER END-->
-<section class="relative inside-banner-outer overflow-hidden">
-    <div class="inside-banner-inner banner-animation relative ">
-
-        <!-- Banner -->
-        <div
-            class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
-
-            <!-- Parallax Image -->
-            <picture>
-                <!-- Desktop -->
-                <source media="(min-width:1024px)" srcset="Assets/images/banners/company-info-banner-desktop.webp">
-
-                <!-- Tablet -->
-                <source media="(min-width:768px)" srcset="Assets/images/banners/company-info-banner-mob.webp">
-
-                <!-- Mobile -->
-                <img src="Assets/images/banners/company-info-banner-mob.webp" alt="About Bubble Food"
-                    class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover" loading="eager"
-                    fetchpriority="high">
-            </picture>
-
-            <!-- Keep Existing Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
-
-
-        </div>
-
-        <!-- Content -->
-
-        <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
-            <div class="container pb-12 md:pb-15">
-                <div class="max-w-5xl text-left">
-
-                    <nav class="mb-4" aria-label="Breadcrumb">
-                        <ol class="flex items-center gap-2 text-sm">
-                            <li>
-                                <a href="/" class="text-white/70 hover:text-white transition">
-                                    Home
-                                </a>
-                            </li>
-
-                            <li class="text-white/60">/</li>
-
-                            <li class="text-white">
-                                Business & Corporates
-                            </li>
-                        </ol>
-                    </nav>
-
-                    <h1 class="innerbanner-title text-h1 text-white">
-                        Nekta —
-                        <span class="innerbanner-title-span">
-                            Business & Corporates
-                        </span>
-                    </h1>
-
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-</section>
+@if (Model != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
 <!-- HERO BANNER END -->
 <!-- ====================INTRO DOUBLE IMAGE STRUCTURE CSS==================== -->
-<section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+@foreach (var item in Model.Outdoor_Operation_List.Where(x => x.IsBlock == 0))
+{
+    <section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
 
-    <div class="container relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="container relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-            <!-- Left: layered photo composition -->
-            <div class="relative">
-                <div class="nourish-media-wrap relative">
+                <!-- Left: layered photo composition -->
+                <div class="relative">
+                    <div class="nourish-media-wrap relative">
 
+                        <!-- back photo: chef portrait -->
+                        <div class="nourish-photo nourish-photo-back">
+                            <img loading="lazy" src="@item.Component_LHS_thumbnail"
+                                alt="@item.Component_LHS_thumbnail_image_alt">
+                        </div>
 
+                        <!-- front photo: plating close-up, overlaps the back photo -->
+                        <div class="nourish-photo nourish-photo-front">
+                            <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                        </div>
 
-                    <!-- back photo: chef portrait -->
-                    <div class="nourish-photo nourish-photo-back">
-                        <img loading="lazy" src="assets/images/outdoorevents/outdoor_intro_behind.webp"
-                            alt="Nekta chef in the kitchen">
                     </div>
-
-                    <!-- front photo: plating close-up, overlaps the back photo -->
-                    <div class="nourish-photo nourish-photo-front">
-                        <img loading="lazy" src="assets/images/outdoorevents/outdoor_intro_front.webp"
-                            alt="Chef plating a dish with precision">
-                    </div>
-
                 </div>
-            </div>
-            <!-- Right: copy -->
-            <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
-                <div class="section-title-outer mx-auto max-w-5xl">
-                    <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
-                        Outdoor Operations. <span class="text-letters-slide">Indoor Standards </span>
+                <!-- Right: copy -->
+                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
                     </h2>
 
                 </div>
                 <div class="intro-outer-wrapper sm:pl-15">
-                    <p>Culinary excellence is at the heart of everything Nekta delivers. From globally inspired cuisines
-                        to regional classics, our culinary team brings together innovation, technique and tradition to
-                        create food experiences that delight at every scale. As a hospitality-backed catering company
-                        drawn from TajSATS catering services and the wider Tata catering company legacy, we treat food
-                        as craft, not commodity.</p>
-
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
                 </div>
 
             </div>
         </div>
     </div>
 </section>
-
+}
 
 <!-- ==================== OUTDOOR CATERING EXCELLENCE ==================== -->
 <!-- ==================== OUTDOOR CATERING EXCELLENCE ==================== -->
-<section class="bc-catering-section relative  overflow-hidden">
-    <div class="container-fluid relative z-10">
+@foreach (var item in Model.Outdoor_Catering_Excellence_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-catering-section relative  overflow-hidden">
+        <div class="container-fluid relative z-10">
 
 
 
-        <!-- Left side fork with pasta decorative image -->
-        <img loading="lazy" src="Assets/images/outdoorevents/fork-pasta-left.webp" alt=""
-            class="bc-catering-deco bc-catering-deco--fork" aria-hidden="true" />
+            <!-- Left side fork with pasta decorative image -->
+            <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
+                class="bc-catering-deco bc-catering-deco--fork" aria-hidden="true" />
 
-        <!-- Right side tomato splatter decorative image -->
-        <img loading="lazy" src="Assets/images/outdoorevents/tomato-splatter-right.webp" alt=""
-            class="bc-catering-deco bc-catering-deco--tomato" aria-hidden="true" />
+            <!-- Right side tomato splatter decorative image -->
+            <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
+                class="bc-catering-deco bc-catering-deco--tomato" aria-hidden="true" />
 
-        <!-- Dome shape with background image + centered copy -->
-        <div class="bc-catering-dome">
-            <img loading="lazy" src="Assets/images/outdoorevents/catering-dome-bg.webp" alt=""
-                class="bc-catering-dome-bg" aria-hidden="true" />
-            <div class="bc-catering-dome-overlay"></div>
-            <div class="bc-catering-dome-content">
-                <div class="section-title-outer text-center mx-auto max-w-5xl">
-                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
-                        Outdoor Catering <span class="text-letters-slide">Excellence</span>
+            <!-- Dome shape with background image + centered copy -->
+            <div class="bc-catering-dome">
+                <img loading="lazy" src="@item.Componentbackground" alt="@item.ComponentbackgroundAltText"
+                    class="bc-catering-dome-bg" aria-hidden="true" />
+                <div class="bc-catering-dome-overlay"></div>
+                <div class="bc-catering-dome-content">
+                    <div class="section-title-outer text-center mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
                     </h2>
                 </div>
 
-                <p>Nekta designs and runs outdoor events with the same discipline followed at our central kitchen,
-                    controlling every variable, and utilizing the culinary expertise of TajSATS to elevate the event</p>
-                <p>Outdoor catering experiences are engineered around the audience, the setting and the moment, blending
-                    culinary craftsmanship, banquet-scale logistics and refined service to deliver events that feel
-                    effortless and memorable.</p>
+                @if (!string.IsNullOrWhiteSpace(item?.Intro))
+                    {
+                        @Html.Raw(item.Intro)
+                    }
 
+                </div>
             </div>
+
+
+
         </div>
-
-
-
-    </div>
-</section>
-
+    </section>
+}
 
 
 
