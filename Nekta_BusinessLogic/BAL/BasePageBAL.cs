@@ -113,7 +113,7 @@ namespace Nekta_BusinessLogic.BAL
                 MediafilePath = Config_Application_Website.GetPath(group, "File Upload"),
                 Component_LHS_thumbnail = Config_Application_Website.GetPath(group, "component LHS thumbnail"),
                 Component_LHS_thumbnail_image_alt = Config_Application_Website.GetPath(group, "Component LHS thumbnail image alt"),
-                bg_class = Config_Application_Website.GetPath(group, "bg class"),
+                bg_class = Config_Application_Website.GetValue(dict, "bg class"),
             });
         }
     }
