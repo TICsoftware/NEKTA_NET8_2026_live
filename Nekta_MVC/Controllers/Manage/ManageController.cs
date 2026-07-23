@@ -90,10 +90,16 @@ namespace Nekta_MVC.Controllers.Manage
                 HttpContext.Session.SetString("UserTypeId", user.UserType_Id.ToString());
 
                 _bal.InsertLoginLog_bal(username, ipAddress, "Login Success");
-                //live
-               return RedirectToAction("Verify2FA", "Manage");
 
-                 //return RedirectToAction("Dashboard", "Manage");
+                if (user.UserType_Id == 5)
+                {
+                    return RedirectToAction("SetSuperadmin", "Manage");
+                }
+
+                //live
+                return RedirectToAction("Verify2FA", "Manage");
+
+                //return RedirectToAction("Dashboard", "Manage");
             }
             catch (Exception ex)
             {
@@ -189,8 +195,8 @@ namespace Nekta_MVC.Controllers.Manage
             return View();
         }
 
-[Authorize]
-[SessionAuthorize]
+        [Authorize]
+        [SessionAuthorize]
         public IActionResult Register()
         {
             ViewBag.UserType = _bal.UserType_Drowpdown_bal();
@@ -198,8 +204,8 @@ namespace Nekta_MVC.Controllers.Manage
             return View();
         }
 
-[Authorize]
-[SessionAuthorize]
+        [Authorize]
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult Register(User account)
         {
@@ -237,7 +243,7 @@ namespace Nekta_MVC.Controllers.Manage
             //     CreatedBy = 1
             // };
 
-            
+
             int result = _bal.InsertUsers_bal(entity);
 
             if (result == 0)
@@ -268,8 +274,8 @@ namespace Nekta_MVC.Controllers.Manage
             return true;
         }
 
-[Authorize]
-[SessionAuthorize]
+        [Authorize]
+        [SessionAuthorize]
         [HttpGet]
         public IActionResult EditUser(int id)
         {
@@ -283,8 +289,8 @@ namespace Nekta_MVC.Controllers.Manage
             return View(user);
         }
 
-[Authorize]
-[SessionAuthorize]
+        [Authorize]
+        [SessionAuthorize]
         [HttpPost]
         public IActionResult EditUser(UserEdit account)
         {
@@ -330,8 +336,8 @@ namespace Nekta_MVC.Controllers.Manage
             return RedirectToAction("UserList");
         }
 
-[Authorize]
-[SessionAuthorize]
+        [Authorize]
+        [SessionAuthorize]
         public IActionResult UserList()
         {
             List<User> users = _bal.GetUser_bal();
@@ -391,6 +397,56 @@ namespace Nekta_MVC.Controllers.Manage
             var logs = _bal.GetLoginLogs_bal(email);
 
             return View(logs);
+        }
+
+
+        public async Task<IActionResult> SetSuperadmin()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            var secret = HttpContext.Session.GetString("UserSecret");
+            var username = HttpContext.Session.GetString("Username");
+            var userTypeIdStr = HttpContext.Session.GetString("UserTypeId");
+
+            if (string.IsNullOrEmpty(secret) || string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Manage");
+            }
+
+            try
+            {
+
+                int userTypeId = string.IsNullOrEmpty(userTypeIdStr) ? 0 : Convert.ToInt32(userTypeIdStr);
+                string roleName = ClaimsExtensions.MapRole(userTypeId);
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, username ?? ""),
+                    new Claim(ClaimTypes.Role, roleName),
+                    new Claim(ClaimTypes.NameIdentifier, userId)
+                };
+
+                var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+
+                await HttpContext.SignInAsync(
+                    "MyCookieAuth",
+                    new ClaimsPrincipal(identity),
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                        ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
+                    });
+
+                // ✅ Clear session after success
+                HttpContext.Session.Remove("UserSecret");
+                HttpContext.Session.Remove("UserTypeId");
+
+                return RedirectToAction("Dashboard", "Manage");
+            }
+            catch
+            {
+                ViewBag.Error = "Something went wrong during verification.";
+                return View();
+            }
         }
 
 
