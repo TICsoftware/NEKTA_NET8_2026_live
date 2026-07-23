@@ -109,7 +109,7 @@ namespace Nekta_BusinessLogic.BAL
                 Component_Designation = Config_Application_Website.GetValue(dict, "component designation"),
                 Component_Designation2 = Config_Application_Website.GetValue(dict, "Component designation 2"),
                 Designation = Config_Application_Website.GetValue(dict, "Designation"),
-                Thumbnail_color_image = Config_Application_Website.GetValue(dict, "block thumbnail color image"),
+                Thumbnail_color_image = Config_Application_Website.GetPath(group, "block thumbnail color image"),
                 MediafilePath = Config_Application_Website.GetPath(group, "File Upload"),
                 Component_LHS_thumbnail = Config_Application_Website.GetPath(group, "component LHS thumbnail"),
                 Component_LHS_thumbnail_image_alt = Config_Application_Website.GetPath(group, "Component LHS thumbnail image alt"),
