@@ -1,0 +1,265 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SolutionsModel
+@{
+    ViewData["Title"] = "Culinary Excellence";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+    <title>@Model.Content.cont_window_title</title>
+
+    <meta content="@Model.Content.cont_metatag" name="keywords" />
+    <meta content="@Model.Content.cont_metadesc" name="description" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+    <!-- Facebook / Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content.ContTitle" />
+    <meta property="og:description" content="@Model.Content.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/three-box-slider.css">
+    <link rel="stylesheet" href="~/Assets/css/three-tilt-card.css">
+    <link rel="stylesheet" href="~/Assets/css/Culinaryexcellence.css" />
+    <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
+    <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
+    <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
+}
+
+<!-- HERO BANNER -->
+@if (Model != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
+
+<!-- ==================== From the Core to Every Corner ==================== -->
+@foreach (var item in Model.From_The_Core_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+        <img loading="lazy" src="~/Assets/images/business/icon-right.svg" alt=""
+            class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
+        <div class="container relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="relative">
+                    <div class="nourish-media-wrap relative">
+                        <div class="nourish-photo nourish-photo-back">
+                            <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                        </div>
+                        <div class="nourish-photo nourish-photo-front">
+                            <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                        </div>
+                    </div>
+                </div>
+                <div class="relative space-y-6 md:space-y-8 sm:max-w-[35vw]">
+                    <div class="section-title-outer mx-auto max-w-5xl">
+                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                            @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                        </h2>
+                    </div>
+                    <div class="intro-outer-wrapper sm:pl-15">
+                        @if (!string.IsNullOrWhiteSpace(item.Intro))
+                        {
+                            @Html.Raw(item.Intro)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ==================== Why Central Kitchens Matter ==================== -->
+@foreach (var item in Model.Why_Central_Kitchens_List.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-dining-section section-pb curveshape-wrap">
+        <div class="curveSvg-bg">
+            <svg class="curveSvg" viewBox="0 0 1000 400" preserveAspectRatio="none" overflow="visible">
+                <path class="curvePath" data-max-curve="140"
+                    d="M0,144 L1000,144 L1000,400 L0,400 Z" fill="#e8e0c4"></path>
+            </svg>
+        </div>
+        <div class="outer-polaroids-icons">
+            @if (!string.IsNullOrWhiteSpace(item.Component_Icon_Image))
+            {
+                <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
+                    class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
+            }
+            @if (!string.IsNullOrWhiteSpace(item.Component_Icon2_Image))
+            {
+                <img loading="lazy" src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                    class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
+            }
+        </div>
+
+        <div class="container relative z-10">
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+                </h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center">
+                @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    @Html.Raw(item.Intro)
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ==================== At a Glance ==================== -->
+@foreach (var item in Model.At_A_Glance_List.Where(x => x.IsBlock == 0))
+{
+    <section class="story-gallery">
+        <div class="container">
+            <div class="section-title-outer text-center mx-auto max-w-5xl at-glance-spacing">
+                <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+                </h2>
+            </div>
+            <div class="relative">
+                <div class="story-gallery-left">
+                    <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
+                </div>
+                <div class="story-gallery-right">
+                    <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                        class="max-w-auto z-10 story-turmuric">
+                    <img src="@item.Component_Icon3_Image" alt="" class="max-w-auto z-10 story-leaf">
+                </div>
+                <div class="cards-wrapper relative flex justify-center items-center">
+                    <div class="gallery-card gallery-left">
+                        <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
+                    </div>
+                    <div class="gallery-card gallery-center">
+                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                    </div>
+                    <div class="gallery-card gallery-right">
+                        <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ==================== Counter Section ==================== -->
+@if (Model.Infographics_Counter_List != null && Model.Infographics_Counter_List.Any(x => x.IsBlock == 1))
+{
+    <section class="counter-section section-pb">
+        <div class="container">
+            <div class="counter-wrapper sm:max-w-5xl sm:mx-auto">
+                @{
+                    var counters = Model.Infographics_Counter_List
+                        .Where(x => x.IsBlock == 1)
+                        .OrderBy(x => x.Sequence)
+                        .ToList();
+                }
+                @foreach (var item in counters)
+                {
+                    <div class="flex flex-col shrink-0 rounded-2xl px-4 py-6 items-start gap-0 box-itm counter-item">
+                        @Html.Raw(item.Intro.CleanParagraphTags())
+                        <p>@item.Title</p>
+                    </div>
+
+                    @if (item.Sequence != counters.Max(x => x.Sequence))
+                    {
+                        <div class="counter-divider"></div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ==================== Dynamism on a Plate ==================== -->
+@if (Model.Dynamism_On_A_Plate_List != null && Model.Dynamism_On_A_Plate_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Dynamism_On_A_Plate_List)
+}
+
+<!-- ==================== Culinary Capability Thumb Slider ==================== -->
+@if (Model.Culinary_Capability_Thumb_List != null && Model.Culinary_Capability_Thumb_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml", Model.Culinary_Capability_Thumb_List)
+}
+
+<!-- ==================== Culinary Capability Arch Cards ==================== -->
+@if (Model.Culinary_Capability_Arch_List != null && Model.Culinary_Capability_Arch_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_arch_cards.cshtml", Model.Culinary_Capability_Arch_List)
+}
+
+<!-- ==================== Built to Aviation Standards ==================== -->
+@if (Model.Built_To_Aviation_Standards_List != null && Model.Built_To_Aviation_Standards_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_aviation_standards.cshtml", Model.Built_To_Aviation_Standards_List)
+}
+
+<!-- ==================== Why Clients Choose Nekta's Culinary Capability ==================== -->
+@if (Model.Why_Clients_Choose_List != null && Model.Why_Clients_Choose_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Why_Clients_Choose_List)
+}
+
+<!-- ==================== Central Kitchens CTA ==================== -->
+@if (Model.Central_Kitchens_CTA_List != null && Model.Central_Kitchens_CTA_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Central_Kitchens_CTA_List)
+}
+
+<!-- ==================== Works Best With ==================== -->
+@if (Model.Works_Best_With_List != null && Model.Works_Best_With_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_works_best_with.cshtml", Model.Works_Best_With_List)
+}
+
+<!-- ==================== Explore with Nekta ==================== -->
+@if (Model.Explore_With_Nekta_List != null && Model.Explore_With_Nekta_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_explore_with_nekta.cshtml", Model.Explore_With_Nekta_List)
+}
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/center-mode-slider.js"></script>
+    <script src="~/Assets/js/three-box-slider.js"></script>
+    <script src="~/Assets/js/thumb-slider.js"></script>
+    <script src="~/Assets/js/Culinaryexcellence.js"></script>
+    <script src="~/Assets/js/three-tilt-card.js"></script>
+    <script src="~/Assets/js/blogs-cards-slider.js"></script>
+}

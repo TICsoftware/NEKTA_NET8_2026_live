@@ -337,7 +337,10 @@
          4: Diverse Playgrounds. Singular Spirit
          =================================== -->
 <section id="playgrounds-section" class="bg-cream section-spacing relative overflow-hidden">
-   <img src="assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+   @foreach (var item in Model.Singular_Spirit_Aboutus_List.Where(x => x.IsBlock == 0))
+      {
+   <img src="@item.Componentbackground" alt="" class="w-full h-full absolute top-0 left-0" />
+   }
    <div class="container">
       <!-- Section Heading -->
       @foreach (var item in Model.Singular_Spirit_Aboutus_List.Where(x => x.IsBlock == 0))

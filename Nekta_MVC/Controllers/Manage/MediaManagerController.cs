@@ -372,6 +372,30 @@ namespace Nekta_MVC.Controllers.Manage
             return PartialView("media_partial", vm);
         }
 
+
+        public IActionResult SearchMedia(string sortOrder, string fileType, string search, int page = 1)
+        {
+            int pageSize = 12;
+
+            var items = _repo.GetAll_Media_bal(
+                sortOrder ?? "DateDesc",
+                fileType ?? "All",
+                search,
+                page,
+                pageSize
+            );
+
+            var vm = new MediaManagerViewModel
+            {
+                Items = items,
+                CurrentPage = page,
+                HasMore = items.Count == pageSize
+            };
+
+            return PartialView("_MediaGridPartial", vm);
+        }
+
+
         [HttpGet]
         public IActionResult LoadMoreMedia(string sortOrder, string fileType, string search, int page = 1)
         {
