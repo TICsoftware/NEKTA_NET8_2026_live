@@ -44,76 +44,36 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-edge-section { position: relative; background-color: var(--color-cream); overflow: hidden;}
 .bc-arch-grid { display: grid;grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem;}
 
-.bc-arch-card {position: relative; border: 1px solid var(--color-green); border-radius: 336px 336px 0 0; aspect-ratio: 320 / 416;    display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 1rem 1rem 2.5rem; overflow: hidden; transition: background-color var(--motion-base) var(--ease-premium);}
+.bc-arch-card {position: relative; border: 1px solid var(--color-green); border-radius: 336px 336px 0 0; aspect-ratio: 320 / 416;    display: flex; flex-direction: column; justify-content:center; align-items: center; text-align: center; padding: 1rem 1rem 2.5rem; overflow: hidden; transition: background-color var(--motion-base) var(--ease-premium);}
 
 .bc-arch-card img {width: clamp(52px, 4.6vw, 88px); height: auto; margin-bottom: 12px; transition: transform var(--motion-base) var(--ease-premium);}
 .bc-arch-card h3 {font-family:var(--font-heading); font-weight: 500; font-size: var(--text-h4); max-width: 100%; margin-inline: auto;}
 .bc-arch-card p {font-size: 1rem;max-height: 0;opacity: 0;overflow: hidden;}
 .bc-arch-card:hover p,
-.bc-arch-card.is-active p {max-height: 350px;opacity: 1; margin-top: 8px;}
+.bc-arch-card.is-active p {max-height: 350px;opacity: 1; margin-top: 20px;}
 .bc-arch-card:hover img {transform: translateY(-4px) scale(1.05);}
 
 
 /* Nekta edge making slider */
-.bc-arch-center {
-    position: relative;
-    display: flex;
-    flex-direction: column;   /* stack viewport above controls */
-    align-items: center;
-    gap: 12px;
-    padding: 20px 20px 40px;  /* less side padding now that arrows aren't floating on edges */
+.bc-arch-center { position: relative; display: flex; flex-direction: column;    align-items: center; gap: 12px; padding: 20px 20px 40px;  }
+.bc-arch-center .bc-arch-viewport { overflow: hidden; width: 100%; height: 580px;            padding:20px 0px ;}
+.bc-arch-center .bc-arch-track {display: flex;align-items: flex-end;   /* cards grow upward from a shared baseline */ gap: 24px; height: 100%; will-change: transform; transition: transform 0.5s cubic-bezier(.25,.8,.25,1);}
+.bc-arch-center .bc-arch-card {flex: 0 0 auto; width: 260px; min-height: 320px;  max-height: 420px;         align-self: flex-end;      box-sizing: border-box; cursor: pointer; opacity: 0.45;
+ transform: scale(0.82);
+ transition: width 0.5s cubic-bezier(.25,.8,.25,1),
+             min-height 0.5s cubic-bezier(.25,.8,.25,1),
+             transform 0.5s cubic-bezier(.25,.8,.25,1),
+             opacity 0.5s ease,
+             filter 0.5s ease;
+ filter: grayscale(30%);
+ overflow: hidden;
 }
 
-.bc-arch-center .bc-arch-viewport {
-    overflow: hidden;
-    width: 100%;
-    /* fixed height = tallest card's height + top/bottom breathing room */
-    height: 580px;           /* was: padding: 30px 0 (this let height float) */
-    padding:20px 0px ;
-}
-
-.bc-arch-center .bc-arch-track {
-    display: flex;
-    align-items: flex-end;   /* cards grow upward from a shared baseline */
-    gap: 24px;
-    height: 100%;
-    will-change: transform;
-    transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
-}
-
-.bc-arch-center .bc-arch-card {
-    flex: 0 0 auto;
-    width: 260px;
-    min-height: 320px;
-    max-height: 420px;        /* cap so growth is predictable */
-    align-self: flex-end;     /* bottoms align regardless of height */
-    box-sizing: border-box;
-    cursor: pointer;
-    opacity: 0.45;
-    transform: scale(0.82);
-    transition: width 0.5s cubic-bezier(.25,.8,.25,1),
-                min-height 0.5s cubic-bezier(.25,.8,.25,1),
-                transform 0.5s cubic-bezier(.25,.8,.25,1),
-                opacity 0.5s ease,
-                filter 0.5s ease;
-    filter: grayscale(30%);
-    overflow: hidden;
-}
-
-.bc-arch-center .bc-arch-card.is-active {
-    width: 600px;
-    min-height: 560px;
-    opacity: 1;
-    transform: scale(1);
-
-    z-index: 3;
-
-    overflow: visible;
-}
+.bc-arch-center .bc-arch-card.is-active { width: 600px; min-height: 560px; opacity: 1; transform: scale(1); z-index: 3; overflow: visible;}
 
 @media (max-width: 640px) {
     .bc-arch-center .bc-arch-viewport {
-        height: 400px;         /* adjust to match your mobile min/max-height pair */
+        height:500px;         /* adjust to match your mobile min/max-height pair */
     }
     .bc-arch-center .bc-arch-card {
         width: 200px;
@@ -184,8 +144,20 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
     transition: width 0.3s ease;
 }
 
+.bc-arch-center .bc-arch-card.is-active h3,
+.bc-arch-center .bc-arch-card.is-active p {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition-delay: 0s;
+}
 
-
+.bc-arch-center .bc-arch-card.is-active.content-ready h3,
+.bc-arch-center .bc-arch-card.is-active.content-ready p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.0s;
+}
 
 
 @media (min-width: 768px) {

@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // newslider
+    // nekta edgenewslider
 document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
     const viewport = slider.querySelector('.bc-arch-viewport');
     const track = slider.querySelector('.bc-arch-track');
@@ -345,7 +345,7 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
 
     function centerTrack(withTransition = true) {
         track.style.transition = withTransition
-            ? 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1)'
+            ? 'transform 0.35s cubic-bezier(0.65, 0, 0.35, 1)'
             : 'none';
 
         const sizes = getSizes();
@@ -364,20 +364,24 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
         track.style.transform = `translateX(${centerOffset - offsetToCard}px)`;
     }
 
-    function updateClasses() {
-        const rIndex = renderedIndex(activeIndex);
-        cards.forEach((card, i) => {
-            const wasActive = card.classList.contains('is-active');
-            const willBeActive = (i === rIndex);
+function updateClasses(withTransition = true) {
+    const rIndex = renderedIndex(activeIndex);
+    cards.forEach((card, i) => {
+        const wasActive = card.classList.contains('is-active');
+        const willBeActive = (i === rIndex);
 
-            if (wasActive && !willBeActive) {
-                card.classList.remove('content-ready');
-            }
+        if (wasActive && !willBeActive) {
+            card.classList.remove('content-ready');
+        }
 
-            card.classList.remove('is-active', 'is-adjacent');
+        card.classList.remove('is-active', 'is-adjacent');
 
-            if (willBeActive) {
-                card.classList.add('is-active');
+        if (willBeActive) {
+            card.classList.add('is-active');
+
+            if (!withTransition) {
+                card.classList.add('content-ready');
+            } else if (!wasActive) {
                 const onResizeDone = (e) => {
                     if (e.propertyName === 'min-height' || e.propertyName === 'width') {
                         card.classList.add('content-ready');
@@ -385,11 +389,18 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
                     }
                 };
                 card.addEventListener('transitionend', onResizeDone);
-            } else if (Math.abs(i - rIndex) === 1) {
-                card.classList.add('is-adjacent');
             }
-        });
-    }
+        } else if (Math.abs(i - rIndex) === 1) {
+            card.classList.add('is-adjacent');
+        }
+    });
+}
+
+function render(withTransition = true) {
+    updateClasses(withTransition);
+    centerTrack(withTransition);
+    updateDots();
+}
 
     function buildDots() {
         dotsWrap.innerHTML = '';
@@ -406,11 +417,7 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
         Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === activeIndex));
     }
 
-    function render(withTransition = true) {
-        updateClasses();
-        centerTrack(withTransition);
-        updateDots();
-    }
+
 
     function goTo(index, withTransition = true) {
         activeIndex = (index + realCount) % realCount;

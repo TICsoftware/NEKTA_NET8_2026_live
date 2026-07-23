@@ -236,12 +236,8 @@ top: -25vw;
    right: 0;
    bottom: 0;
    height: 4.6rem; /* shorter, just softens the last line edge */
-   background: linear-gradient(
-      to bottom,
-      rgba(126, 149, 115, 0) 0%,
-      rgba(126, 149, 115, 0.6) 55%,
-      rgba(126, 149, 115, 0.95) 100%
-   );
+    background: linear-gradient(to bottom, rgba(126, 149, 115, 0) 0%, rgb(116 141 110 / 65%) 55%, rgb(116 141 110) 100%);
+  
    pointer-events: none;
    opacity: 1;
    transition: opacity 0.4s ease;
@@ -266,3 +262,4 @@ top: -25vw;
 .read-more-btn:hover {
    color: #ffffff;
 }
+
