@@ -1,0 +1,44 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+<section class="bc-edge-section section-pt">
+    @foreach (var item in Model.Where(x => x.IsBlock == 0))
+    {
+        @if (!string.IsNullOrWhiteSpace(item.ComponentThumbnail))
+        {
+            <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText"
+                class="bc-deco hidden xl:block -left-20 -top-20" aria-hidden="true" />
+        }
+        @if (!string.IsNullOrWhiteSpace(item.Component_Icon_Image))
+        {
+            <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
+                class="bc-deco hidden xl:block -right-0 -top-40" aria-hidden="true" />
+        }
+        <div class="container relative z-10 ">
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                    ? item.DisplayTitle.CleanParagraphTags()
+                    : item.Title)
+                </h2>
+                @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="bc-arch-grid">
+        @foreach (var item in Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
+        {
+            <div class="bc-arch-card">
+                <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" aria-hidden="true" />
+                <h3>@item.Title</h3>
+                <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+            </div>
+        }
+    </div>
+</section>
