@@ -14,17 +14,19 @@
         </div>
 
         <div class="cu-plate-wrap cu-plate-left" aria-hidden="true">
-            <img src="/Assets/images/contact-us/plate-bg-circle.webp" alt="" class="cu-plate-circle">
+           
+              <img src="@(string.IsNullOrWhiteSpace(item.Component_LHS_icon1) ? "/Assets/images/contact-us/plate-bg-circle.webp" : item.Component_LHS_icon1)" alt="" class="cu-plate-circle">
             <img src="@(string.IsNullOrWhiteSpace(item.Component_LHS_thumbnail) ? "/Assets/images/contact-us/pasta-plate.webp" : item.Component_LHS_thumbnail)"
                 alt="" class="cu-plate-img">
-            <img src="/Assets/images/contact-us/coriander.webp" alt="" class="cu-plate-deco cu-coriander">
+            <img src="@(string.IsNullOrWhiteSpace(item.Component_LHS_icon2) ? "/Assets/images/contact-us/coriander.webp" : item.Component_LHS_icon2)" alt="" class="cu-plate-deco cu-coriander">
+          
         </div>
 
         <div class="cu-plate-wrap cu-plate-right" aria-hidden="true">
-            <img src="/Assets/images/contact-us/plate-bg-circle.webp" alt="" class="cu-plate-circle">
+            <img src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon1) ? "/Assets/images/contact-us/plate-bg-circle.webp" : item.Component_RHS_icon1)" alt="" class="cu-plate-circle">
             <img src="@(string.IsNullOrWhiteSpace(item.Component_right_image) ? "/Assets/images/contact-us/berry-pancake-plate.webp" : item.Component_right_image)"
                 alt="" class="cu-plate-img">
-            <img src="/Assets/images/contact-us/strawberry.webp" alt="" class="cu-plate-deco cu-strawberry">
+            <img src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon2) ? "/Assets/images/contact-us/strawberry.webp" : item.Component_RHS_icon2)" alt="" class="cu-plate-deco cu-strawberry">
         </div>
 
         <div class="container relative text-center">

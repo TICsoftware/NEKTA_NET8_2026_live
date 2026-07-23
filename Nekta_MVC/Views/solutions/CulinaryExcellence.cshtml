@@ -71,7 +71,7 @@
                             <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
                         </div>
                         <div class="nourish-photo nourish-photo-front">
-                            <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                            <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
                         </div>
                     </div>
                 </div>
@@ -107,14 +107,14 @@
             </svg>
         </div>
         <div class="outer-polaroids-icons">
-            @if (!string.IsNullOrWhiteSpace(item.Component_Icon_Image))
+            @if (!string.IsNullOrWhiteSpace(item.Component_LHS_thumbnail))
             {
-                <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
+                <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
                     class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
             }
-            @if (!string.IsNullOrWhiteSpace(item.Component_Icon2_Image))
+            @if (!string.IsNullOrWhiteSpace(item.Component_right_image))
             {
-                <img loading="lazy" src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
                     class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
             }
         </div>
