@@ -12,34 +12,11 @@
 
 /* Final Positions */
 .gallery-left{ left:2%; transform:rotate(-6deg); z-index:1;}
-.story-gallery-left{
-    position: absolute;
-    left: -6vw;
-    bottom: -40px;
-    z-index: 2;
-}
-.story-gallery-right{
-    position: absolute;
-    right: -17vw;
-    top: 52%;
-    transform: translateY(-50%);
-    z-index: 2;
-}
-
-.story-gallery-right .story-turmuric{
-    position: relative;
-    left: -70px;
-    bottom: 0;
-}
-
-.story-gallery-right .story-leaf{
-    position: absolute;
-    left: 35px;
-    bottom: 0;
-}
-
+.story-gallery-left{position: absolute;left: -5vw;bottom: -40px;z-index: 2;}
+.story-gallery-right{ position: absolute; right: -14vw; top: 52%; transform: translateY(-50%); z-index: 2;}
+.story-gallery-right .story-turmuric{ position: relative; left: -70px; bottom: 0;}
+.story-gallery-right .story-leaf{ position: absolute; left: 35px; bottom: 0;}
 .gallery-center{ z-index:21;}
-
 .gallery-right{ right:2%; transform:rotate(6deg);  z-index:20;}
 
 @media(max-width:991px){

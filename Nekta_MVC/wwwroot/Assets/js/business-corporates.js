@@ -308,14 +308,14 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
     const GAP = 24;
 
     // These MUST mirror your CSS values exactly — update both together if you change sizes
-    function getSizes() {
-        const isMobile = window.innerWidth <= 640;
-        return {
-            base: isMobile ? 200 : 260,
-            active: isMobile ? 260 : 600,
-            gap: isMobile ? 24 : GAP
-        };
+function getSizes() {
+    const isMobile = window.innerWidth <= 640;
+    if (isMobile) {
+        const vw = viewport.getBoundingClientRect().width;
+        return { base: vw, active: vw, gap: 0 };
     }
+    return { base: 260, active: 600, gap: GAP };
+}
 
     const cardWidth = realCards[0].offsetWidth || 260;
     const gap = parseFloat(getComputedStyle(track).gap) || 24;
