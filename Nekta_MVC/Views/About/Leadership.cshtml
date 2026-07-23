@@ -155,7 +155,7 @@
                         }
 
             <div class="ld-grid">
-                @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 1))
+               @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
                 {
                     <div class="ld-card">
                         <div class="ld-card-arch">
@@ -216,7 +216,7 @@
             </div>
                         }
             <div class="ld-grid">
-                @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 1))
+                @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
                 {
                     <div class="ld-card">
                         <div class="ld-card-arch">
@@ -248,7 +248,7 @@
             </div>
                         }
             <div class="ld-grid">
-                @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 1))
+                @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
                 {
                     <div class="ld-card">
                         <div class="ld-card-arch">
