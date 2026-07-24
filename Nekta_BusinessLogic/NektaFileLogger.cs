@@ -8,8 +8,8 @@ namespace Nekta_BusinessLogic.Common
     {
         private static readonly object _lock = new();
 
-        private static readonly string _logFolder =
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+        //private static readonly string _logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+        private static readonly string _logFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Logs");
 
         private static string FileName =>
             $"{DateTime.Now:yyyy-MM}_logs.txt";
