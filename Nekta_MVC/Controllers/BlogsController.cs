@@ -33,4 +33,22 @@ public class BlogsController : Controller
             _bal.Dispose();
         }
     }
+
+    public IActionResult inside(string title)
+    {
+        try
+        {
+            var data = _bal.GetBlogInside_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Blogs/inside :" + title, ex);
+            return View(new BlogsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
 }
