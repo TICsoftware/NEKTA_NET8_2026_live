@@ -1,0 +1,59 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.BlogsModel
+@{
+    ViewData["Title"] = "Blogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    @if (Model?.Content != null)
+    {
+        <title>@Model.Content.cont_window_title</title>
+
+        <meta content="@Model.Content.cont_metatag" name="keywords" />
+        <meta content="@Model.Content.cont_metadesc" name="description" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="" />
+        <meta name="twitter:title" content="@Model.Content.ContTitle" />
+        <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Nekta" />
+        <meta property="og:title" content="@Model.Content.ContTitle" />
+        <meta property="og:description" content="@Model.Content.cont_metadesc" />
+        <meta property="og:url" content="https://www.nekta.com/" />
+        <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+        <meta itemprop="name" content="Nekta" />
+        <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+        <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Nekta" />
+        <meta property="og:title" content="@Model.Content.ContTitle" />
+        <meta property="og:description" content="@Model.Content.cont_metadesc" />
+        <meta property="og:image" content="@Model.Content.cont_meta_image" />
+        <meta property="og:url" content="https://www.nekta.com/" />
+
+        <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+    }
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/blogs.css" />
+}
+
+@if (Model?.Content != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
+
+@if ((Model?.Latest_Trends_List?.Any() == true) || (Model?.BlogPosts_List?.Any() == true))
+{
+    @await Html.PartialAsync("~/Views/Blogs/_latest_trends.cshtml", Model)
+}
+
+@section Scripts {
+    <script src="~/Assets/js/blogs.js"></script>
+}
