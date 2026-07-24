@@ -34,15 +34,12 @@ public class BlogsController : Controller
         }
     }
 
-<<<<<<< HEAD
-
-    [HttpGet]
     public ActionResult BlogLoadMore(int contentId, int page, int pageSize)
     {
         try
         {
             var model = _bal.Get_Blogs_List_BAL(contentId, page, pageSize);
-  
+
             if (model.BlogPosts_List == null || !model.BlogPosts_List.Any())
             {
                 return Content(string.Empty); // Indicates no more records
@@ -58,7 +55,6 @@ public class BlogsController : Controller
     }
 
 
-=======
     public IActionResult inside(string title)
     {
         try
@@ -76,5 +72,4 @@ public class BlogsController : Controller
             _bal.Dispose();
         }
     }
->>>>>>> 29f7957e606105ddaf6065fac5b26781b65ae105
 }

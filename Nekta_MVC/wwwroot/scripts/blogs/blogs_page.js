@@ -11,7 +11,7 @@ $(document).on("click", "#btnLoadMore", function (e) {
         data: {
             contentId: contentId,
             page: page,
-            pageSize: 10
+            pageSize: 1
         },
         success: function (html) {
 
