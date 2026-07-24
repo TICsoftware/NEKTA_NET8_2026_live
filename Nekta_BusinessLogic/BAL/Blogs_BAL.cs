@@ -27,12 +27,13 @@ namespace Nekta_BusinessLogic.BAL
                 {
                     var groupedData = GetGroupedComponents(ds.Tables[1]);
                     model.Components = groupedData;
-                    model.Latest_Trends_List = MapComponents(groupedData, 1);
+                    //model.Latest_Trends_List = MapComponents(groupedData, 1);
                 }
 
                 if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
                 {
                     model.BlogPosts_List = Config_Application_Website.MapArticleList(ds.Tables[2]);
+                    model.TotalCount = Convert.ToInt32(ds.Tables[3].Rows[0]["TotalCount"]);
                 }
 
                 return model;
@@ -47,5 +48,33 @@ namespace Nekta_BusinessLogic.BAL
                 Dispose();
             }
         }
+
+        public BlogsModel Get_Blogs_List_BAL(int contentId, int page, int pageSize)
+        {
+            try
+            {
+                var model = new BlogsModel();
+                var ds = Get_Blogs_List_DAL(contentId, page, pageSize);
+
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.BlogPosts_List = Config_Application_Website.MapArticleList(ds.Tables[0]);
+                    model.TotalCount = Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"]);
+                }
+
+                return model;
+            }
+            catch (Exception ex)
+            {
+                NektaFileLogger.LogInfo("Blogs", "GetBlogs_BAL", ex.ToString());
+                return new BlogsModel();
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+
     }
 }

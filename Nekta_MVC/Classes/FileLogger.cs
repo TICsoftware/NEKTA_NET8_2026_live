@@ -7,7 +7,8 @@ namespace Nekta_MVC
     {
         public static IHttpContextAccessor? HttpContextAccessor { get; set; }
         private static readonly object _lock = new();
-        private static readonly string _logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+        //private static readonly string _logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+        private static readonly string _logFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", "Logs");
 
         // Change this to "yyyy-MM" for monthly logs
         private static readonly string _fileName = DateTime.Now.ToString("yyyy-MM") + "_logs.txt";

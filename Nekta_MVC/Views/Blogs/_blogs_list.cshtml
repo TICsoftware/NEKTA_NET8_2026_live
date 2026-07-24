@@ -1,0 +1,37 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ArticleModel>
+
+@{
+    var articlePosts = Model.OrderBy(x => x.Sequence)
+    .ToList() ?? new List<ArticleModel>();
+}
+
+
+@foreach (var item in articlePosts)
+{
+    <div class="insight-card blogs-cards-wrapper blog-item">
+        <div class="media-frame blogs-cards-image">
+            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+            {
+                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+            }
+        </div>
+        <div class="blogs-cards-content">
+            @if (item.DisplayDate.HasValue)
+            {
+                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+            }
+            <h3 class="insight-title">@item.Title</h3>
+            @if (!string.IsNullOrWhiteSpace(item.Url))
+            {
+                <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
+                    class="link-md link-primary">
+                    <span class="underline">Read More</span>
+                    <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                </a>
+            }
+        </div>
+    </div>
+}
