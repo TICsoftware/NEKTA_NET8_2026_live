@@ -97,6 +97,12 @@ namespace Nekta_MVC.Routes
                           pattern: "blogs",
                           defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
                       );
+
+                          app.MapControllerRoute(
+                name: "blogs-inside",
+                pattern: "blogs/{title?}", 
+                defaults: new { controller = "Blogs", action = "inside" }
+                );
                          app.MapControllerRoute(
                           name: "case studies",
                           pattern: "case-studies",
