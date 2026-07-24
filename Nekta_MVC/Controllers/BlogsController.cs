@@ -34,6 +34,7 @@ public class BlogsController : Controller
         }
     }
 
+<<<<<<< HEAD
 
     [HttpGet]
     public ActionResult BlogLoadMore(int contentId, int page, int pageSize)
@@ -57,4 +58,23 @@ public class BlogsController : Controller
     }
 
 
+=======
+    public IActionResult inside(string title)
+    {
+        try
+        {
+            var data = _bal.GetBlogInside_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Blogs/inside :" + title, ex);
+            return View(new BlogsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+>>>>>>> 29f7957e606105ddaf6065fac5b26781b65ae105
 }
