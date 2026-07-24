@@ -118,7 +118,10 @@ namespace Nekta_BusinessLogic.BAL
                 Component_LHS_icon2 = Config_Application_Website.GetPath(group, "LHS component icon image2"),
                 Component_RHS_icon1 = Config_Application_Website.GetPath(group, "RHS component icon image1"),
                 Component_RHS_icon2 = Config_Application_Website.GetPath(group, "RHS component icon image2"),
-            });
+            })
+            .OrderBy(x => x.Sequence)
+            .ToList();
+
         }
     }
 }
