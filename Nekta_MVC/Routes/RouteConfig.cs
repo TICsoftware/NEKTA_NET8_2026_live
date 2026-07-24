@@ -78,6 +78,33 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "culinary-excellence" }
                       );
 
+                      app.MapControllerRoute(
+                          name: "people",
+                          pattern: "solutions/people",
+                          defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "people" }
+                      );
+
+
+                            app.MapControllerRoute(
+                          name: "Food-Safety-Hygiene",
+                          pattern: "solutions/food-safety-and-hygiene",
+                          defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "food-safety-and-hygiene" }
+                      );
+
+
+                        app.MapControllerRoute(
+                          name: "Blogs",
+                          pattern: "blogs",
+                          defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
+                      );
+                         app.MapControllerRoute(
+                          name: "case studies",
+                          pattern: "case-studies",
+                          defaults: new { controller = "Blogs", action = "Index", title = "case-studies" }
+                      );
+
+
+
             app.MapControllerRoute(
                 name: "LoadMoreSearch",
                 pattern: "Search/LoadMoreSearch",
