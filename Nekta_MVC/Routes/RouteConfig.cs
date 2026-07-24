@@ -95,7 +95,7 @@ namespace Nekta_MVC.Routes
                         app.MapControllerRoute(
                           name: "Blogs",
                           pattern: "blogs",
-                          defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
+                          defaults: new { controller = "Blogs", action = "Index", title = "latest-trends-stories" }
                       );
 
 
