@@ -159,7 +159,7 @@ namespace Nekta_MVC.Routes
             app.MapControllerRoute(
                 name: "contactus",
                 pattern: "contactus",
-                defaults: new { controller = "pagearticle", action = "Index", id = "contact" }
+                defaults: new { controller = "Contactus", action = "Index", title = "contact" }
             );
 
             app.MapControllerRoute(

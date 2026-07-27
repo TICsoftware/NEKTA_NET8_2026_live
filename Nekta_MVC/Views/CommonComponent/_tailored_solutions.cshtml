@@ -1,0 +1,48 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var saladImageSrc = component != null && !string.IsNullOrWhiteSpace(component.ComponentThumbnail)
+        ? component.ComponentThumbnail
+        : Url.Content("~/Assets/images/contact-us/salad-bowl.webp");
+}
+
+@if (component != null)
+{
+    <!-- ==================== TAILORED SOLUTIONS ==================== -->
+    <section class="solutions-section section-spacing">
+        <div class="container">
+
+            <div class="solutions-grid">
+
+                <!-- Media: salad bowl over decorative circle -->
+                <div class="solutions-media">
+                    <img loading="lazy" src="~/Assets/images/contact-us/circle-bg.webp" alt="" class="solutions-circle" aria-hidden="true" />
+                    <img loading="lazy" src="@saladImageSrc"
+                         alt="@component.ComponentThumbnailAltText" class="solutions-salad" />
+                </div>
+
+                <!-- Copy -->
+                <div class="solutions-copy">
+                    @if (!string.IsNullOrWhiteSpace(component.Content))
+                    {
+                        @Html.Raw(component.Content)
+                    }
+                    else if (!string.IsNullOrWhiteSpace(component.Intro))
+                    {
+                        @Html.Raw(component.Intro)
+                    }
+
+                    <img loading="lazy" src="~/Assets/images/contact-us/leaf-icon.webp" alt="" class="solutions-leaf" aria-hidden="true" />
+                </div>
+
+            </div>
+
+            <!-- Decorative splash bleeding off the right edge -->
+            <img loading="lazy" src="~/Assets/images/contact-us/juice-splash.webp" alt="" class="solutions-splash" aria-hidden="true" />
+
+        </div>
+    </section>
+}

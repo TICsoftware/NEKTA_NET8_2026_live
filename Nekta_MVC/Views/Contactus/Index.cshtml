@@ -1,0 +1,101 @@
+@using Nekta_MVC.Helpers
+@using Nekta_MVC.Models
+@model Nekta_BusinessLogic.Entity.ContactUsModel
+@{
+    ViewData["Title"] = Model?.Content?.ContTitle ?? "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ContactUsPageName = Model?.Content?.PageName ?? "contact";
+}
+
+@section head {
+    <title>@Model.Content?.cont_window_title</title>
+
+    <meta content="@Model.Content?.cont_metatag" name="keywords" />
+    <meta content="@Model.Content?.cont_metadesc" name="description" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="@Model.Content?.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content?.cont_metadesc" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content?.ContTitle" />
+    <meta property="og:description" content="@Model.Content?.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content?.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content?.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/contact-us.css" />
+}
+
+<!-- ==================== HERO BANNER ==================== -->
+@await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+
+<!-- ==================== ENQUIRY FORM ==================== -->
+@await Html.PartialAsync("~/Views/CommonComponent/_contactus_enquiry_form.cshtml", new ContactUsEnquiryModel())
+
+
+
+
+<!-- ==================== HOW TO REACH US + CAREERS ==================== -->
+@if ((Model.HowToReachUs_List != null && Model.HowToReachUs_List.Any())
+    || (Model.Careers_List != null && Model.Careers_List.Any()))
+{
+    <section class="reach-section section-spacing ">
+@foreach (var item in Model.Careers_List.Where(x => x.IsBlock == 0))
+{
+        <!-- Decorative bowl of pistachios (top right) -->
+        <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt" class="deco-bowl" aria-hidden="true" />
+
+        <!-- Decorative plate of pistachios (bottom left) -->
+        <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt" class="deco-plate" aria-hidden="true" />
+
+}
+        <div class="container">
+            @if (Model.HowToReachUs_List != null && Model.HowToReachUs_List.Any())
+            {
+                @await Html.PartialAsync("~/Views/CommonComponent/_reach_us_cards.cshtml", Model.HowToReachUs_List)
+            }
+
+            @if (Model.Careers_List != null && Model.Careers_List.Any())
+            {
+                @await Html.PartialAsync("~/Views/CommonComponent/_careers_cta.cshtml", Model.Careers_List)
+            }
+        </div>
+    </section>
+}
+
+<!-- ==================== OUR OFFICES ==================== -->
+@if (Model.Offices_List != null && Model.Offices_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_offices_grid.cshtml", Model.Offices_List)
+}
+
+<!-- ==================== TAILORED SOLUTIONS ==================== -->
+@if (Model.TailoredSolutions_List != null && Model.TailoredSolutions_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_tailored_solutions.cshtml", Model.TailoredSolutions_List)
+}
+
+<!-- ==================== FOLLOW NEKTA ==================== -->
+@if (Model.FollowNekta_List != null && Model.FollowNekta_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_follow_nekta.cshtml", Model.FollowNekta_List)
+}
+
+<!-- ==================== EVERY ENQUIRY ==================== -->
+@if (Model.EveryEnquiry_List != null && Model.EveryEnquiry_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_every_enquiry.cshtml", Model.EveryEnquiry_List)
+}
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/contactus-script.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Assets/js/fy-select-script.js"></script>
+}
