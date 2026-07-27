@@ -357,7 +357,7 @@ background-color: #F1EDDE;
     }
     .ld-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 15px;
+    gap: 30px;
     max-width: 85%;
     margin: 0 auto;
 }
@@ -401,3 +401,11 @@ background-color: #F1EDDE;
         right: 5px;
     }
 }
+
+
+/* Small screen laptop */
+ @media (min-width: 1200px) and (max-width: 1366px) {
+    .ld-quote {
+font-size: 1.75rem;
+}
+ }

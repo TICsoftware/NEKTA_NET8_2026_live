@@ -59,9 +59,9 @@
     --font-body: "Poppins", sans-serif;
     --font-heading: "Cormorant Garamond", serif;
     --text-h1: clamp(3.75rem, 2rem + 5vw, 5.25rem);
-    --text-h2: clamp(3.125rem, 1.8rem + 4vw, 4.5rem);
+    --text-h2: clamp(2.175rem, 1.8rem + 4vw, 4.5rem);
     --text-h3: clamp(1.625rem, 1rem + 2vw, 2.125rem);
-    --text-h4: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+    --text-h4: clamp(1.75rem, 0.9rem + 1vw, 1.75rem);
     --text-h5: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
     --text-p: clamp(1rem, 0.948rem + 0.22vw, 1.125rem);
     --text-small: clamp(0.875rem, 0.35vw + 0.7rem,  0.875rem);
@@ -1144,6 +1144,9 @@
   }
   .w-25 {
     width: calc(var(--spacing) * 25);
+  }
+  .w-35 {
+    width: calc(var(--spacing) * 35);
   }
   .w-40 {
     width: calc(var(--spacing) * 40);
