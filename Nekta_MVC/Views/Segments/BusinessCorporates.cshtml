@@ -261,7 +261,7 @@
                         <div class="bc-arch-card" data-index="@idx">
                             <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" aria-hidden="true" />
                             <h3>@item.Title</h3>
-                            <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+                            <p class="edge-content">@Html.Raw(item.Intro.CleanParagraphTags())</p>
                         </div>
                         idx++;
                     }
@@ -286,7 +286,7 @@
         @foreach (var item in Model.Technology_That_Runs_List.Where(x => x.IsBlock == 0))
         {
             <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
-                <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+                <h2 class="section-title text-h2 section-title--light" data-leaf-target letters-slide-down text-split>
                     @Html.Raw(
                     !string.IsNullOrWhiteSpace(item.DisplayTitle)
                     ? item.DisplayTitle.CleanParagraphTags()
