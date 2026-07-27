@@ -90,7 +90,11 @@ namespace Nekta_MVC.Routes
                           pattern: "solutions/food-safety-and-hygiene",
                           defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "food-safety-and-hygiene" }
                       );
-
+       app.MapControllerRoute(
+                          name: "contactus",
+                          pattern: "contact-us",
+                          defaults: new { controller = "Contactus", action = "Index", title = "contact-us" }
+                      );
 
                         app.MapControllerRoute(
                           name: "Blogs",
