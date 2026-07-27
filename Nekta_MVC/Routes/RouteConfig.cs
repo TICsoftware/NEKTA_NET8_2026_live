@@ -90,18 +90,41 @@ namespace Nekta_MVC.Routes
                           pattern: "solutions/food-safety-and-hygiene",
                           defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "food-safety-and-hygiene" }
                       );
-
+       app.MapControllerRoute(
+                          name: "contactus",
+                          pattern: "contact-us",
+                          defaults: new { controller = "Contactus", action = "Index", title = "contact-us" }
+                      );
 
                         app.MapControllerRoute(
                           name: "Blogs",
                           pattern: "blogs",
                           defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
                       );
+
+                          app.MapControllerRoute(
+                name: "blogs-inside",
+                pattern: "blogs/{title?}", 
+                defaults: new { controller = "Blogs", action = "inside" }
+                );
                          app.MapControllerRoute(
                           name: "case studies",
                           pattern: "case-studies",
                           defaults: new { controller = "Blogs", action = "Index", title = "case-studies" }
                       );
+      app.MapControllerRoute(
+                name: "casestudies-inside",
+                pattern: "case-studies/{title?}", 
+                defaults: new { controller = "Blogs", action = "inside" }
+                );
+                      app.MapControllerRoute(
+                            name: "blog-load-more",
+                            pattern: "blogs/BlogLoadMore",
+                            defaults: new
+                            {
+                                controller = "Blogs", action = "BlogLoadMore"
+                            }
+                        );
 
 
 
@@ -140,7 +163,7 @@ namespace Nekta_MVC.Routes
             app.MapControllerRoute(
                 name: "contactus",
                 pattern: "contactus",
-                defaults: new { controller = "pagearticle", action = "Index", id = "contact" }
+                defaults: new { controller = "Contactus", action = "Index", title = "contact" }
             );
 
             app.MapControllerRoute(

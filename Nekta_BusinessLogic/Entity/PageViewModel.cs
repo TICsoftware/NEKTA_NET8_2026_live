@@ -62,9 +62,10 @@ namespace Nekta_BusinessLogic.Entity
         public string CanonicalUrl { get; set; }
 
         public string cont_meta_image { get; set; }
-         
-         public DateTime? cont_displaydate { get; set; }
 
+        public DateTime? cont_displaydate { get; set; }
+        public string ByLine { get; set; }
+        public string Publication { get; set; }
 
     }
 

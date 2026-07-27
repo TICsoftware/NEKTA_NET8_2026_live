@@ -27,6 +27,18 @@ namespace Nekta_BusinessLogic.DAL
             return GetDataSet("sp_GetContentComponentData", sqlParams);
         }
 
+        public DataSet Get_Blogs_List_DAL(int contentId, int page, int pageSize)
+        {
+            SqlParameter[] sqlParams =
+            {
+                new SqlParameter("@ContentId", contentId),
+                new SqlParameter("@Page", page),
+                new SqlParameter("@PageSize", pageSize)
+            };
+
+            return GetDataSet("Get_Blogs_List", sqlParams);
+        }
+
         public DataSet GetContentComponentById_DAL(int ContentID, string Group_Id)
         {
             SqlParameter[] sqlParams =
@@ -77,6 +89,9 @@ namespace Nekta_BusinessLogic.DAL
 
             return GetDataSet("GetEventsContent", sqlParams);
         }
+
+
+
 
 
     }

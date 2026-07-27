@@ -33,4 +33,43 @@ public class BlogsController : Controller
             _bal.Dispose();
         }
     }
+
+    public ActionResult BlogLoadMore(int contentId, int page, int pageSize)
+    {
+        try
+        {
+            var model = _bal.Get_Blogs_List_BAL(contentId, page, pageSize);
+
+            if (model.BlogPosts_List == null || !model.BlogPosts_List.Any())
+            {
+                return Content(string.Empty); // Indicates no more records
+            }
+
+            return PartialView("_blogs_list", model.BlogPosts_List);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("BlogLoadMore", ex);
+            return Content(string.Empty);
+        }
+    }
+
+
+    public IActionResult inside(string title)
+    {
+        try
+        {
+            var data = _bal.GetBlogInside_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Blogs/inside :" + title, ex);
+            return View(new BlogsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
 }

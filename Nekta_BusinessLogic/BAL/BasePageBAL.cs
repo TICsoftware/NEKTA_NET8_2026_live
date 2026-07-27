@@ -31,6 +31,9 @@ namespace Nekta_BusinessLogic.BAL
                 ContTitle = row.Field<string>("cont_title") ?? "",
                 Cont_intro = row.Field<string>("cont_intro") ?? "",
                 Cont_hmpg_intro = row.Field<string>("cont_hmpg_intro") ?? "",
+                Content = row.Table.Columns.Contains("content")
+                    ? row.Field<string>("content") ?? ""
+                    : "",
                 PageName = row.Field<string>("cont_pagename") ?? "",
                 MastheadImage = image,
                 MobileMastheadImage = row.Field<string>("mobile_masthead_image_path") ?? "",
@@ -43,7 +46,16 @@ namespace Nekta_BusinessLogic.BAL
                 Hmpg_thumbnail_alt_text = row.Field<string>("Hmpg_thumbnail_alt_text") ?? "",
                 Masthead_image_Alt_text = row.Field<string>("Masthead_alt_text") ?? "",
                 CanonicalUrl = Config_Application_Website.GetMetaUrl(baseurl, canUrl),
-                cont_meta_image = Config_Application_Website.GetMetaUrl(baseurl, image)
+                cont_meta_image = Config_Application_Website.GetMetaUrl(baseurl, image),
+                cont_displaydate = row.Table.Columns.Contains("cont_displaydate")
+                    ? row.Field<DateTime?>("cont_displaydate")
+                    : null,
+                ByLine = row.Table.Columns.Contains("cont_ByLine")
+                    ? row.Field<string>("cont_ByLine") ?? ""
+                    : (row.Table.Columns.Contains("ByLine") ? row.Field<string>("ByLine") ?? "" : ""),
+                Publication = row.Table.Columns.Contains("Cont_Publication")
+                    ? row.Field<string>("Cont_Publication") ?? ""
+                    : (row.Table.Columns.Contains("Publication") ? row.Field<string>("Publication") ?? "" : "")
             };
         }
 

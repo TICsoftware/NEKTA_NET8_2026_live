@@ -14,6 +14,12 @@ namespace Nekta_BusinessLogic.Entity
         // Child blog posts from Tables[2]
         public List<ArticleModel> BlogPosts_List { get; set; } = new();
 
+        // Related articles from Tables[2] (blog inside page)
+        public List<ArticleModel> RelatedArticles_List { get; set; } = new();
+
+        // Seq 1 header for related section on inside page
+        public List<ComponentModel> Related_Section_List { get; set; } = new();
+
         public int TotalCount { get; set; }
     }
 }

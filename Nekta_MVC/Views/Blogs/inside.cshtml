@@ -1,0 +1,106 @@
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.BlogsModel
+@{
+    ViewData["Title"] = Model?.Content?.ContTitle ?? "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+    @if (Model?.Content != null)
+    {
+        <title>@Model.Content.cont_window_title</title>
+
+        <meta content="@Model.Content.cont_metatag" name="keywords" />
+        <meta content="@Model.Content.cont_metadesc" name="description" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="" />
+        <meta name="twitter:title" content="@Model.Content.ContTitle" />
+        <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="Nekta" />
+        <meta property="og:title" content="@Model.Content.ContTitle" />
+        <meta property="og:description" content="@Model.Content.cont_metadesc" />
+        <meta property="og:url" content="https://www.nekta.com/" />
+        <meta property="og:image" content="@Model.Content.cont_meta_image" />
+
+        <meta itemprop="name" content="Nekta" />
+        <meta itemprop="description" content="@Model.Content.cont_metadesc" />
+        <meta itemprop="image" content="@Model.Content.cont_meta_image" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Nekta" />
+        <meta property="og:title" content="@Model.Content.ContTitle" />
+        <meta property="og:description" content="@Model.Content.cont_metadesc" />
+        <meta property="og:image" content="@Model.Content.cont_meta_image" />
+        <meta property="og:url" content="https://www.nekta.com/" />
+
+        <link rel="canonical" href="@Model.Content.CanonicalUrl" />
+    }
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/bloginside.css" />
+}
+
+@if (Model?.Content != null)
+{
+    <section class="section-spacing blog-detail-section">
+        <div class="container blog-detail-container">
+
+            <div class="section-title-outer text-center max-w-5xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Model.Content.ContTitle<span class="text-letters-slide"></span>
+                </h2>
+            </div>
+
+            <div class="blog-detail-meta">
+                @if (Model.Content.cont_displaydate.HasValue)
+                {
+                    <div class="blog-meta-item">
+                        <span class="blog-meta-label">Date</span>
+                        <span class="blog-meta-value">@Model.Content.cont_displaydate.Value.ToString("dd MMMM yyyy")</span>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Content.ByLine))
+                {
+                    <div class="blog-meta-item">
+                        <span class="blog-meta-label">Author</span>
+                        <span class="blog-meta-value">@Model.Content.ByLine</span>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Content.Publication))
+                {
+                    <div class="blog-meta-item">
+                        <span class="blog-meta-label">Read</span>
+                        <span class="blog-meta-value">@Model.Content.Publication</span>
+                    </div>
+                }
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(Model.Content.MastheadImage))
+            {
+                <div class="blog-detail-hero">
+                    <img loading="lazy" src="@Model.Content.MastheadImage" alt="@Model.Content.Masthead_image_Alt_text" />
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Content.Content))
+            {
+                <article class="blog-detail-content">
+                    @Html.Raw(Model.Content.Content)
+                </article>
+            }
+
+        </div>
+    </section>
+}
+
+@if (Model?.RelatedArticles_List?.Any() == true)
+{
+    @await Html.PartialAsync("~/Views/Blogs/_related_articles.cshtml", Model)
+}
+
+@section Scripts {
+}

@@ -1,0 +1,35 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+@if (component != null)
+{
+    <div class="careers">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                ? component.DisplayTitle.CleanParagraphTags()
+                : component.Title)
+            </h2>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(component.Intro))
+        {
+            @Html.Raw(component.Intro)
+        }
+
+        @if (!string.IsNullOrWhiteSpace(component.Url))
+        {
+            <a href="@component.Url" class="common-btn btn-slide-fill mt-3" type="button">
+                <span>@(!string.IsNullOrWhiteSpace(component.Url_Text) ? component.Url_Text : "Visit Careers")</span>
+                <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+            </a>
+        }
+    </div>
+}

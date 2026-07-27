@@ -1,0 +1,42 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var section = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var cards = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+}
+
+<!-- Section Heading -->
+@if (section != null)
+{
+    <div class="section-title-outer text-center mx-auto max-w-5xl">
+        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+            @Html.Raw(
+            !string.IsNullOrWhiteSpace(section.DisplayTitle)
+            ? section.DisplayTitle.CleanParagraphTags()
+            : section.Title)
+        </h2>
+    </div>
+}
+
+<div class="reach-grid">
+    @foreach (var item in cards)
+    {
+        <div class="reach-card">
+            <h3>@item.Title</h3>
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+            {
+                <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(item.Content))
+            {
+                @Html.Raw(item.Content)
+            }
+
+            <!-- Decorative green leaf image -->
+            <img loading="lazy" src="~/Assets/images/intro-leaf/green_leaf_travel.svg" alt="" class="reach-card-leaf" aria-hidden="true" />
+        </div>
+    }
+</div>

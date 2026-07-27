@@ -1,0 +1,65 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model BlogsModel
+
+@{
+    var header = Model.Related_Section_List?.FirstOrDefault(x => x.IsBlock == 0);
+    var articlePosts = Model.RelatedArticles_List?
+        .OrderBy(x => x.Sequence)
+        .ToList() ?? new List<ArticleModel>();
+}
+
+@if (articlePosts.Any())
+{
+    <section class="section-pb relative overflow-hidden">
+        <div class="container">
+
+            <div class="section-title-outer text-center max-w-8xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @if (header != null)
+                    {
+                        @Html.Raw(
+                            !string.IsNullOrWhiteSpace(header.DisplayTitle)
+                                ? header.DisplayTitle.CleanParagraphTags()
+                                : header.Title)
+                    }
+                    else
+                    {
+                        @:Related <span class="text-letters-slide">Blogs</span>
+                    }
+                </h2>
+            </div>
+
+            <div class="blogs-cards-grid">
+                @foreach (var item in articlePosts)
+                {
+                    <div class="insight-card blogs-cards-wrapper">
+                        <div class="media-frame blogs-cards-image">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                            {
+                                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                            }
+                        </div>
+                        <div class="blogs-cards-content">
+                            @if (item.DisplayDate.HasValue)
+                            {
+                                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                            }
+                            <h3 class="insight-title">@item.Title</h3>
+                            @if (!string.IsNullOrWhiteSpace(item.Url))
+                            {
+                                <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
+                                    class="link-md link-primary">
+                                    <span class="underline">Read More</span>
+                                    <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+}

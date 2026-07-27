@@ -1,0 +1,115 @@
+@using Nekta_MVC.Models
+@model ContactUsEnquiryModel
+
+@{
+    var pageName = ViewBag.ContactUsPageName as string ?? "contact";
+}
+
+<!-- ==================== ENQUIRY FORM ==================== -->
+<section class="cu-form-section section-spacing relative">
+
+    <!-- right green image -->
+    <img loading="lazy" src="~/Assets/images/contact-us/right_green_leaf.webp" alt=""
+         class="cu-leaf-deco cu-leaf-right hidden lg:block" aria-hidden="true" />
+    <!-- left green image -->
+    <img loading="lazy" src="~/Assets/images/contact-us/left_green_leaf.webp" alt=""
+         class="cu-leaf-deco cu-leaf-left hidden lg:block" aria-hidden="true" />
+
+    <div class="container relative z-10">
+        <div class="text-center mb-10 md:mb-14">
+            <div class="text-center mb-6 px-6 mx-auto max-w-6xl section-title--light-outer">
+                <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+                    Tell us a little about your
+                    <span class="section-title--dark text-letters-slide">requirement</span>
+                </h2>
+                <p class="cu-form-intro">
+                    Share the basics and a member of our team will get back
+                    to you within one business day.
+                </p>
+            </div>
+        </div>
+
+        @if (TempData["ContactUsSuccess"] != null)
+        {
+            <div class="cu-form-alert cu-form-alert--success" role="status">@TempData["ContactUsSuccess"]</div>
+        }
+        @if (TempData["ContactUsError"] != null)
+        {
+            <div class="cu-form-alert cu-form-alert--error" role="alert">@TempData["ContactUsError"]</div>
+        }
+
+        <div class="cu-form-card ">
+            <form class="space-y-6" asp-controller="Contactus" asp-action="SubmitEnquiry" method="post" novalidate>
+                <input type="hidden" name="title" value="@pageName" />
+                <div class="cu-form-grid">
+                    <div class="cu-field">
+                        <label asp-for="FullName">Full Name <span class="req">*</span></label>
+                        <input asp-for="FullName" type="text" placeholder="Your full name" autocomplete="name" />
+                        <span asp-validation-for="FullName" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field">
+                        <label asp-for="Designation">Designation</label>
+                        <input asp-for="Designation" type="text" placeholder="Your role or title" autocomplete="organization-title" />
+                        <span asp-validation-for="Designation" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field">
+                        <label asp-for="Organisation">Organisation Name <span class="req">*</span></label>
+                        <input asp-for="Organisation" type="text" placeholder="Your organisation" autocomplete="organization" />
+                        <span asp-validation-for="Organisation" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field">
+                        <label asp-for="Email">Work Email <span class="req">*</span></label>
+                        <input asp-for="Email" type="email" placeholder="you@company.com" autocomplete="email" />
+                        <span asp-validation-for="Email" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field">
+                        <label asp-for="Phone">Contact Number <span class="req">*</span></label>
+                        <input asp-for="Phone" type="tel" placeholder="+91XXXXXXXXXX" autocomplete="tel" />
+                        <span asp-validation-for="Phone" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field">
+                        <label asp-for="City">City <span class="req">*</span></label>
+                        <select asp-for="City">
+                            <option value="">Select your city</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="gurugram">Gurugram</option>
+                            <option value="bengaluru">Bengaluru</option>
+                            <option value="chennai">Chennai</option>
+                            <option value="kolkata">Kolkata</option>
+                            <option value="goa">MOPA, Goa</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span asp-validation-for="City" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field cu-field--full">
+                        <label asp-for="Interest">Area of Interest <span class="req">*</span></label>
+                        <select asp-for="Interest">
+                            <option value="">Select an area of interest</option>
+                            <option value="corporate">Business and Corporate</option>
+                            <option value="education">Education</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="events">Outdoor Events</option>
+                        </select>
+                        <span asp-validation-for="Interest" class="cu-field-error"></span>
+                    </div>
+                    <div class="cu-field cu-field--full">
+                        <label asp-for="Message">Tell us more.</label>
+                        <textarea asp-for="Message" placeholder="Describe your requirement, scale, or any context that would help us respond meaningfully."></textarea>
+                        <span asp-validation-for="Message" class="cu-field-error"></span>
+                    </div>
+                </div>
+                <label class="cu-consent">
+                    <input asp-for="Consent" type="checkbox" />
+                    <span>I agree to be contacted by Nekta regarding my enquiry.</span>
+                </label>
+
+                <span>
+                    <button type="submit" class="common-btn btn-slide-fill">
+                        <span>Send enquiry</span>
+                        <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+                    </button>
+                </span>
+            </form>
+        </div>
+    </div>
+</section>

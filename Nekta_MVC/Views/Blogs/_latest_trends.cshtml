@@ -3,22 +3,16 @@
 @model BlogsModel
 
 @{
-    var header = Model.Latest_Trends_List?.FirstOrDefault(x => x.IsBlock == 0);
-    var componentCards = Model.Latest_Trends_List?
-        .Where(x => x.IsBlock == 1)
-        .OrderBy(x => x.Sequence)
-        .ToList() ?? new List<ComponentModel>();
     var articlePosts = Model.BlogPosts_List?
-        .OrderBy(x => x.Sequence)
-        .ToList() ?? new List<ArticleModel>();
-    var useArticles = articlePosts.Any();
+    .OrderBy(x => x.Sequence)
+    .ToList() ?? new List<ArticleModel>();
 }
 
 <section class="section-spacing relative overflow-hidden">
     <img src="/Assets/images/bg-pattern.webp" alt="" class="bg-pattern-img" />
     <div class="container">
 
-        @if (header != null)
+        @* @if (header != null)
         {
             <div class="section-title-outer text-center max-w-8xl mx-auto">
                 <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
@@ -32,71 +26,46 @@
                     @Html.Raw(header.Intro)
                 }
             </div>
-        }
+        } *@
 
-        <div class="blogs-cards-grid">
-            @if (useArticles)
+        <div class="blogs-cards-grid" id="articleContainer">
+
+            @foreach (var item in articlePosts)
             {
-                @foreach (var item in articlePosts)
-                {
-                    <div class="insight-card blogs-cards-wrapper">
-                        <div class="media-frame blogs-cards-image">
-                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
-                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
-                            {
-                                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
-                            }
-                        </div>
-                        <div class="blogs-cards-content">
-                            @if (item.DisplayDate.HasValue)
-                            {
-                                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
-                            }
-                            <h3 class="insight-title">@item.Title</h3>
-                            @if (!string.IsNullOrWhiteSpace(item.Url))
-                            {
-                                <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
-                                    class="link-md link-primary">
-                                    <span class="underline">Read More</span>
-                                    <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
-                                </a>
-                            }
-                        </div>
+                <div class="insight-card blogs-cards-wrapper blog-item">
+                    <div class="media-frame blogs-cards-image">
+                        <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+                        @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                        {
+                            <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                        }
                     </div>
-                }
-            }
-            else
-            {
-                @foreach (var item in componentCards)
-                {
-                    <div class="insight-card blogs-cards-wrapper">
-                        <div class="media-frame blogs-cards-image">
-                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
-                            @if (!string.IsNullOrWhiteSpace(item.Section_title))
-                            {
-                                <span class="pill">@item.Section_title</span>
-                            }
-                        </div>
-                        <div class="blogs-cards-content">
-                            <h3 class="insight-title">@item.Title</h3>
-                            @if (!string.IsNullOrWhiteSpace(item.Url))
-                            {
-                                <a href="@item.Url" class="link-md link-primary">
-                                    <span class="underline">@(string.IsNullOrWhiteSpace(item.Url_Text) ? "Read More" : item.Url_Text)</span>
-                                    <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
-                                </a>
-                            }
-                        </div>
+                    <div class="blogs-cards-content">
+                        @if (item.DisplayDate.HasValue)
+                        {
+                            <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                        }
+                        <h3 class="insight-title">@item.Title</h3>
+                        @if (!string.IsNullOrWhiteSpace(item.Url))
+                        {
+                            <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
+                                class="link-md link-primary">
+                                <span class="underline">Read More</span>
+                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
+                            </a>
+                        }
                     </div>
-                }
+                </div>
             }
+
+
         </div>
 
-        @if (header != null && !string.IsNullOrWhiteSpace(header.Url))
+        @if (Model.TotalCount > 10)
         {
-            <div class="view-all-wrap">
-                <a href="@header.Url" class="common-btn btn-slide-fill">
-                    <span>@(string.IsNullOrWhiteSpace(header.Url_Text) ? "View More" : header.Url_Text)</span>
+            <div class="view-all-wrap" id="DivLoad">
+                <a href="#" class="common-btn btn-slide-fill" id="btnLoadMore">
+                    <span>Load More</span>
                     <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
                 </a>
             </div>

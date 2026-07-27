@@ -54,6 +54,13 @@
     @await Html.PartialAsync("~/Views/Blogs/_latest_trends.cshtml", Model)
 }
 
+
+<input type="hidden" id="hdnContentId" value="@Model.Content.ContId" />
+<input type="hidden" id="hdnTotalCount" value="@Model.TotalCount" />
+<input type="hidden" id="hdnPage" value="2" />
+
+
 @section Scripts {
     <script src="~/Assets/js/blogs.js"></script>
+     <script src="~/scripts/blogs/blogs_page.js"></script>
 }

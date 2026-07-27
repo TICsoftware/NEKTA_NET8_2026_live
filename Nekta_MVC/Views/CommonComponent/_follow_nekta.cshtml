@@ -1,0 +1,32 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+@if (component != null)
+{
+    <!-- ==================== FOLLOW NEKTA ==================== -->
+    <section class="cu-follow-section section-spacing">
+        <div class="container text-center">
+            <!-- Section Heading -->
+            <div class="section-title-outer text-center mx-auto max-w-7xl ">
+                <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                    !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                    ? component.DisplayTitle.CleanParagraphTags()
+                    : component.Title)
+                </h2>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(component.Intro))
+            {
+                <p>@Html.Raw(component.Intro.CleanParagraphTags())</p>
+            }
+            <div class="flex items-center justify-center gap-4">
+              @Html.Raw(component.Content.CleanParagraphTags())
+            </div>
+        </div>
+    </section>
+}

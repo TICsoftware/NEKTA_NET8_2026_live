@@ -1,0 +1,83 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var component = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var offices = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+}
+
+<!-- ==================== OUR OFFICES ==================== -->
+<section class="offices-section section-spacing ">
+    <div class="container">
+
+        <div class="offices-heading-wrap">
+            <!-- Section Heading -->
+            @if (component != null)
+            {
+                <div class="section-title-outer text-center mx-auto max-w-5xl">
+                    <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                        ? component.DisplayTitle.CleanParagraphTags()
+                        : component.Title)
+                    </h2>
+                </div>
+            }
+        </div>
+
+        <div class="offices-grid-wrap">
+
+            <!-- Decorative food photography -->
+              @if (component != null)
+            {
+            <img loading="lazy"  src="@component.Component_LHS_thumbnail" alt="@component.Component_LHS_thumbnail_image_alt" class="deco-food deco-avocado" aria-hidden="true" />
+            <img loading="lazy" src="@component.ComponentThumbnail" alt="@component.ComponentThumbnail"  class="deco-food deco-jam" aria-hidden="true" />
+            <img loading="lazy" src="@component.Component_right_image" alt="@component.Component_Right_image_alt" class="deco-food deco-lettuce" aria-hidden="true" />
+            }
+
+            <!-- Grid intersection dots (4 columns of lines x 3 rows of lines) -->
+            <span class="grid-dot dot-col-1 dot-row-1"></span>
+            <span class="grid-dot dot-col-2 dot-row-1"></span>
+            <span class="grid-dot dot-col-3 dot-row-1"></span>
+            <span class="grid-dot dot-col-4 dot-row-1"></span>
+
+            <span class="grid-dot dot-col-1 dot-row-2"></span>
+            <span class="grid-dot dot-col-2 dot-row-2"></span>
+            <span class="grid-dot dot-col-3 dot-row-2"></span>
+            <span class="grid-dot dot-col-4 dot-row-2"></span>
+
+            <span class="grid-dot dot-col-1 dot-row-3"></span>
+            <span class="grid-dot dot-col-2 dot-row-3"></span>
+            <span class="grid-dot dot-col-3 dot-row-3"></span>
+            <span class="grid-dot dot-col-4 dot-row-3"></span>
+
+            <div class="offices-grid">
+                @foreach (var office in offices)
+                {
+                    <div class="office-card">
+                        <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <h3>@office.Title</h3>
+                        @if (!string.IsNullOrWhiteSpace(office.Intro))
+                        {
+                            <p>@Html.Raw(office.Intro.CleanParagraphTags())</p>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(office.Url))
+                        {
+                            <a href="@office.Url" class="view-map" target="_blank" rel="noopener">
+                                <span>@office.Url_Text</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+                                </svg>
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>
