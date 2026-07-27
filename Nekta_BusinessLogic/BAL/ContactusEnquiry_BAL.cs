@@ -1,6 +1,8 @@
 using System;
+using System.Data;
 using Microsoft.Extensions.Configuration;
 using Nekta_BusinessLogic.DAL;
+using Nekta_BusinessLogic.Entity;
 
 namespace Nekta_BusinessLogic.BAL
 {
@@ -15,10 +17,52 @@ namespace Nekta_BusinessLogic.BAL
             _dal = new ContactusEnquiry_DAL(configuration);
         }
 
-        public int SubmitEnquiry_BAL(string fullName, string designation, string organisation,
-            string email, string phone, string city, string interest, string message, bool consent)
+        public int SubmitEnquiry_BAL(ContactUsEnquiry model)
         {
-            return _dal.AddContactUsEnquiry_DAL(fullName, designation, organisation, email, phone, city, interest, message, consent);
+            return _dal.AddContactUsEnquiry_DAL(model);
+        }
+
+
+        public List<CityMaster> GetCityList_BAL()
+        {
+            DataSet ds = _dal.GetCityList_DAL();
+
+            List<CityMaster> list = new List<CityMaster>();
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    list.Add(new CityMaster
+                    {
+                        CityId = Convert.ToInt32(row["CityId"]),
+                        CityName = row["CityName"].ToString()
+                    });
+                }
+            }
+
+            return list;
+        }
+
+        public List<AreaOfInterestMaster> GetAreaOfInterestList_BAL()
+        {
+            DataSet ds = _dal.GetAreaOfInterestList_DAL();
+
+            List<AreaOfInterestMaster> list = new List<AreaOfInterestMaster>();
+
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    list.Add(new AreaOfInterestMaster
+                    {
+                        InterestId = Convert.ToInt32(row["InterestId"]),
+                        InterestName = row["InterestName"].ToString()
+                    });
+                }
+            }
+
+            return list;
         }
 
         public void Dispose()

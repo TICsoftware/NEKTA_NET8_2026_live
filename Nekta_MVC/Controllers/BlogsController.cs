@@ -28,6 +28,7 @@ public class BlogsController : Controller
             FileLogger.LogError("/Blogs :", ex);
             return View(new BlogsModel());
         }
+
         finally
         {
             _bal.Dispose();

@@ -37,6 +37,9 @@ namespace Nekta_MVC.Models
         [StringLength(1000, ErrorMessage = "Message cannot exceed 1000 characters")]
         public string? Message { get; set; }
 
+
+        public string? IPAddress{ get; set; }
+
         [Display(Name = "consent")]
         public bool Consent { get; set; }
     }

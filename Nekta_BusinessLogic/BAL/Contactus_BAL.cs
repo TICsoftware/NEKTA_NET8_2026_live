@@ -18,6 +18,9 @@ namespace Nekta_BusinessLogic.BAL
         {
         }
 
+
+        
+
         public ContactUsModel GetContactUs_BAL(string pagename, int languageId, int geographyId)
         {
             var model = new ContactUsModel();

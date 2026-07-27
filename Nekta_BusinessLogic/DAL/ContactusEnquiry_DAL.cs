@@ -1,6 +1,8 @@
 using System;
+using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Nekta_BusinessLogic.Entity;
 
 namespace Nekta_BusinessLogic.DAL
 {
@@ -14,23 +16,35 @@ namespace Nekta_BusinessLogic.DAL
 
         // Inserts one enquiry and returns the new row's identity.
         // SP name/columns to be finalized by the DB owner: sp_AddContactUsEnquiry
-        public int AddContactUsEnquiry_DAL(string fullName, string designation, string organisation,
-            string email, string phone, string city, string interest, string message, bool consent)
+        public int AddContactUsEnquiry_DAL(ContactUsEnquiry model)
         {
             SqlParameter[] sqlParams =
             {
-                new SqlParameter("@FullName", (object?)fullName ?? DBNull.Value),
-                new SqlParameter("@Designation", string.IsNullOrWhiteSpace(designation) ? (object)DBNull.Value : designation),
-                new SqlParameter("@Organisation", (object?)organisation ?? DBNull.Value),
-                new SqlParameter("@Email", (object?)email ?? DBNull.Value),
-                new SqlParameter("@Phone", (object?)phone ?? DBNull.Value),
-                new SqlParameter("@City", (object?)city ?? DBNull.Value),
-                new SqlParameter("@Interest", (object?)interest ?? DBNull.Value),
-                new SqlParameter("@Message", string.IsNullOrWhiteSpace(message) ? (object)DBNull.Value : message),
-                new SqlParameter("@Consent", consent),
+                new SqlParameter("@FullName", (object?)model.FullName ?? DBNull.Value),
+                new SqlParameter("@Designation", string.IsNullOrWhiteSpace(model.Designation) ? (object)DBNull.Value : model.Designation),
+                new SqlParameter("@Organisation", (object?)model.Organisation ?? DBNull.Value),
+                new SqlParameter("@Email", (object?)model.Email ?? DBNull.Value),
+                new SqlParameter("@Phone", (object?)model.Phone ?? DBNull.Value),
+                new SqlParameter("@CityId", model.CityId),
+                new SqlParameter("@InterestId", model.InterestId),
+                new SqlParameter("@Query", string.IsNullOrWhiteSpace(model.Query) ? (object)DBNull.Value : model.Query),
+                new SqlParameter("@Consent", model.Consent),
+                new SqlParameter("@IPAddress", string.IsNullOrWhiteSpace(model.IPAddress) ? (object)DBNull.Value : model.IPAddress)
             };
 
             return SqlInsertReturnIdentity_withSP("sp_AddContactUsEnquiry", "@Return_ID", sqlParams);
         }
+
+
+        public DataSet GetCityList_DAL()
+        {
+            return GetDataSet("GetCityMaster");
+        }
+
+        public DataSet GetAreaOfInterestList_DAL()
+        {
+            return GetDataSet("GetAreaOfInterestMaster");
+        }
+
     }
 }
