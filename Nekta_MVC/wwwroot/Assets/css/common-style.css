@@ -133,10 +133,12 @@ Leaf travel CSS
 
 
  @media (min-width: 1200px) and (max-width: 1366px) {
+
 .text-h2 {font-size: 3rem}
-p {font-size: 1rem !important; }
+ p {font-size: 1rem !important; }
 .section-title-center {max-width: 800px;}
-    .md\:mt-6 {
-        margin-top: calc(var(--spacing) * 3);
-    }
+.md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
+.h-170 {height: calc(var(--spacing) * 130);}
+.text-h1 { font-size: var(--text-h1); font-size: 60px;}
+
  }

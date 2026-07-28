@@ -75,6 +75,8 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 /* WHat our culinary capability */
 .bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1234; width: 11vw; rotate: -33deg;}
 
+.bc-dining-deco--basil{ max-width: 18vw;}
+
 /* WWhy client choose nekta Thumb slider */
 .bg-darkcream .edge-details h3 { color: var(--color-text-heading);}
 .bg-darkcream .edge-details p { color: var(--color-text-heading);}

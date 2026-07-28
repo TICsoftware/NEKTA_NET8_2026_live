@@ -12,7 +12,7 @@
 
 /* Final Positions */
 .gallery-left{ left:2%; transform:rotate(-6deg); z-index:1;}
-.story-gallery-left{position: absolute;left: -5vw;bottom: -40px;z-index: -2;}
+.story-gallery-left{position: absolute;left: -5vw;bottom: -40px;z-index: 1;}
 .story-gallery-right{ position: absolute; right: -14vw; top: 52%; transform: translateY(-50%); z-index: 2;}
 
 .story-gallery-right .story-leaf{ position: absolute; left: 35px; bottom: 0;}

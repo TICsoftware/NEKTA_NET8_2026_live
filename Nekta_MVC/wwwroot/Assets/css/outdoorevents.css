@@ -97,3 +97,18 @@
 }
 
 }
+
+ @media (min-width: 1200px) and (max-width: 1366px) {
+.section-title-outer {
+    margin-bottom: 30px;
+    max-width: 40vw;
+}
+
+    .merge-imgs img:nth-child(1) {
+        max-width: 19vw;
+        left: -7vw;
+        top: 0vw;
+        z-index: 10;
+    }
+
+    }
