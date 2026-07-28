@@ -16,7 +16,7 @@ namespace Nekta_BusinessLogic.DAL
 
         // Inserts one enquiry and returns the new row's identity.
         // SP name/columns to be finalized by the DB owner: sp_AddContactUsEnquiry
-        public int AddContactUsEnquiry_DAL(ContactUsEnquiry model)
+        public DataTable AddContactUsEnquiry_DAL(ContactUsEnquiry model)
         {
             SqlParameter[] sqlParams =
             {
@@ -32,7 +32,8 @@ namespace Nekta_BusinessLogic.DAL
                 new SqlParameter("@IPAddress", string.IsNullOrWhiteSpace(model.IPAddress) ? (object)DBNull.Value : model.IPAddress)
             };
 
-            return SqlInsertReturnIdentity_withSP("sp_AddContactUsEnquiry", "@Return_ID", sqlParams);
+            return GetDataSet("sp_AddContactUsEnquiry", sqlParams).Tables[0];
+            //return SqlInsertReturnIdentity_withSP("sp_AddContactUsEnquiry", "@Return_ID", sqlParams);
         }
 
 

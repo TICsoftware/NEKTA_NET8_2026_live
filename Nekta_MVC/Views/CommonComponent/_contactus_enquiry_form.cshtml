@@ -38,8 +38,10 @@
             <div class="cu-form-alert cu-form-alert--error" role="alert">@TempData["ContactUsError"]</div>
         }
 
-        <div class="cu-form-card ">
-            <form class="space-y-6" asp-controller="Contactus" asp-action="SubmitEnquiry" method="post" novalidate>
+        <div class="cu-form-card " id="contactFormContainer">
+
+            <form id="contactForm" class="space-y-6" asp-controller="Contactus" asp-action="SubmitEnquiry" method="post"
+                novalidate>
                 <input type="hidden" name="title" value="@pageName" />
                 <div class="cu-form-grid">
                     <div class="cu-field">
@@ -107,6 +109,7 @@
                 <label class="cu-consent">
                     <input asp-for="Consent" type="checkbox" />
                     <span>I agree to be contacted by Nekta regarding my enquiry.</span>
+                    <span asp-validation-for="Consent" class="cu-field-error"></span>
                 </label>
 
                 <span>
@@ -115,6 +118,7 @@
                         <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
                     </button>
                 </span>
+                <div id="contactMessage"></div>
             </form>
         </div>
     </div>

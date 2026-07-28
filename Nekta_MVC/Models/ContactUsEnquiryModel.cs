@@ -12,6 +12,7 @@ namespace Nekta_MVC.Models
         [RegularExpression(@"^(?=.*[a-zA-Z])[a-zA-Z][a-zA-Z\s.]*$", ErrorMessage = "Only alphabets, spaces and '.' are allowed")]
         public string? FullName { get; set; }
 
+        [Required(ErrorMessage = "Please enter your designation")]
         [StringLength(100, ErrorMessage = "Designation cannot exceed 100 characters")]
         public string? Designation { get; set; }
 
@@ -38,9 +39,9 @@ namespace Nekta_MVC.Models
         public string? Message { get; set; }
 
 
-        public string? IPAddress{ get; set; }
+        public string? IPAddress { get; set; }
 
-        [Display(Name = "consent")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Please accept the consent.")]
         public bool Consent { get; set; }
     }
 }
