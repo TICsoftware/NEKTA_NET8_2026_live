@@ -2,7 +2,7 @@
 @model Nekta_BusinessLogic.Entity.AboutModel
 @{
     ViewData["Title"] = "Leadership";
-       Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section head {
@@ -120,8 +120,8 @@
                             class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
 
                         @Html.Raw(item.Intro.ToString().Replace(oldValue: "<p>", newValue: "<p class=\"ld-quote my-4\">"))
-                          
-                   
+
+
 
                         <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
                             class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
@@ -138,102 +138,10 @@
         </section>
     }
 
-    <!-- ==================== BOARD OF DIRECTORS ==================== -->
-
-    <section class="ld-board-section section-spacing ld-leaf-waypoint" data-leaf-x="20" data-leaf-rotation="15">
-        <div class="container relative z-10">
-            @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 0))
-            {
-                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
-                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
-                        @Html.Raw(
-                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                        ? item.DisplayTitle.CleanParagraphTags()
-                        : item.Title)
-                </h2>
-            </div>
-                        }
-
-            <div class="ld-grid">
-               @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
-                {
-                    <div class="ld-card">
-                        <div class="ld-card-arch">
-                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
-                                class="ld-img ld-img-sketch" />
-                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
-                                class="ld-img ld-img-color" />
-                        </div>
-                        <h3>@item.Title</h3>
-                        @Html.Raw(@item.Designation)
-                    </div>
-                }
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== QUOTE 2 ==================== -->
-    @foreach (var item in Model.leadership_intro_2_List.Where(x => x.IsBlock == 0))
-    {
-        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="75"
-            data-leaf-rotation="-10">
-            <!-- Background Pattern -->
-            <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
-
-            <div class="container relative z-10">
-                <div class="max-w-6xl mx-auto">
-                    <div class="ld-quote-wrapper">
-                        <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
-                            class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
-
-                       
-                           @Html.Raw(item.Intro.ToString().Replace(oldValue: "<p>", newValue: "<p class=\"ld-quote my-4\">"))
-                        <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
-                            class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
-                    </div>
-                    <div class="ld-quote-author">
-                        <h2 class="ld-author-name">@item.Title</h2>
-                        <p class="ld-author-role">@item.Component_Designation</p>
-                        <p class="text-base">@item.Component_Designation2</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    }
 
     <!-- ==================== CORE TEAM ==================== -->
-    <section class="ld-team-section section-spacing ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
-        <div class="container relative z-10">
-            @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 0))
-            {
-                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
-                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
-                        @Html.Raw(
-                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                        ? item.DisplayTitle.CleanParagraphTags()
-                        : item.Title)
-                </h2>
-            </div>
-                        }
-            <div class="ld-grid">
-                @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
-                {
-                    <div class="ld-card">
-                        <div class="ld-card-arch">
-                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
-                                class="ld-img ld-img-sketch" />
-                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
-                                class="ld-img ld-img-color" />
-                        </div>
-                        <h3>@item.Title</h3>
-                       @Html.Raw(@item.Designation)
-                    </div>
-                }
-            </div>
-        </div>
-    </section>
 
-    <!-- ==================== MANAGEMENT TEAM ==================== -->
+
     <section class="ld-team-section section-pb ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
         <div class="container relative z-10">
             @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 0))
@@ -258,12 +166,114 @@
                                 class="ld-img ld-img-color" />
                         </div>
                         <h3>@item.Title</h3>
-                    @Html.Raw(@item.Designation)
+                        @Html.Raw(@item.Designation)
                     </div>
                 }
             </div>
         </div>
     </section>
+
+    <!-- ==================== MANAGEMENT TEAM ==================== -->
+    <section class="ld-team-section section-spacing ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
+        <div class="container relative z-10">
+            @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 0))
+            {
+                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+                        }
+            <div class="ld-grid">
+                @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
+                {
+                    <div class="ld-card">
+                        <div class="ld-card-arch">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-sketch" />
+                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-color" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        @Html.Raw(@item.Designation)
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- ==================== QUOTE 2 ==================== -->
+    @foreach (var item in Model.leadership_intro_2_List.Where(x => x.IsBlock == 0))
+    {
+        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="75"
+            data-leaf-rotation="-10">
+            <!-- Background Pattern -->
+            <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
+
+            <div class="container relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="ld-quote-wrapper">
+                        <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
+
+
+                        @Html.Raw(item.Intro.ToString().Replace(oldValue: "<p>", newValue: "<p class=\"ld-quote my-4\">"))
+                        <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
+                            class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
+                    </div>
+                    <div class="ld-quote-author">
+                        <h2 class="ld-author-name">@item.Title</h2>
+                        <p class="ld-author-role">@item.Component_Designation</p>
+                        <p class="text-base">@item.Component_Designation2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+
+    <!-- ==================== BOARD OF DIRECTORS ==================== -->
+
+    <section class="ld-board-section section-spacing ld-leaf-waypoint" data-leaf-x="20" data-leaf-rotation="15">
+        <div class="container relative z-10">
+            @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 0))
+            {
+                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                    <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                        ? item.DisplayTitle.CleanParagraphTags()
+                        : item.Title)
+                </h2>
+            </div>
+                        }
+
+            <div class="ld-grid">
+                @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
+                {
+                    <div class="ld-card">
+                        <div class="ld-card-arch">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-sketch" />
+                            <img loading="lazy" src="@item.Thumbnail_color_image" alt="@item.ThumbnailAltText"
+                                class="ld-img ld-img-color" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        @Html.Raw(@item.Designation)
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
 </div>
 
 

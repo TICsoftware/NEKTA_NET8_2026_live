@@ -171,6 +171,18 @@ namespace Nekta_MVC.Routes
                 pattern: "legal-disclaimer",
                 defaults: new { controller = "pagearticle", action = "article", id = "legal-disclaimer" }
             );
+
+            app.MapControllerRoute(
+                name: "privacy-policy",
+                pattern: "privacy-policy",
+                defaults: new { controller = "pagearticle", action = "article", id = "privacy-policy" }
+            );
+
+               app.MapControllerRoute(
+                name: "terms-of-use",
+                pattern: "terms-and-conditions",
+                defaults: new { controller = "pagearticle", action = "article", id = "terms-and-conditions" }
+            );
             app.MapControllerRoute(
               name: "sitemap",
               pattern: "sitemap",
