@@ -69,3 +69,23 @@
 .feature-card:hover {
     background: var(--color-green);
 }
+
+
+/* Small screen laptop */
+ @media (min-width: 1200px) and (max-width: 1366px) {
+
+
+    .feature-card h3{font-size: 1.75rem;}
+    .feature-card {padding: 1.5rem 2rem;}
+    .feature-card .p-6{ padding: 20px 10px;}
+
+    .edge-card-title {font-size: 1.75rem;}
+    .edge-card-text{font-size: 1rem;max-width: 27vw;}
+    .underline{font-weight: 300;}
+   
+    .blogs-cards-slider .insight-title { font-size: 1.75rem;}
+    .playgroud-button { padding-bottom: 20px; margin-bottom: -15px;}
+    .swiper-button-next-custom:hover, .swiper-button-prev-custom:hover { box-shadow: none; }
+     .swiper-button-next-custom{ transition: transform var(--motion-slow) ,  }
+
+}

@@ -125,7 +125,7 @@ backface-visibility: hidden;
 
 
 
-
+.nekta-edge .container-fluid{ padding-left: 0rem; padding-right: 0rem;}
 
 @media (min-width: 640px) {
 
@@ -310,4 +310,56 @@ backface-visibility: hidden;
 .signature-leaf-img {width: 28vw;right: -25vw;top: 5vw;}
 .signature-bg { width: 120%; max-width: 125%; margin-left: -9vw; margin-top: -10vw;}
 .signature-plate-image {max-width: 95%;}
+    .md\:h-\[100vh\] {
+        height: 60vh;
+    }
+
+}
+
+
+ @media (min-width: 1024px) and (max-width: 1080px){
+
+     .collage-item-bottom { width: 388px;}
+    .collage-item-bottom {bottom: -2rem;left: -3rem;width: 87%;}
+    .collage-item-top { width: 320px;}
+    .feature-card { padding: 1.25rem 1.5rem;}
+    .md\:h-\[100vh\] {height: 48vh;}
+    .edgeSwiper .swiper-slide-active { transform: scale(1.1); z-index: 5;}
+
+ }
+
+
+/* Small screen laptop */
+ @media (min-width: 1200px) and (max-width: 1366px) {
+    .collage-item-top { width: 290px;}
+    .collage-item-bottom {width: 370px;}
+    .collage-item-bottom { bottom: 5rem; left: 23px; }
+    .collage-item-top { top: -3rem; right: -2rem;}
+
+    .feature-card h3{font-size: 1.75rem;}
+    .feature-card {padding: 1.5rem 2rem;}
+    .feature-card .p-6{ padding: 20px 10px;}
+
+    .edge-card-title {font-size: 1.75rem;}
+    .edge-card-text{font-size: 1rem;max-width: 27vw;}
+    .underline{font-weight: 300;}
+   
+    .blogs-cards-slider .insight-title { font-size: 1.75rem;}
+
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+ .h-\[100vh\] {
+    height: 60vh;
+}
+.nekta-edge .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.underline{font-weight: 300;}
+.testimonial .section-title-outer{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
 }

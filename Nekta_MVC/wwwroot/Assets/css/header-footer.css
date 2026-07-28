@@ -176,6 +176,14 @@ footer h4 {font-size: var(--text-20); margin-bottom: 1.5rem;}
 .footer-brand-copy { padding-bottom: 1rem;}
 }
 
+@media (min-width: 1200px) and (max-width: 1366px){
+    .footer-text, .footer-link {
+
+    font-size: 1rem;
+    font-weight: 500;
+}
+}
+
 @media (max-width: 767px) {
 .footer-brand-copy {padding-bottom: 1rem;}
 .footer-quick-link-click {border-bottom: 1px solid rgba(246, 244, 230, 0.35); }
