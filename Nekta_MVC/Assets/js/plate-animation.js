@@ -48,7 +48,7 @@ gsap.set(".signature-bg", {
       ".signature-garlic-img",
       {
         xPercent: 20,
-        yPercent: -180,
+        yPercent: -130,
         rotation: -28,
         opacity: 0,
         transformOrigin: "50% 50%",
@@ -66,7 +66,7 @@ gsap.set(".signature-bg", {
       ".signature-leaf-img",
       {
         xPercent: 0,
-        yPercent: -200,
+        yPercent: -150,
         rotation: 28,
         opacity: 0,
         transformOrigin: "50% 50%",

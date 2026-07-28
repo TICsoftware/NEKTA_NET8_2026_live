@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    // nekta edgenewslider
+    // nekta edgenewslider 
 document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
     const viewport = slider.querySelector('.bc-arch-viewport');
     const track = slider.querySelector('.bc-arch-track');
@@ -345,7 +345,7 @@ function getSizes() {
 
     function centerTrack(withTransition = true) {
         track.style.transition = withTransition
-            ? 'transform 0.35s cubic-bezier(0.65, 0, 0.35, 1)'
+            ? 'transform 0.75s cubic-bezier(0.25, 0, 0.35, 1)'
             : 'none';
 
         const sizes = getSizes();
@@ -366,6 +366,7 @@ function getSizes() {
 
 function updateClasses(withTransition = true) {
     const rIndex = renderedIndex(activeIndex);
+
     cards.forEach((card, i) => {
         const wasActive = card.classList.contains('is-active');
         const willBeActive = (i === rIndex);
@@ -382,14 +383,13 @@ function updateClasses(withTransition = true) {
             if (!withTransition) {
                 card.classList.add('content-ready');
             } else if (!wasActive) {
-                const onResizeDone = (e) => {
-                    if (e.propertyName === 'min-height' || e.propertyName === 'width') {
+                setTimeout(() => {
+                    if (card.classList.contains('is-active')) {
                         card.classList.add('content-ready');
-                        card.removeEventListener('transitionend', onResizeDone);
                     }
-                };
-                card.addEventListener('transitionend', onResizeDone);
+                }, 250); // Reduce to 80ms if you want it even faster
             }
+
         } else if (Math.abs(i - rIndex) === 1) {
             card.classList.add('is-adjacent');
         }

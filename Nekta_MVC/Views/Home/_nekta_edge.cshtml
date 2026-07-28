@@ -9,10 +9,10 @@
     .FirstOrDefault();
 }
 
-<section class="bg-green center-slider relative section-spacing overflow-hidden">
-    <div class="">
+<section class="bg-green center-slider relative section-spacing overflow-hidden nekta-edge">
+    <div class="container-fluid">
         <div class="text-center mb-6 px-6 mx-auto max-w-5xl section-title--light-outer">
-            <h2 class="section-title section-title--light" data-leaf-target letters-slide-down text-split>
+            <h2 class="section-title text-h2 section-title--light" data-leaf-target letters-slide-down text-split>
                 @Html.Raw(
                 !string.IsNullOrWhiteSpace(Component.DisplayTitle)
                 ? Component.DisplayTitle.CleanParagraphTags()
