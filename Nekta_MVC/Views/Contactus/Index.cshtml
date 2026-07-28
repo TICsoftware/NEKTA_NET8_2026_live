@@ -34,9 +34,11 @@
 <!-- ==================== HERO BANNER ==================== -->
 @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
 
+
+
 <!-- ==================== ENQUIRY FORM ==================== -->
-@* @await Html.PartialAsync("~/Views/CommonComponent/_contactus_enquiry_form.cshtml", new ContactUsEnquiryModel())
- *@
+ @await Html.PartialAsync("~/Views/CommonComponent/_contactus_enquiry_form.cshtml", new ContactUsEnquiryModel())
+ 
 
 
 
@@ -98,4 +100,5 @@
     <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Assets/js/fy-select-script.js"></script>
+    <script src="~/scripts/contact/enquiry.js"></script>
 }

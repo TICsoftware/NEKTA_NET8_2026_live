@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Nekta_BusinessLogic.BAL;
 using Nekta_BusinessLogic.Entity;
@@ -24,6 +25,12 @@ public class ContactusController : Controller
         try
         {
             var data = _bal.GetContactUs_BAL(title, 1, 1);
+
+            using var enquiryBal = new ContactusEnquiry_BAL(_configuration);
+            ViewBag.CityList = enquiryBal.GetCityList_BAL();
+            ViewBag.AreaOfInterestList = enquiryBal.GetAreaOfInterestList_BAL();
+
+
             return View(data);
         }
         catch (Exception ex)
@@ -37,42 +44,126 @@ public class ContactusController : Controller
         }
     }
 
+
+
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SubmitEnquiry(ContactUsEnquiryModel model, string title)
+    public IActionResult SubmitEnquiry(ContactUsEnquiryModel model)
     {
         if (!ModelState.IsValid)
         {
-            TempData["ContactUsError"] = "Please correct the highlighted fields and try again.";
-            return RedirectToAction("Index", new { title = string.IsNullOrWhiteSpace(title) ? "contact" : title });
+            return Json(new
+            {
+                status = false,
+                message = "Please correct the highlighted fields and try again."
+            });
         }
 
-        var enquiryBal = new ContactusEnquiry_BAL(_configuration);
         try
         {
-            enquiryBal.SubmitEnquiry_BAL(
-                model.FullName,
-                model.Designation,
-                model.Organisation,
-                model.Email,
-                model.Phone,
-                model.City,
-                model.Interest,
-                model.Message,
-                model.Consent);
+            var entity = new ContactUsEnquiry
+            {
+                FullName = model.FullName,
+                Designation = model.Designation,
+                Organisation = model.Organisation,
+                Email = model.Email,
+                Phone = model.Phone,
+                CityId = Convert.ToInt32(model.City),
+                InterestId = Convert.ToInt32(model.Interest),
+                Query = model.Message,
+                Consent = model.Consent,
+                IPAddress = GetClientIpAddress()
+            };
 
-            TempData["ContactUsSuccess"] = "Thank you for reaching out. A member of our team will get back to you within one business day.";
+            using var enquiryBal = new ContactusEnquiry_BAL(_configuration);
+
+            DataTable dt = enquiryBal.SubmitEnquiry_BAL(entity);
+
+            string result = dt.Rows[0][0].ToString();
+
+            switch (result)
+            {
+                case "updated":
+                    return Json(new
+                    {
+                        status = true,
+                        message = "Thank you for reaching out. Our team will get back to you within one business day."
+                    });
+
+                case "exceeds":
+                    return Json(new
+                    {
+                        status = false,
+                        message = "You have exceeded the maximum number of enquiries allowed today."
+                    });
+
+                default:
+                    return Json(new
+                    {
+                        status = false,
+                        message = result
+                    });
+            }
         }
         catch (Exception ex)
         {
-            FileLogger.LogError("/Contactus/SubmitEnquiry :", ex);
-            TempData["ContactUsError"] = "Something went wrong while submitting your enquiry. Please try again.";
-        }
-        finally
-        {
-            enquiryBal.Dispose();
-        }
+            FileLogger.LogError($"{nameof(ContactusController)}/{nameof(SubmitEnquiry)}", ex);
 
-        return RedirectToAction("Index", new { title = string.IsNullOrWhiteSpace(title) ? "contact" : title });
+            return Json(new
+            {
+                status = false,
+                message = "Something went wrong while submitting your enquiry."
+            });
+        }
     }
+
+
+    private string GetClientIpAddress()
+    {
+        var forwardedFor = Request.Headers["X-Forwarded-For"].FirstOrDefault();
+
+        if (!string.IsNullOrWhiteSpace(forwardedFor))
+            return forwardedFor.Split(',')[0].Trim();
+
+        return HttpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
+    }
+
+    // [HttpPost]
+    // [ValidateAntiForgeryToken]
+    // public IActionResult SubmitEnquiry(ContactUsEnquiryModel model, string title)
+    // {
+    //     if (!ModelState.IsValid)
+    //     {
+    //         TempData["ContactUsError"] = "Please correct the highlighted fields and try again.";
+    //         return RedirectToAction("Index", new { title = string.IsNullOrWhiteSpace(title) ? "contact" : title });
+    //     }
+
+    //     var enquiryBal = new ContactusEnquiry_BAL(_configuration);
+    //     try
+    //     {
+    //         enquiryBal.SubmitEnquiry_BAL(
+    //             model.FullName,
+    //             model.Designation,
+    //             model.Organisation,
+    //             model.Email,
+    //             model.Phone,
+    //             model.City,
+    //             model.Interest,
+    //             model.Message,
+    //             model.Consent);
+
+    //         TempData["ContactUsSuccess"] = "Thank you for reaching out. A member of our team will get back to you within one business day.";
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         FileLogger.LogError("/Contactus/SubmitEnquiry :", ex);
+    //         TempData["ContactUsError"] = "Something went wrong while submitting your enquiry. Please try again.";
+    //     }
+    //     finally
+    //     {
+    //         enquiryBal.Dispose();
+    //     }
+
+    //     return RedirectToAction("Index", new { title = string.IsNullOrWhiteSpace(title) ? "contact" : title });
+    // }
 }

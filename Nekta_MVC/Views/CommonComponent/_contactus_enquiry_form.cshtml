@@ -10,10 +10,10 @@
 
     <!-- right green image -->
     <img loading="lazy" src="~/Assets/images/contact-us/right_green_leaf.webp" alt=""
-         class="cu-leaf-deco cu-leaf-right hidden lg:block" aria-hidden="true" />
+        class="cu-leaf-deco cu-leaf-right hidden lg:block" aria-hidden="true" />
     <!-- left green image -->
     <img loading="lazy" src="~/Assets/images/contact-us/left_green_leaf.webp" alt=""
-         class="cu-leaf-deco cu-leaf-left hidden lg:block" aria-hidden="true" />
+        class="cu-leaf-deco cu-leaf-left hidden lg:block" aria-hidden="true" />
 
     <div class="container relative z-10">
         <div class="text-center mb-10 md:mb-14">
@@ -38,8 +38,10 @@
             <div class="cu-form-alert cu-form-alert--error" role="alert">@TempData["ContactUsError"]</div>
         }
 
-        <div class="cu-form-card ">
-            <form class="space-y-6" asp-controller="Contactus" asp-action="SubmitEnquiry" method="post" novalidate>
+        <div class="cu-form-card " id="contactFormContainer">
+
+            <form id="contactForm" class="space-y-6" asp-controller="Contactus" asp-action="SubmitEnquiry" method="post"
+                novalidate>
                 <input type="hidden" name="title" value="@pageName" />
                 <div class="cu-form-grid">
                     <div class="cu-field">
@@ -49,12 +51,14 @@
                     </div>
                     <div class="cu-field">
                         <label asp-for="Designation">Designation</label>
-                        <input asp-for="Designation" type="text" placeholder="Your role or title" autocomplete="organization-title" />
+                        <input asp-for="Designation" type="text" placeholder="Your role or title"
+                            autocomplete="organization-title" />
                         <span asp-validation-for="Designation" class="cu-field-error"></span>
                     </div>
                     <div class="cu-field">
                         <label asp-for="Organisation">Organisation Name <span class="req">*</span></label>
-                        <input asp-for="Organisation" type="text" placeholder="Your organisation" autocomplete="organization" />
+                        <input asp-for="Organisation" type="text" placeholder="Your organisation"
+                            autocomplete="organization" />
                         <span asp-validation-for="Organisation" class="cu-field-error"></span>
                     </div>
                     <div class="cu-field">
@@ -70,14 +74,14 @@
                     <div class="cu-field">
                         <label asp-for="City">City <span class="req">*</span></label>
                         <select asp-for="City">
-                            <option value="">Select your city</option>
-                            <option value="mumbai">Mumbai</option>
-                            <option value="gurugram">Gurugram</option>
-                            <option value="bengaluru">Bengaluru</option>
-                            <option value="chennai">Chennai</option>
-                            <option value="kolkata">Kolkata</option>
-                            <option value="goa">MOPA, Goa</option>
-                            <option value="other">Other</option>
+                            <option value="">Select city</option>
+                            @if (ViewBag.CityList != null)
+                            {
+                                foreach (var item in ViewBag.CityList)
+                                {
+                                    <option value="@item.CityId">@item.CityName</option>
+                                }
+                            }
                         </select>
                         <span asp-validation-for="City" class="cu-field-error"></span>
                     </div>
@@ -85,22 +89,27 @@
                         <label asp-for="Interest">Area of Interest <span class="req">*</span></label>
                         <select asp-for="Interest">
                             <option value="">Select an area of interest</option>
-                            <option value="corporate">Business and Corporate</option>
-                            <option value="education">Education</option>
-                            <option value="healthcare">Healthcare</option>
-                            <option value="events">Outdoor Events</option>
+                            @if (ViewBag.AreaOfInterestList != null)
+                            {
+                                foreach (var item in ViewBag.AreaOfInterestList)
+                                {
+                                    <option value="@item.InterestId">@item.InterestName</option>
+                                }
+                            }
                         </select>
                         <span asp-validation-for="Interest" class="cu-field-error"></span>
                     </div>
                     <div class="cu-field cu-field--full">
                         <label asp-for="Message">Tell us more.</label>
-                        <textarea asp-for="Message" placeholder="Describe your requirement, scale, or any context that would help us respond meaningfully."></textarea>
+                        <textarea asp-for="Message"
+                            placeholder="Describe your requirement, scale, or any context that would help us respond meaningfully."></textarea>
                         <span asp-validation-for="Message" class="cu-field-error"></span>
                     </div>
                 </div>
                 <label class="cu-consent">
                     <input asp-for="Consent" type="checkbox" />
                     <span>I agree to be contacted by Nekta regarding my enquiry.</span>
+                    <span asp-validation-for="Consent" class="cu-field-error"></span>
                 </label>
 
                 <span>
@@ -109,6 +118,7 @@
                         <img loading="lazy" src="~/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
                     </button>
                 </span>
+                <div id="contactMessage"></div>
             </form>
         </div>
     </div>

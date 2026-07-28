@@ -2386,10 +2386,21 @@
     .lg\:ml-auto {
       margin-left: auto;
     }
+<<<<<<< HEAD
+  }
+  .lg\:block {
+    @media (width >= 64rem) {
+      display: block;
+    }
+  }
+  .lg\:max-w-\[35vw\] {
+    @media (width >= 64rem) {
+=======
     .lg\:block {
       display: block;
     }
     .lg\:max-w-\[35vw\] {
+>>>>>>> 0c4898affb362751faffee5741217831c3bc6f6c
       max-width: 35vw;
     }
     .lg\:max-w-\[65vw\] {

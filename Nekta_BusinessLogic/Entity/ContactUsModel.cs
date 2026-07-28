@@ -27,5 +27,44 @@ namespace Nekta_BusinessLogic.Entity
 
         // Every Enquiry Reaches Someone - component_sequence = 6
         public List<ComponentModel> EveryEnquiry_List { get; set; } = new();
+
+        public List<CityMaster> CityList { get; set; } = new();
+
+        public List<AreaOfInterestMaster> AreaOfInterestList { get; set; } = new();
     }
+
+    public class ContactUsEnquiry
+    {
+        public string FullName { get; set; }
+        public string Designation { get; set; }
+        public string Organisation { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public int CityId { get; set; }
+        public string City { get; set; }
+        public int InterestId { get; set; }
+        public string Interest { get; set; }
+        public string Query { get; set; }
+        public bool Consent { get; set; }
+        public string IPAddress { get; set; }
+    }
+
+    public class CityMaster
+    {
+        public int CityId { get; set; }
+        public string? CityName { get; set; }
+        public int Sequence { get; set; }
+        public bool Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
+
+    public class AreaOfInterestMaster
+    {
+        public int InterestId { get; set; }
+        public string? InterestName { get; set; }
+        public int Sequence { get; set; }
+        public bool Status { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
+
 }
