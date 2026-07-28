@@ -13,6 +13,8 @@ TITLE ANIMATION
 .section-title-outer-center {text-align: center;}
 
 .intro-outer-wrapper p {font-size: var(--text-intro);}
+.section-title-center {max-width: 1080px;}
+
 
 .card,
 .feature-card,
@@ -131,6 +133,10 @@ Leaf travel CSS
 
 
  @media (min-width: 1200px) and (max-width: 1366px) {
-    .text-h2 {font-size: 3rem}
-    p {font-size: 1rem !important; }
+.text-h2 {font-size: 3rem}
+p {font-size: 1rem !important; }
+.section-title-center {max-width: 800px;}
+    .md\:mt-6 {
+        margin-top: calc(var(--spacing) * 3);
+    }
  }

@@ -180,7 +180,7 @@ width: 350px;
     width: 270px; height: 290px;
     left: 50%; top: 400px;
     margin-left: 20px;
-    transform: rotate(6deg);
+   transform: rotate(-15deg) !important;
     z-index: 4;
   }
   .cd-photo-3{
@@ -251,25 +251,22 @@ width: 350px;
     color: var(--color-text-heading);
 }
 
-/* Thumbslider coffe image position */
-.merge-imgs img:nth-child(1) {
-    left: -6vw !important;
-    top: 0vw !;
-    z-index: 10;
-}
+
 
 
 /* remove: background: var(--color-primary) from .cd-stamp .bowl */
 
   @media (max-width: 900px){
     .cd-inner{ min-height: auto; }
-    .cd-photo, .cd-stamp{ position: static; margin: 18px auto; transform: none !important; }
-    .cd-photo-1{ width: 220px; height: 260px; }
-    .cd-photo-2{ width: 160px; height: 195px; }
-    .cd-photo-3{ width: 220px; height: 270px; }
+    .cd-photo, .cd-stamp{ position: static; margin: 18px auto; transform: none !important; display: inline-block; }
+    .cd-photo-1{ width: 33vw; height: 40vw; }
+    .cd-photo-2{ width: 25vw; height: 30vw; margin-left: 45vw; margin-top: 15vw; rotate: -8deg !important; max-width: 160px; max-height: 200px; }
+    .cd-photo-3{ width: 33vw; height: 40vw; max-height: 260px; max-width: 200px;}
     .cd-stamp{ display: none; }
     .cd-leaf{ display: none; }
     .cd-band{ height: 12%; }
+    .cd-photo-1 {display: none;}
+
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -289,7 +286,33 @@ width: 350px;
     .nourish-title{ font-size:1.7rem; }
     .nourish-btn{padding:12px 24px;font-size:0.85rem;}
     .nourish-leaf{ width:40px;}
+    .cd-photo-2{ width: 25vw; height: 30vw; margin-left: 28vw; margin-top: 15vw; rotate: -8deg !important; }
   }
   
+/* Tab */
+ @media (min-width: 1024px) and (max-width: 1080px)
+ {
+.text-h2 { font-size: 2.875rem;}
 
+ }
+
+ /* 150% */
+ @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+
+ }
+
+/* Small latop 1366px */
+ @media (min-width: 1200px) and (max-width: 1366px) {
+
+
+
+.cd-stamp .bowl { width: 110px; height: 110px; object-fit: cover;}
+.cd-photo-1 {width: 258px; height: 365px; left: -6vw; top: 9vw; transform: rotate(-9deg); z-index: 15;}
+.cd-stamp-1 { left: 8vw; top: 2vw; rotate: 9deg; transform: rotate(18deg) !important;}
+.cd-copy { position: relative; max-width: 650px;}
+.cd-photo-3 { width: 235px; height: 310px; right: -3vw; top: 90px; transform: rotate(7deg); z-index: 2;}
+.cd-stamp-2{ right: 10vw; top: 30px;}
+.cd-photo-2 { width: 230px; height: 250px; left: 50%; bottom: 6px; margin-left: 20px; transform: rotate(-11deg) !important; z-index: 4;}
+
+ }
 

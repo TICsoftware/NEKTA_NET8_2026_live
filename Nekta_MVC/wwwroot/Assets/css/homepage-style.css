@@ -236,6 +236,10 @@ backface-visibility: hidden;
     color: var(--color-cream);
 }
 
+.insightsSwiper  .swiper-slide{ height: auto;}
+.insight-card { height: 100%;}
+.insight-card-wrapper{padding-bottom:40px;}
+.insight-card-wrapper a { position: absolute; bottom: 0;}
 
 @media (min-width: 768px) {
     .testimonial-text {
@@ -344,7 +348,11 @@ backface-visibility: hidden;
     .edge-card-text{font-size: 1rem;max-width: 27vw;}
     .underline{font-weight: 300;}
    
-    .blogs-cards-slider .insight-title { font-size: 1.75rem;}
+
+
+    .lg\:gap-16 {
+        gap: calc(var(--spacing) * 10);
+    }
 
 }
 

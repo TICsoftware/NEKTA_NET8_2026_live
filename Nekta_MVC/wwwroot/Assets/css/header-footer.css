@@ -172,16 +172,20 @@ footer h4{font-size: var(--text-h3);font-family: var(--font-heading);  font-weig
 .footer-link:hover::after { width: 100%;}
 
 @media (max-width: 992px) {
-footer h4 {font-size: var(--text-20); margin-bottom: 1.5rem;}
+
 .footer-brand-copy { padding-bottom: 1rem;}
 }
 
 @media (min-width: 1200px) and (max-width: 1366px){
-    .footer-text, .footer-link {
 
-    font-size: 1rem;
-    font-weight: 500;
+.footer-text, .footer-link { font-size: 1rem; font-weight: 500;}
+.logo img { transition: max-width .20s ease; max-width: 10vw;}
+.bar {padding: 14px 40px;}
+.nav-item > button, .nav-item > .nav-plain {
+
+    font-size: 1rem
 }
+
 }
 
 @media (max-width: 767px) {
