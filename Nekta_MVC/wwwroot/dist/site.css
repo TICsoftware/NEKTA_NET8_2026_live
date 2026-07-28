@@ -2570,6 +2570,11 @@
       margin-left: auto;
     }
   }
+  .lg\:block {
+    @media (width >= 64rem) {
+      display: block;
+    }
+  }
   .lg\:max-w-\[35vw\] {
     @media (width >= 64rem) {
       max-width: 35vw;
