@@ -49,3 +49,13 @@
 .bc-plate-mini { position: absolute; right: -4%; top: 7%; transform: rotate(6deg);}
 .bc-leaf-deco {position: absolute;width: clamp(70px, 8vw, 135px); pointer-events: none; user-select: none;}
 .bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1;}
+
+
+/* Small latop 1366px */
+ @media (min-width: 1200px) and (max-width: 1366px){
+
+  .lg\:gap-16 { gap: calc(var(--spacing) * 5);}
+.sm\:max-w-\[35vw\] { max-width: 50vw;}
+.nourish-media {max-width: 26rem !important;}
+
+ }
