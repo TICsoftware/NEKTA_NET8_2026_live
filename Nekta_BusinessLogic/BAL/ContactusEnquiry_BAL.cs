@@ -7,6 +7,8 @@ using Nekta_BusinessLogic.Common;
 using Nekta_BusinessLogic.DAL;
 using Nekta_BusinessLogic.Entity;
 
+
+
 namespace Nekta_BusinessLogic.BAL
 {
     // Dedicated BAL for the Contact Us enquiry form submission, kept
@@ -14,10 +16,13 @@ namespace Nekta_BusinessLogic.BAL
     public class ContactusEnquiry_BAL : IDisposable
     {
         private readonly ContactusEnquiry_DAL _dal;
+        private readonly IConfiguration _configuration;
+
 
         public ContactusEnquiry_BAL(IConfiguration configuration)
         {
             _dal = new ContactusEnquiry_DAL(configuration);
+            _configuration = configuration;
         }
 
         // public int SubmitEnquiry_BAL(ContactUsEnquiry model)
@@ -33,7 +38,7 @@ namespace Nekta_BusinessLogic.BAL
                 dt = _dal.AddContactUsEnquiry_DAL(model);
                 if (dt.Rows[0][0].ToString() == "updated")
                 {
-                    //sendmail(mailenquiryContent(obj, "You have received an Business enquiry through the website.").ToString(), "Business enquiry from " + obj.Full_name, "business");
+                    SendMail(MailEnquiryContent(model), "New Requirement Enquiry from " + model.FullName);
                 }
             }
             catch (Exception ex)
@@ -49,49 +54,49 @@ namespace Nekta_BusinessLogic.BAL
         }
 
 
-        // public void SendMail(string emailContent, string subject, string mailTitle)
-        // {
-        //     try
-        //     {
-        //         var settings = _configuration.GetSection("EmailSettings");
+        public void SendMail(string emailContent, string subject)
+        {
+            try
+            {
+                var settings = _configuration.GetSection("EmailSettings");
 
-        //         using var message = new MailMessage();
+                using var message = new MailMessage();
 
-        //         string displayName = settings["DisplayName"];
+                string displayName = settings["DisplayName"];
 
-        //         message.To.Add(new MailAddress(settings["To"]!, settings["DisplayName"]));
-
-
-
-        //         message.From = new MailAddress(settings["From"]!, displayName);
-        //         message.Subject = subject;
-        //         message.Body = emailContent;
-        //         message.IsBodyHtml = true;
-
-        //         using var smtp = new SmtpClient(settings["Host"])
-        //         {
-        //             Port = Convert.ToInt32(settings["Port"]),
-        //             EnableSsl = true,
-        //             UseDefaultCredentials = false,
-        //             Credentials = new NetworkCredential(
-        //                 settings["Username"],
-        //                 settings["Password"])
-        //         };
-
-        //         smtp.Send(message);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         NektaFileLogger.LogError("EmailService/SendMail", ex);
-        //     }
-        // }
+                message.To.Add(new MailAddress(settings["To"]!, settings["DisplayName"]));
 
 
-        public string MailEnquiryContent(ContactUsEnquiry obj, string cityName, string interestName)
+
+                message.From = new MailAddress(settings["From"]!, displayName);
+                message.Subject = subject;
+                message.Body = emailContent;
+                message.IsBodyHtml = true;
+
+                using var smtp = new SmtpClient(settings["Host"])
+                {
+                    Port = Convert.ToInt32(settings["Port"]),
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(
+                        settings["Username"],
+                        settings["Password"])
+                };
+
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                NektaFileLogger.LogError("EmailService/SendMail", ex);
+            }
+        }
+
+
+        public string MailEnquiryContent(ContactUsEnquiry obj)
         {
             string bodyhtmlcontent =
                 "<h4>Dear Team,</h4>" +
-                "<p>Please find below Contact Us Enquiry details.</p>" +
+                "<p>Please find below the Enquiry details submitted through the website.</p>" +
 
                 "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;'>"
                 + "<tbody>"
@@ -122,12 +127,12 @@ namespace Nekta_BusinessLogic.BAL
 
                 + "<tr>"
                 + "<td><strong>City</strong></td>"
-                + "<td>" + cityName + "</td>"
+                + "<td>" + obj.City + "</td>"
                 + "</tr>"
 
                 + "<tr>"
                 + "<td><strong>Area of Interest</strong></td>"
-                + "<td>" + interestName + "</td>"
+                + "<td>" + obj.Interest + "</td>"
                 + "</tr>"
 
                 + (!string.IsNullOrWhiteSpace(obj.Query)
