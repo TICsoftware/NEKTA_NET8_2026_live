@@ -173,10 +173,13 @@
 
 <!-- ==================== CTA ==================== -->
 <!-- ==================== CTA ==================== -->
-@if (Model?.Proof_Is_On_The_Plate_List != null && Model.Proof_Is_On_The_Plate_List.Any())
+@* @if (Model?.Proof_Is_On_The_Plate_List != null && Model.Proof_Is_On_The_Plate_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Proof_Is_On_The_Plate_List)
-}
+} *@
+
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
+
 
 
 @section Scripts {

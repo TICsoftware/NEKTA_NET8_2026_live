@@ -237,10 +237,12 @@
 }
 
 <!-- ==================== Central Kitchens CTA ==================== -->
-@if (Model.Central_Kitchens_CTA_List != null && Model.Central_Kitchens_CTA_List.Any())
+@* @if (Model.Central_Kitchens_CTA_List != null && Model.Central_Kitchens_CTA_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Central_Kitchens_CTA_List)
-}
+} *@
+
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Central_Kitchens_CTA_List)
 
 <!-- ==================== Works Best With ==================== -->
 @if (Model.Works_Best_With_List != null && Model.Works_Best_With_List.Any())
