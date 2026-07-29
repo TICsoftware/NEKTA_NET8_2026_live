@@ -16,6 +16,7 @@ TITLE ANIMATION
 .section-title-center {max-width: 1080px;}
 
 
+
 .card,
 .feature-card,
 .testimonial-card,
@@ -117,6 +118,14 @@ Leaf travel CSS
     z-index:100;
     will-change:transform;
 }
+
+
+
+/* Green Wrpper White heading for CenterMode Slider */
+.green-wrapper.bg-green .title-section {color: var(--color-cream) !important;}
+.green-wrapper.bg-darkcream .title-section { color:var(--color-text-heading) !important;}
+
+
 
 
 /* tab */

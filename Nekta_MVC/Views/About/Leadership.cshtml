@@ -146,7 +146,7 @@
         <div class="container relative z-10">
             @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 0))
             {
-                <div class="section-title-outer mx-auto max-w-5xl section-title-outer-center text-center">
+                <div class="section-title-outer section-pt mx-auto max-w-5xl section-title-outer-center text-center">
                     <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
                         @Html.Raw(
                         !string.IsNullOrWhiteSpace(item.DisplayTitle)

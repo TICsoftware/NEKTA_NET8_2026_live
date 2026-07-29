@@ -8,11 +8,11 @@
 
 
 <section
-    class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-darkcream" : component.bg_class)  center-slider relative section-spacing overflow-hidden">
+    class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-darkcream" : component.bg_class) green-wrapper center-slider relative section-spacing overflow-hidden">
     <div class="">
         <!-- Section Heading -->
         <div class="section-title-outer text-center mx-auto max-w-5xl">
-            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+            <h2 class="title-section  text-h2 " data-leaf-target letters-slide-down text-split>
                 @Html.Raw(
                 !string.IsNullOrWhiteSpace(component.DisplayTitle)
                 ? component.DisplayTitle.CleanParagraphTags()
