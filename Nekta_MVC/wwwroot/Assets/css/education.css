@@ -301,6 +301,39 @@ width: 350px;
 
  }
 
+
+  /* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+.cd-photo-3 {
+    width: 270px;
+    height: 392px;
+}
+.cd-stamp-2 {
+    right: 11vw;
+    top: 30px;
+}
+.cd-photo-1 {
+    width: 302px;
+    height: 387px;
+    left: -5vw;
+}
+
+.cd-photo-2 {
+    width: 248px;
+    height: 256px;
+    left: 50%;
+    top: 395px;}
+
+    .nourish-media {
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 35rem !important;}
+
+
+}
+
+
 /* Small latop 1366px */
  @media (min-width: 1200px) and (max-width: 1366px) {
 
@@ -315,4 +348,6 @@ width: 350px;
 .cd-photo-2 { width: 230px; height: 250px; left: 50%; bottom: 6px; margin-left: 20px; transform: rotate(-11deg) !important; z-index: 4;}
 
  }
+
+
 
