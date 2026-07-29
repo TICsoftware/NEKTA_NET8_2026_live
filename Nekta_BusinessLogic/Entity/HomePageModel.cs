@@ -20,6 +20,8 @@ namespace Nekta_BusinessLogic.Entity
         public List<HomeCommonModel> ExperienceSpeaks_List { get; set; } = new();
         public List<HomeCommonModel> ClientsWeServe_List { get; set; } = new();
         public List<HomeCommonModel> LatestTrends_List { get; set; } = new();
+
+         public List<ArticleModel> Case_Studies_List { get; set; } = new();
     }
 
 
