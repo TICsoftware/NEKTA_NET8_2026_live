@@ -38,8 +38,13 @@ namespace Nekta_BusinessLogic.BAL
                 model.Life_Beautiful_Plate_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_List = MapComponents(groupedData, 4);
                 model.Technology_That_Runs_List = MapComponents(groupedData, 5);
-                model.Proof_Plate_List = MapComponents(groupedData, 6);
+                model.Case_Studies_Component_List = MapComponents(groupedData, 6);
                 model.Seeking_Elevated_DE_List = MapComponents(groupedData, 7);
+            }
+
+            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
             }
 
             return model;
@@ -68,7 +73,13 @@ namespace Nekta_BusinessLogic.BAL
                 model.Life_beautiful_Plate_Education_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_Education_List = MapComponents(groupedData, 4);
                 model.Singular_Spirit_Education_List = MapComponents(groupedData, 5);
+                model.Case_Studies_Component_List = MapComponents(groupedData, 6);
 
+            }
+
+            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
             }
 
             return model;
@@ -98,9 +109,12 @@ namespace Nekta_BusinessLogic.BAL
                 model.Services_For_Healthcare_Clients_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_For_Healthcare_List = MapComponents(groupedData, 4);
                 model.Singular_Spirit_HC_List = MapComponents(groupedData, 5);
-                model.Seeking_New_Experience_HC_List = MapComponents(groupedData, 6);
+                model.Case_Studies_Component_List = MapComponents(groupedData, 6);
+            }
 
-
+            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
             }
 
             return model;
@@ -128,8 +142,12 @@ namespace Nekta_BusinessLogic.BAL
                 model.Sports_Catering_Excellence_List = MapComponents(groupedData, 2);
                 model.Services_For_Sports_Clients_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_For_Sports_List = MapComponents(groupedData, 4);
-                model.Proof_Is_On_The_Plate_List = MapComponents(groupedData, 5);
+                model.Case_Studies_Component_List = MapComponents(groupedData, 5);
+            }
 
+            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
             }
 
             return model;
@@ -158,7 +176,11 @@ namespace Nekta_BusinessLogic.BAL
                 model.Services_For_Outdoor_Events_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_For_Outdoor_Events_List = MapComponents(groupedData, 4);
                 model.Proof_Is_On_The_Plate_Outdoor_List = MapComponents(groupedData, 5);
+            }
 
+            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            {
+                model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
             }
 
             return model;

@@ -1,3 +1,4 @@
+@using Nekta_BusinessLogic.Entity
 @using Nekta_MVC.Helpers
 @model Nekta_BusinessLogic.Entity.SegmentsModel
 @{
@@ -391,7 +392,14 @@
 
 <!-- ==================== PROOF IS ON THE PLATE ==================== -->
 
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
+
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+{
+    Case_Studies_Component_List = Model.Case_Studies_Component_List,
+    Case_Studies_List = Model.Case_Studies_List
+})
+
+
 
 <!-- ==================== CTA ==================== -->
 @foreach (var item in Model.Seeking_Elevated_DE_List.Where(x => x.IsBlock == 0))
