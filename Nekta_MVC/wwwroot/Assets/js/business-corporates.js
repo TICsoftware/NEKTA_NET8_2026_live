@@ -203,8 +203,6 @@ document.querySelectorAll('.outer-polaroids-icons').forEach((wrapper) => {
 });
 
 // Nekta edge center focued slider chanages
-
-
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-slider]').forEach(function (slider) {
         const track = slider.querySelector('.bc-arch-track');
@@ -294,8 +292,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+ // ==================== NEKTA EDGE NEW SLIDER UPDATED==================== //
 
-    // nekta edgenewslider 
 document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
     const viewport = slider.querySelector('.bc-arch-viewport');
     const track = slider.querySelector('.bc-arch-track');
@@ -364,37 +362,84 @@ function getSizes() {
         track.style.transform = `translateX(${centerOffset - offsetToCard}px)`;
     }
 
-function updateClasses(withTransition = true) {
-    const rIndex = renderedIndex(activeIndex);
+    function cancelContentReveal(card) {
+        if (card._bcRevealCleanup) {
+            card._bcRevealCleanup();
+        }
+    }
 
-    cards.forEach((card, i) => {
-        const wasActive = card.classList.contains('is-active');
-        const willBeActive = (i === rIndex);
+    function scheduleContentReveal(card) {
+        cancelContentReveal(card);
 
-        if (wasActive && !willBeActive) {
-            card.classList.remove('content-ready');
+        const reveal = () => {
+            if (card.classList.contains('is-active')) {
+                card.classList.add('content-ready');
+            }
+        };
+
+        const isMobile = window.innerWidth <= 767;
+
+        if (isMobile) {
+            const mobileTimer = setTimeout(() => {
+                cancelContentReveal(card);
+                reveal();
+            }, 100);
+            card._bcRevealCleanup = () => {
+                clearTimeout(mobileTimer);
+                card._bcRevealCleanup = null;
+            };
+            return;
         }
 
-        card.classList.remove('is-active', 'is-adjacent');
+        const onTransitionEnd = (e) => {
+            if (e.target !== card) return;
+            if (e.propertyName !== 'width') return;
+            cancelContentReveal(card);
+            reveal();
+        };
 
-        if (willBeActive) {
-            card.classList.add('is-active');
+        const fallbackTimer = setTimeout(() => {
+            cancelContentReveal(card);
+            reveal();
+        }, 420);
 
-            if (!withTransition) {
-                card.classList.add('content-ready');
-            } else if (!wasActive) {
-                setTimeout(() => {
-                    if (card.classList.contains('is-active')) {
-                        card.classList.add('content-ready');
-                    }
-                }, 250); // Reduce to 80ms if you want it even faster
+        card._bcRevealCleanup = () => {
+            card.removeEventListener('transitionend', onTransitionEnd);
+            clearTimeout(fallbackTimer);
+            card._bcRevealCleanup = null;
+        };
+
+        card.addEventListener('transitionend', onTransitionEnd);
+    }
+
+    function updateClasses(withTransition = true) {
+        const rIndex = renderedIndex(activeIndex);
+
+        cards.forEach((card, i) => {
+            const wasActive = card.classList.contains('is-active');
+            const willBeActive = (i === rIndex);
+
+            if (wasActive && !willBeActive) {
+                cancelContentReveal(card);
+                card.classList.remove('content-ready');
             }
 
-        } else if (Math.abs(i - rIndex) === 1) {
-            card.classList.add('is-adjacent');
-        }
-    });
-}
+            card.classList.remove('is-active', 'is-adjacent');
+
+            if (willBeActive) {
+                card.classList.add('is-active');
+
+                if (!withTransition) {
+                    card.classList.add('content-ready');
+                } else if (!wasActive) {
+                    scheduleContentReveal(card);
+                }
+
+            } else if (Math.abs(i - rIndex) === 1) {
+                card.classList.add('is-adjacent');
+            }
+        });
+    }
 
 function render(withTransition = true) {
     updateClasses(withTransition);
