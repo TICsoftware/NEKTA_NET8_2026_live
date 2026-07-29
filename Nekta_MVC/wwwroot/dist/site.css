@@ -2528,7 +2528,6 @@ body {
   transition: background-color 0.35s ease,color 0.35s ease;
   font-weight: 400;
   background-color: var(--color-primary);
-  overflow-x: hidden;
 }
 @layer base {
   h1 {

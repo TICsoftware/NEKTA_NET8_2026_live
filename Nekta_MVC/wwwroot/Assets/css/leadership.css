@@ -420,7 +420,7 @@ font-size: 1.125rem !important;
     .ld-card h3 {
     font-size: 1.5rem !important;
     margin-bottom: 5px;
-    line-height: 1.25;
+    line-height: 1;
     
 }
     .ld-card p {
@@ -428,3 +428,20 @@ font-size: 1.125rem !important;
   
 }
 }
+
+
+ /* 150% */
+  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+
+        .ld-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 5px;
+    line-height: 1;
+    
+}
+    .ld-card p {
+    font-size: 1rem !important;
+  
+}
+
+ }
