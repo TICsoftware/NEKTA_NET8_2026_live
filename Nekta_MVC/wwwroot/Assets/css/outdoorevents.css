@@ -101,7 +101,7 @@
  @media (min-width: 1200px) and (max-width: 1366px) {
 .section-title-outer {
     margin-bottom: 30px;
-    max-width: 40vw;
+    max-width: 60vw;
 }
 
     .merge-imgs img:nth-child(1) {
