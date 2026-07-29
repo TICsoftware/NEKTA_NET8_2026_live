@@ -54,15 +54,11 @@ namespace Nekta_BusinessLogic.BAL
                 model.LatestTrends_List = MapComponentCommon(groupedData, 9);
 
 
-                // var headerData = MapComponentCommon(groupedData, 5);
-                // if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
-                // {
-                //     var ourTeamData = GetGroupedComponents(ds.Tables[2]);
-                //     var teamData = MapComponentCommon(ourTeamData, 1);
+                if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                {
+                    model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
+                }
 
-                //     // Merge both
-                //     model.OurTeam_List = headerData.Concat(teamData).ToList();
-                // }
 
             }
 
