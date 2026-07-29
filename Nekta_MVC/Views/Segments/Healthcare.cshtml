@@ -1,3 +1,4 @@
+@using Nekta_BusinessLogic.Entity
 @using Nekta_MVC.Helpers
 @model Nekta_BusinessLogic.Entity.SegmentsModel
 @{
@@ -123,10 +124,9 @@
                 !string.IsNullOrWhiteSpace(item.DisplayTitle)
                 ? item.DisplayTitle.CleanParagraphTags()
                 : item.Title)
-            </h2 
-        </div>
-            <!-- Intro paragraphs -->
-            @if (!string.IsNullOrWhiteSpace(item?.Intro))
+        </h2 </div>
+        <!-- Intro paragraphs -->
+        @if (!string.IsNullOrWhiteSpace(item?.Intro))
             {
                 <div class="story-intro text-center max-w-5xl mx-auto mb-25 mt-10">
                     @Html.Raw(item.Intro)
@@ -185,13 +185,11 @@
 }
 
 <!-- ==================== CTA ==================== -->
-@* @if (Model?.Seeking_New_Experience_HC_List != null && Model.Seeking_New_Experience_HC_List.Any())
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
 {
-    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Seeking_New_Experience_HC_List)
-} *@
-
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
-
+    Case_Studies_Component_List = Model.Case_Studies_Component_List,
+    Case_Studies_List = Model.Case_Studies_List
+})
 
 
 @section Scripts {

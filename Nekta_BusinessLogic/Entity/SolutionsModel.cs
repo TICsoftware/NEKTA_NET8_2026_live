@@ -21,6 +21,10 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Works_Best_With_List { get; set; } = new();
         public List<ComponentModel> Explore_With_Nekta_List { get; set; } = new();
 
+
+        public List<ComponentModel> Case_Studies_Component_List { get; set; } = new();
+        public List<ArticleModel> Case_Studies_List { get; set; } = new();
+
         public int TotalCount { get; set; }
     }
 }

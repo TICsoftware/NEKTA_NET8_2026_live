@@ -37,9 +37,15 @@ namespace Nekta_BusinessLogic.BAL
                     model.Culinary_Capability_Arch_List = MapComponents(groupedData, 7);
                     model.Built_To_Aviation_Standards_List = MapComponents(groupedData, 8);
                     model.Why_Clients_Choose_List = MapComponents(groupedData, 9);
-                    model.Central_Kitchens_CTA_List = MapComponents(groupedData, 10);
+                    model.Case_Studies_Component_List = MapComponents(groupedData, 10);
                     model.Works_Best_With_List = MapComponents(groupedData, 11);
                     model.Explore_With_Nekta_List = MapComponents(groupedData, 12);
+                }
+
+
+                if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                {
+                    model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
                 }
 
                 return model;

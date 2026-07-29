@@ -55,6 +55,10 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Proof_Is_On_The_Plate_Outdoor_List { get; set; } = new();
 
 
+        public List<ComponentModel> Case_Studies_Component_List { get; set; } = new();
+        public List<ArticleModel> Case_Studies_List { get; set; } = new();
+
+
         public int TotalCount { get; set; }
 
     }
