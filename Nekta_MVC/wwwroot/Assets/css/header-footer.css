@@ -114,7 +114,7 @@ button:focus-visible, a:focus-visible{ outline:2px solid var(--color-secondary);
 ========================= */
 .footer-grid {color:#fff;}
 .footer-logo { width: auto; height: 50px;}
-.footer-brand-copy { font-size: 1rem; line-height: 1.5;}
+.footer-brand-copy { font-size: 1rem; line-height: 1.5; }
 .footer-nav-list { font-size: 0.875rem;}
 .social-link { width: 40px; height: 40px; font-size: 1.125rem;}
 .footer-legal { color: #fff;margin-top: 15px;}

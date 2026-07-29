@@ -406,6 +406,25 @@ background-color: #F1EDDE;
 /* Small screen laptop */
  @media (min-width: 1200px) and (max-width: 1366px) {
     .ld-quote {
-font-size: 1.75rem;
+font-size: 1.125rem !important;
 }
  }
+
+ 
+ /* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+    .ld-quote {
+        font-size: 1.5rem !important;
+    }
+
+    .ld-card h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 5px;
+    line-height: 1.25;
+    
+}
+    .ld-card p {
+    font-size: 1rem !important;
+  
+}
+}
