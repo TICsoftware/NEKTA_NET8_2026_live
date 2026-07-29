@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="~/Assets/css/education.css" />
     <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
     <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
+    <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
+    
 }
 
 <!-- HERO BANNER END-->
@@ -187,6 +189,7 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_Education_List)
 }
 
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
 
 
 @section Scripts {
@@ -195,4 +198,6 @@
     <script src="~/Assets/js/three-box-slider.js"></script>
     <script src="~/Assets/js/thumb-slider.js"></script>
     <script src="~/Assets/js/education.js"></script>
+    <script src="~/Assets/js/blogs-cards-slider.js"></script>
+    
 }
