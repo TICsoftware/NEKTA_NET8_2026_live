@@ -416,4 +416,15 @@ font-size: 1.125rem !important;
     .ld-quote {
         font-size: 1.5rem !important;
     }
+
+    .ld-card h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 5px;
+    line-height: 1.25;
+    
+}
+    .ld-card p {
+    font-size: 1rem !important;
+  
+}
 }
