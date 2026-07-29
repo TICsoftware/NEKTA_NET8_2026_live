@@ -175,7 +175,7 @@ namespace Nekta_BusinessLogic.BAL
                 model.Outdoor_Catering_Excellence_List = MapComponents(groupedData, 2);
                 model.Services_For_Outdoor_Events_List = MapComponents(groupedData, 3);
                 model.Nektas_Edge_For_Outdoor_Events_List = MapComponents(groupedData, 4);
-                model.Proof_Is_On_The_Plate_Outdoor_List = MapComponents(groupedData, 5);
+                model.Case_Studies_Component_List = MapComponents(groupedData, 5);
             }
 
             if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)

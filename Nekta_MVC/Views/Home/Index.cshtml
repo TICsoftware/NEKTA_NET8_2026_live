@@ -125,7 +125,7 @@
 
 @if (Model?.LatestTrends_List != null && Model.LatestTrends_List.Any())
 {
-    @await Html.PartialAsync("_latest_trends", Model.LatestTrends_List)
+    @await Html.PartialAsync("_latest_trends", Model)
 }
 
 

@@ -20,6 +20,8 @@ namespace Nekta_BusinessLogic.Entity
         public List<HomeCommonModel> ExperienceSpeaks_List { get; set; } = new();
         public List<HomeCommonModel> ClientsWeServe_List { get; set; } = new();
         public List<HomeCommonModel> LatestTrends_List { get; set; } = new();
+
+        public List<ArticleModel> Blogs_List { get; set; } = new();
     }
 
 
@@ -58,8 +60,8 @@ namespace Nekta_BusinessLogic.Entity
 
         public string component_icon_image { get; set; }
         public string component_icon_image_alt { get; set; }
-        
-        public string Designation{ get; set; }
+
+        public string Designation { get; set; }
 
     }
 
