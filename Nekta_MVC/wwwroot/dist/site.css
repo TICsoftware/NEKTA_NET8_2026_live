@@ -1215,9 +1215,6 @@
   .max-w-none {
     max-width: none;
   }
-  .max-w-xl {
-    max-width: var(--container-xl);
-  }
   .flex-1 {
     flex: 1;
   }
@@ -1989,9 +1986,6 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-green {
-    color: var(--color-green);
-  }
   .text-primary {
     color: var(--color-primary);
   }
@@ -2242,9 +2236,6 @@
     }
     .sm\:max-w-5xl {
       max-width: var(--container-5xl);
-    }
-    .sm\:max-w-\[35vw\] {
-      max-width: 35vw;
     }
     .sm\:max-w-\[60vw\] {
       max-width: 60vw;
