@@ -16,6 +16,8 @@ TITLE ANIMATION
 .intro-outer-wrapper p {font-size: var(--text-intro);}
 .section-title-center {max-width: 1080px;}
 
+.cta-section h2{ font-family:var(  --font-body) !important; font-weight:500;}
+
 .card,
 .feature-card,
 .testimonial-card,
