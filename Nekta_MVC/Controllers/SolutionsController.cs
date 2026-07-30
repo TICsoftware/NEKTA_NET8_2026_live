@@ -40,6 +40,25 @@ public class SolutionsController : Controller
     }
 
 
+    public IActionResult Food_Safety_Hygiene(string title)
+    {
+        try
+        {
+            var data = _bal.GetFood_Safety_Hygiene_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/Food_Safety_Hygiene :", ex);
+            return View(new SolutionsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
+
     public IActionResult culexc(string title)
     {
         try
