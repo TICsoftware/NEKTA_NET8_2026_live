@@ -98,41 +98,7 @@
                Please share your requirements.<br />
                An associate will connect with you shortly.
             </p>
-            <form class="enquiry-form" action="#" method="post">
-               <div class="form-field">
-                  <label for="fullName">Full Name Organisation</label>
-                  <input id="fullName" name="fullName" type="text" placeholder="Enter Full Name Organisation"
-                     autocomplete="organization" />
-               </div>
-               <div class="form-field">
-                  <label for="interest">Area of Interest</label>
-                  <select id="interest" name="interest">
-                     <option value="">Select</option>
-                     <option value="corporate">
-                        Business and Corporate
-                     </option>
-                     <option value="education">Education</option>
-                     <option value="healthcare">Healthcare</option>
-                     <option value="events">Outdoor Events</option>
-                  </select>
-               </div>
-               <div class="form-field">
-                  <label for="email">Email Address</label>
-                  <input id="email" name="email" type="email" placeholder="Enter Email Address" autocomplete="email" />
-               </div>
-               <div class="form-field">
-                  <label for="phone">Contact Number</label>
-                  <input id="phone" name="phone" type="tel" placeholder="Enter Contact Number" autocomplete="tel" />
-               </div>
-               <div class="form-field">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" placeholder="Enter your message"></textarea>
-               </div>
-               <button type="submit" class="common-btn modal-submit btn-slide-fill">
-                  <span>Send Enquiry</span>
-                  <span aria-hidden="true">&rarr;</span>
-               </button>
-            </form>
+            @await Html.PartialAsync("~/Views/CommonComponent/_home_contact_modal_form.cshtml", new Nekta_MVC.Models.ContactUsEnquiryModel())
          </div>
       </div>
    </div>
@@ -192,6 +158,11 @@
    <script src="/Assets/js/center-mode-slider.js"></script>
    <script src="/Assets/js/blogs-cards-slider.js"></script>
    <script src="/Assets/js/assistant-popup-script.js"></script>
+
+   @* CONTACT MODAL VALIDATION + SUBMIT  *@
+   <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+   <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+   <script src="/Assets/js/home-contact-modal-script.js"></script>
 
 
    <!-- <script defer type="text/javascript" src="/Assets/js/cookie-script.js"></script> -->
