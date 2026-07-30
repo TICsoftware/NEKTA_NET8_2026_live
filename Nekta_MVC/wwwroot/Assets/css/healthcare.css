@@ -54,6 +54,9 @@ right: -9vw;
     height: auto;
     rotate: -22deg;
 }
+
+
+
  
 /* Responsive scaling for smaller screens */
 @media (max-width: 768px) {

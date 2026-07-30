@@ -51,6 +51,18 @@
 .bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1;}
 
 
+
+ /* Small screen laptop */
+ @media all and (max-width: 1440px) {
+.bc-plate-wrap::before {width:38vw;height: 38vw;}
+}
+
+
+ @media all and (max-width: 1180px) {
+.bc-plate-wrap::before {width:78vw;height: 78vw;}
+}
+
+
 /* Small latop 1366px */
  @media (min-width: 1200px) and (max-width: 1366px){
 
@@ -74,5 +86,8 @@
     transform: translateY(-50%);
     max-width: 23vw;
 }
+
+
+.bc-plate-wrap::before {width: 450px;height: 450px;}
 
  }

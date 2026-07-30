@@ -5,6 +5,15 @@
     box-shadow: 0 12px 24px rgb(0 0 0 / 0.16);
 }
 .swiper.edgeSwiper {padding-top: 25px;}
+
+/* Mute transitions during seamless loop wrap so active scale/blur doesn't re-fire */
+.edgeSwiper.edge-swiper-jumping .swiper-wrapper,
+.edgeSwiper.edge-swiper-jumping .swiper-slide,
+.edgeSwiper.edge-swiper-jumping .edge-card,
+.edgeSwiper.edge-swiper-jumping .edge-card-image,
+.edgeSwiper.edge-swiper-jumping .edge-details {
+    transition: none !important;
+}
 /* Image aur text ke beech zero gap */
 .edgeSwiper .swiper-slide-active .p-8,
 .edgeSwiper .swiper-slide-active .edge-details {
