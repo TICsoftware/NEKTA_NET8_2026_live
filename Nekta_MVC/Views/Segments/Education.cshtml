@@ -191,7 +191,7 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_Education_List)
 }
 
-@if (Model?.Case_Studies_List != null)
+@if (Model?.Case_Studies_List != null && Model.Case_Studies_List.Count > 0)
 {
     await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
     {

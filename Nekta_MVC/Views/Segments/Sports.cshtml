@@ -175,7 +175,7 @@
 
 <!-- ==================== CTA ==================== -->
 <!-- ==================== CTA ==================== -->
-@if (Model?.Case_Studies_List != null)
+@if (Model?.Case_Studies_List != null && Model.Case_Studies_List.Count > 0)
 {
     await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
     {
