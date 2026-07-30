@@ -186,12 +186,12 @@
    <section class="cta-section section-spacing">
       <div class="container">
          <div class="max-w-5xl mx-auto text-center">
-            <h2>
+            <p class="text-h3!">
                @Html.Raw(
                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
                        ? item.DisplayTitle.CleanParagraphTags()
                        : item.Title)
-            </h2>
+            </p>
 
             @if (!string.IsNullOrWhiteSpace(item.Url))
             {

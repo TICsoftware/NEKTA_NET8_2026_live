@@ -1,3 +1,5 @@
+p:last-child{ margin-bottom: 0 !important;}
+
 /**=====================================
 TITLE ANIMATION
 =====================================**/
@@ -11,11 +13,8 @@ TITLE ANIMATION
 .section-title-outer p {font-size: var(--text-intro);}
 .section-title--light-outer p {color: #fff;}
 .section-title-outer-center {text-align: center;}
-
 .intro-outer-wrapper p {font-size: var(--text-intro);}
 .section-title-center {max-width: 1080px;}
-
-.cta-section h2{ font-family:var(  --font-body) !important; font-size:var(--text-h3);  font-weight:500;}
 
 .card,
 .feature-card,
