@@ -57,22 +57,10 @@
     transform: rotate(45deg) translateY(-1px);
 }
 
-.cu-leaf-deco {
-    position: absolute;
-    pointer-events: none;
-    user-select: none;
-
-
-}
+.cu-leaf-deco { position: absolute;  pointer-events: none;  user-select: none;}
 
 /* ---------- HOW TO REACH US ---------- */
-  .reach-section{
-    position:relative;
-    overflow:hidden;
-
-  }
-
-
+  .reach-section{ position:relative; overflow:hidden; background-color: var(  --color-darkcream);}
 
   /* ---------- Heading ---------- */
   .reach-heading-wrap{
@@ -108,7 +96,7 @@
     margin-bottom:110px;
   }
   .reach-card{
-    background:var(--card-bg);
+    background:var(  --color-primary);
     border-radius:18px;
     padding:36px 40px 44px;
     position:relative;
@@ -418,8 +406,8 @@
  
   .solutions-salad{
     position: absolute;
-    top: -35%;
-    left: -86%;
+     top: -6vw;
+    left: -16vw;
     max-width: 48vw;
     z-index: 2;
     rotate: 34deg;
@@ -949,4 +937,38 @@ position: absolute;
 
 
 
-  
+  /* Small screen laptop */
+ @media (min-width: 1200px) and (max-width: 1366px) {
+
+ }
+
+  /* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
+
+}
+
+
+ /* 150% */
+  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+
+  .cu-form-card { max-width: 890px;}
+  .cu-leaf-deco {max-width: 21vw;}
+  .cu-leaf-left { bottom: 8%;left: -2vw;}
+  .cu-leaf-right { right: -2vw;}
+
+  .careers p {text-align: center;max-width: 515px; margin: 15px auto;}
+  .deco-plate { position: absolute; bottom: -7vw; left: -7%; width: 33vw; z-index: 1;}
+  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 28vw;z-index: 1;}
+  .offices-grid-wrap {width: 800px; margin: 0 auto;}
+
+  .solutions-salad {
+    position: absolute;
+    top: -6vw;
+    left: -11vw;
+    max-width: 48vw;}
+    .solutions-grid {gap: 10px;}
+    .solutions-circle { position: absolute; left: 5vw; bottom: 6vw; width: 21vw;}
+    .solutions-splash {position: absolute;top: 33%;right: -12%;height: 85%;}
+
+
+  }

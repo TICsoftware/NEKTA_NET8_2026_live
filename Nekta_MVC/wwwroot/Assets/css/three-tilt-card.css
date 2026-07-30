@@ -24,7 +24,7 @@
 .gallery-card{padding: 5px;width:180px;height:240px;}
 .gallery-left{left:0;}
 .gallery-right{right:0;}
-.story-gallery{ padding: 20px 0px 100px 0px;}
+.story-gallery{ padding: 80px 0px;}
 
 }
  @media (min-width: 1200px) and (max-width: 1366px) {
