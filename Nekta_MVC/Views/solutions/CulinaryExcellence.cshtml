@@ -63,7 +63,7 @@
 {
     <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
         <img loading="lazy" src="~/Assets/images/business/icon-right.svg" alt=""
-            class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
+             class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
         <div class="container relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="relative">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="nourish-photo nourish-photo-front">
                             <img loading="lazy" src="@item.Component_LHS_thumbnail"
-                                alt="@item.Component_LHS_thumbnail_image_alt">
+                                 alt="@item.Component_LHS_thumbnail_image_alt">
                         </div>
                     </div>
                 </div>
@@ -84,10 +84,10 @@
                             !string.IsNullOrWhiteSpace(item.DisplayTitle)
                             ? item.DisplayTitle.CleanParagraphTags()
                             : item.Title)
-                    </h2>
-                </div>
-                <div class="intro-outer-wrapper sm:pl-15">
-                    @if (!string.IsNullOrWhiteSpace(item.Intro))
+                        </h2>
+                    </div>
+                    <div class="intro-outer-wrapper sm:pl-15">
+                        @if (!string.IsNullOrWhiteSpace(item.Intro))
                         {
                             @Html.Raw(item.Intro)
                         }
@@ -111,12 +111,12 @@
             @if (!string.IsNullOrWhiteSpace(item.Component_LHS_thumbnail))
             {
                 <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
-                    class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
+                     class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
             }
             @if (!string.IsNullOrWhiteSpace(item.Component_right_image))
             {
                 <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
-                    class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
+                     class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
             }
         </div>
 
@@ -127,11 +127,11 @@
                     !string.IsNullOrWhiteSpace(item.DisplayTitle)
                     ? item.DisplayTitle.CleanParagraphTags()
                     : item.Title)
-            </h2>
-        </div>
+                </h2>
+            </div>
 
-        <div class="max-w-4xl mx-auto text-center">
-            @if (!string.IsNullOrWhiteSpace(item.Intro))
+            <div class="max-w-4xl mx-auto text-center">
+                @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
                     @Html.Raw(item.Intro)
                 }
@@ -151,31 +151,31 @@
                     !string.IsNullOrWhiteSpace(item.DisplayTitle)
                     ? item.DisplayTitle.CleanParagraphTags()
                     : item.Title)
-            </h2>
+                </h2>
+            </div>
+            <div class="relative">
+                <div class="story-gallery-left">
+                    <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
+                </div>
+                <div class="story-gallery-right">
+                    <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                         class="max-w-auto z-10 story-turmuric">
+                    <img src="@item.Component_Icon3_Image" alt="" class="max-w-auto z-10 story-leaf">
+                </div>
+                <div class="cards-wrapper relative flex justify-center items-center">
+                    <div class="gallery-card gallery-left">
+                        <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
+                    </div>
+                    <div class="gallery-card gallery-center">
+                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                    </div>
+                    <div class="gallery-card gallery-right">
+                        <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="relative">
-            <div class="story-gallery-left">
-                <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
-            </div>
-            <div class="story-gallery-right">
-                <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
-                    class="max-w-auto z-10 story-turmuric">
-                <img src="@item.Component_Icon3_Image" alt="" class="max-w-auto z-10 story-leaf">
-            </div>
-            <div class="cards-wrapper relative flex justify-center items-center">
-                <div class="gallery-card gallery-left">
-                    <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
-                </div>
-                <div class="gallery-card gallery-center">
-                    <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
-                </div>
-                <div class="gallery-card gallery-right">
-                    <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 }
 
 <!-- ==================== Counter Section ==================== -->
@@ -239,7 +239,7 @@
 }
 
 <!-- ==================== Central Kitchens CTA ==================== -->
-@if (Model?.Case_Studies_List != null)
+@if (Model?.Case_Studies_List != null && Model.Case_Studies_List.Count > 0)
 {
     await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
     {

@@ -5,7 +5,6 @@ function initContactModal() {
     if (!modal) return;
 
     const panel = modal.querySelector(".modal-panel");
-    const form = modal.querySelector(".enquiry-form");
 
     const openButtons = document.querySelectorAll("[data-modal-open]");
     const closeButtons = modal.querySelectorAll("[data-modal-close]");
@@ -75,11 +74,6 @@ function initContactModal() {
         if (e.key === "Escape") {
             closeModal();
         }
-    });
-
-    form?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        closeModal();
     });
 }
 
