@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
     <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
     <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
-    
+
 }
 
 <!-- HERO BANNER END-->
@@ -168,7 +168,8 @@
 <!-- ==================== LIFE IS A BEAUTIFUL PLATE (GALLERY) ==================== -->
 @if (Model?.Life_beautiful_Plate_Education_List != null && Model.Life_beautiful_Plate_Education_List.Any())
 {
-    @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml", Model.Life_beautiful_Plate_Education_List)
+    @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml",
+    Model.Life_beautiful_Plate_Education_List)
 }
 
 
@@ -190,11 +191,14 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_Education_List)
 }
 
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+@if (Model?.Case_Studies_List != null)
 {
-    Case_Studies_Component_List = Model.Case_Studies_Component_List,
-    Case_Studies_List = Model.Case_Studies_List
-})
+    await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+    {
+        Case_Studies_Component_List = Model.Case_Studies_Component_List,
+        Case_Studies_List = Model.Case_Studies_List
+    });
+}
 
 
 @section Scripts {
@@ -204,5 +208,5 @@
     <script src="~/Assets/js/thumb-slider.js"></script>
     <script src="~/Assets/js/education.js"></script>
     <script src="~/Assets/js/blogs-cards-slider.js"></script>
-    
+
 }

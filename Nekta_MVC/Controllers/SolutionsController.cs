@@ -40,7 +40,7 @@ public class SolutionsController : Controller
     }
 
 
-        public IActionResult culexc(string title)
+    public IActionResult culexc(string title)
     {
         try
         {

@@ -155,6 +155,7 @@
 
 
 <!-- ==================== Services for Outdoor Events ==================== -->
+
 @if (Model?.Services_For_Outdoor_Events_List != null && Model.Services_For_Outdoor_Events_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_life_is_beautiful_plate.cshtml",
@@ -171,11 +172,14 @@
 
 
 <!-- ==================== CTA ==================== -->
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+@if (Model?.Case_Studies_List != null)
 {
-    Case_Studies_Component_List = Model.Case_Studies_Component_List,
-    Case_Studies_List = Model.Case_Studies_List
-})
+    await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+    {
+        Case_Studies_Component_List = Model.Case_Studies_Component_List,
+        Case_Studies_List = Model.Case_Studies_List
+    });
+}
 
 
 @section Scripts {
@@ -184,5 +188,5 @@
     <script src="~/Assets/js/blogs-cards-slider.js"></script>
     <script src="~/Assets/js/thumb-slider.js"></script>
     <script src="~/Assets/js/outdoorevents.js"></script>
-    
+
 }

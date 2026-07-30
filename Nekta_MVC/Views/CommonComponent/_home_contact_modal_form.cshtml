@@ -1,0 +1,84 @@
+@using Nekta_BusinessLogic.BAL
+@using Nekta_MVC.Models
+@using Microsoft.Extensions.Configuration
+@model ContactUsEnquiryModel
+@inject IConfiguration Configuration
+
+@{
+    List<Nekta_BusinessLogic.Entity.CityMaster> cityList;
+    List<Nekta_BusinessLogic.Entity.AreaOfInterestMaster> interestList;
+
+    using (var enquiryBal = new ContactusEnquiry_BAL(Configuration))
+    {
+        cityList = enquiryBal.GetCityList_BAL();
+        interestList = enquiryBal.GetAreaOfInterestList_BAL();
+    }
+}
+
+<form id="homeContactForm" class="enquiry-form" asp-controller="Contactus" asp-action="SubmitHomeEnquiry"
+    method="post" novalidate>
+    <div class="form-field">
+        <label asp-for="FullName">Full Name</label>
+        <input asp-for="FullName" type="text" placeholder="Enter Full Name" autocomplete="name" />
+        <span asp-validation-for="FullName" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Designation">Designation</label>
+        <input asp-for="Designation" type="text" placeholder="Enter Designation" autocomplete="organization-title" />
+        <span asp-validation-for="Designation" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Organisation">Organisation Name</label>
+        <input asp-for="Organisation" type="text" placeholder="Enter Organisation Name" autocomplete="organization" />
+        <span asp-validation-for="Organisation" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="City">City</label>
+        <select asp-for="City">
+            <option value="">Select city</option>
+            @foreach (var item in cityList)
+            {
+                <option value="@item.CityId">@item.CityName</option>
+            }
+        </select>
+        <span asp-validation-for="City" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Interest">Area of Interest</label>
+        <select asp-for="Interest">
+            <option value="">Select an area of interest</option>
+            @foreach (var item in interestList)
+            {
+                <option value="@item.InterestId">@item.InterestName</option>
+            }
+        </select>
+        <span asp-validation-for="Interest" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Email">Email Address</label>
+        <input asp-for="Email" type="email" placeholder="Enter Email Address" autocomplete="email" />
+        <span asp-validation-for="Email" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Phone">Contact Number</label>
+        <input asp-for="Phone" type="tel" placeholder="Enter Contact Number" autocomplete="tel" />
+        <span asp-validation-for="Phone" class="field-error"></span>
+    </div>
+    <div class="form-field">
+        <label asp-for="Message">Message</label>
+        <textarea asp-for="Message" placeholder="Enter your message"></textarea>
+        <span asp-validation-for="Message" class="field-error"></span>
+    </div>
+
+    <label class="modal-consent">
+        <input asp-for="Consent" type="checkbox" />
+        <span>I agree to be contacted by Nekta regarding my enquiry.</span>
+        <span asp-validation-for="Consent" class="field-error"></span>
+    </label>
+
+    <button type="submit" class="common-btn modal-submit btn-slide-fill">
+        <span>Send Enquiry</span>
+        <span aria-hidden="true">&rarr;</span>
+    </button>
+    <div id="homeContactMessage"></div>
+</form>
