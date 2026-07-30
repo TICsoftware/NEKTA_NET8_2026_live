@@ -1,3 +1,4 @@
+@using Nekta_BusinessLogic.Entity
 @using Nekta_MVC.Helpers
 @model Nekta_BusinessLogic.Entity.SegmentsModel
 @{
@@ -189,7 +190,11 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_singular_spirit.cshtml", Model.Singular_Spirit_Education_List)
 }
 
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
+{
+    Case_Studies_Component_List = Model.Case_Studies_Component_List,
+    Case_Studies_List = Model.Case_Studies_List
+})
 
 
 @section Scripts {

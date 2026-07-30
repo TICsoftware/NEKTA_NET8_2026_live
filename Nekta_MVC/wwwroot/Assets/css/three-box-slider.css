@@ -42,7 +42,10 @@
     border-bottom-right-radius: 24px;
 }
 
-
+.three-box-slider {
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+}
 
 .feature-card {
     background: var(--color-cream);

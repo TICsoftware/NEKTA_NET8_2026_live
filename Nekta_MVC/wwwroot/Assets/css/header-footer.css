@@ -162,7 +162,7 @@ transform:translateY(-50%);}
  .footer-quick-links { padding-left: 40px; }
 }
 
-
+.footer-indent p { margin-bottom: 0px;}
 
 /* Shubham css Changes in footer */
 footer h4{font-size: var(--text-h3);font-family: var(--font-heading);  font-weight: 400;color: var(--color-primary);  border-bottom: 2px solid var(--color-primary); display: inline-block; margin-bottom: 2.5rem; padding-bottom: 0.5rem;}

@@ -1,3 +1,4 @@
+@using Nekta_BusinessLogic.Entity
 @using Nekta_MVC.Helpers
 @model Nekta_BusinessLogic.Entity.SegmentsModel
 @{
@@ -174,14 +175,11 @@
 
 <!-- ==================== CTA ==================== -->
 <!-- ==================== CTA ==================== -->
-@* @if (Model?.Proof_Is_On_The_Plate_List != null && Model.Proof_Is_On_The_Plate_List.Any())
+@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", new CaseStudiesViewModel
 {
-    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_cta.cshtml", Model.Proof_Is_On_The_Plate_List)
-} *@
-
-@await Html.PartialAsync("~/Views/CommonComponent/_case_studies.cshtml", Model.Proof_Is_On_The_Plate_List)
-
-
+    Case_Studies_Component_List = Model.Case_Studies_Component_List,
+    Case_Studies_List = Model.Case_Studies_List
+})
 
 @section Scripts {
     <script src="~/Assets/js/inner-banner-script.js"></script>

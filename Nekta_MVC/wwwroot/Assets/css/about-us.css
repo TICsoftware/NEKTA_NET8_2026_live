@@ -1,5 +1,5 @@
 .intro-section-wrap p {font-size: var(--text-22);}
-.cta-section h2{ font-family:var(  --font-heading); font-size:var(--text-h3); font-style:italic; font-weight:700;}
+
 
 .counter-odometer {display: inline-flex;align-items: baseline;gap: 0ch;font-variant-numeric: tabular-nums;line-height: 1;overflow: hidden;}
 .odometer-digit {overflow: hidden;display: inline-block;vertical-align: bottom;height: 1em;width: 1ch;text-align: center;font-family: inherit;font-weight: inherit;font-size: inherit;}
