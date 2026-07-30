@@ -32,11 +32,6 @@ $(document).ready(function () {
                         `<div class="modal-alert modal-alert--success">${response.message}</div>`
                     );
 
-                    setTimeout(function () {
-                        $("#contactModal [data-modal-close]").first().trigger("click");
-                        $("#homeContactMessage").empty();
-                    }, 1600);
-
                 } else {
                     $("#homeContactMessage").html(
                         `<div class="modal-alert modal-alert--error">${response.message}</div>`
