@@ -49,6 +49,20 @@ namespace Nekta_BusinessLogic.Entity
         public string IPAddress { get; set; }
     }
 
+    public class SalesEnquiry
+    {
+        public string FullName { get; set; }
+        public string Designation { get; set; }
+        public string Organisation { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+        public int InterestId { get; set; }
+        public string Interest { get; set; }
+        public string Query { get; set; }
+        public string IPAddress { get; set; }
+    }
+
     public class CityMaster
     {
         public int CityId { get; set; }

@@ -1,5 +1,6 @@
 p:last-child{ margin-bottom: 0 !important;}
 
+
 /**=====================================
 TITLE ANIMATION
 =====================================**/
@@ -16,6 +17,9 @@ TITLE ANIMATION
 .intro-outer-wrapper p {font-size: var(--text-intro);}
 .section-title-center {max-width: 1080px;}
 
+
+
+.section-title-outer .title-section:last-child{ margin-bottom:0 !important;}
 
 
 .card,

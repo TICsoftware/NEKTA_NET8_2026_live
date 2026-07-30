@@ -22,6 +22,14 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Explore_With_Nekta_List { get; set; } = new();
 
 
+        //Food Safety & Hygiene
+        public List<ComponentModel> Driving_Quality_Excellence_Food_List { get; set; } = new();
+        public List<ComponentModel> Building_Trust_Food_List { get; set; } = new();
+        public List<ComponentModel> Our_Commitment_Compliance_Excellence_Food_List { get; set; } = new();
+        public List<ComponentModel> A_Trusted_Safety_Framework_Food_List { get; set; } = new();
+        public List<ComponentModel> Our_Food_Safety_Quality_Food_List { get; set; } = new();
+
+
         public List<ComponentModel> Case_Studies_Component_List { get; set; } = new();
         public List<ArticleModel> Case_Studies_List { get; set; } = new();
 

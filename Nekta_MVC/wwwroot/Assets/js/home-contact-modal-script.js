@@ -70,13 +70,7 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        // Designation
-        let designation = $form.find("#Designation").val().trim();
-        if (designation === "") {
-            $form.find('[data-valmsg-for="Designation"]').text("Please enter your designation.");
-            isValid = false;
-        }
-
+       
         // Organisation
         let organisation = $form.find("#Organisation").val().trim();
         if (organisation === "") {
@@ -84,11 +78,7 @@ $(document).ready(function () {
             isValid = false;
         }
 
-        // City
-        if ($form.find("#City").val() === "") {
-            $form.find('[data-valmsg-for="City"]').text("Please select your city.");
-            isValid = false;
-        }
+      
 
         // Interest
         if ($form.find("#Interest").val() === "") {
@@ -124,11 +114,7 @@ $(document).ready(function () {
             }
         }
 
-        // Consent
-        if (!$form.find("#Consent").prop("checked")) {
-            $form.find('[data-valmsg-for="Consent"]').text("Please accept the consent.");
-            isValid = false;
-        }
+       
 
         return isValid;
     }

@@ -5,6 +5,27 @@
 .innerbanner-title-heading.innerbanner-title-heading-white {color: #fff;}
 .innerbanner-title-heading .highlight-span { color: var(--color-primary);}
 
+.blank-template-inner h2{ font-size:var(--text-h3); margin-top:30px; margin-bottom: 10px; color: var(--color-secondary);}
+.blank-template-inner .list-alpha li,
+.blank-template-inner .list-disc li,
+.blank-template-inner .list-number li{ font-size: var(--text-p); margin-bottom:20px; position:relative; list-style-type: none; padding-left:25px;}
+
+.blank-template-inner .list-alpha li .alpha,
+.blank-template-inner .list-number li .number{ position: absolute; left: 0px; font-weight: 700;}
+
+.list-disc li{position:relative}
+.list-disc li::before{ content:''; position:absolute; top:5px; left:0; background-color:#fc713c; height:7px; width:7px; border-radius:50%;}
+.blank-template-inner .list-disc  .alpha{ display: none;}
+
+/* .blank-template-inner .list-alpha li:before{ content:''; position: absolute; top:5px; left:0;}
+.blank-template-inner .list-disc li:before{content:''; position: absolute; top:5px; left:0;} */
+
+.blank-template-inner .list-alpha li::marker,
+.blank-template-inner .list-disc li::marker{ display:none !important;}
+
+
+
+
 @media (max-width: 1023px) {
 
 }
