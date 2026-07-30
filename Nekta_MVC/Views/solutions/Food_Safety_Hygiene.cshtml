@@ -58,7 +58,7 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
 }
 
-<!-- ==================== From the Core to Every Corner ==================== -->
+<!-- ==================== Driving Quality Excellence ==================== -->
 @foreach (var item in Model.Driving_Quality_Excellence_Food_List.Where(x => x.IsBlock == 0))
 {
     <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
@@ -98,7 +98,7 @@
     </section>
 }
 
-<!-- ==================== Why Central Kitchens Matter ==================== -->
+<!-- ==================== Building Trust ==================== -->
 @foreach (var item in Model.Building_Trust_Food_List.Where(x => x.IsBlock == 0))
 {
     <section class="bc-dining-section section-pb curveshape-wrap">
@@ -142,9 +142,8 @@
 
 
 
-<!-- ==================== Built to Aviation Standards ==================== -->
-@if (Model.Our_Commitment_Compliance_Excellence_Food_List != null &&
-Model.Our_Commitment_Compliance_Excellence_Food_List.Any())
+<!-- ==================== Our Commitment to Compliance & Excellence ==================== -->
+@if (Model.Our_Commitment_Compliance_Excellence_Food_List != null && Model.Our_Commitment_Compliance_Excellence_Food_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_aviation_standards.cshtml",
     Model.Our_Commitment_Compliance_Excellence_Food_List)
@@ -152,10 +151,11 @@ Model.Our_Commitment_Compliance_Excellence_Food_List.Any())
 
 
 
-<!-- ==================== CTA ==================== -->
+<!-- ==================== A Trusted Safety Framework ==================== -->
 @foreach (var item in Model.A_Trusted_Safety_Framework_Food_List.Where(x => x.IsBlock == 0))
 {
-    <section class="cta-section @(string.IsNullOrWhiteSpace(item?.bg_class) ? "bg-darkcream" : item.bg_class)  section-spacing relative overflow-hidden">
+    <section
+        class="cta-section @(string.IsNullOrWhiteSpace(item?.bg_class) ? "bg-darkcream" : item.bg_class)  section-spacing relative overflow-hidden">
         <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
         <div class="container">
             <!-- Section Heading -->
@@ -187,7 +187,7 @@ Model.Our_Commitment_Compliance_Excellence_Food_List.Any())
 
 
 
-<!-- ==================== Why Clients Choose Nekta's Culinary Capability ==================== -->
+<!-- ==================== Our Food Safety & Quality Assurance Practices ==================== -->
 @if (Model.Our_Food_Safety_Quality_Food_List != null && Model.Our_Food_Safety_Quality_Food_List.Any())
 {
     @await Html.PartialAsync("~/Views/CommonComponent/_nekta_edge.cshtml", Model.Our_Food_Safety_Quality_Food_List)
