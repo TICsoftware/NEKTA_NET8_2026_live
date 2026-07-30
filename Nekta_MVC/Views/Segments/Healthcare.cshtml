@@ -44,13 +44,13 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
-
     <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
     <link rel="stylesheet" href="~/Assets/css/healthcare.css" />
     <link rel="stylesheet" href="~/Assets/css/page-intro-section.css" />
     <link rel="stylesheet" href="~/Assets/css/three-tilt-card.css">
     <link rel="stylesheet" href="~/Assets/css/three-box-slider.css">
     <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
+    
 }
 
 <!-- HERO BANNER END-->
@@ -59,7 +59,6 @@
     @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
 }
 <!-- HERO BANNER END -->
-
 
 <!-- ==================== INTR0- DELIVERING EXPERIENCES ==================== -->
 @foreach (var item in Model.Nutrition_That_Heals_List.Where(x => x.IsBlock == 0))
