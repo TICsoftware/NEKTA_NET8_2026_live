@@ -1,5 +1,6 @@
 p:last-child{ margin-bottom: 0 !important;}
 
+
 /**=====================================
 TITLE ANIMATION
 =====================================**/
@@ -16,7 +17,10 @@ TITLE ANIMATION
 .intro-outer-wrapper p {font-size: var(--text-intro);}
 .section-title-center {max-width: 1080px;}
 
-.cta-section h2{ font-family:var(  --font-body) !important; font-weight:500;}
+
+
+.section-title-outer .title-section:last-child{ margin-bottom:0 !important;}
+
 
 .card,
 .feature-card,
@@ -126,6 +130,8 @@ Leaf travel CSS
 .green-wrapper.bg-green .title-section {color: var(--color-cream) !important;}
 .green-wrapper.bg-darkcream .title-section { color:var(--color-text-heading) !important;}
 
+
+.cta-section h2{ font-family:var(--font-body) !important; font-weight:500;}
 
 
 
