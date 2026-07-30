@@ -1843,12 +1843,6 @@
   .align-top {
     vertical-align: top;
   }
-  .font-body {
-    font-family: var(--font-body);
-  }
-  .font-body\! {
-    font-family: var(--font-body) !important;
-  }
   .font-heading {
     font-family: var(--font-heading);
   }
@@ -1881,24 +1875,12 @@
   .text-h2 {
     font-size: var(--text-h2);
   }
-  .text-h2\! {
-    font-size: var(--text-h2) !important;
-  }
   .text-h3 {
     font-size: var(--text-h3);
   }
-<<<<<<< HEAD
-=======
   .text-h3\! {
     font-size: var(--text-h3) !important;
   }
-  .text-h4 {
-    font-size: var(--text-h4);
-  }
-  .text-h5 {
-    font-size: var(--text-h5);
-  }
->>>>>>> 0a9781b64074681424883ae2d138409a54f35faa
   .text-small {
     font-size: var(--text-small);
   }

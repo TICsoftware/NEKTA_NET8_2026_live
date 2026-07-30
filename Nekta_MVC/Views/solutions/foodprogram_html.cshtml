@@ -1,0 +1,436 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SolutionsModel
+@{
+    ViewData["Title"] = "Culinary Excellence";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+}
+
+@section Styles {
+
+
+
+    <link rel="stylesheet" href="~/Assets/css/foodprogram.css" />
+    
+}
+
+<!-- HERO BANNER END-->
+      <section class="relative inside-banner-outer overflow-hidden">
+         <div class="inside-banner-inner banner-animation relative ">
+
+            <!-- Banner -->
+            <div class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+               <!-- Parallax Image -->
+               <picture>
+                  <!-- Desktop -->
+                  <source media="(min-width:1024px)"
+                     srcset="assets/images/banners/company-info-banner-desktop.webp">
+
+                  <!-- Tablet -->
+                  <source media="(min-width:768px)"
+                     srcset="assets/images/banners/company-info-banner-mob.webp">
+
+                  <!-- Mobile -->
+                  <img
+                     src="assets/images/banners/company-info-banner-mob.webp"
+                     alt="About Bubble Food"
+                     class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover"
+                     loading="eager"
+                     fetchpriority="high">
+               </picture>
+
+               <!-- Keep Existing Overlay -->
+               <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+
+
+            </div>
+
+            <!-- Content -->
+           
+               <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+                  <div class="container pb-12 md:pb-15">
+                     <div class="max-w-4xl text-left">
+
+                        <nav class="mb-4" aria-label="Breadcrumb">
+                           <ol class="flex items-center gap-2 text-sm">
+                              <li>
+                                 <a href="/" class="text-white/70 hover:text-white transition">
+                                    Home
+                                 </a>
+                              </li>
+
+                              <li class="text-white/60">/</li>
+
+                              <li class="text-white">
+                                 About Us
+                              </li>
+                           </ol>
+                        </nav>
+
+                        <h1 class="innerbanner-title text-h1 text-white">
+                          Life is a 
+                           <span class="innerbanner-title-span">
+                              Beautiful Plate
+                           </span>
+                        </h1>
+
+                     </div>
+                  </div>
+               </div>
+           
+
+         </div>
+      </section>
+<!-- HERO BANNER END -->
+
+<!-- Logo intro section-->
+<section class="plates-section relative bg-darkcream">
+     <!-- background bg image tag for the curved line -->
+            <img class="curve-bg" src="~/Assets/images/foodprogram/curve-bg.svg" alt="" aria-hidden="true">
+
+            <!-- left decorative image -->
+            <img class="deco deco-left" src="~/Assets/images/foodprogram/deco-left.png" alt="Sandwich illustration">
+
+            <!-- right decorative image -->
+            <img class="deco deco-right" src="~/Assets/images/foodprogram/deco-right.png" alt="Croissant illustration">
+        <div class="container">
+           
+
+            <div class="plates-inner">
+
+                <div class="plate-grid" id="plateGrid">
+                <!-- Each .plate = circular plate image (bottom layer) + logo (top layer).
+                    Replace the <span> in .plate-logo with an <img class="plate-logo-img" src="logo.svg" alt="Brand name">
+                    to drop in a real logo. -->
+
+                <div class="plate" style="--wordmark-color:#D9502E">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="~/Assets/images/foodprogram/Fire_and_Feast_Final_logo.svg" alt="Fire & Fork logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#3F6B4F">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-02.svg" alt="Anuka Craft logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#2C5B8A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-03.svg" alt="Blue Harbor logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#4A4A4A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-04.svg" alt="White Ridgetown logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#1F5C4A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-05.svg" alt="Gvsthaus logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#8A6A3A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-06.svg" alt="le Café logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#D9502E">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-07.svg" alt="BR logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#2C6E5E">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-08.svg" alt="Riverstead logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#5B7A3A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-09.svg" alt="Farm Kitchen logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#C9873A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-10.svg" alt="Solara Café logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#3A7CA5">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-11.svg" alt="CloudBrew logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#6B4A3A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-12.svg" alt="Whole & Co. logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#D9502E">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-13.svg" alt="Perfect Podi logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#8A5A2A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-14.svg" alt="The Originals logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#C94F7C">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-15.svg" alt="Sweet Bloom logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#2C4E7A">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-16.svg" alt="Home Kitchens logo" loading="lazy"></div>
+                </div>
+
+                <div class="plate" style="--wordmark-color:#7A3AA5">
+                    <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                    <div class="plate-logo"><img class="plate-logo-img" src="assets/logos/logo-17.svg" alt="Pulp Culture logo" loading="lazy"></div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+</section>
+
+@* Cuervsection *@
+<section class="av-section">
+  <div class="av-container">
+    <div class="av-grid">
+
+      <!-- LEFT: arch image -->
+      <div class="av-media-wrap">
+        <div class="av-arch">
+          <img src="~/Assets/images/foodprogram/chef-image.png" alt="Chef preparing a dish">
+        </div>
+      </div>
+
+      <!-- RIGHT: paragraph content -->
+      <div class="av-content" id="avContent">
+        <img src="assets/leaf-icon.svg" alt="" class="av-leaf-icon">
+
+        <div class="av-text-block">
+          <p>At Nekta, we believe that great dining begins with diversity. Recognising the varied tastes, preferences, and expectations of today's consumers, we have curated a portfolio of distinctive food concepts designed to cater to every palate and occasion.</p>
+                    <p>At Nekta, we believe that great dining begins with diversity. Recognising the varied tastes, preferences, and expectations of today's consumers, we have curated a portfolio of distinctive food concepts designed to cater to every palate and occasion.</p>
+
+          <div class="av-text-extra">
+            <div>
+              <p>Our concepts span a rich spectrum of culinary experiences— from everyday comfort food and regional favourites to authentic global cuisines, vibrant street food formats, specialty beverages, and wellness-focused offerings. Each concept is thoughtfully developed to bring variety, excitement, and freshness to the dining experience while maintaining consistency at scale.</p>
+
+              <p>Crafted by our team of culinary experts, these concepts are inspired by evolving food trends, regional influences, dietary preferences, and consumer insights. The result is a dynamic and ever-evolving dining ecosystem that keeps menus engaging, relevant, and consistently exciting.</p>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="av-read-more" id="avReadMoreBtn" aria-expanded="false" aria-controls="avContent">
+          <span class="av-read-more-text">Read More</span>
+          <span class="av-read-more-icon">+</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- decorative bottom-right leaves -->
+  <img src="assets/leaves-decor.png" alt="" class="av-decor-corner">
+</section>
+
+
+
+@* quote section *@
+<section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="80" data-leaf-rotation="-20">
+            <!-- Background Pattern -->
+            <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
+            <!-- Decorative Leaf -->
+
+            <div class="container relative z-10">
+                <div class="max-w-6xl mx-auto">
+
+                    <div class="ld-quote-wrapper">
+                        <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt="" class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
+
+                        <p class="ld-quote my-4">Our leadership team reflects a dynamic blend of experience and fresh perspective. Seasoned professionals bring deep industry knowledge and strategic clarity, while a new generation of talent introduces agility and insight into evolving consumer trends. Together, this balance enables us to craft forward-looking strategies that remain relevant in a rapidly changing landscape.</p>
+
+
+
+                        <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt="" class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
+                    </div>
+
+                    <div class="ld-quote-author">
+                        <h2 class="ld-author-name">Ashwin shah</h2>
+                        <p class="ld-author-role">
+                            Director of Sales and Business Development
+                        </p>
+                    </div>
+                </div>
+            </div>
+ </section>
+
+ @* Accordian section *@
+ <section class="mp-section section-spacing">
+        <img src="assets/deco-fruit.svg" alt="" class="mp-deco" aria-hidden="true">
+
+        <div class="mp-head">
+                     <!-- Section Heading -->
+         <div class="section-title-outer text-center mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+    The Multi-Purpose Cart
+            </h2>
+
+         </div>
+         
+            <p class="mp-desc">At Nekta, we believe that great dining experiences are built on both variety and value. Our Multi-Purpose Cart is a flexible, mobile dining solution designed to bring an engaging culinary experience directly to consumers—wherever they are within the facility.</p>
+          
+        </div>
+
+        <div class="accordion" id="accordion">
+            
+           <div class="container">
+            <!-- 01 — collapsed, no media -->
+            <div class="acc-item" data-acc-item>
+            <button class="acc-header" data-acc-toggle>
+                <span class="acc-num">01</span>
+                <span class="acc-title">Anuka Comfort</span>
+                <span class="acc-toggle-icon"></span>
+            </button>
+            <div class="acc-panel">
+                <div class="acc-panel-inner">
+                <div class="acc-grid text-only">
+                    <div class="acc-text">
+                    <p>Anuka Comfort brings together everyday favourites crafted with fresh, honest ingredients — designed for consumers looking for familiar, satisfying meals without compromise.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- 02 — open by default, IMAGE SLIDER (2+ images) -->
+            <div class="acc-item is-open" data-acc-item>
+            <button class="acc-header" data-acc-toggle>
+                <span class="acc-num">02</span>
+                <span class="acc-title">Bowled Over</span>
+                <span class="acc-toggle-icon"></span>
+            </button>
+            <div class="acc-panel">
+                <div class="acc-panel-inner">
+                <div class="acc-grid">
+                    <div class="acc-text">
+                    <p>Bowled Over is Nekta's interactive live food concept that brings together nutrition, personalisation, and flavor in one wholesome bowl. Designed for today's health-conscious consumer, the concept features chef-crafted, nutrient-rich bowls that can be customised with a choice of grains, fresh vegetables, proteins, toppings, and signature sauces—creating a balanced meal tailored to individual preferences.</p>
+                    <p>Served through a live counter format, our chefs assemble each bowl in real time, allowing consumers to curate their meal while ensuring the right balance of taste, nutrition, and portion control.</p>
+                    </div>
+                    <div class="acc-media" data-per-view="2">
+                    <div class="acc-slider" data-slider>
+                        <div class="acc-slide"><img src="assets/bowled-over-1.jpg" alt="Bowled Over — fresh bowl spread"></div>
+                        <div class="acc-slide"><img src="assets/bowled-over-2.jpg" alt="Bowled Over — mobile cart"></div>
+                            <div class="acc-slide"><img src="assets/bowled-over-1.jpg" alt="Bowled Over — fresh bowl spread"></div>
+                        <div class="acc-slide"><img src="assets/bowled-over-2.jpg" alt="Bowled Over — mobile cart"></div>
+                    </div>
+                    
+                    <button class="acc-arrow acc-arrow-prev" type="button" data-slider-prev aria-label="Previous image">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="#3B372B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="acc-arrow acc-arrow-next" type="button" data-slider-next aria-label="Next image">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#3B372B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="acc-dots" data-slider-dots></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- 03 — open by default, SINGLE IMAGE (no slider controls) -->
+            <div class="acc-item is-open" data-acc-item>
+            <button class="acc-header" data-acc-toggle>
+                <span class="acc-num">03</span>
+                <span class="acc-title">Foodtrotters</span>
+                <span class="acc-toggle-icon"></span>
+            </button>
+            <div class="acc-panel">
+                <div class="acc-panel-inner">
+                <div class="acc-grid">
+                    <div class="acc-text">
+                    <p>Foodtrotters is Nekta's international cuisine concept, designed to bring global flavours to the workplace while thoughtfully adapting them to local tastes and preferences. Curated by our culinary team, the concept introduces employees to a diverse range of world cuisines, delivering familiar comfort alongside new culinary discoveries.</p>
+                    <p>From Asian favourites and Mediterranean classics to Continental specialties and global street-food inspirations, every dish is prepared with authentic culinary influences while being carefully tailored to suit the Indian palate.</p>
+                    </div>
+                    <div class="acc-media">
+                    <div class="acc-slider" data-slider>
+                        <div class="acc-slide"><img src="assets/foodtrotters-1.jpg" alt="Foodtrotters — wraps and dips"></div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- 04 — open by default, no media -->
+            <div class="acc-item is-open" data-acc-item>
+            <button class="acc-header" data-acc-toggle>
+                <span class="acc-num">04</span>
+                <span class="acc-title">The Perfect Jodi</span>
+                <span class="acc-toggle-icon"></span>
+            </button>
+            <div class="acc-panel">
+                <div class="acc-panel-inner">
+                <div class="acc-grid text-only">
+                    <div class="acc-text">
+                    <p>The Perfect Jodi is a unique dining concept built around the idea that great meals are created through thoughtful pairings, bringing together complementary flavours, textures, and culinary traditions, the concept combines Indian or international preparations or a single plate to create a balanced and memorable dining experience.</p>
+                    <p>From classic pairings to contemporary combinations, each Jodi is carefully curated by our chefs to ensure that every element enhances the other. Thoughtfully crafted to balance taste and nutrition, The Perfect Jodi offers consumers the best of both worlds—familiar comforts and global inspiration—creating a dining experience that is wholesome, engaging, and full of discovery.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- 05 — open by default, IMAGE + VIDEO SLIDER -->
+            <div class="acc-item is-open" data-acc-item>
+            <button class="acc-header" data-acc-toggle>
+                <span class="acc-num">05</span>
+                <span class="acc-title">The Pagoda</span>
+                <span class="acc-toggle-icon"></span>
+            </button>
+            <div class="acc-panel">
+                <div class="acc-panel-inner">
+                <div class="acc-grid">
+                    <div class="acc-text">
+                    <p>The Pagoda is Nekta's Pan-Asian dining concept, bringing the bold and vibrant flavours of the Far East to the workplace. From Asian-inspired rice and noodle bowls to flavourful protein preparations, every dish is thoughtfully curated for the Indian palate while retaining its authentic character.</p>
+                    <p>Served in elegant bento box, The Pagoda delivers a complete and balanced meal experience. Prepared live by our chefs using fresh ingredients and authentic techniques, the concept combines customisation, convenience, and premium presentation to elevate everyday dining.</p>
+                    </div>
+                    <div class="acc-media" data-per-view="2">
+                    <div class="acc-slider" data-slider>
+                        <div class="acc-slide"><img src="assets/pagoda-1.jpg" alt="The Pagoda — bento box"></div>
+                        <div class="acc-slide" data-type="video">
+                        <video src="assets/pagoda-video.mp4" poster="assets/pagoda-video-poster.jpg" playsinline></video>
+                        <button class="acc-play-btn" type="button" data-play-video aria-label="Play video">
+                            <svg viewBox="0 0 24 24" fill="#3B372B"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        </div>
+                    </div>
+                    <button class="acc-arrow acc-arrow-prev" type="button" data-slider-prev aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="#3B372B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button class="acc-arrow acc-arrow-next" type="button" data-slider-next aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#3B372B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="acc-dots" data-slider-dots></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+           </div>  
+
+        </div>
+</section>
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/foodprogram.js"></script>
+
+}

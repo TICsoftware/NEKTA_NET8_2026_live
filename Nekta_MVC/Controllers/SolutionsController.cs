@@ -38,7 +38,23 @@ public class SolutionsController : Controller
             _bal.Dispose();
         }
     }
-
+    public IActionResult foodprogram_html()
+    {
+        try
+        {
+           //var data = _bal.GetCulinaryExcellence_BAL(title, 1, 1);
+            return View();
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/CulinaryExcellence :", ex);
+            return View(new SolutionsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
 
     public IActionResult culexc(string title)
     {
