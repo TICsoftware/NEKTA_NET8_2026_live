@@ -36,7 +36,7 @@
         <div class="container relative text-center">
             <!-- Section Heading -->
             <div class="section-title-outer text-center mx-auto max-w-2xl ">
-                <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
                     @Html.Raw(
                     !string.IsNullOrWhiteSpace(component.DisplayTitle)
                     ? component.DisplayTitle.CleanParagraphTags()
@@ -50,8 +50,8 @@
 
             @if (!string.IsNullOrWhiteSpace(component.Intro))
             {
-                <p class="cu-enquiry-copy">
-                    @Html.Raw(component.Intro)
+                <p class="cu-enquiry-copy ">
+                    @Html.Raw(component.Intro.CleanParagraphTags())
                 </p>
             }
         </div>

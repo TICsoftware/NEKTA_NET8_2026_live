@@ -24,6 +24,7 @@
   --text-small:   clamp(0.875rem, 0.35vw + 0.7rem,  0.875rem); /**14px - 14px**/
   --text-button:  clamp(1rem,  0.948rem + 0.22vw, 1.125rem);
   --text-22:     clamp(1.125rem, 1.021rem + 0.44vw, 1.375rem); /* 18px → 22px */
+  --text-30: clamp(1.375rem, 1.875rem, 1.875rem); /* 22px → 30px */
   --text-12: clamp(0.7rem, 0.65rem + 0.2vw, 0.75rem);
 
   --text-intro: clamp(1.125rem, 1.021rem + 0.44vw, 1.375rem); /* 18px → 22px */
@@ -115,6 +116,10 @@ body {
    font-weight: 400;
    background-color: var(--color-primary);
   }
+
+
+.font-body{ font-family: "Poppins", sans-serif !important;}
+.font-heading{  font-family: "Cormorant Garamond", serif !important;}
 
 
 @layer base {
