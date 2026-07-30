@@ -1,7 +1,7 @@
 @using Nekta_BusinessLogic.BAL
 @using Nekta_MVC.Models
 @using Microsoft.Extensions.Configuration
-@model ContactUsEnquiryModel
+@model SalesEnquiryModel
 @inject IConfiguration Configuration
 
 @{
@@ -15,34 +15,20 @@
     }
 }
 
-<form id="homeContactForm" class="enquiry-form" asp-controller="Contactus" asp-action="SubmitHomeEnquiry"
-    method="post" novalidate>
+<form id="homeContactForm" class="enquiry-form" asp-controller="Contactus" asp-action="SubmitSalesEnquiry" method="post"
+    novalidate>
     <div class="form-field">
         <label asp-for="FullName">Full Name</label>
         <input asp-for="FullName" type="text" placeholder="Enter Full Name" autocomplete="name" />
         <span asp-validation-for="FullName" class="field-error"></span>
     </div>
-    <div class="form-field">
-        <label asp-for="Designation">Designation</label>
-        <input asp-for="Designation" type="text" placeholder="Enter Designation" autocomplete="organization-title" />
-        <span asp-validation-for="Designation" class="field-error"></span>
-    </div>
+
     <div class="form-field">
         <label asp-for="Organisation">Organisation Name</label>
         <input asp-for="Organisation" type="text" placeholder="Enter Organisation Name" autocomplete="organization" />
         <span asp-validation-for="Organisation" class="field-error"></span>
     </div>
-    <div class="form-field">
-        <label asp-for="City">City</label>
-        <select asp-for="City">
-            <option value="">Select city</option>
-            @foreach (var item in cityList)
-            {
-                <option value="@item.CityId">@item.CityName</option>
-            }
-        </select>
-        <span asp-validation-for="City" class="field-error"></span>
-    </div>
+
     <div class="form-field">
         <label asp-for="Interest">Area of Interest</label>
         <select asp-for="Interest">
@@ -70,11 +56,7 @@
         <span asp-validation-for="Message" class="field-error"></span>
     </div>
 
-    <label class="modal-consent">
-        <input asp-for="Consent" type="checkbox" />
-        <span>I agree to be contacted by Nekta regarding my enquiry.</span>
-        <span asp-validation-for="Consent" class="field-error"></span>
-    </label>
+
 
     <button type="submit" class="common-btn modal-submit btn-slide-fill">
         <span>Send Enquiry</span>

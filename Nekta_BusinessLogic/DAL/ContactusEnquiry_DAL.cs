@@ -33,7 +33,23 @@ namespace Nekta_BusinessLogic.DAL
             };
 
             return GetDataSet("sp_AddContactUsEnquiry", sqlParams).Tables[0];
-            //return SqlInsertReturnIdentity_withSP("sp_AddContactUsEnquiry", "@Return_ID", sqlParams);
+        }
+
+
+        public DataTable AddSalesEnquiry_DAL(SalesEnquiry model)
+        {
+            SqlParameter[] sqlParams =
+            {
+                new SqlParameter("@FullName", (object?)model.FullName ?? DBNull.Value),
+                new SqlParameter("@Organisation", string.IsNullOrWhiteSpace(model.Organisation) ? (object)DBNull.Value : model.Organisation),
+                new SqlParameter("@Email", (object?)model.Email ?? DBNull.Value),
+                new SqlParameter("@Phone", (object?)model.Phone ?? DBNull.Value),
+                new SqlParameter("@InterestId", model.InterestId),
+                new SqlParameter("@Query", string.IsNullOrWhiteSpace(model.Query) ? (object)DBNull.Value : model.Query),
+                new SqlParameter("@IPAddress", string.IsNullOrWhiteSpace(model.IPAddress) ? (object)DBNull.Value : model.IPAddress)
+            };
+
+            return GetDataSet("sp_AddSalesEnquiry", sqlParams).Tables[0];
         }
 
 
