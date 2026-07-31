@@ -45,7 +45,7 @@ namespace Nekta_BusinessLogic.BAL
 
                 if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
                 {
-                    model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
+                    model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]);
                 }
 
                 return model;
