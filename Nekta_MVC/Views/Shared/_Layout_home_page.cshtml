@@ -45,6 +45,15 @@
    <link rel="stylesheet" href="/Assets/css/blogs-cards-slider.css">
    <link rel="stylesheet" href="/Assets/css/assistant-popup.css">
 
+<script>
+        window.markerConfig = {
+            project: '6a67453b87a771686690c241',
+            source: 'snippet'
+        };
+
+        !function (e, r, a) { if (!e.__Marker) { e.__Marker = {}; var t = [], n = { __cs: t };["show", "hide", "isVisible", "capture", "cancelCapture", "unload", "reload", "isExtensionInstalled", "setReporter", "clearReporter", "setCustomData", "on", "off"].forEach(function (e) { n[e] = function () { var r = Array.prototype.slice.call(arguments); r.unshift(e), t.push(r) } }), e.Marker = n; var s = r.createElement("script"); s.async = 1, s.src = "https://edge.marker.io/latest/shim.js"; var i = r.getElementsByTagName("script")[0]; i.parentNode.insertBefore(s, i) } }(window, document);
+    </script>
+
    @RenderSection("Styles", required: false)
 </head>
 
@@ -98,7 +107,7 @@
                Please share your requirements.<br />
                An associate will connect with you shortly.
             </p>
-            @await Html.PartialAsync("~/Views/CommonComponent/_home_contact_modal_form.cshtml", new Nekta_MVC.Models.ContactUsEnquiryModel())
+            @await Html.PartialAsync("~/Views/CommonComponent/_home_contact_modal_form.cshtml", new Nekta_MVC.Models.SalesEnquiryModel())
          </div>
       </div>
    </div>

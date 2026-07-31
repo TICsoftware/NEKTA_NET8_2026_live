@@ -61,5 +61,52 @@ namespace Nekta_BusinessLogic.BAL
             }
 
         }
+
+
+
+        public SolutionsModel GetFood_Safety_Hygiene_BAL(string pagename, int languageId, int geographyId)
+        {
+            try
+            {
+                var model = new SolutionsModel();
+                var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Content = MapContent(ds.Tables[0].Rows[0]);
+                }
+
+                if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+                {
+                    var groupedData = GetGroupedComponents(ds.Tables[1]);
+                    model.Components = groupedData;
+
+                    model.Driving_Quality_Excellence_Food_List = MapComponents(groupedData, 1);
+                    model.Building_Trust_Food_List = MapComponents(groupedData, 2);
+                    model.Our_Commitment_Compliance_Excellence_Food_List = MapComponents(groupedData, 3);
+                    model.A_Trusted_Safety_Framework_Food_List = MapComponents(groupedData, 4);
+                    model.Our_Food_Safety_Quality_Food_List = MapComponents(groupedData, 5);
+                }
+
+                if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                {
+                    model.Case_Studies_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
+                }
+
+                return model;
+            }
+            catch (Exception ex)
+            {
+                NektaFileLogger.LogInfo("Solutions", "GetFood_Safety_Hygiene_BAL", ex.ToString());
+                return new SolutionsModel();
+            }
+            finally
+            {
+                Dispose();
+            }
+        }
+
+
+
     }
 }

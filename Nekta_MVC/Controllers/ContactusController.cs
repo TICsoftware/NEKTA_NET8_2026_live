@@ -126,7 +126,7 @@ public class ContactusController : Controller
     // same model, BAL and DAL.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SubmitHomeEnquiry(ContactUsEnquiryModel model)
+    public IActionResult SubmitSalesEnquiry(SalesEnquiryModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -139,23 +139,20 @@ public class ContactusController : Controller
 
         try
         {
-            var entity = new ContactUsEnquiry
+            var entity = new SalesEnquiry
             {
                 FullName = model.FullName,
-                Designation = model.Designation,
                 Organisation = model.Organisation,
                 Email = model.Email,
                 Phone = model.Phone,
-                CityId = Convert.ToInt32(model.City),
                 InterestId = Convert.ToInt32(model.Interest),
                 Query = model.Message,
-                Consent = model.Consent,
                 IPAddress = GetClientIpAddress()
             };
 
             using var enquiryBal = new ContactusEnquiry_BAL(_configuration);
 
-            DataTable dt = enquiryBal.SubmitEnquiry_BAL(entity);
+            DataTable dt = enquiryBal.SalesEnquiry_BAL(entity);
 
             string result = dt.Rows[0][0].ToString();
 
@@ -185,7 +182,7 @@ public class ContactusController : Controller
         }
         catch (Exception ex)
         {
-            FileLogger.LogError($"{nameof(ContactusController)}/{nameof(SubmitHomeEnquiry)}", ex);
+            FileLogger.LogError($"{nameof(ContactusController)}/{nameof(SubmitSalesEnquiry)}", ex);
 
             return Json(new
             {
@@ -194,6 +191,10 @@ public class ContactusController : Controller
             });
         }
     }
+
+
+
+
 
 
     private string GetClientIpAddress()

@@ -54,6 +54,30 @@ namespace Nekta_BusinessLogic.BAL
         }
 
 
+        public DataTable SalesEnquiry_BAL(SalesEnquiry model)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = _dal.AddSalesEnquiry_DAL(model);
+                if (dt.Rows[0][0].ToString() == "updated")
+                {
+                    //SendMail(MailSalesEnquiryContent(model), "New Requirement Enquiry from " + model.FullName);
+                }
+            }
+            catch (Exception ex)
+            {
+                dt.Rows[0][0] = ex.Message.ToString();
+            }
+            finally
+            {
+
+            }
+
+            return dt;
+        }
+
+
         public void SendMail(string emailContent, string subject)
         {
             try
@@ -146,6 +170,55 @@ namespace Nekta_BusinessLogic.BAL
                 + "<br/>"
                 + "<p><strong>Regards,</strong><br/>"
                 + "<strong>Nekta Foods</strong></p>";
+
+            return bodyhtmlcontent;
+        }
+
+
+        public string MailSalesEnquiryContent(SalesEnquiry obj)
+        {
+            string bodyhtmlcontent =
+                "<h4>Dear Team,</h4>" +
+                "<p>Please find below the Sales Enquiry details submitted through the website.</p>" +
+
+                "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse; width:100%;'>" +
+                "<tbody>" +
+
+                "<tr>" +
+                "<td><strong>Full Name</strong></td>" +
+                "<td>" + obj.FullName + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                "<td><strong>Organisation</strong></td>" +
+                "<td>" + obj.Organisation + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                "<td><strong>Email</strong></td>" +
+                "<td>" + obj.Email + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                "<td><strong>Phone</strong></td>" +
+                "<td>" + obj.Phone + "</td>" +
+                "</tr>" +
+
+                "<tr>" +
+                "<td><strong>Area of Interest</strong></td>" +
+                "<td>" + obj.Interest + "</td>" +
+                "</tr>" +
+
+                (!string.IsNullOrWhiteSpace(obj.Query)
+                    ? "<tr><td><strong>Message</strong></td><td>" + obj.Query + "</td></tr>"
+                    : "") +
+
+                "</tbody>" +
+                "</table>" +
+
+                "<br/>" +
+                "<p><strong>Regards,</strong><br/>" +
+                "<strong>Nekta Foods Website</strong></p>";
 
             return bodyhtmlcontent;
         }

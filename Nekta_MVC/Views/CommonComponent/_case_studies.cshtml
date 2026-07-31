@@ -34,39 +34,38 @@
 
             <div class="swiper-wrapper">
 
-                @if (Model.Case_Studies_List != null && Model.Case_Studies_List.Any())
+
+                @foreach (var item in Model.Case_Studies_List)
                 {
-                    foreach (var item in Model.Case_Studies_List)
-                    {
-                        <div class="swiper-slide h-auto">
-                            <div class="insight-card group blogs-cards-wrapper">
-                                <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
-                                    <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
-                                        class="w-full object-cover" />
-                                </div>
-                                <div class="py-6 blogs-cards-content">
-                                    <span
-                                        class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">
-                                        Case Study
-                                    </span>
+                    <div class="swiper-slide h-auto">
+                        <div class="insight-card group blogs-cards-wrapper">
+                            <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                                <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
+                                    class="w-full object-cover" />
+                            </div>
+                            <div class="py-6 blogs-cards-content">
+                                <span
+                                    class="pill inline-block bg-green text-cream text-xs font-medium px-2.5 py-1 rounded-lg">
+                                    Case Study
+                                </span>
 
-                                    <h3 class="insight-title line-clamp-2">
-                                        @item.Title
-                                    </h3>
+                                <h3 class="insight-title line-clamp-2">
+                                    @item.Title
+                                </h3>
 
-                                    @if (!string.IsNullOrWhiteSpace(item.Url))
-                                    {
-                                        <a href="@item.Url" class="link-md link-primary mt-4">
-                                            <span class="underline">Read More</span>
-                                            <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
-                                                alt="rightArrow" />
-                                        </a>
-                                    }
-                                </div>
+                                @if (!string.IsNullOrWhiteSpace(item.Url))
+                                {
+                                    <a href="@item.Url" class="link-md link-primary mt-4">
+                                        <span class="underline">Read More</span>
+                                        <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
+                                            alt="rightArrow" />
+                                    </a>
+                                }
                             </div>
                         </div>
-                    }
+                    </div>
                 }
+
 
             </div>
             <div class="blogs-slider-nav">
