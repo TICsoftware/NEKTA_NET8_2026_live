@@ -75,15 +75,55 @@
    // ----------  Read more funtionality----------  //
 
 
+
+
+
+
   // ----------  Accrodian section ---------- //
 
-  /* ---------------- accordion toggle (each item independent) ---------------- */
+// ----------  Accrodian section ---------- //
+
+  /* ---------------- accordion toggle (only one item open at a time) ---------------- */
+  const allAccItems = document.querySelectorAll('[data-acc-item]');
+
+  function openAccItem(item) {
+    if (!item) return;
+    allAccItems.forEach((el) => el.classList.remove('is-open'));
+    item.classList.add('is-open');
+  }
+
+  function toggleAccItem(item) {
+    const wasOpen = item.classList.contains('is-open');
+    allAccItems.forEach((el) => el.classList.remove('is-open'));
+    if (!wasOpen) item.classList.add('is-open');
+  }
+
   document.querySelectorAll('[data-acc-toggle]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const item = btn.closest('[data-acc-item]');
-      item.classList.toggle('is-open');
+      toggleAccItem(item);
     });
   });
+
+  /* ---------------- open accordion item from a logo/plate click ---------------- */
+/* ---------------- open accordion item from a logo/plate click ---------------- */
+document.querySelectorAll('[data-acc-target]').forEach((trigger) => {
+    trigger.style.cursor = 'pointer';
+    trigger.addEventListener('click', () => {
+      const targetId = trigger.getAttribute('data-acc-target');
+      const targetItem = document.querySelector(`[data-acc-item][data-acc-id="${targetId}"]`);
+      if (!targetItem) return;
+
+      openAccItem(targetItem);
+
+      // wait for the .5s panel transition (open + any other panel collapsing) to finish
+      // before measuring scroll position — otherwise the layout shift after
+      // collapse/expand pushes the header out of view.
+      setTimeout(() => {
+        targetItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 550); // matches .acc-panel's 0.5s transition + small buffer
+    });
+});
 
   /* ---------------- generic media slider ---------------- */
   class AccSlider {
