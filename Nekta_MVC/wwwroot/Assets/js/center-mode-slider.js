@@ -1,15 +1,20 @@
 (function () {
-    function initCenterModeSlider() {
+    function initOneCenterModeSlider(sliderRoot) {
+        if (!sliderRoot || sliderRoot.dataset.edgeSwiperReady === "1") return;
         if (typeof Swiper === "undefined") return;
-
-        const sliderRoot = document.querySelector(".edgeSwiper");
-        if (!sliderRoot) return;
 
         const qsa = (selector, scope = document) => [
             ...scope.querySelectorAll(selector),
         ];
         const qs = (selector, scope = document) => scope.querySelector(selector);
-        const navContainer = qs(".edge-nav-arrows");
+
+        // Prefer arrows inside this slider section so multiple edge swipers
+        // on one page don't share the wrong controls.
+        const section =
+            sliderRoot.closest("section") || sliderRoot.parentElement || document;
+        const navContainer =
+            qs(".edge-nav-arrows", sliderRoot) ||
+            qs(".edge-nav-arrows", section);
         const prevControl = navContainer
             ? qs(".edge-swiper-prev", navContainer)
             : null;
@@ -24,14 +29,11 @@
         if (!wrapperEl || originalCount === 0) return;
 
         // 3-set track: [copy][original][copy] — order always a,b,c,d,a,b,c,d...
-        // Native Swiper loop is avoided (one-direction / first-wrap bugs with
-        // centeredSlides + fractional slidesPerView).
         const enableManualLoop = originalCount > 1;
         if (enableManualLoop) {
             const cloneSlide = (slide) => {
                 const clone = slide.cloneNode(true);
                 clone.setAttribute("data-duplicated", "true");
-                // Avoid first-wrap layout shift from lazy images on clones.
                 qsa("img", clone).forEach((img) => {
                     img.loading = "eager";
                     img.removeAttribute("loading");
@@ -59,9 +61,14 @@
         let directionArmed = false;
 
         const silentJump = (swiper, target) => {
-            if (!enableManualLoop || jumping) return false;
+            if (!enableManualLoop || jumping || !swiper) return false;
             const idx = swiper.activeIndex;
-            if (target === idx || target < 0 || target >= swiper.slides.length) {
+            if (
+                target === idx ||
+                target < 0 ||
+                !swiper.slides ||
+                target >= swiper.slides.length
+            ) {
                 return false;
             }
 
@@ -87,26 +94,20 @@
             swiper.updateActiveIndex(target);
             swiper.updateSlidesClasses();
 
-            // Keep an in-progress swipe aligned after the invisible reposition.
             if (swiper.touchEventsData) {
                 const t = swiper.getTranslate();
                 swiper.touchEventsData.startTranslate = t;
                 swiper.touchEventsData.currentTranslate = t;
             }
 
-            // Force sync layout before the animated step that follows.
             void wrapperEl.offsetWidth;
             sliderRoot.classList.remove("edge-swiper-jumping");
             jumping = false;
             return true;
         };
 
-        // Before moving next/prev at a middle-set edge, teleport to the twin
-        // slide in the buffer set (same content, same on-screen position).
-        // The following animated step then lands inside a continuous set —
-        // no post-animation corrective snap, so the first wrap isn't jerky.
         const ensureLoopRoom = (swiper, direction) => {
-            if (!enableManualLoop || jumping) return;
+            if (!enableManualLoop || jumping || !swiper) return;
             const idx = swiper.activeIndex;
 
             if (direction > 0 && idx >= middleEnd) {
@@ -116,9 +117,8 @@
             }
         };
 
-        // Safety net for free-swipes that still land in a buffer set.
         const snapToMiddleSet = (swiper) => {
-            if (!enableManualLoop || jumping) return;
+            if (!enableManualLoop || jumping || !swiper) return;
             const idx = swiper.activeIndex;
             let target = null;
             if (idx < originalCount) target = idx + originalCount;
@@ -127,7 +127,9 @@
             silentJump(swiper, target);
         };
 
-        const edgeSwiper = new Swiper(".edgeSwiper", {
+        // Pass the element (not ".edgeSwiper") so Swiper never returns an
+        // array when the page has more than one center-mode slider.
+        const edgeSwiper = new Swiper(sliderRoot, {
             slidesPerView: 1,
             centeredSlides: true,
             spaceBetween: 0,
@@ -159,11 +161,10 @@
 
             on: {
                 init(swiper) {
-                    swiper.update();
+                    if (typeof swiper.update === "function") swiper.update();
                     if (!enableManualLoop) return;
 
                     swiper.slideTo(middleStart, 0, false);
-                    // Force layout of every slide (incl. clones) before first wrap.
                     swiper.slides.forEach((slide) => {
                         slide.getBoundingClientRect();
                     });
@@ -185,7 +186,6 @@
                         (swiper.touches?.currentX ?? 0) -
                         (swiper.touches?.startX ?? 0);
                     if (Math.abs(diff) < 1) return;
-                    // Finger left → next; finger right → prev.
                     ensureLoopRoom(swiper, diff < 0 ? 1 : -1);
                 },
                 slideChangeTransitionEnd(swiper) {
@@ -196,6 +196,11 @@
                 },
             },
         });
+
+        // Guard: string selector + multiple matches returns an array in Swiper 14.
+        if (!edgeSwiper || typeof edgeSwiper.slideNext !== "function") return;
+
+        sliderRoot.dataset.edgeSwiperReady = "1";
 
         qsa(".edgeArrow", sliderRoot).forEach((item) =>
             item.classList.add("hidden"),
@@ -218,8 +223,14 @@
         let resyncScheduled = false;
         const forceResync = () => {
             if (resyncScheduled) return;
+            if (!edgeSwiper || edgeSwiper.destroyed) return;
+            if (typeof edgeSwiper.update !== "function") return;
             resyncScheduled = true;
             requestAnimationFrame(() => {
+                if (!edgeSwiper || edgeSwiper.destroyed) {
+                    resyncScheduled = false;
+                    return;
+                }
                 edgeSwiper.update();
                 if (!userInteracted) {
                     edgeSwiper.slideTo(middleStart, 0, false);
@@ -251,6 +262,13 @@
             );
             io.observe(sliderRoot);
         }
+    }
+
+    function initCenterModeSlider() {
+        if (typeof Swiper === "undefined") return;
+        document
+            .querySelectorAll(".edgeSwiper")
+            .forEach((el) => initOneCenterModeSlider(el));
     }
 
     if (document.readyState === "loading") {

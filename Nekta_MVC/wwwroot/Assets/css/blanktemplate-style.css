@@ -23,6 +23,7 @@
 .blank-template-inner .list-alpha li::marker,
 .blank-template-inner .list-disc li::marker{ display:none !important;}
 
+.blank-template-inner{ max-width:990px;}
 
 
 
