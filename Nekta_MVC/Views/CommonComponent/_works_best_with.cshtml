@@ -2,7 +2,7 @@
 @using Nekta_MVC.Helpers
 @model List<ComponentModel>
 
-<section class="section-spacing relative overflow-hidden">
+<section class="bg-green green-wrapper section-spacing relative overflow-hidden">
     <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
     <div class="container">
         @foreach (var item in Model.Where(x => x.IsBlock == 0))
