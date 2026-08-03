@@ -108,5 +108,55 @@ namespace Nekta_BusinessLogic.BAL
 
 
 
+        public SolutionsModel GetFoodProgram_BAL(string pagename, int languageId, int geographyId)
+        {
+            try
+            {
+                var model = new SolutionsModel();
+                var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
+
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Content = MapContent(ds.Tables[0].Rows[0]);
+                }
+
+                if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+                {
+                    var groupedData = GetGroupedComponents(ds.Tables[1]);
+                    model.Components = groupedData;
+
+                    model.Component_1_List = MapComponents(groupedData, 1);
+                    model.Leadership_Message_List = MapComponents(groupedData, 2);
+                    model.The_Multi_Purpose_Cart_List = MapComponents(groupedData, 3);
+                }
+
+
+                if (ds?.Tables.Count > 3 && ds.Tables[3].Rows.Count > 0)
+                {
+                    model.Articles_List = Config_Application_Website.MapArticleList(ds.Tables[3]);
+                }
+
+                if (ds?.Tables.Count > 4 && ds.Tables[4].Rows.Count > 0)
+                {
+                    var groupedDataarticle = GetGroupedComponents(ds.Tables[4]);
+                    model.Articles_Sliders_List = MapComponents(groupedDataarticle, 1);
+                }
+
+                return model;
+            }
+            catch (Exception ex)
+            {
+                NektaFileLogger.LogInfo("Solutions", "GetFoodProgram_BAL", ex.ToString());
+                return new SolutionsModel();
+            }
+            finally
+            {
+                Dispose();
+            }
+
+        }
+
+
+
     }
 }

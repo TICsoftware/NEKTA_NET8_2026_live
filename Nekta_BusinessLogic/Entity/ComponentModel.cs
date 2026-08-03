@@ -8,6 +8,7 @@ namespace Nekta_BusinessLogic.Entity
     public class ComponentModel
     {
         public string GroupId { get; set; }
+        public int Cont_Id { get; set; }
 
         public string Title { get; set; }
         public string Intro { get; set; }
@@ -70,6 +71,7 @@ namespace Nekta_BusinessLogic.Entity
         public string Title { get; set; }
         public string Intro { get; set; }
         public string HmpgIntro { get; set; }
+         public string Content { get; set; }
 
         public string PageName { get; set; }
 

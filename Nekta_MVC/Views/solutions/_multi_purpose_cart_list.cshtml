@@ -1,0 +1,43 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@using Nekta_MVC.Models
+
+@model SolutionsModel
+
+@{
+    var component = Model.The_Multi_Purpose_Cart_List.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+<section class="plates-section relative bg-darkcream">
+    <!-- background bg image tag for the curved line -->
+    <img class="curve-bg" src="~/Assets/images/foodprogram/curve-bg.svg" alt="" aria-hidden="true">
+
+    <!-- left decorative image -->
+    <img class="deco deco-left" src="@component.ComponentThumbnail" alt="@component.ComponentThumbnailAltText">
+
+    <!-- right decorative image -->
+    <img class="deco deco-right" src="@component.Component_right_image" alt="@component.Component_Right_image_alt">
+    <div class="container">
+
+
+        <div class="plates-inner">
+
+            <div class="plate-grid" id="plateGrid">
+                <!-- Each .plate = circular plate image (bottom layer) + logo (top layer).
+                    Replace the <span> in .plate-logo with an <img class="plate-logo-img" src="logo.svg" alt="Brand name">
+                    to drop in a real logo. -->
+
+                @foreach (var item in Model.Articles_List)
+                {
+                    <div class="plate" style="--wordmark-color:@Html.Raw(item.HmpgIntro.CleanParagraphTags())" data-acc-target="@item.Title.Replace(" ", "-").ToLower()">
+                        <img class="plate-img" src="~/Assets/images/foodprogram/logo-bg.png" alt="" aria-hidden="true">
+                        <div class="plate-logo"><img class="plate-logo-img"
+                                src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" loading="lazy"></div>
+                    </div>
+                }
+                
+
+            </div>
+        </div>
+    </div>
+</section>

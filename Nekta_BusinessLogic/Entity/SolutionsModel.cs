@@ -30,6 +30,14 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Our_Food_Safety_Quality_Food_List { get; set; } = new();
 
 
+
+        // Food Program
+        public List<ComponentModel> Component_1_List { get; set; } = new();
+        public List<ComponentModel> Leadership_Message_List { get; set; } = new();
+        public List<ComponentModel> The_Multi_Purpose_Cart_List { get; set; } = new();
+        public List<ArticleModel> Articles_List { get; set; } = new();
+        public List<ComponentModel> Articles_Sliders_List { get; set; } = new();
+
         public List<ComponentModel> Case_Studies_Component_List { get; set; } = new();
         public List<ArticleModel> Case_Studies_List { get; set; } = new();
 

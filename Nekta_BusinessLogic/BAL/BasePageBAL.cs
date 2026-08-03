@@ -66,7 +66,8 @@ namespace Nekta_BusinessLogic.BAL
                 {
                     GroupId = x.Field<Guid>("context_group_id").ToString(),
                     Sequence = Convert.ToInt32(x["component_sequence"]),
-                    IsBlock = Convert.ToInt32(x["is_block"])
+                    IsBlock = Convert.ToInt32(x["is_block"]),
+                    Cont_Id = x.Field<int>("cont_id")
                 })
                 .Select(group => new ComponentGroup
                 {
@@ -80,7 +81,8 @@ namespace Nekta_BusinessLogic.BAL
                         FieldValue = row.Field<string>("field_value") ?? "",
                         ImagePath = row.Field<string>("component_image_path") ?? "",
                         sequence = group.Key.Sequence,
-                        IsBlock = group.Key.IsBlock
+                        IsBlock = group.Key.IsBlock,
+                        Cont_Id = group.Key.Cont_Id
                     }).ToList()
 
                 }).OrderBy(x => x.Fields.First().sequence).ToList();
@@ -90,7 +92,8 @@ namespace Nekta_BusinessLogic.BAL
         {
             return Config_Application_Website.MapComponent(data, sequence, (group, dict) => new ComponentModel
             {
-                GroupId = group.GroupId,
+                GroupId = group.GroupId,    
+                Cont_Id = group.Fields.FirstOrDefault()?.Cont_Id ?? 0,
                 Title = Config_Application_Website.GetValue(dict, "Title", "Component Title"),
                 Intro = Config_Application_Website.GetValue(dict, "Intro", "Component Intro"),
                 HmpgIntro = Config_Application_Website.GetValue(dict, "Landing intro", "Component Landing intro"),
