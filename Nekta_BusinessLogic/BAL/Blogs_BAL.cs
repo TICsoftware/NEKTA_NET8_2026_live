@@ -30,10 +30,10 @@ namespace Nekta_BusinessLogic.BAL
                     //model.Latest_Trends_List = MapComponents(groupedData, 1);
                 }
 
-                if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                if (ds.Tables.Count > 3 && ds.Tables[3].Rows.Count > 0)
                 {
-                    model.BlogPosts_List = Config_Application_Website.MapArticleList(ds.Tables[2]);
-                    model.TotalCount = Convert.ToInt32(ds.Tables[3].Rows[0]["TotalCount"]);
+                    model.BlogPosts_List = Config_Application_Website.MapArticleList(ds.Tables[3]);
+                    model.TotalCount = Convert.ToInt32(ds.Tables[4].Rows[0]["TotalCount"]);
                 }
 
                 return model;
@@ -105,9 +105,9 @@ namespace Nekta_BusinessLogic.BAL
                     model.Related_Section_List = MapComponents(groupedData, 1);
                 }
 
-                if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+                if (ds.Tables.Count > 3 && ds.Tables[3].Rows.Count > 0)
                 {
-                    model.RelatedArticles_List = Config_Application_Website.MapArticleList(ds.Tables[2]);
+                    model.RelatedArticles_List = Config_Application_Website.MapArticleList(ds.Tables[3]);
                 }
 
                 return model;

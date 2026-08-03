@@ -16,6 +16,7 @@ namespace Nekta_BusinessLogic.Entity
     public class ComponentGroup
     {
         public string GroupId { get; set; }
+        public string Cont_Id { get; set; }
         public int Sequence { get; set; }
         public List<ComponentField> Fields { get; set; } = new List<ComponentField>();
     }
@@ -31,6 +32,7 @@ namespace Nekta_BusinessLogic.Entity
         public string popup_content { get; set; }
         public int sequence { get; set; }
         public int IsBlock { get; set; }
+        public int Cont_Id { get; set; }
     }
 
     public class ContentViewModel

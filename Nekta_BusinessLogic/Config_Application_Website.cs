@@ -134,6 +134,7 @@ namespace Nekta_BusinessLogic
 
                     Intro = row["cont_intro"]?.ToString(),
                     HmpgIntro = row["cont_hmpg_intro"]?.ToString(),
+                    Content = row["content"]?.ToString(),
                     PageName = row["cont_pagename"]?.ToString(),
 
                     ThumbnailImage = row["Hmpg_thumbnail"]?.ToString(),
