@@ -65,7 +65,7 @@
         <img loading="lazy" src="~/Assets/images/business/icon-right.svg" alt=""
              class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
         <div class="container relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 ">
                 <div class="relative">
                     <div class="nourish-media-wrap relative">
                         <div class="nourish-photo nourish-photo-back">
@@ -78,15 +78,15 @@
                     </div>
                 </div>
                 <div class="relative space-y-6 md:space-y-8 ">
-                    <div class="section-title-outer mx-auto max-w-5xl">
-                        <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                    <div class="section-title-outer max-w-full lg:max-w-120">
+                        <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
                             @Html.Raw(
                             !string.IsNullOrWhiteSpace(item.DisplayTitle)
                             ? item.DisplayTitle.CleanParagraphTags()
                             : item.Title)
                         </h2>
                     </div>
-                    <div class="intro-outer-wrapper sm:pl-15">
+                    <div class="intro-outer-wrapper sm:pl-15 pr-[10%]">
                         @if (!string.IsNullOrWhiteSpace(item.Intro))
                         {
                             @Html.Raw(item.Intro)
@@ -130,7 +130,7 @@
                 </h2>
             </div>
 
-            <div class="max-w-4xl mx-auto text-center">
+            <div class="max-w-6xl mx-auto text-center">
                 @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
                     @Html.Raw(item.Intro)
