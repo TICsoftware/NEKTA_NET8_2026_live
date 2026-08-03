@@ -113,16 +113,16 @@ button:focus-visible, a:focus-visible{ outline:2px solid var(--color-secondary);
    FOOTER
 ========================= */
 .footer-grid {color:#fff;}
-.footer-logo { width: auto; height: 50px;}
+.footer-logo { width: auto; height: 40px; margin-bottom:5px !important;}
 .footer-brand-copy { font-size: 1rem; line-height: 1.5; }
 .footer-nav-list { font-size: 0.875rem;}
-.social-link { width: 40px; height: 40px; font-size: 1.125rem;}
-.footer-legal { color: #fff;margin-top: 15px;}
+.social-link { width: 35px; height: 35px; font-size:1rem;}
+.footer-legal { color: #fff;}
 .legal-divider { border-right-color: #fff;}
 .footer-title { font-family: var(--font-heading); font-size: 1rem; font-weight: 400; line-height: 1.45;letter-spacing: 0;}
 .footer-title { color: var(--color-primary); border-bottom: 2px solid var(--color-primary);  display: inline-block; margin-bottom: 1.5rem;padding-bottom: 0.5rem;}
 .footer-label { color: var(--color-primary); font-family: var(--font-heading); font-size: 14px; font-weight: 400; margin-bottom: 0.5rem;}
-.footer-text, .footer-link {color: var(--color-primary); font-size: 1.25rem; font-weight: 400; line-height: 1.5;}
+.footer-text, .footer-link {color: var(--color-primary); font-size:1rem; font-weight: 400 !important; line-height: 1.125;}
 .copyright-text, .legal-link {font-size:0.875rem;font-weight: 400;}
 .footer-link {font-weight: 600;}
 .copyright-text {color: #fff; text-align: center; margin-bottom:0;}
@@ -138,7 +138,8 @@ footer *{backface-visibility:hidden;}
 .menu-divider::before{ content:""; position:absolute; left:0; right:10px; top:50%; height:1px; background:rgba(255,255,255,.25);    transform:translateY(-50%);}
 .menu-divider span{ position:absolute; right:0; top:50%; width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.35);
 transform:translateY(-50%);}
- 
+
+
 @media (min-width: 1280px) {
 
 }
@@ -162,14 +163,17 @@ transform:translateY(-50%);}
  .footer-quick-links { padding-left: 40px; }
 }
 
-.footer-indent p { margin-bottom: 0px;}
+.footer-indent p,
+.footer-indent p a{ margin-bottom: 0px; font-size:1rem;}
 
 /* Shubham css Changes in footer */
-footer h4{font-size: var(--text-h3);font-family: var(--font-heading);  font-weight: 400;color: var(--color-primary);  border-bottom: 2px solid var(--color-primary); display: inline-block; margin-bottom: 2.5rem; padding-bottom: 0.5rem;}
+footer h4{font-size: var(--text-h4);font-family: var(--font-heading);  font-weight: 400;color: var(--color-primary);  border-bottom: 2px solid var(--color-primary); display: inline-block; margin-bottom:1rem; padding-bottom: 1rem;}
 .footer-link { position: relative; display: inline-block; transition: color 300ms ease;}
 .footer-link::after { content: ""; position: absolute; left: 0; bottom: -4px; height: 1px; width: 0; background-color: #fff;    transition: all 300ms ease-out;}
 .footer-link:hover { color: #fff;}
 .footer-link:hover::after { width: 100%;}
+
+.footer-indent h4{ padding-bottom:0.5rem;}
 
 @media (max-width: 992px) {
 
@@ -177,14 +181,20 @@ footer h4{font-size: var(--text-h3);font-family: var(--font-heading);  font-weig
 }
 
 @media (min-width: 1200px) and (max-width: 1366px){
-
-.footer-text, .footer-link { font-size: 1rem; font-weight: 500;}
+.footer-text, .footer-link { font-size: 0.875rem; font-weight: 500;}
 .logo img { transition: max-width .20s ease; max-width: 10vw;}
 .bar {padding: 14px 40px;}
 .nav-item > button, .nav-item > .nav-plain {
 
     font-size: 1rem
 }
+.footer-nav-list li a, .footer-indent p, .footer-indent p a{ font-size:  0.85rem !important;}
+.footer-subsidiary-logo{ height:35px !important; width:auto !important}
+.footer-logo{ height:45px !important; width:auto !important}
+.footer-indent h4, footer h4{ font-size:20px!important; padding-bottom:0.5rem;}
+.footer-nav-list{ margin-bottom:10px !important}
+.footer-nav-list li{ margin-bottom:15px !important}
+.footer-bottom *{ font-size: 0.85rem !important}
 
 }
 
