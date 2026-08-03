@@ -1,0 +1,117 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SolutionsModel
+@{
+    ViewData["Title"] = "Food Program";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/foodprogram.css" />
+}
+
+
+<!-- HERO BANNER -->
+@if (Model != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_banner.cshtml", Model.Content)
+}
+
+
+@if (Model != null)
+{
+    @await Html.PartialAsync("_multi_purpose_cart_list.cshtml", Model)
+}
+<!-- Logo intro section-->
+
+
+@* 2nd Cuervsection *@
+
+@foreach (var item in Model.Component_1_List.Where(x => x.IsBlock == 0))
+{
+    <section class="av-section">
+        <div class="av-container">
+            <div class="av-grid">
+
+                <!-- LEFT: arch image -->
+                <div class="av-media-wrap">
+                    <div class="av-arch">
+                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                    </div>
+                </div>
+
+                <!-- RIGHT: paragraph content -->
+                <div class="av-content" id="avContent">
+                    <img src="~/assets/leaf-icon.svg" alt="" class="av-leaf-icon">
+
+                    @Html.Raw(item.Intro)
+
+                    <button type="button" class="av-read-more" id="avReadMoreBtn" aria-expanded="false"
+                        aria-controls="avContent">
+                        <span class="av-read-more-text">Read More</span>
+                        <span class="av-read-more-icon">+</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- decorative bottom-right leaves -->
+        <img src="~/assets/leaves-decor.png" alt="" class="av-decor-corner">
+        <!-- decorative bottom-right leaves -->
+        <img src="@item.Componentbackground" alt="@item.ComponentbackgroundAltText" class="av-decor-corner">
+    </section>
+}
+
+
+
+@* 3rd quote section *@
+@foreach (var item in Model.Leadership_Message_List.Where(x => x.IsBlock == 0))
+{
+    <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="80"
+        data-leaf-rotation="-20">
+        <!-- Background Pattern -->
+        <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
+        <!-- Decorative Leaf -->
+
+        <div class="container relative z-10">
+            <div class="max-w-6xl mx-auto">
+
+                <div class="ld-quote-wrapper">
+                    <img loading="lazy" src="/Assets/images/leadership/opening_quote.svg" alt=""
+                        class="ld-quote-mark ld-quote-mark--open" aria-hidden="true">
+
+                    <p class="ld-quote my-4"> @Html.Raw(item.Intro.CleanParagraphTags())</p>
+
+
+
+                    <img loading="lazy" src="/Assets/images/leadership/closing_quote.svg" alt=""
+                        class="ld-quote-mark ld-quote-mark--close" aria-hidden="true">
+                </div>
+
+                <div class="ld-quote-author">
+                    <h2 class="ld-author-name">@item.Title</h2>
+                    <p class="ld-author-role">
+                        @item.Designation
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@* 4thAccordian section *@
+
+@if (Model != null)
+{
+    @await Html.PartialAsync("_multi_purpose_cart_content.cshtml", Model)
+}
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/foodprogram.js"></script>
+}

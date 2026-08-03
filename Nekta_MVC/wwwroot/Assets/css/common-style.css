@@ -1,5 +1,5 @@
 p:last-child{ margin-bottom: 0 !important;}
-
+body{ overflow-x:hidden;}
 
 /**=====================================
 TITLE ANIMATION
@@ -107,9 +107,14 @@ TITLE ANIMATION
 /**=====================================
 INNER BANNER CSS
 =====================================**/
+.innerbanner-title.text-h1{font-style: italic; font-weight: 700;}
 .innerbanner-title-span {font-style: italic; font-weight: 700; color: #fff;}
 .into-section-center-wrapper {display: flex; justify-content: center;}
 .into-section-center-wrapper p {font-size: var(--text-intro); color: var(--color-text);}
+
+.innerbanner-caption nav,
+.innerbanner-caption nav *{ font-size:14px !important;}
+
 
 /**=====================================
 Leaf travel CSS
@@ -128,7 +133,10 @@ Leaf travel CSS
 
 /* Green Wrpper White heading for CenterMode Slider */
 .green-wrapper.bg-green .title-section {color: var(--color-cream) !important;}
+.green-wrapper.bg-green .title-section .text-letters-slide span{color: var(--color-text-dark) !important;}
+
 .green-wrapper.bg-darkcream .title-section { color:var(--color-text-heading) !important;}
+.green-wrapper.bg-darkcream .title-section .text-letters-slide span { color:var(--color-secondary) !important;}
 
 
 .cta-section h2{ font-family:var(--font-body) !important; font-weight:500;}

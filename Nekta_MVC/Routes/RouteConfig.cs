@@ -83,10 +83,17 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "Solutions", action = "foodprogram_html" }
                       );
 
+<<<<<<< HEAD
 app.MapControllerRoute(
                           name: "dailypour-html",
                           pattern: "segments/dailypour-html",
                           defaults: new { controller = "Segments", action = "dailypour_html" }
+=======
+                      app.MapControllerRoute(
+                          name: "food-program-page",
+                          pattern: "solutions/food-programs",
+                          defaults: new { controller = "Solutions", action = "FoodProgram", title = "food-programs" }
+>>>>>>> d1e06ff1779351074929b38ce2bc17ff1cbbab2e
                       );
 
                       app.MapControllerRoute(

@@ -1,0 +1,31 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@if (Model != null && Model.Any(x => x.IsBlock == 1))
+{
+    <section class="counter-section section-pb">
+        <div class="container">
+            <div class="counter-wrapper sm:max-w-5xl sm:mx-auto">
+                @{
+                    var counters = Model
+                        .Where(x => x.IsBlock == 1)
+                        .OrderBy(x => x.Sequence)
+                        .ToList();
+                }
+                @foreach (var item in counters)
+                {
+                    <div class="flex flex-col shrink-0 rounded-2xl px-4 py-6 items-start gap-0 box-itm counter-item">
+                        @Html.Raw(item.Intro.CleanParagraphTags())
+                        <p>@item.Title</p>
+                    </div>
+
+                    @if (item.Sequence != counters.Max(x => x.Sequence))
+                    {
+                        <div class="counter-divider"></div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+}

@@ -9,10 +9,10 @@
 
 /* ---------- INTRO DOUBLE IMAGE STRUCTURE CSS---------- */
 .nourish-media-wrap{ position: relative; width: 100%; aspect-ratio: 4 / 3.1; }
-.nourish-photo{ position: absolute; border-radius: 1.5rem; overflow: hidden; border: 8px solid var(--color-cream); box-shadow: 0 20px 38px var(--line);}
+.nourish-photo{ position: absolute; border-radius: 1.5rem; overflow: hidden; border: 8px solid  #D5CABF; box-shadow: 0 20px 38px var(--line);}
 .nourish-photo img{ width: 100%; height: 100%; object-fit: cover; display: block;}
-.nourish-photo-back{ top: 0; left: 0; aspect-ratio: 2/3;  z-index: 1;}
-.nourish-photo-front{ right: 0; top: 50%; z-index: 2; aspect-ratio: 1 / 1; transform: translateY(-50%);}
+.nourish-photo-back{ top: 0; left: 0; aspect-ratio: 2/2.45;  z-index: 1; }
+.nourish-photo-front{ right: 0; top: 45%; z-index: 2; aspect-ratio: 1 / 1; transform: translateY(-50%);}
 .nourish-media {
     position: relative;
     flex-shrink: 0;

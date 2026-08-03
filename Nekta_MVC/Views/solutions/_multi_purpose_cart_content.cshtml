@@ -1,0 +1,155 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@using Nekta_MVC.Models
+
+@model SolutionsModel
+
+@{
+    var component = Model.The_Multi_Purpose_Cart_List.FirstOrDefault(x => x.IsBlock == 0);
+}
+
+<section class="mp-section section-spacing bg-darkcream">
+    <img src="@component.Component_Icon2_Image" alt="@component.Component_Icon_alt_Image"
+        class="mp-deco mp-deco-top-left" aria-hidden="true">
+    <img src="@component.Component_Icon_Image" alt="@component.Component_Icon_alt_Image"
+        class="mp-deco mp-deco-bottom-right" aria-hidden="true">
+
+    <div class="mp-head">
+        <!-- Section Heading -->
+        <div class="section-title-outer text-center mx-auto max-w-5xl">
+            <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                @Html.Raw(
+                !string.IsNullOrWhiteSpace(component.DisplayTitle)
+                ? component.DisplayTitle.CleanParagraphTags()
+                : component.Title)
+            </h2>
+
+        </div>
+
+        <p class="mp-desc"> @Html.Raw(component.Intro)</p>
+
+    </div>
+
+    <div class="accordion" id="accordion">
+
+        <div class="container">
+            <!-- 01 — collapsed, no media -->
+
+            @{
+                int index = 1;
+            }
+            @foreach (var item in Model.Articles_List)
+            {
+                var mediaList = Model.Articles_Sliders_List
+                .Where(x => x.Cont_Id == item.ContId)
+                .ToList();
+
+                bool hasMedia = mediaList.Any();
+                bool isSlider = mediaList.Count > 1;
+
+                <div class="acc-item" data-acc-item data-acc-id="@item.Title.Replace(" ", "-").ToLower()">
+
+                    <button class="acc-header" data-acc-toggle>
+                        <span class="acc-num">@index.ToString("00")</span>
+                        <span class="acc-title">@item.Title</span>
+                        <span class="acc-toggle-icon"></span>
+                    </button>
+
+                    <div class="acc-panel">
+                        <div class="acc-panel-inner">
+
+                            @if (!hasMedia)
+                            {
+                                <!-- TEXT ONLY -->
+                                <div class="acc-grid text-only">
+                                    <div class="acc-text">
+                                        @Html.Raw(item.Content)
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <!-- IMAGE / VIDEO -->
+                                <div class="acc-grid">
+
+                                    <div class="acc-text">
+                                        @Html.Raw(item.Content)
+                                    </div>
+
+                                    <div class="acc-media" @(isSlider ? "data-per-view=\"2\"" : "")>
+
+                                        <div class="acc-slider" data-slider>
+
+                                            @foreach (var media in mediaList)
+                                            {
+                                                // If your table has MediaType column
+                                                if (!string.IsNullOrEmpty(media.Video_path))
+                                                {
+                                                    <div class="acc-slide">
+                                                        <img src="@media.ThumbnailImage" alt="@media.ThumbnailAltText">
+                                                    </div>
+                                                    <div class="acc-slide" data-type="video">
+                                                        <video src="@media.Video_path" poster="@media.ThumbnailImage" playsinline>
+                                                        </video>
+
+                                                        <button class="acc-play-btn" type="button" data-play-video
+                                                            aria-label="Play Video">
+
+                                                            <svg viewBox="0 0 24 24" fill="#3B372B">
+                                                                <path d="M8 5v14l11-7z"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="acc-slide">
+                                                        <img src="@media.ThumbnailImage" alt="@media.ThumbnailAltText" />
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+
+                                        @if (isSlider)
+                                        {
+                                            <button class="acc-arrow acc-arrow-prev" type="button" data-slider-prev
+                                                aria-label="Previous">
+
+                                                <svg viewBox="0 0 24 24" fill="none">
+                                                    <path d="M15 5L8 12L15 19" stroke="#3B372B" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+
+                                            </button>
+
+                                            <button class="acc-arrow acc-arrow-next" type="button" data-slider-next
+                                                aria-label="Next">
+
+                                                <svg viewBox="0 0 24 24" fill="none">
+                                                    <path d="M9 5L16 12L9 19" stroke="#3B372B" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+
+                                            </button>
+                                        }
+
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+                index++;
+            }
+
+
+
+
+        </div>
+
+    </div>
+</section>

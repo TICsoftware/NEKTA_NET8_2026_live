@@ -2,7 +2,7 @@
 @using Nekta_MVC.Helpers
 @model List<ComponentModel>
 
-<section class="section-spacing relative overflow-hidden">
+<section class="bg-green green-wrapper section-spacing relative overflow-hidden">
     <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
     <div class="container">
         @foreach (var item in Model.Where(x => x.IsBlock == 0))
@@ -13,8 +13,8 @@
                     !string.IsNullOrWhiteSpace(item.DisplayTitle)
                     ? item.DisplayTitle.CleanParagraphTags()
                     : item.Title)
-                </h2>
-                @if (!string.IsNullOrWhiteSpace(item.Intro))
+            </h2>
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
                     @Html.Raw(item.Intro)
                 }
@@ -41,7 +41,8 @@
                                 @if (!string.IsNullOrWhiteSpace(item.Url))
                                 {
                                     <a href="@item.Url" class="link-md link-primary mt-4">
-                                        <span class="underline">@(string.IsNullOrWhiteSpace(item.Url_Text) ? "Read More" : item.Url_Text)</span>
+                                        <span class="underline">@(string.IsNullOrWhiteSpace(item.Url_Text) ? "Read More" :
+                                                                                item.Url_Text)</span>
                                         <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png"
                                             alt="rightArrow" />
                                     </a>

@@ -38,11 +38,31 @@ public class SolutionsController : Controller
             _bal.Dispose();
         }
     }
+
+
+
+    public IActionResult FoodProgram(string title)
+    {
+        try
+        {
+            var data = _bal.GetFoodProgram_BAL(title, 1, 1);
+            return View(data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/CulinaryExcellence :", ex);
+            return View(new SolutionsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
     public IActionResult foodprogram_html()
     {
         try
         {
-           //var data = _bal.GetCulinaryExcellence_BAL(title, 1, 1);
+            //var data = _bal.GetCulinaryExcellence_BAL(title, 1, 1);
             return View();
         }
         catch (Exception ex)
@@ -55,6 +75,9 @@ public class SolutionsController : Controller
             _bal.Dispose();
         }
     }
+
+
+
 
     public IActionResult Food_Safety_Hygiene(string title)
     {

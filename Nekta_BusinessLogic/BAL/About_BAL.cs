@@ -93,9 +93,9 @@ namespace Nekta_BusinessLogic.BAL
                 model.Policies_List = MapComponents(groupedData, 2);
             }
 
-            if (ds?.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+            if (ds?.Tables.Count > 3 && ds.Tables[3].Rows.Count > 0)
             {
-                model.AnnualReturn_List = Config_Application_Website.MapArticleList(ds.Tables[2]); ;
+                model.AnnualReturn_List = Config_Application_Website.MapArticleList(ds.Tables[3]); ;
             }
 
             return model;

@@ -1146,8 +1146,8 @@
   .w-25 {
     width: calc(var(--spacing) * 25);
   }
-  .w-35 {
-    width: calc(var(--spacing) * 35);
+  .w-30 {
+    width: calc(var(--spacing) * 30);
   }
   .w-40 {
     width: calc(var(--spacing) * 40);
@@ -1637,9 +1637,6 @@
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
-  .mask-repeat {
-    mask-repeat: repeat;
-  }
   .object-cover {
     object-fit: cover;
   }
@@ -1772,9 +1769,6 @@
   .pt-5 {
     padding-top: calc(var(--spacing) * 5);
   }
-  .pt-8 {
-    padding-top: calc(var(--spacing) * 8);
-  }
   .pt-10 {
     padding-top: calc(var(--spacing) * 10);
   }
@@ -1786,6 +1780,12 @@
   }
   .pr-4 {
     padding-right: calc(var(--spacing) * 4);
+  }
+  .pr-5 {
+    padding-right: calc(var(--spacing) * 5);
+  }
+  .pr-\[10\%\] {
+    padding-right: 10%;
   }
   .pb-0 {
     padding-bottom: 0px;
@@ -2210,9 +2210,6 @@
     .sm\:w-10 {
       width: calc(var(--spacing) * 10);
     }
-    .sm\:max-w-4xl {
-      max-width: var(--container-4xl);
-    }
     .sm\:max-w-5xl {
       max-width: var(--container-5xl);
     }
@@ -2224,6 +2221,9 @@
     }
     .sm\:flex-row {
       flex-direction: row;
+    }
+    .sm\:gap-4 {
+      gap: calc(var(--spacing) * 4);
     }
     :where(.sm\:space-y-3 > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -2285,9 +2285,6 @@
     }
     .md\:mt-6 {
       margin-top: calc(var(--spacing) * 6);
-    }
-    .md\:mt-10 {
-      margin-top: calc(var(--spacing) * 10);
     }
     .md\:mt-12 {
       margin-top: calc(var(--spacing) * 12);
@@ -2367,14 +2364,14 @@
     .md\:px-8 {
       padding-inline: calc(var(--spacing) * 8);
     }
-    .md\:pt-16 {
-      padding-top: calc(var(--spacing) * 16);
-    }
-    .md\:pt-20 {
-      padding-top: calc(var(--spacing) * 20);
+    .md\:pt-10 {
+      padding-top: calc(var(--spacing) * 10);
     }
     .md\:pb-5 {
       padding-bottom: calc(var(--spacing) * 5);
+    }
+    .md\:pb-10 {
+      padding-bottom: calc(var(--spacing) * 10);
     }
     .md\:pb-12 {
       padding-bottom: calc(var(--spacing) * 12);
@@ -2405,6 +2402,9 @@
     }
     .lg\:block {
       display: block;
+    }
+    .lg\:max-w-120 {
+      max-width: calc(var(--spacing) * 120);
     }
     .lg\:max-w-\[35vw\] {
       max-width: 35vw;
@@ -2503,7 +2503,7 @@ body {
   h1, h2, h3, h4, h5 {
     font-family: var(--font-heading) !important;
     color: var(--color-text-heading);
-    line-height: 1.15;
+    line-height: 1 !important;
   }
   h1, .text-h1 {
     font-size: var(--text-h1);
