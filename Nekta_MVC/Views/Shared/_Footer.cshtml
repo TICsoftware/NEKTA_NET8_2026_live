@@ -1,35 +1,39 @@
       <!-- ==================== FOOTER SECTION ==================== -->
-      <footer class="footer-bg bg-cover bg-center bg-no-repeat pb-8 relative">
+      <footer class="footer-bg bg-cover bg-center bg-no-repeat relative">
          <img src="/Assets/images/footerBackground.jpg" class="object-cover w-full h-full absolute inset-0 bottom-0" alt="">
          <div class="container">
             <div class="footer-grid grid md:grid-cols-12 gap-2 md:pl-0">
                <!-- Left Column - Logo & Info -->
-               <div class="md:col-span-4 md:border-r-[#F6F4E6]/35 md:border-r pb-4 sm:pr-2 lg:pr-0 md:pb-5 pt-10 md:pt-16">
+               <div class="md:col-span-4 md:border-r-[#F6F4E6]/35 md:border-r sm:pr-2 lg:pr-0 pb-4 md:pb-10 pt-4 md:pt-10">
                   <img src="/Assets/images/logo/Nekta-white.svg" alt="logo" class="footer-logo mb-6" />
                   <p class="text-h3 font-heading mb-0!">Life is a beautiful plate</p>
-                  <div class="menu-divider"> <span></span></div>
+                  <div class="menu-divider"><span></span></div>
 
                   <div
-                     class="footer-brand-copy footer-indent mt-2 text-cream font-normal border-b border-b-[#F6F4E6]/35 pb-8 md:pb-5">
+                     class="footer-brand-copy footer-indent mt-2 text-cream font-normal border-b border-b-[#F6F4E6]/35 pb-5 md:pb-5">
                      <p class="">A wholly owned subsidiary of</p>
-                     <img src="/Assets/images/logo/taj-sats-logo.webp" alt="TAJ Sats" class="footer-subsidiary-logo w-35" />
+                     <img src="/Assets/images/logo/TajSats-logo.png" alt="TAJ Sats" class="footer-subsidiary-logo w-30" />
                   </div>
-
-                  <div class="footer-indent mt-8 md:mt-10">
-                     <h4 class=" border-0! mb-0!">Address</h4>
-                     <p>
-                        9th Floor, Express Towers, <br />
-                        Nariman Point, Mumbai 400 021
-                     </p>
-                  </div>
-                  <div class="footer-indent mt-5">
-                     <h4 class=" border-0! mb-0!">Contact US</h4>
-                     <p> <a href="tel:+912231220200">+91 22 3122 0200</a> </p>
-                     <p class="footer-text"> <a href="mailto:sales@bubblefoods.com">sales@bubblefoods.com</a></p>
+   
+                  <div class="flex flex-col sm:flex-row gap-4 sm:gap-4 mt-5 md:mt-6 pr-5">
+                     <div class="footer-indent ">
+                        <h4 class=" border-0! mb-0!">Address</h4>
+                        <p>
+                           9th Floor, Express Towers, <br />
+                           Nariman Point, Mumbai 400 021
+                        </p>
+                     </div>
+                     
+                     <div class="footer-indent ">
+                        <h4 class=" border-0! mb-0!">Contact Us</h4>
+                        <p> <a href="tel:+912231220200">+91 22 3122 0200</a> </p>
+                        <p class="footer-text"> <a href="mailto:sales@nektafoods.com">sales@nektafoods.com</a></p>
+                     </div>
                   </div>
                </div>
+
                <!-- Quick Link -->
-               <div class="footer-quick-links footer-quick-link-click md:col-span-3 md:pt-20">
+               <div class="footer-quick-links footer-quick-link-click md:col-span-3 md:pt-10">
                   <h4 >Quick Link</h4>
                   <ul class="footer-nav-list space-y-1 sm:space-y-3 lg:space-y-5">
                      <li>
@@ -53,14 +57,14 @@
                   </ul>
                </div>
                <!-- Segments -->
-               <div class="md:col-span-3 md:pt-20 footer-quick-link-click">
+               <div class="md:col-span-3 md:pt-10 footer-quick-link-click">
                   <h4 >Segments</h4>
                   <ul class="footer-nav-list space-y-1 sm:space-y-3 lg:space-y-5">
                      <li>
-                        <a href="/segments/business-and-corporates" class="footer-link">Business and Corporate</a>
+                        <a href="/segments/business-and-corporates" class="footer-link">Business & Corporate</a>
                      </li>
                      <li>
-                        <a href="/segments/Horcea" class="footer-link">HORECA</a>
+                        <a href="/segments/Horcea" class="footer-link">Horeca</a>
                      </li>
                      <li>
                         <a href="/segments/education" class="footer-link">Education</a>
@@ -80,7 +84,7 @@
                   </ul>
                </div>
                <!-- Solutions -->
-               <div class="md:col-span-2 md:pt-20 footer-quick-link-click">
+               <div class="md:col-span-2 md:pt-10 footer-quick-link-click">
                   <h4 >Solutions</h4>
                   <ul class="footer-nav-list space-y-1 sm:space-y-3 lg:space-y-5">
                      <li>
@@ -102,11 +106,11 @@
                </div>
             </div>
             <!-- Bottom Bar -->
-            <div
-               class="footer-bottom border-t border-[#F6F4E6]/35 pt-8 flex flex-col lg:flex-row justify-between items-center gap-3 md:gap-4 lg:gap-4 text-xs">
+            <div class="footer-bottom border-t border-[#F6F4E6]/35 py-2 flex flex-col lg:flex-row justify-between items-center gap-3 md:gap-4 lg:gap-4 text-xs">
                <p class="copyright-text">
                   Copyright © <span id="year-foot"></span> Nekta. All Rights Reserved.
                </p>
+
                <!-- Social Icons -->
                <div class="flex gap-4 md:gap-4">
                   <a href="#" class="social-link text-cream hover:text-green transition border border-cream rounded-full flex items-center justify-center"
@@ -120,15 +124,11 @@
                   </a>
                   <a href="#"
                      class="social-link text-cream hover:text-green transition border border-cream rounded-full flex items-center justify-center"
-                     aria-label="X">
-                     <img src="/Assets/images/twitter-icon.svg" alt="logo" />
-                  </a>
-                  <a href="#"
-                     class="social-link text-cream hover:text-green transition border border-cream rounded-full flex items-center justify-center"
                      aria-label="LinkedIn">
                      <img src="/Assets/images/linkedin-icon.svg" alt="logo" />
                   </a>
                </div>
+
                <div class="footer-legal flex flex-wrap justify-center gap-2">
                   <a href="/sitemap" class="legal-link legal-divider pr-2 border-r">Sitemap</a>
                   <a href="/legal-disclaimer" class="legal-link legal-divider pr-2 border-r">Legal Disclaimer</a>
