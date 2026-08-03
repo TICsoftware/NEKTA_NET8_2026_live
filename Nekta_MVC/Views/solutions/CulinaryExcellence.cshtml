@@ -59,152 +59,27 @@
 }
 
 <!-- ==================== From the Core to Every Corner ==================== -->
-@foreach (var item in Model.From_The_Core_List.Where(x => x.IsBlock == 0))
+@if (Model.From_The_Core_List != null && Model.From_The_Core_List.Any())
 {
-    <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
-        <img loading="lazy" src="~/Assets/images/business/icon-right.svg" alt=""
-             class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
-        <div class="container relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 ">
-                <div class="relative">
-                    <div class="nourish-media-wrap relative">
-                        <div class="nourish-photo nourish-photo-back">
-                            <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
-                        </div>
-                        <div class="nourish-photo nourish-photo-front">
-                            <img loading="lazy" src="@item.Component_LHS_thumbnail"
-                                 alt="@item.Component_LHS_thumbnail_image_alt">
-                        </div>
-                    </div>
-                </div>
-                <div class="relative space-y-6 md:space-y-8 ">
-                    <div class="section-title-outer max-w-full lg:max-w-120">
-                        <h2 class="title-section text-h2" data-leaf-target letters-slide-down text-split>
-                            @Html.Raw(
-                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                            ? item.DisplayTitle.CleanParagraphTags()
-                            : item.Title)
-                        </h2>
-                    </div>
-                    <div class="intro-outer-wrapper sm:pl-15 pr-[10%]">
-                        @if (!string.IsNullOrWhiteSpace(item.Intro))
-                        {
-                            @Html.Raw(item.Intro)
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Html.PartialAsync("~/Views/CommonComponent/_page_intro_dual_image.cshtml", Model.From_The_Core_List)
 }
 
 <!-- ==================== Why Central Kitchens Matter ==================== -->
-@foreach (var item in Model.Why_Central_Kitchens_List.Where(x => x.IsBlock == 0))
+@if (Model.Why_Central_Kitchens_List != null && Model.Why_Central_Kitchens_List.Any())
 {
-    <section class="bc-dining-section section-pb curveshape-wrap">
-        <div class="curveSvg-bg">
-            <svg class="curveSvg" viewBox="0 0 1000 400" preserveAspectRatio="none" overflow="visible">
-                <path class="curvePath" data-max-curve="140" d="M0,144 L1000,144 L1000,400 L0,400 Z" fill="#e8e0c4"></path>
-            </svg>
-        </div>
-        <div class="outer-polaroids-icons">
-            @if (!string.IsNullOrWhiteSpace(item.Component_LHS_thumbnail))
-            {
-                <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
-                     class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
-            }
-            @if (!string.IsNullOrWhiteSpace(item.Component_right_image))
-            {
-                <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
-                     class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
-            }
-        </div>
-
-        <div class="container relative z-10">
-            <div class="section-title-outer text-center max-w-6xl mx-auto">
-                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
-                    @Html.Raw(
-                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                    ? item.DisplayTitle.CleanParagraphTags()
-                    : item.Title)
-                </h2>
-            </div>
-
-            <div class="max-w-6xl mx-auto text-center">
-                @if (!string.IsNullOrWhiteSpace(item.Intro))
-                {
-                    @Html.Raw(item.Intro)
-                }
-            </div>
-        </div>
-    </section>
+    @await Html.PartialAsync("~/Views/CommonComponent/_title_intro_curve.cshtml", Model.Why_Central_Kitchens_List)
 }
 
 <!-- ==================== At a Glance ==================== -->
-@foreach (var item in Model.At_A_Glance_List.Where(x => x.IsBlock == 0))
+@if (Model.At_A_Glance_List != null && Model.At_A_Glance_List.Any())
 {
-    <section class="story-gallery">
-        <div class="container">
-            <div class="section-title-outer text-center mx-auto max-w-5xl at-glance-spacing">
-                <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
-                    @Html.Raw(
-                    !string.IsNullOrWhiteSpace(item.DisplayTitle)
-                    ? item.DisplayTitle.CleanParagraphTags()
-                    : item.Title)
-                </h2>
-            </div>
-            <div class="relative story-gallery-wrap">
-                <div class="story-gallery-left">
-                    <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
-                </div>
-                <div class="story-gallery-right">
-                    <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
-                         class="max-w-auto z-10 story-turmuric">
-                    <img src="@item.Component_Icon3_Image" alt="" class="max-w-auto z-10 story-leaf">
-                </div>
-                <div class="cards-wrapper relative flex justify-center items-center">
-                    <div class="gallery-card gallery-left">
-                        <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
-                    </div>
-                    <div class="gallery-card gallery-center">
-                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
-                    </div>
-                    <div class="gallery-card gallery-right">
-                        <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @await Html.PartialAsync("~/Views/CommonComponent/_at_a_glance.cshtml", Model.At_A_Glance_List)
 }
 
 <!-- ==================== Counter Section ==================== -->
-@if (Model.Infographics_Counter_List != null && Model.Infographics_Counter_List.Any(x => x.IsBlock == 1))
+@if (Model.Infographics_Counter_List != null && Model.Infographics_Counter_List.Any())
 {
-    <section class="counter-section section-pb">
-        <div class="container">
-            <div class="counter-wrapper sm:max-w-5xl sm:mx-auto">
-                @{
-                    var counters = Model.Infographics_Counter_List
-                    .Where(x => x.IsBlock == 1)
-                    .OrderBy(x => x.Sequence)
-                    .ToList();
-                }
-                @foreach (var item in counters)
-                {
-                    <div class="flex flex-col shrink-0 rounded-2xl px-4 py-6 items-start gap-0 box-itm counter-item">
-                        @Html.Raw(item.Intro.CleanParagraphTags())
-                        <p>@item.Title</p>
-                    </div>
-
-                    @if (item.Sequence != counters.Max(x => x.Sequence))
-                    {
-                        <div class="counter-divider"></div>
-                    }
-                }
-            </div>
-        </div>
-    </section>
+    @await Html.PartialAsync("~/Views/CommonComponent/_infographics_counter.cshtml", Model.Infographics_Counter_List)
 }
 
 <!-- ==================== Dynamism on a Plate ==================== -->

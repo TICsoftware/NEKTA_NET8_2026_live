@@ -1,0 +1,43 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+    <section class="story-gallery">
+        <div class="container">
+            @if (!string.IsNullOrWhiteSpace(item.DisplayTitle) || !string.IsNullOrWhiteSpace(item.Title))
+            {
+                <div class="section-title-outer text-center mx-auto max-w-5xl at-glance-spacing">
+                    <h2 class="title-section text-h2 " data-leaf-target letters-slide-down text-split>
+                        @Html.Raw(
+                            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                                ? item.DisplayTitle.CleanParagraphTags()
+                                : item.Title)
+                    </h2>
+                </div>
+            }
+            <div class="relative story-gallery-wrap">
+                <div class="story-gallery-left">
+                    <img src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image" class="max-w-auto">
+                </div>
+                <div class="story-gallery-right">
+                    <img src="@item.Component_Icon2_Image" alt="@item.Component_Icon_alt_Image"
+                         class="max-w-auto z-10 story-turmuric">
+                    <img src="@item.Component_Icon3_Image" alt="" class="max-w-auto z-10 story-leaf">
+                </div>
+                <div class="cards-wrapper relative flex justify-center items-center">
+                    <div class="gallery-card gallery-left">
+                        <img src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt">
+                    </div>
+                    <div class="gallery-card gallery-center">
+                        <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                    </div>
+                    <div class="gallery-card gallery-right">
+                        <img src="@item.Component_right_image" alt="@item.Component_Right_image_alt">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
