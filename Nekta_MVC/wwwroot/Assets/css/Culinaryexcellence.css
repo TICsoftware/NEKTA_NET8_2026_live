@@ -5,11 +5,13 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px;}
 
 /* Chili / basil decorations */
-.bc-dining-deco--chili {left: 14vw; top: 0vw; transform: rotate(-10deg); z-index: 2;max-width: 12vw;}
-.bc-dining-deco--basil { right:8vw; top:2vw; transform: rotate(15deg); z-index: 2;max-width: 16vw;}
+.bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1234; width: 11vw; rotate: -33deg;}
+.bc-dining-deco--chili{left:5vw; top: 2vw; transform: rotate(-10deg); z-index: 2;max-width:220px; width:20vw}
+.bc-dining-deco--basil{right:0vw; top:5vw; transform: rotate(15deg); z-index: 2; max-width:350px; width:30vw;}
+
 .outer-polaroids {top: 3vw; left: 5vw; position: absolute;}
 
-.curveshape-wrap {position: relative;width: 100%;min-height: 80vh;overflow: visible;display: flex; align-items: center;  justify-content: center; padding-top:5vw;}
+.curveshape-wrap {position: relative;width: 100%;min-height:400px;overflow: visible;display: flex; align-items: center;  justify-content: center; padding-top:5vw;}
 .curveshape-wrap .curveSvg-bg {position: absolute;inset: 0;z-index: 1;pointer-events: none; overflow: hidden;}
 .curveshape-wrap svg {position: absolute;top: 0;left: 0;width: 100%;height: 100%; display: block; overflow: visible;}
 /*  End */
@@ -72,10 +74,14 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
 .underline{text-decoration-line: underline;color:var(--color-third);}
 .read-more-content.is-collapsed::after {background: linear-gradient(   to bottom, rgba(247, 242, 231, 0), rgb(228, 215, 171)) !important;}
-/* WHat our culinary capability */
-.bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1234; width: 11vw; rotate: -33deg;}
 
-.bc-dining-deco--basil{ max-width: 18vw;}
+
+
+
+
+.story-gallery-right{}
+
+
 
 /* WWhy client choose nekta Thumb slider */
 .bg-darkcream .edge-details h3 { color: var(--color-text-heading);}
