@@ -1,0 +1,28 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+    <section class="cta-section section-spacing">
+        <div class="container">
+            <div class="max-w-5xl mx-auto text-center">
+                <p class="text-h4!">
+                    @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(item.Url))
+                {
+                    <a href="@item.Url" class="common-btn mt-8 md:mt-12 btn-slide-fill" type="button"
+                       data-modal-open="contactModal">
+                        <span>@(!string.IsNullOrWhiteSpace(item.Url_Text) ? item.Url_Text : "Enquire Now")</span>
+                        <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow" />
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+}

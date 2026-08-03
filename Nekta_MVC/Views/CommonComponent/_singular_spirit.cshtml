@@ -7,7 +7,8 @@
 }
 
 <section id="playgrounds-section" class="@(string.IsNullOrWhiteSpace(component?.bg_class) ? "bg-cream" : component.bg_class)  section-spacing relative overflow-hidden">
-    <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0" />
+    <img src="@(string.IsNullOrWhiteSpace(component?.Componentbackground) ? "/Assets/images/bg-pattern.webp" : component.Componentbackground)"
+         alt="" class="w-full h-full absolute top-0 left-0" />
     <div class="container">
         <!-- Section Heading -->
 
@@ -53,7 +54,7 @@
                  </div>
 
                 <!-- Slider Navigation -->
-                <div class="flex justify-center items-center gap-4 md:gap-6 mt-8 md:mt-12  w-auto!">
+                <div class="flex justify-center items-center gap-4 md:gap-6 mt-8 md:mt-12  w-auto! playgroud-button">
                     <div
                         class="swiper-button-prev-custom cursor-pointer w-10 h-10 md:w-12 md:h-12 rounded-full bg-green flex items-center justify-center text-cream transition-all hover:scale-110">
                         <img loading="lazy" src="/Assets/images/arrows/swiperLeft.png" alt="swiperLeft" />

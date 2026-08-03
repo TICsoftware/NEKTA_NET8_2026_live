@@ -1,0 +1,44 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+    <section class="bc-dining-section section-pb curveshape-wrap">
+        <div class="curveSvg-bg">
+            <svg class="curveSvg" viewBox="0 0 1000 400" preserveAspectRatio="none" overflow="visible">
+                <path class="curvePath" data-max-curve="140" d="M0,144 L1000,144 L1000,400 L0,400 Z" fill="#e8e0c4"></path>
+            </svg>
+        </div>
+        <div class="outer-polaroids-icons">
+            @if (!string.IsNullOrWhiteSpace(item.Component_LHS_thumbnail))
+            {
+                <img loading="lazy" src="@item.Component_LHS_thumbnail" alt="@item.Component_LHS_thumbnail_image_alt"
+                     class="bc-deco bc-dining-deco--chili" aria-hidden="true" />
+            }
+            @if (!string.IsNullOrWhiteSpace(item.Component_right_image))
+            {
+                <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
+                     class="bc-deco bc-dining-deco--basil" aria-hidden="true" />
+            }
+        </div>
+
+        <div class="container relative z-10">
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
+                <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
+                    @Html.Raw(
+                        !string.IsNullOrWhiteSpace(item.DisplayTitle)
+                            ? item.DisplayTitle.CleanParagraphTags()
+                            : item.Title)
+                </h2>
+            </div>
+
+            <div class="max-w-6xl mx-auto text-center">
+                @if (!string.IsNullOrWhiteSpace(item.Intro))
+                {
+                    @Html.Raw(item.Intro)
+                }
+            </div>
+        </div>
+    </section>
+}
