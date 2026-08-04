@@ -193,3 +193,51 @@ Leaf travel CSS
 .text-h1 { font-size: var(--text-h1); font-size: 60px;}
 
  }
+
+
+ /* readmore functionality  */
+ .read-more-fade {
+  position: relative;
+  max-height: 20.5em;
+  overflow: hidden;
+  transition: max-height 0.8s ease;
+}
+
+.read-more-fade.is-expanded {
+  max-height: 60em;
+}
+
+.read-more-fade::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3em;
+  background: linear-gradient(to bottom, rgba(232, 224, 196, 0) 0%, #e8e0c4 85%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.read-more-fade.is-expanded::after {
+  opacity: 0;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-top:40px;
+}
+
+.read-more-plus {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.read-more-btn.is-expanded .read-more-plus {
+  transform: rotate(45deg);
+}

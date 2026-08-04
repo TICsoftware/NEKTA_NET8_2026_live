@@ -33,12 +33,17 @@
                 </h2>
             </div>
 
-            <div class="max-w-6xl mx-auto text-center">
+            <div class="max-w-6xl mx-auto text-center read-more-fade flex flex-col items-center justify-center">
                 @if (!string.IsNullOrWhiteSpace(item.Intro))
                 {
                     @Html.Raw(item.Intro)
                 }
             </div>
+                <div class="text-center">
+                    <button type="button" class="read-more-btn" aria-expanded="false">
+                        <span class="read-more-label">Read More</span> <span class="read-more-plus">+</span>
+                    </button>
+                </div>
         </div>
     </section>
 }
