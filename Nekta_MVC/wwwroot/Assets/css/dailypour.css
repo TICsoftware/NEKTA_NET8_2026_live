@@ -85,19 +85,24 @@
   }
 
   /* --------- Content grid --------- */
-  .dp-content-grid {
-    display: grid;
-    grid-template-columns: minmax(280px, 930px) 1fr;
+.dp-content-grid{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:0rem;
+    align-items:center;
+}
 
-    gap: clamp(32px, 6vw, 30px);
-  }
+.dp-image-wrap{
+    max-width:720px;
+    width:100%;
+}
 
-  .dp-image-wrap {
-    position: relative;
-    flex-shrink: 0;
-
-    max-width: 60rem;
-
+.dp-text-block{
+    max-width:560px;
+    width:100%;
+}
+  .dp-image-wrap {position: relative;flex-shrink: 0;
+ max-width: 43rem;
     padding: 12px;
     border-radius: 999px 999px 22px 22px;
     overflow: hidden;
@@ -122,6 +127,7 @@
   .dp-text-block {
     max-width: 660px;
   }
+  
 
 
 
@@ -231,14 +237,22 @@
   /* --------- Circular deco badges, left + right --------- */
   .dpq-deco {
     position: absolute;
-    width: 118px;
-    height: 118px;
+    width: 10vw;
+    height: 10vw;
     border-radius: 50%;
     background: #f2e6c6; /* cream badge background */
-    overflow: hidden;
+
     z-index: 10;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   }
+  .dpq-deco img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
 
   .title-section .text-letters-slide {
        color: var(--color-cream) !important;
@@ -251,10 +265,16 @@
  
   .dpq-deco img {
     display: block;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
   }
+    .dpq-deco-left img {
+      max-width: 20vw;
+    }
+      .dpq-deco-right img { 
+        max-width: 10vw;
+        top: 2vw;
+        left:4vw
+      }
  
   .dpq-deco-left {
     left: -55px;
@@ -504,7 +524,7 @@
   }
  
   @media (max-width: 560px) {
-    .menu-section { padding: 64px 16px 70px; }
+   
     .menu-card { width: 240px; }
     .menu-card-media { height: 280px; }
     .menu-nav { width: 38px; height: 38px; top: 140px; }
@@ -526,7 +546,7 @@
     position: relative;
     z-index: 2;
   
-    margin: 0 auto 50px;
+    margin: 0 auto 0px;
     text-align: center;
   }
  
@@ -587,7 +607,7 @@
     position: relative;
     flex: 0 0 auto;
     width: min(880px, 78vw);
-    height: clamp(260px, 34vw, 380px);
+    height: clamp(450px, 34vw, 402px);
     border-radius: 22px;
    
     background: #1c1a19;
@@ -704,14 +724,19 @@
  
   @media (max-width: 640px) {
     .experience-caption {
-      left: 16px;
-      bottom: 16px;
-      max-width: 240px;
-      padding: 16px 18px;
+        left: -32px;
+        bottom: 16px;
+        max-width: 288px;
+        padding: 16px 18px;
     }
     .experience-caption-title {
       font-size: 1.1rem;
     }
+    .experience-subtext {
+
+    padding: 30px 32px;
+
+}
   }
 
 
@@ -721,23 +746,22 @@
   --------------------------------------- */
   .belongs-section {
     position: relative;
-
-    padding: 90px 0px 380px;
     isolation: isolate;
+    padding-bottom: 20vw
   }
  
   /* Background texture — real <img> tags, not CSS backgrounds,
      so each texture asset can be swapped/optimized independently. */
-  .belongs-bg-corner {
+.belongs-bg-corner {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: clamp(160px, 16vw, 260px);
+    top: 11vw;
+    left: -4vw;
+    width: clamp(160px, 16vw, 331px);
     height: auto;
     z-index: 0;
     pointer-events: none;
     user-select: none;
-  }
+}
  
   .belongs-bg-edge {
     position: absolute;
@@ -914,12 +938,12 @@
   }
  
   @media (max-width: 560px) {
-    .belongs-section {
-      padding: 70px 18px 100px;
-    }
-    .belongs-header {
-      margin-bottom: 40px;
-    }
+
+.belongs-header {  margin-bottom: 40px;}
+.belongs-accordion { display: flex; flex-direction: column; padding-right: 7vw; padding-left: 7vw;}
+.belongs-bg-corner {position: absolute; top: 89vw;}
+.experience-slide img {border-radius: 20px;}
+
   }
 
 
@@ -929,7 +953,7 @@
   .backbone-section {
     position: relative;
     overflow: hidden;
-    padding: 90px 24px 110px;
+
     isolation: isolate;
   }
  
@@ -1187,17 +1211,32 @@
     isolation: isolate;
   }
  
-  .dp-cta-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    pointer-events: none;
-    user-select: none;
-  }
- 
+.dp-cta-bg {
+  position: absolute;
+  left: 0;
+  top: -12%;         /* was inset:0 — now oversized so it can shift without leaving a gap */
+  width: 100%;
+  height: 124%;       /* taller than the section so parallax movement stays covered */
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+.dp-cta-deco-right {
+  position: absolute;
+  right: -20px;
+  top: -30px;
+  width: clamp(120px, 12vw, 200px);
+  height: auto;
+  z-index: 2;           /* above .dp-cta-overlay (z-index: 1) so it isn't dimmed by the dark gradient */
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+
+}
   .dp-cta-overlay {
     position: absolute;
     inset: 0;
@@ -1298,4 +1337,16 @@
     .dp-cta-inner {
       padding: 64px 20px 72px;
     }
+    .dpq-deco-left img {
+    max-width: 37vw;
+}
+.dpq-deco-right img {
+    max-width: 26vw;
+    top: 2vw;
+    left: 4vw;
+}
+#main-wrapper{
+  overflow-x: hidden;
+}
+    
   }

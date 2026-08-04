@@ -202,3 +202,49 @@
       label.textContent = expanded ? 'Read Less' : 'Read More';
     });
   })();
+
+  
+
+  /* ---------------------------------------
+   CTA BANNER — background image parallax
+--------------------------------------- */
+(function () {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return; // bail out cleanly instead of referencing an undefined external variable
+  }
+
+  var mmCta = gsap.matchMedia();
+
+  mmCta.add('all', function () {
+    var section = document.querySelector('.daily-pour-cta-section');
+    if (!section) return;
+
+    var bg = section.querySelector('.dp-cta-bg');
+    if (!bg) return;
+
+    var tween = gsap.fromTo(
+      bg,
+      { yPercent: -10 },
+      {
+        yPercent: 10,
+        ease: 'none',
+        force3D: true,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+
+    return function () {
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+      tween.kill();
+      gsap.set(bg, { clearProps: 'transform' });
+    };
+  });
+})();
