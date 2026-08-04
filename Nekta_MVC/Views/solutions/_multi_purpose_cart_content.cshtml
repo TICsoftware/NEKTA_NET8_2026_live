@@ -76,7 +76,9 @@
                                         @Html.Raw(item.Content)
                                     </div>
 
-                                    <div class="acc-media" @(isSlider ? "data-per-view=\"2\"" : "")>
+                                    <div class="acc-media" @Html.Raw(isSlider ? "data-per-view=\"2\"" : "")
+                                        style="--per-view: @(isSlider ? 2 : 1);">
+
 
                                         <div class="acc-slider" data-slider>
 
@@ -85,9 +87,9 @@
                                                 // If your table has MediaType column
                                                 if (!string.IsNullOrEmpty(media.Video_path))
                                                 {
-                                                    <div class="acc-slide">
+                                                    @* <div class="acc-slide">
                                                         <img src="@media.ThumbnailImage" alt="@media.ThumbnailAltText">
-                                                    </div>
+                                                    </div> *@
                                                     <div class="acc-slide" data-type="video">
                                                         <video src="@media.Video_path" poster="@media.ThumbnailImage" playsinline>
                                                         </video>
