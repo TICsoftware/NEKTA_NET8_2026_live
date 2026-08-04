@@ -35,6 +35,9 @@
         <div class="container">
             <!-- 01 — collapsed, no media -->
 
+            @{
+                int index = 1;
+            }
             @foreach (var item in Model.Articles_List)
             {
                 var mediaList = Model.Articles_Sliders_List
@@ -47,7 +50,7 @@
                 <div class="acc-item" data-acc-item data-acc-id="@item.Title.Replace(" ", "-").ToLower()">
 
                     <button class="acc-header" data-acc-toggle>
-                        <span class="acc-num">@item.Sequence</span>
+                        <span class="acc-num">@index.ToString("00")</span>
                         <span class="acc-title">@item.Title</span>
                         <span class="acc-toggle-icon"></span>
                     </button>
@@ -140,6 +143,7 @@
                     </div>
 
                 </div>
+                index++;
             }
 
 

@@ -1,0 +1,1301 @@
+  /* ---------------------------------------
+     DAILY POUR SECTION
+  --------------------------------------- */
+
+  body{overflow-x: hidden;} /* prevent horizontal scroll from the decorative corner images */
+  .inside-banner-outer {
+    z-index: 0;
+  }
+
+  .daily-pour-section {
+    position: relative;
+    overflow: visible;
+
+    isolation: isolate;
+  }
+
+  /* Background texture — delivered as an <img>, not a CSS background,
+     so it can be swapped/optimized independently of layout. */
+  .dp-bg-texture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Corner coffee decoration images — left (pour + beans) and right (cup + beans) */
+  .dp-deco {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+.dp-deco-left {
+    left: -6vw;
+    width: clamp(180px, 20vw, 424px);
+    height: auto;
+    rotate: 106deg;
+    z-index: 3;
+}
+  .dp-deco-right {
+    right: -19vw;
+    top: -17vw;
+    width: clamp(177px, 40vw, 780px);
+    height: auto;
+  }
+
+  .dp-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  /* --------- Heading + divider --------- */
+  .dp-heading-wrap {
+    text-align: center;
+    margin-bottom: 85px;
+  }
+
+  .dp-heading {
+  
+    font-style: italic;
+    font-weight: 600;
+
+    color: #7a2430;
+    margin: 0 0 18px;
+  
+  }
+
+  /* Divider added purely via CSS — a small ornamental swash image
+     centered beneath the heading. Swap the url() for the real asset. */
+  .dp-divider {
+    width: 190px;
+    height: 35px;
+    margin: 0 auto;
+    background-image: url('/Assets/images/dailypour/heading-divider-ornament.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  /* --------- Content grid --------- */
+  .dp-content-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 930px) 1fr;
+
+    gap: clamp(32px, 6vw, 30px);
+  }
+
+  .dp-image-wrap {
+    position: relative;
+    flex-shrink: 0;
+
+    max-width: 60rem;
+
+    padding: 12px;
+    border-radius: 999px 999px 22px 22px;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    margin: 0 auto;
+  }
+
+  .dp-image-wrap:hover {
+    transform: translateY(-4px);
+
+  }
+
+  .dp-arch-image {
+    display: block;
+    width: 100%;
+    height: clamp(300px, 32vw, 495px);
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 999px 999px 14px 14px; /* slightly tighter than wrapper so the frame reads evenly */
+  }
+
+  .dp-text-block {
+    max-width: 660px;
+  }
+
+
+
+  /* Fade-truncate effect on the second paragraph, matching the reference.
+     Transitions smoothly when the .is-expanded state is toggled by JS. */
+  .dp-text-block p.dp-fade {
+    position: relative;
+    max-height: 4.7em;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+            mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+    transition: max-height 0.4s ease, -webkit-mask-image 0.3s ease;
+  }
+
+  .dp-text-block p.dp-fade.is-expanded {
+    max-height: 30em; /* comfortably larger than the full paragraph */
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+
+  .dp-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+ 
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #a3402f;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    background: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    padding: 0;
+  }
+
+  .dp-plus {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+
+  .dp-read-more.is-expanded .dp-plus {
+    transform: rotate(45deg); /* + becomes a visual x when expanded */
+  }
+
+  .dp-read-more:hover {
+    border-color: #a3402f;
+  }
+
+  .dp-plus {
+    font-size: 1rem;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+
+  /* --------- Responsive --------- */
+  @media (max-width: 900px) {
+    .dp-content-grid {
+      grid-template-columns: 1fr;
+    }
+    .dp-image-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .dp-deco-left,
+    .dp-deco-right {
+      width: 140px;
+      opacity: 0.7;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .daily-pour-section {
+      padding: 80px 18px 70px;
+    }
+    .dp-heading-wrap {
+      margin-bottom: 44px;
+    }
+    .dp-deco-left,
+    .dp-deco-right {
+      display: none; /* keep mobile clean and focused on content */
+    }
+  }
+
+    /* ---------------------------------------
+     QUOTE BANNER SECTION
+  --------------------------------------- */
+.dpq-banner {
+  position: relative;
+  background: #163a55; /* deep navy */
+  padding: 10px 0px;
+  /* border removed from here */
+}
+
+.dpq-border-frame {
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid #cda94f;
+  border-bottom: 2px solid #cda94f;
+  padding: 24px 0;   /* spacing between the gold lines and the text inside */
+ 
+}
+ 
+  /* --------- Circular deco badges, left + right --------- */
+  .dpq-deco {
+    position: absolute;
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    background: #f2e6c6; /* cream badge background */
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  }
+
+  .title-section .text-letters-slide {
+       color: var(--color-cream) !important;
+
+}
+  .title-section-red .text-letters-slide {
+       color: #5C0700 !important;
+
+}
+ 
+  .dpq-deco img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  .dpq-deco-left {
+    left: -55px;
+    bottom: -30px;
+  }
+ 
+  .dpq-deco-right {
+    right: -55px;
+    top: -30px;
+  }
+ 
+  /* --------- Centered copy --------- */
+  .dpq-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1290px;
+    margin: 0 auto;
+    text-align: center;
+  }
+ 
+  .dpq-line {
+    font-family: var(--font-heading);
+   font-style: italic;
+    font-weight: 500;
+    color: #fff;
+
+    line-height: 1.5;
+    margin: 0;
+  }
+ 
+  .dpq-line + .dpq-line {
+    margin-top: 2px;
+  }
+ 
+  /* --------- Responsive --------- */
+  @media (max-width: 640px) {
+    .dpq-banner {
+      padding: 36px 20px;
+    }
+    .dpq-deco {
+      width: 76px;
+      height: 76px;
+    }
+    .dpq-deco-left {
+      left: -34px;
+      bottom: -20px;
+    }
+    .dpq-deco-right {
+      right: -34px;
+      top: -20px;
+    }
+    .dpq-inner {
+      max-width: 92%;
+    }
+  }
+ 
+  @media (max-width: 420px) {
+    .dpq-deco {
+      display: none; /* keep the smallest screens focused on the quote */
+    }
+  }
+
+
+
+
+    /* ---------------------------------------
+     MENU SECTION
+  --------------------------------------- */
+  .menu-section {
+    position: relative;
+
+    overflow: hidden;
+  }
+ 
+  /* Scattered decorative dots above the heading */
+  .menu-decor-dots {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    width: 140px;
+    height: 60px;
+    transform: translateX(-60px);
+    pointer-events: none;
+  }
+ 
+  .menu-decor-dots span {
+    position: absolute;
+    border-radius: 50%;
+    background: #b08d5f;
+    opacity: 0.7;
+  }
+ 
+  .menu-decor-dots span:nth-child(1) { width: 6px;  height: 6px;  top: 0;   left: 10px; }
+  .menu-decor-dots span:nth-child(2) { width: 9px;  height: 9px;  top: 14px; left: 40px; opacity: 0.55; }
+  .menu-decor-dots span:nth-child(3) { width: 4px;  height: 4px;  top: 4px;  left: 66px; }
+  .menu-decor-dots span:nth-child(4) { width: 7px;  height: 7px;  top: 26px; left: 92px; opacity: 0.5; }
+  .menu-decor-dots span:nth-child(5) { width: 4px;  height: 4px;  top: 8px;  left: 118px; }
+  .menu-decor-dots span:nth-child(6) { width: 10px; height: 10px; top: 30px; left: 6px;  opacity: 0.4; }
+ 
+  /* --------- Header --------- */
+  .menu-header {
+    position: relative;
+    z-index: 2;
+    max-width: 1020px;
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+ 
+  .menu-heading {
+    
+    font-weight: 600;
+    font-size: clamp(2.1rem, 4.2vw, 2.9rem);
+    color: #7a2430;
+    margin: 0 0 18px;
+  }
+ 
+  .menu-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+ 
+  .menu-divider-line {
+    width: 46px;
+    height: 1px;
+    background: #b6825f;
+  }
+ 
+  .menu-divider-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+ 
+  .menu-subtext {
+  
+    font-size: 22px;
+    padding: 30px 0px;
+    margin: 0;
+  }
+ 
+  /* --------- Slider --------- */
+  .menu-slider-wrap {
+    position: relative;
+    max-width: 1790px;
+    margin: 0 auto;
+  }
+ 
+
+ 
+  .menu-track {
+    display: flex;
+    gap: 26px;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+ 
+.menu-card {
+    flex: 0 0 auto;
+    width: 494px;
+}
+ 
+  .menu-card-media {
+    position: relative;
+    border-radius: 999px 999px 100px 100px;
+    overflow: hidden;
+    height: 340px;
+    background: #1c1a19; /* fallback behind image while loading */
+  }
+ 
+  .menu-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  .menu-card-media::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 55%;
+    background: linear-gradient(to top, rgba(10, 8, 6, 0.88) 0%, rgba(10, 8, 6, 0.35) 55%, rgba(10, 8, 6, 0) 100%);
+  }
+ 
+  .menu-card-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    z-index: 2;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.975rem;
+    color: #f7f1e2;
+    margin: 0;
+  }
+ 
+  .menu-card-text {
+   
+  
+  
+ 
+    text-align: center;
+    margin: 22px 6px 0;
+  }
+ 
+  /* --------- Nav arrows --------- */
+  .menu-nav {
+    position: absolute;
+    top: 170px; /* vertically centered against the 340px media height */
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: #f4efe0;
+    color: #7a2430;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 5;
+  }
+ 
+  .menu-nav:hover {
+    transform: translateY(-50%) scale(1.06);
+  }
+ 
+  .menu-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+ 
+  .menu-nav-prev { left: -14px; }
+  .menu-nav-next { right: -14px; }
+ 
+  @media (max-width: 900px) {
+    .menu-nav-prev { left: 4px; }
+    .menu-nav-next { right: 4px; }
+  }
+ 
+  @media (max-width: 560px) {
+    .menu-section { padding: 64px 16px 70px; }
+    .menu-card { width: 240px; }
+    .menu-card-media { height: 280px; }
+    .menu-nav { width: 38px; height: 38px; top: 140px; }
+  }
+
+
+
+  /* ---------------------------------------
+     EXPERIENCE SECTION CENTERED SLIDER
+  --------------------------------------- */
+  .experience-section {
+    position: relative;
+    overflow: hidden;
+    z-index: 123;
+  }
+ 
+  /* --------- Header --------- */
+  .experience-header {
+    position: relative;
+    z-index: 2;
+  
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+ 
+  .experience-heading {
+
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    color: #7a2430;
+    margin: 0 0 16px;
+  }
+ 
+  .experience-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+ 
+  .experience-divider-line {
+    width: 44px;
+    height: 1px;
+    background: #b6825f;
+  }
+ 
+  .experience-divider-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+ 
+  .experience-subtext {
+
+   max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 0px;
+    font-size: 22px;
+   
+  }
+ 
+  /* --------- Center-focused slider --------- */
+  .experience-slider-viewport {
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0 40px;
+  }
+ 
+  .experience-track {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+ 
+  .experience-slide {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(880px, 78vw);
+    height: clamp(260px, 34vw, 380px);
+    border-radius: 22px;
+   
+    background: #1c1a19;
+    transform: scale(0.82);
+    opacity: 0.55;
+    transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.55s ease;
+  }
+ 
+  .experience-slide.is-active {
+    transform: scale(1);
+    opacity: 1;
+    z-index: 2;
+  }
+ 
+  .experience-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+ 
+  /* --------- Caption card, only meaningful on the active slide --------- */
+  .experience-caption {
+    position: absolute;
+    left: -3vw;
+    bottom: 28px;
+    max-width: 400px;
+    background: #f6efdf;
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    pointer-events: none;
+  }
+ 
+  .experience-slide.is-active .experience-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+ 
+  .experience-caption-title {
+
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #241f1a;
+    margin: 0 0 10px;
+  }
+ 
+  .experience-caption-text {
+ 
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: #5c5348;
+    margin: 0;
+  }
+ 
+  /* --------- Controls: prev / dots / next --------- */
+  .experience-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 8px;
+  }
+ 
+  .experience-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #c8663f;
+    color: #fff;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+ 
+  .experience-arrow:hover {
+    transform: scale(1.06);
+  }
+ 
+  .experience-arrow:disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
+ 
+  .experience-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+ 
+  .experience-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c8a98a;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+ 
+  .experience-dot.is-active {
+    background: #c8663f;
+    transform: scale(1.4);
+  }
+ 
+  @media (max-width: 640px) {
+    .experience-caption {
+      left: 16px;
+      bottom: 16px;
+      max-width: 240px;
+      padding: 16px 18px;
+    }
+    .experience-caption-title {
+      font-size: 1.1rem;
+    }
+  }
+
+
+
+  /* ---------------------------------------
+     ACCORDIAN FUNCTIONALITY FOR THE DAILY POUR BELONGS
+  --------------------------------------- */
+  .belongs-section {
+    position: relative;
+
+    padding: 90px 0px 380px;
+    isolation: isolate;
+  }
+ 
+  /* Background texture — real <img> tags, not CSS backgrounds,
+     so each texture asset can be swapped/optimized independently. */
+  .belongs-bg-corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(160px, 16vw, 260px);
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+ 
+  .belongs-bg-edge {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+ 
+  /* --------- Header --------- */
+  .belongs-header {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+ 
+  .belongs-heading {
+
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    color: #7a2430;
+    margin: 0 0 16px;
+  }
+ 
+  .belongs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+ 
+  .belongs-divider-line {
+    width: 44px;
+    height: 1px;
+    background: #b6825f;
+  }
+ 
+  .belongs-divider-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+ 
+  .belongs-subtext {
+   
+    font-size: 22px;
+    line-height: 1.7;
+    max-width: 1000px;
+    margin: 0 auto; 
+    padding: 30px 0px;
+  
+  }
+ 
+  /* --------- Content grid --------- */
+  .belongs-grid {
+    position: relative;
+    z-index: 2;
+  
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  
+  }
+ 
+  @media (min-width: 900px) {
+    .belongs-grid {
+      grid-template-columns: 1fr 1.15fr;
+      gap: 60px;
+    }
+  }
+ 
+  .belongs-image-wrap {
+        border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+  }
+ 
+  .belongs-image-wrap img {
+    display: block;
+    width: 100%;
+    height: clamp(260px, 30vw, 495px);
+    object-fit: cover;
+  }
+ 
+  /* --------- Accordion --------- */
+  .belongs-accordion {
+    display: flex;
+    flex-direction: column;
+        padding-right: 7vw;
+  }
+ 
+  .belongs-accordion-item {
+    border-bottom: 1px solid rgba(122, 36, 48, 0.18);
+  }
+ 
+  .belongs-accordion-item:first-child {
+    border-top: 1px solid rgba(122, 36, 48, 0.18);
+  }
+ 
+  .belongs-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: none;
+    border: none;
+    padding: 18px 2px;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.75rem;
+    color: var(--color-text-heading)
+   
+  }
+ 
+  .belongs-accordion-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+ 
+  .belongs-accordion-icon::before,
+  .belongs-accordion-icon::after {
+    content: '';
+    position: absolute;
+    background: #c8663f;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+ 
+  .belongs-accordion-icon::before {
+    width: 14px;
+    height: 2px;
+  }
+ 
+  .belongs-accordion-icon::after {
+    width: 2px;
+    height: 14px;
+  }
+ 
+  .belongs-accordion-item.is-open .belongs-accordion-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0; /* vertical bar fades/rotates away, leaving a flat line = the "x to minus" morph */
+  }
+ 
+  .belongs-accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+ 
+  .belongs-accordion-panel-inner {
+    padding: 0 2px 20px;
+  }
+ 
+  .belongs-accordion-panel-inner p {
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #6b6053;
+    margin: 0;
+  }
+ 
+  @media (max-width: 560px) {
+    .belongs-section {
+      padding: 70px 18px 100px;
+    }
+    .belongs-header {
+      margin-bottom: 40px;
+    }
+  }
+
+
+ /* ---------------------------------------
+     BUILT ON NEKTA'S BACKBONE
+  --------------------------------------- */
+  .backbone-section {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 24px 110px;
+    isolation: isolate;
+  }
+ 
+  .backbone-deco-corner {
+    position: absolute;
+    right: -20px;
+    bottom: -10px;
+    width: clamp(120px, 12vw, 180px);
+    height: auto;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+ 
+  /* --------- Header --------- */
+  .backbone-header {
+    position: relative;
+    z-index: 2;
+  
+    margin: 0 auto 50px;
+    text-align: center;
+  }
+ 
+  .backbone-heading {
+
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    color: #7a2430;
+    margin: 0 0 16px;
+  }
+ 
+  .backbone-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+ 
+  .backbone-divider-line {
+    width: 44px;
+    height: 1px;
+    background: #b6825f;
+  }
+ 
+  .backbone-divider-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+ 
+  .backbone-subtext {
+
+    font-size: 22px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 0px;
+  
+  }
+ 
+  /* --------- Collage --------- */
+  .backbone-collage {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto 56px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+      "a b c d e"
+      "f g c h i";
+    gap: 14px;
+    height: clamp(280px, 32vw, 400px);
+  }
+ 
+  .backbone-collage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px; /* default — used by the center tall image */
+  }
+ 
+  /* Leaf shapes grouped by ROW within each half of the collage —
+     left-top row (a, b) shares one shape, left-bottom row (f, g) shares another;
+     right-top row (d, e) shares one shape, right-bottom row (h, i) shares another. */
+  .backbone-collage img.is-leaf {
+    border-radius: 0; /* the mask defines the outline now, not border-radius */
+  }
+ 
+  .backbone-collage img.is-leaf-left-top {
+    -webkit-mask-image: url('/Assets/images/dailypour/leaf-shape-mask-left-top.svg');
+            mask-image: url('/Assets/images/dailypour/leaf-shape-mask-left-top.svg');
+  }
+ 
+  .backbone-collage img.is-leaf-left-bottom {
+    -webkit-mask-image: url('/Assets/images/dailypour/leaf-shape-mask-left-bottom.svg');
+            mask-image: url('/Assets/images/dailypour/leaf-shape-mask-left-bottom.svg');
+  }
+ 
+  .backbone-collage img.is-leaf-right-top {
+    -webkit-mask-image: url('/Assets/images/dailypour/leaf-shape-mask-right-top.svg');
+            mask-image: url('/Assets/images/dailypour/leaf-shape-mask-right-top.svg');
+  }
+ 
+  .backbone-collage img.is-leaf-right-bottom {
+    -webkit-mask-image: url('/Assets/images/dailypour/leaf-shape-mask-right-bottom.svg');
+            mask-image: url('/Assets/images/dailypour/leaf-shape-mask-right-bottom.svg');
+  }
+ 
+  .backbone-collage img.is-leaf-left-top,
+  .backbone-collage img.is-leaf-left-bottom,
+  .backbone-collage img.is-leaf-right-top,
+  .backbone-collage img.is-leaf-right-bottom {
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+            mask-position: center;
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+  }
+ 
+  .backbone-cell-a { grid-area: a; }
+  .backbone-cell-b { grid-area: b; }
+  .backbone-cell-c { grid-area: c; } /* tall center image — spans both rows via the repeated area name */
+  .backbone-cell-d { grid-area: d; }
+  .backbone-cell-e { grid-area: e; }
+  .backbone-cell-f { grid-area: f; }
+  .backbone-cell-g { grid-area: g; }
+  .backbone-cell-h { grid-area: h; }
+  .backbone-cell-i { grid-area: i; }
+
+
+  .backbone-cell-c {
+  grid-area: c;
+  /* Sized independently of the shared width:100%/height:100% rule on .backbone-collage img —
+     change these two values to whatever size you want the center image to be. */
+  width: 100% !important;
+  height: 80% !important;
+  justify-self: center;
+  align-self: center;
+}
+ 
+  @media (max-width: 760px) {
+    .backbone-collage {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-areas:
+        "a b c"
+        "f g c"
+        "d h i";
+      height: clamp(340px, 90vw, 480px);
+    }
+  }
+ 
+  @media (max-width: 460px) {
+    .backbone-collage {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-template-areas:
+        "a b"
+        "c c"
+        "f g"
+        "d h"
+        "e i";
+      height: clamp(520px, 160vw, 640px);
+    }
+  }
+ 
+  /* --------- Sub-copy + read more --------- */
+  .backbone-footer {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+ 
+  .backbone-subheading {
+   
+    font-weight: 600;
+    font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+    color: #3a2e22;
+    margin: 0 0 16px;
+  }
+ 
+  .backbone-footer p.dp-fade {
+    position: relative;
+    max-height: 4.9em;
+    overflow: hidden;
+
+    font-size: 18px;
+    line-height: 1.75;
+ 
+    margin: 0 0 14px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
+            mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
+    transition: max-height 0.4s ease, -webkit-mask-image 0.3s ease;
+  }
+ 
+  .backbone-footer p.dp-fade.is-expanded {
+    max-height: 30em;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+ 
+  .backbone-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #a3402f;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    background: none;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    padding: 0;
+  }
+ 
+  .backbone-read-more:hover {
+    border-color: #a3402f;
+  }
+ 
+  .backbone-plus {
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1;
+    transform: translateY(-1px);
+    transition: transform 0.25s ease;
+  }
+ 
+  .backbone-read-more.is-expanded .backbone-plus {
+    transform: rotate(45deg) translateY(-1px);
+  }
+ 
+  @media (max-width: 560px) {
+    .backbone-section {
+      padding: 70px 18px 80px;
+    }
+  }
+
+  /* ---------------------------------------
+     BRING THE DAILY POUR TO YOUR SPACE — CTA banner
+  --------------------------------------- */
+  .dp-cta-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+ 
+  .dp-cta-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+ 
+  .dp-cta-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 8, 6, 0.55) 0%,
+      rgba(10, 8, 6, 0.68) 45%,
+      rgba(10, 8, 6, 0.72) 100%
+    );
+    pointer-events: none;
+  }
+ 
+  .dp-cta-inner {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 auto;
+    padding: 90px 24px 100px;
+    text-align: center;
+  }
+ 
+  .dp-cta-heading {
+
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+    color: #fdf8ec;
+    margin: 0 0 18px;
+    line-height: 1.25;
+  }
+ 
+  .dp-cta-heading strong {
+   
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+ 
+  .dp-cta-divider {
+    width: 200px;
+    height: 35px;
+    margin: 0 auto 26px;
+    background-image: url('/Assets/images/dailypour/white_divider.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+ 
+  .dp-cta-lead {
+
+   
+ 
+    color: #fdf8ec;
+    margin: 0 0 12px;
+  }
+ 
+  .dp-cta-text {
+
+    line-height: 1.7;
+    color: rgba(253, 248, 236, 0.85);
+    margin: 0 auto;
+    max-width: 800px;
+   padding: 5px 0px 50px 0px;
+  }
+ 
+  .dp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #c8663f;
+    color: #fff;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 15px 28px;
+    border-radius: 999px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+ 
+  .dp-cta-btn:hover {
+    background: #b3552f;
+    transform: translateY(-2px);
+  }
+ 
+  .dp-cta-btn-arrow {
+    font-size: 1rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+ 
+  .dp-cta-btn:hover .dp-cta-btn-arrow {
+    transform: translateX(3px);
+  }
+ 
+  @media (max-width: 560px) {
+    .dp-cta-inner {
+      padding: 64px 20px 72px;
+    }
+  }
