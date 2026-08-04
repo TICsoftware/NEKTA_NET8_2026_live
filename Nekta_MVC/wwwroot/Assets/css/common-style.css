@@ -137,7 +137,11 @@ Leaf travel CSS
 
 .green-wrapper.bg-darkcream .title-section { color:var(--color-text-heading) !important;}
 .green-wrapper.bg-darkcream .title-section .text-letters-slide span { color:var(--color-secondary) !important;}
-
+ 
+.green-wrapper.bg-green *{color:#fff !important;}
+.green-wrapper.bg-green a img {
+    filter: grayscale(1) invert(1) brightness(100);
+}
 
 .cta-section h2{ font-family:var(--font-body) !important; font-weight:500;}
 
