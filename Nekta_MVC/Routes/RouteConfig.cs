@@ -26,122 +26,124 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "About", action = "Leadership", title = "leadership" }
                       );
 
-                        app.MapControllerRoute(
-                          name: "companyinformation",
-                          pattern: "about-us/company-information",
-                          defaults: new { controller = "About", action = "CompanyInformation", title = "company-information" }
-                      );
+            app.MapControllerRoute(
+              name: "companyinformation",
+              pattern: "about-us/company-information",
+              defaults: new { controller = "About", action = "CompanyInformation", title = "company-information" }
+          );
 
 
-                       app.MapControllerRoute(
-                          name: "BusinessandCorporates",
-                          pattern: "segments/business-and-corporates",
-                          defaults: new { controller = "Segments", action = "BusinessCorporates", title = "business-and-corporates" }
-                      );
+            app.MapControllerRoute(
+               name: "BusinessandCorporates",
+               pattern: "segments/business-and-corporates",
+               defaults: new { controller = "Segments", action = "BusinessCorporates", title = "business-and-corporates" }
+           );
 
-                      app.MapControllerRoute(
-                          name: "education",
-                          pattern: "segments/education",
-                          defaults: new { controller = "Segments", action = "Education", title = "education" }
-                      );
+            app.MapControllerRoute(
+                name: "education",
+                pattern: "segments/education",
+                defaults: new { controller = "Segments", action = "Education", title = "education" }
+            );
 
-                       app.MapControllerRoute(
-                          name: "healthcare",
-                          pattern: "segments/healthcare",
-                          defaults: new { controller = "Segments", action = "Healthcare", title = "healthcare" }
-                      );
+            app.MapControllerRoute(
+               name: "healthcare",
+               pattern: "segments/healthcare",
+               defaults: new { controller = "Segments", action = "Healthcare", title = "healthcare" }
+           );
 
-                       app.MapControllerRoute(
-                          name: "sports",
-                          pattern: "segments/sports",
-                          defaults: new { controller = "Segments", action = "Sports", title = "sports" }
-                      );
+            app.MapControllerRoute(
+               name: "sports",
+               pattern: "segments/sports",
+               defaults: new { controller = "Segments", action = "Sports", title = "sports" }
+           );
 
-                      app.MapControllerRoute(
-                          name: "outdoor-events",
-                          pattern: "segments/outdoor-events",
-                          defaults: new { controller = "Segments", action = "OutdoorEvents", title = "outdoor-events" }
-                      );
-
-
+            app.MapControllerRoute(
+                name: "outdoor-events",
+                pattern: "segments/outdoor-events",
+                defaults: new { controller = "Segments", action = "OutdoorEvents", title = "outdoor-events" }
+            );
 
 
-                        app.MapControllerRoute(
-                          name: "horcea",
-                          pattern: "segments/horcea",
-                          defaults: new { controller = "Segments", action = "BusinessCorporates", title = "horcea" }
-                      );
+
+
+            app.MapControllerRoute(
+              name: "horcea",
+              pattern: "segments/horcea",
+              defaults: new { controller = "Segments", action = "BusinessCorporates", title = "horcea" }
+          );
 
             app.MapControllerRoute(
                           name: "culinary-excellence",
                           pattern: "solutions/culinary-excellence",
                           defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "culinary-excellence" }
                       );
-    app.MapControllerRoute(
-                          name: "food-program",
-                          pattern: "solutions/food-program-html",
-                          defaults: new { controller = "Solutions", action = "foodprogram_html" }
-                      );
-
             app.MapControllerRoute(
+                                  name: "food-program",
+                                  pattern: "solutions/food-program-html",
+                                  defaults: new { controller = "Solutions", action = "foodprogram_html" }
+                              );
+
+<<<<<<< HEAD
+app.MapControllerRoute(
                           name: "dailypour-html",
                           pattern: "segments/dailypour-html",
                           defaults: new { controller = "Segments", action = "dailypour_html" }
-                      );
-
-            app.MapControllerRoute(
+=======
+                      app.MapControllerRoute(
                           name: "food-program-page",
                           pattern: "solutions/food-programs",
                           defaults: new { controller = "Solutions", action = "FoodProgram", title = "food-programs" }
+>>>>>>> d1e06ff1779351074929b38ce2bc17ff1cbbab2e
                       );
 
-                      app.MapControllerRoute(
-                          name: "people",
-                          pattern: "solutions/people",
-                          defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "people" }
-                      );
+            app.MapControllerRoute(
+                name: "people",
+                pattern: "solutions/people",
+                defaults: new { controller = "Solutions", action = "CulinaryExcellence", title = "people" }
+            );
 
 
-                     app.MapControllerRoute(
-                          name: "Food-Safety-Hygiene",
-                          pattern: "solutions/food-safety-and-hygiene",
-                          defaults: new { controller = "Solutions", action = "Food_Safety_Hygiene", title = "food-safety-and-hygiene" }
-                      );
-                     app.MapControllerRoute(
-                          name: "contactus",
-                          pattern: "contact-us",
-                          defaults: new { controller = "Contactus", action = "Index", title = "contact-us" }
-                      );
+            app.MapControllerRoute(
+                 name: "Food-Safety-Hygiene",
+                 pattern: "solutions/food-safety-and-hygiene",
+                 defaults: new { controller = "Solutions", action = "Food_Safety_Hygiene", title = "food-safety-and-hygiene" }
+             );
+            app.MapControllerRoute(
+                 name: "contactus",
+                 pattern: "contact-us",
+                 defaults: new { controller = "Contactus", action = "Index", title = "contact-us" }
+             );
 
-                        app.MapControllerRoute(
-                          name: "Blogs",
-                          pattern: "blogs",
-                          defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
-                      );
+            app.MapControllerRoute(
+              name: "Blogs",
+              pattern: "blogs",
+              defaults: new { controller = "Blogs", action = "Index", title = "blogs" }
+          );
 
-                          app.MapControllerRoute(
-                name: "blogs-inside",
-                pattern: "blogs/{title?}", 
-                defaults: new { controller = "Blogs", action = "inside" }
-                );
-                         app.MapControllerRoute(
-                          name: "case studies",
-                          pattern: "case-studies",
-                          defaults: new { controller = "Blogs", action = "Index", title = "case-studies" }
+            app.MapControllerRoute(
+  name: "blogs-inside",
+  pattern: "blogs/{title?}",
+  defaults: new { controller = "Blogs", action = "inside" }
+  );
+            app.MapControllerRoute(
+             name: "case studies",
+             pattern: "case-studies",
+             defaults: new { controller = "Blogs", action = "Index", title = "case-studies" }
+         );
+            app.MapControllerRoute(
+                      name: "casestudies-inside",
+                      pattern: "case-studies/{title?}",
+                      defaults: new { controller = "Blogs", action = "inside" }
                       );
-      app.MapControllerRoute(
-                name: "casestudies-inside",
-                pattern: "case-studies/{title?}", 
-                defaults: new { controller = "Blogs", action = "inside" }
-                );
-                      app.MapControllerRoute(
-                            name: "blog-load-more",
-                            pattern: "blogs/BlogLoadMore",
-                            defaults: new
-                            {
-                                controller = "Blogs", action = "BlogLoadMore"
-                            }
-                        );
+            app.MapControllerRoute(
+                  name: "blog-load-more",
+                  pattern: "blogs/BlogLoadMore",
+                  defaults: new
+                  {
+                      controller = "Blogs",
+                      action = "BlogLoadMore"
+                  }
+              );
 
 
 
@@ -165,7 +167,7 @@ namespace Nekta_MVC.Routes
                           defaults: new { controller = "Updates", action = "LoadMoreAnnualArticles" }
                       );
 
- 
+
 
             app.MapControllerRoute(
                 name: "ourteam",
@@ -195,17 +197,17 @@ namespace Nekta_MVC.Routes
                 defaults: new { controller = "pagearticle", action = "article", id = "privacy-policy" }
             );
 
-               app.MapControllerRoute(
-                name: "terms-of-use",
-                pattern: "terms-and-conditions",
-                defaults: new { controller = "pagearticle", action = "article", id = "terms-and-conditions" }
-            );
+            app.MapControllerRoute(
+             name: "terms-of-use",
+             pattern: "terms-and-conditions",
+             defaults: new { controller = "pagearticle", action = "article", id = "terms-and-conditions" }
+         );
             app.MapControllerRoute(
               name: "sitemap",
               pattern: "sitemap",
               defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
           );
-          
+
 
             app.MapControllerRoute(
                 name: "Error",

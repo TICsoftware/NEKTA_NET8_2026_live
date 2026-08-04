@@ -144,10 +144,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const wrapper = document.getElementById("lifeThumbWrapper");
         const prevBtn = document.getElementById("thumbPrev");
         const nextBtn = document.getElementById("thumbNext");
+        const mainPrevBtn = document.getElementById("mainSliderPrev");
+        const mainNextBtn = document.getElementById("mainSliderNext");
         const copyWrapper = document.getElementById("lifeCopyWrapper");
         if (!mainImage || !thumbs.length) return;
 
         const total = thumbs.length;
+        const AUTO_SLIDE_DELAY = 5000;
+        const SLIDE_OUT_DURATION = 380;
+        let autoSlideTimer = null;
+
+        function getActiveIndex() {
+            const activeThumb = document.querySelector(".bc-life-thumb.is-active");
+            return activeThumb ? parseInt(activeThumb.getAttribute("data-frame-index"), 10) : 1;
+        }
+
+        function getDirection(currentIndex, targetIndex) {
+            if (currentIndex === targetIndex) return 1;
+            const forwardDistance = ((targetIndex - currentIndex) + total) % total;
+            return forwardDistance <= total / 2 ? 1 : -1;
+        }
 
         function updateArrows() {
             const hasOverflow = track.scrollWidth > track.clientWidth + 2;
@@ -173,16 +189,32 @@ document.addEventListener("DOMContentLoaded", function () {
             updateArrows();
         }
 
-        function goToFrame(activeThumb) {
+        function goToFrame(activeThumb, direction) {
             const index = parseInt(activeThumb.getAttribute("data-frame-index"), 10);
             const src = activeThumb.getAttribute("data-life-image");
 
-            mainImage.style.opacity = "0";
+            if (typeof direction !== "number") {
+                direction = getDirection(getActiveIndex(), index);
+            }
+
+            const outClass = direction >= 0 ? "thumb-slide-out-left" : "thumb-slide-out-right";
+            const inClass = direction >= 0 ? "thumb-slide-in-right" : "thumb-slide-in-left";
+
+            mainImage.classList.remove("thumb-slide-in-left", "thumb-slide-in-right");
+            mainImage.classList.add(outClass);
+
             setTimeout(function () {
                 mainImage.setAttribute("src", src);
-                mainImage.style.transition = "opacity 420ms ease";
-                mainImage.style.opacity = "1";
-            }, 180);
+
+                mainImage.classList.add("thumb-no-transition");
+                mainImage.classList.remove(outClass);
+                mainImage.classList.add(inClass);
+
+                void mainImage.offsetWidth; // force reflow so the entry animates
+
+                mainImage.classList.remove("thumb-no-transition");
+                mainImage.classList.remove(inClass);
+            }, SLIDE_OUT_DURATION);
 
             const template = document.getElementById("frameContent-" + index);
             if (template && copyWrapper) {
@@ -196,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
         thumbs.forEach(function (thumb) {
             thumb.addEventListener("click", function () {
                 goToFrame(thumb);
+                startAutoSlide();
             });
         });
 
@@ -206,9 +239,40 @@ document.addEventListener("DOMContentLoaded", function () {
             track.scrollBy({ left: 160, behavior: "smooth" });
         });
 
+        function goToNextFrame() {
+            const current = getActiveIndex();
+            const nextIndex = (current % total) + 1;
+            const nextThumb = document.querySelector('.bc-life-thumb[data-frame-index="' + nextIndex + '"]');
+            if (nextThumb) goToFrame(nextThumb, 1);
+        }
+
+        function goToPrevFrame() {
+            const current = getActiveIndex();
+            const prevIndex = ((current - 2) + total) % total + 1;
+            const prevThumb = document.querySelector('.bc-life-thumb[data-frame-index="' + prevIndex + '"]');
+            if (prevThumb) goToFrame(prevThumb, -1);
+        }
+
+        function startAutoSlide() {
+            if (total < 2) return;
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = setInterval(goToNextFrame, AUTO_SLIDE_DELAY);
+        }
+
+        if (mainNextBtn) mainNextBtn.addEventListener("click", function () {
+            goToNextFrame();
+            startAutoSlide();
+        });
+
+        if (mainPrevBtn) mainPrevBtn.addEventListener("click", function () {
+            goToPrevFrame();
+            startAutoSlide();
+        });
+
         window.addEventListener("resize", updateArrows);
 
         goToFrame(thumbs[0]); // Frame 1 active on load — reinitReadMore already exists by now
+        startAutoSlide();
     })();
 
 });
