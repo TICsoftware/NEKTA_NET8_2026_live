@@ -30,7 +30,6 @@
             }
 
             <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch thumb-slider-outer">
-
                 <!-- Left Side -->
                 @if (component != null)
                 {
@@ -53,6 +52,20 @@
                     var first = blocks.First();
                     <div class="bc-life-frame bc-life-main thumb-slider-main">
                         <img id="lifeMainImage" src="@first.ThumbnailImage" alt="@first.ThumbnailAltText" loading="lazy" />
+
+                        <div class="thumb-slider-main-arrows">
+                            <button type="button" class="thumb-slider-main-arrow thumb-slider-main-arrow--prev" id="mainSliderPrev" aria-label="Previous slide">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+
+                            <button type="button" class="thumb-slider-main-arrow thumb-slider-main-arrow--next" id="mainSliderNext" aria-label="Next slide">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 }
 
