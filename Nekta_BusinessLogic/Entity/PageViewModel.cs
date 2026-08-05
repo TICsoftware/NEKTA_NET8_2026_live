@@ -69,6 +69,9 @@ namespace Nekta_BusinessLogic.Entity
         public string ByLine { get; set; }
         public string Publication { get; set; }
 
+        public string cont_external_url { get; set; }
+        
+
     }
 
 
