@@ -121,6 +121,7 @@ public class SegmentsController : Controller
             _bal.Dispose();
         }
     }
+  
 
     public IActionResult dailypour_html(string title)
     {
