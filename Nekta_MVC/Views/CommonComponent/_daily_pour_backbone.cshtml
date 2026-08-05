@@ -76,13 +76,10 @@
 
     @if (!string.IsNullOrWhiteSpace(header.Content))
     {
-      <p class="dp-fade" id="backboneFadeParagraph">
-        @Html.Raw(header.Content.CleanParagraphTags())
-        @if (!string.IsNullOrWhiteSpace(header.HmpgIntro))
-        {
-          <span id="backboneMoreText">@Html.Raw(header.HmpgIntro.CleanParagraphTags())</span>
-        }
-      </p>
+      
+        @Html.Raw(header.Content)
+        
+   
 
       <button
         type="button"
