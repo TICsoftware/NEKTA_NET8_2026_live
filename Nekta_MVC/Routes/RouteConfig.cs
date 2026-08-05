@@ -63,8 +63,17 @@ namespace Nekta_MVC.Routes
                 defaults: new { controller = "Segments", action = "OutdoorEvents", title = "outdoor-events" }
             );
 
+            app.MapControllerRoute(
+                name: "daily-pour",
+                pattern: "segments/the-daily-pour",
+                defaults: new { controller = "Segments", action = "DailyPour", title = "the-daily-pour" }
+            );
 
-
+            app.MapControllerRoute(
+                name: "daily-pour-html",
+                pattern: "segments/the-daily-pour-html",
+                defaults: new { controller = "Segments", action = "dailypour_html" }
+            );
 
             app.MapControllerRoute(
               name: "horcea",

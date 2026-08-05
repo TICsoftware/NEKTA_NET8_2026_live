@@ -1,0 +1,75 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var header = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var slides = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+}
+
+@if (header != null)
+{
+<section class="daily-pour-experience-section experience-section section-spacing">
+
+  <div class="experience-header">
+    <h2 class="title-section-red" data-leaf-target letters-slide-down text-split>
+      <span class="title-section text-letters-slide">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(header.DisplayTitle)
+            ? header.DisplayTitle.CleanParagraphTags()
+            : header.Title)
+      </span>
+    </h2>
+
+    <div class="dp-divider" aria-hidden="true"></div>
+
+    @if (!string.IsNullOrWhiteSpace(header.Intro))
+    {
+      <p class="experience-subtext">
+        @Html.Raw(header.Intro.CleanParagraphTags())
+      </p>
+    }
+
+    <span class="experience-divider-line"></span>
+    <img class="experience-divider-icon"
+         src="@(string.IsNullOrWhiteSpace(header.Icon_Image) ? "/Assets/images/common-images/coffee-bean-icon.svg" : header.Icon_Image)"
+         alt="" />
+    <span class="experience-divider-line"></span>
+  </div>
+
+  @if (slides.Any())
+  {
+  <div class="experience-slider-viewport" id="experienceViewport">
+    <div class="experience-track" id="experienceTrack">
+
+      @{ var index = 0; }
+      @foreach (var item in slides)
+      {
+      <div class="experience-slide" data-index="@index">
+        <img src="@(!string.IsNullOrWhiteSpace(item.ThumbnailImage) ? item.ThumbnailImage : item.ComponentThumbnail)"
+             alt="@(!string.IsNullOrWhiteSpace(item.ThumbnailAltText) ? item.ThumbnailAltText : item.ComponentThumbnailAltText)" />
+        <div class="experience-caption">
+          <h3 class="experience-caption-title">@item.Title</h3>
+          @if (!string.IsNullOrWhiteSpace(item.Intro))
+          {
+            <p class="experience-caption-text">
+              @Html.Raw(item.Intro.CleanParagraphTags())
+            </p>
+          }
+        </div>
+      </div>
+      index++;
+      }
+
+    </div>
+  </div>
+
+  <div class="experience-controls">
+    <button type="button" class="experience-arrow" id="experiencePrev" aria-label="Previous">&#8592;</button>
+    <div class="experience-dots" id="experienceDots"></div>
+    <button type="button" class="experience-arrow" id="experienceNext" aria-label="Next">&#8594;</button>
+  </div>
+  }
+
+</section>
+}

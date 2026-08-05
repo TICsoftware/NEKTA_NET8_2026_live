@@ -1,0 +1,77 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+<section class="home-daily-pour-section daily-pour-section section-spacing">
+
+  <img
+    src="/Assets/images/dailypour/bg-texture-cream.webp"
+    alt=""
+    class="dp-bg-texture"
+  />
+
+  <img
+    src="@(string.IsNullOrWhiteSpace(item.Component_LHS_icon1) ? "/Assets/images/dailypour/deco-coffee-pour-left.png" : item.Component_LHS_icon1)"
+    alt=""
+    class="dp-deco dp-deco-left"
+  />
+
+  <img
+    src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon1) ? "/Assets/images/dailypour/deco-coffee-cup-right.png" : item.Component_RHS_icon1)"
+    alt=""
+    class="dp-deco dp-deco-right"
+  />
+
+  <div class="dp-inner">
+
+    <div class="dp-heading-wrap">
+      <h2 class="title-section-red" data-leaf-target letters-slide-down text-split>
+        <span class="title-section text-letters-slide">
+          @Html.Raw(
+            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+              ? item.DisplayTitle.CleanParagraphTags()
+              : item.Title)
+        </span>
+      </h2>
+      <div class="dp-divider" aria-hidden="true"></div>
+    </div>
+
+    <div class="dp-content-grid">
+
+      <div class="dp-image-wrap">
+        <img
+          src="@item.ComponentThumbnail"
+          alt="@item.ComponentThumbnailAltText"
+          class="dp-arch-image"
+        />
+      </div>
+
+      <div class="dp-text-block">
+        @if (!string.IsNullOrWhiteSpace(item.Intro))
+        {
+          @Html.Raw(item.Intro)
+        }
+
+        @if (!string.IsNullOrWhiteSpace(item.Content))
+        {
+          <p class="dp-fade" id="dpFadeParagraph">
+            @Html.Raw(item.Content.CleanParagraphTags())
+            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+            {
+              <span id="dpMoreText">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+            }
+          </p>
+          <button type="button" class="dp-read-more" id="dpReadMoreBtn" aria-expanded="false" aria-controls="dpFadeParagraph">
+            <span id="dpReadMoreLabel">Read More</span> <span class="dp-plus">+</span>
+          </button>
+        }
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+}

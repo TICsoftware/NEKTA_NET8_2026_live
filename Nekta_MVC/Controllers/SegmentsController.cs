@@ -123,17 +123,34 @@ public class SegmentsController : Controller
     }
   
 
+    public IActionResult DailyPour(string title)
+    {
+        try
+        {
+            var data = _bal.GetDailyPour_BAL(title, 1, 1);
+            return View("dailypour", data);
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/DailyPour :", ex);
+            return View("dailypour", new SegmentsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
+
     public IActionResult dailypour_html(string title)
     {
          try
         {
-           //var data = _bal.GetCulinaryExcellence_BAL(title, 1, 1);
             return View();
         }
         catch (Exception ex)
         {
             FileLogger.LogError("/dailypour_html :", ex);
-            return View(new SolutionsModel());
+            return View(new SegmentsModel());
         }
         finally
         {

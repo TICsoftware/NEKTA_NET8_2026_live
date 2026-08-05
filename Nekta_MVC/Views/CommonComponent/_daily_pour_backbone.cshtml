@@ -1,0 +1,100 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var header = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var collage = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+    var cellClasses = new[]
+    {
+        "backbone-cell-a is-leaf is-leaf-left-top",
+        "backbone-cell-b is-leaf is-leaf-left-top",
+        "backbone-cell-c",
+        "backbone-cell-d is-leaf is-leaf-right-top",
+        "backbone-cell-e is-leaf is-leaf-right-top",
+        "backbone-cell-f is-leaf is-leaf-left-bottom",
+        "backbone-cell-g is-leaf is-leaf-left-bottom",
+        "backbone-cell-h is-leaf is-leaf-right-bottom",
+        "backbone-cell-i is-leaf is-leaf-right-bottom"
+    };
+}
+
+@if (header != null)
+{
+<section class="built-on-backbone-section backbone-section">
+
+  <img
+    src="@(string.IsNullOrWhiteSpace(header.Component_LHS_icon1) ? "/Assets/images/dailypour/deco-coffee-splash-corner.png" : header.Component_LHS_icon1)"
+    alt=""
+    class="backbone-deco-corner"
+    aria-hidden="true"
+  />
+
+  <div class="backbone-header">
+    <h2 class="title-section-red" data-leaf-target letters-slide-down text-split>
+      <span class="title-section text-letters-slide">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(header.DisplayTitle)
+            ? header.DisplayTitle.CleanParagraphTags()
+            : header.Title)
+      </span>
+    </h2>
+    <div class="dp-divider" aria-hidden="true"></div>
+    @if (!string.IsNullOrWhiteSpace(header.Intro))
+    {
+      <p class="backbone-subtext">
+        @Html.Raw(header.Intro.CleanParagraphTags())
+      </p>
+    }
+    <span class="backbone-divider-line"></span>
+    <span class="backbone-divider-line"></span>
+  </div>
+
+  @if (collage.Any())
+  {
+  <div class="backbone-collage">
+    @for (var i = 0; i < collage.Count && i < cellClasses.Length; i++)
+    {
+      var img = collage[i];
+      var src = !string.IsNullOrWhiteSpace(img.ThumbnailImage) ? img.ThumbnailImage : img.ComponentThumbnail;
+      var alt = !string.IsNullOrWhiteSpace(img.ThumbnailAltText) ? img.ThumbnailAltText : img.ComponentThumbnailAltText;
+      <img class="@cellClasses[i]" src="@src" alt="@alt" />
+    }
+  </div>
+  }
+
+  <div class="backbone-footer">
+    @if (!string.IsNullOrWhiteSpace(header.Section_title) || !string.IsNullOrWhiteSpace(header.Popup_Display_Title))
+    {
+      <h3 class="backbone-subheading">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(header.Section_title)
+            ? header.Section_title.CleanParagraphTags()
+            : header.Popup_Display_Title.CleanParagraphTags())
+      </h3>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(header.Content))
+    {
+      <p class="dp-fade" id="backboneFadeParagraph">
+        @Html.Raw(header.Content.CleanParagraphTags())
+        @if (!string.IsNullOrWhiteSpace(header.HmpgIntro))
+        {
+          <span id="backboneMoreText">@Html.Raw(header.HmpgIntro.CleanParagraphTags())</span>
+        }
+      </p>
+
+      <button
+        type="button"
+        class="backbone-read-more"
+        id="backboneReadMoreBtn"
+        aria-expanded="false"
+        aria-controls="backboneFadeParagraph"
+      >
+        <span id="backboneReadMoreLabel">Read More</span> <span class="backbone-plus">+</span>
+      </button>
+    }
+  </div>
+
+</section>
+}
