@@ -122,6 +122,23 @@ public class SegmentsController : Controller
         }
     }
 
+    public IActionResult dailypour_html(string title)
+    {
+         try
+        {
+           //var data = _bal.GetCulinaryExcellence_BAL(title, 1, 1);
+            return View();
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError("/dailypour_html :", ex);
+            return View(new SolutionsModel());
+        }
+        finally
+        {
+            _bal.Dispose();
+        }
+    }
 
 
 }

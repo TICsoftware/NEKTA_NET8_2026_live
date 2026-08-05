@@ -1,0 +1,627 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SolutionsModel
+@{
+    ViewData["Title"] = "Culinary Excellence";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+}
+
+@section Styles {
+
+
+
+    <link rel="stylesheet" href="~/Assets/css/dailypour.css" />
+    
+}
+
+<!-- HERO BANNER END-->
+      <section class="relative inside-banner-outer overflow-hidden">
+         <div class="inside-banner-inner banner-animation relative ">
+
+            <!-- Banner -->
+            <div class="rounded-bottom-lr overflow-hidden h-170 rounded-bl-xl rounded-br-xl relative innerbanner-image-wrapper">
+
+               <!-- Parallax Image -->
+               <picture>
+                  <!-- Desktop -->
+                  <source media="(min-width:1024px)"
+                     srcset="/Assets/images/banners/daily_pour_banner.webp">
+
+                  <!-- Tablet -->
+                  <source media="(min-width:768px)"
+                     srcset="Assets/images/banners/daily_pour_banner.webp">
+
+                  <!-- Mobile -->
+                  <img
+                     src="Assets/images/banners/daily_pour_banner.webp"
+                     alt="About Bubble Food"
+                     class="innerbanner-image absolute left-0 top-0 w-full h-full object-cover"
+                     loading="eager"
+                     fetchpriority="high">
+               </picture>
+
+               <!-- Keep Existing Overlay -->
+               <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+
+
+            </div>
+
+            <!-- Content -->
+           
+               <div class="innerbanner-caption absolute inset-0 z-30 flex items-end">
+                  <div class="container pb-12 md:pb-15">
+                     <div class="max-w-4xl text-left">
+
+                        <nav class="mb-4" aria-label="Breadcrumb">
+                           <ol class="flex items-center gap-2 text-sm">
+                              <li>
+                                 <a href="/" class="text-white/70 hover:text-white transition">
+                                    Home
+                                 </a>
+                              </li>
+
+                              <li class="text-white/60">/</li>
+
+                              <li class="text-white">
+                                 About Us
+                              </li>
+                           </ol>
+                        </nav>
+
+                        <h1 class="innerbanner-title text-h1 text-white">
+                        
+                           <span class="innerbanner-title-span">
+                              The Daily Pour
+                           </span>
+                        </h1>
+
+                        <p class="innerbanner-desc text-white/80">
+                           Creating an everyday habit</p>
+                        <a href="/contact-us" class="common-btn  btn-slide-fill" type="button" data-modal-open="contactModal">
+                            <span>Explore</span>
+                            <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="rightArrow">
+                        </a>
+
+                     </div>
+                  </div>
+
+               </div>
+           
+
+         </div>
+      </section>
+<!-- HERO BANNER END -->
+
+<!-- CRAFTS WORKDAY-->
+<section class="home-daily-pour-section daily-pour-section section-spacing">
+
+  <img
+    src="/Assets/images/dailypour/bg-texture-cream.webp"
+    alt=""
+    class="dp-bg-texture"
+  />
+
+  <img
+    src="/Assets/images/dailypour/deco-coffee-pour-left.png"
+    alt=""
+    class="dp-deco dp-deco-left"
+  />
+
+  <img
+    src="/Assets/images/dailypour/deco-coffee-cup-right.png"
+    alt=""
+    class="dp-deco dp-deco-right"
+  />
+
+  <div class="dp-inner">
+
+    
+
+  
+    <div class="dp-heading-wrap">
+            <h2 class="title-section-red  " data-leaf-target letters-slide-down text-split>
+            <span
+            class="title-section  text-letters-slide"
+            >Where Craft Meets the Workday</span
+            >
+        </h2>
+        <div class="dp-divider" aria-hidden="true"></div>
+    </div>
+      
+    </div>
+
+    <div class="dp-content-grid">
+
+      <div class="dp-image-wrap">
+        <img
+          src="/Assets/images/dailypour/pour-arch.png"
+          alt="Barista pouring coffee into a French press"
+          class="dp-arch-image"
+        />
+      </div>
+
+      <div class="dp-text-block">
+        <p>
+          The Daily Pour is Nekta's premium beverage and bakery concept, designed
+          for the spaces where modern professionals spend their day. Built
+          around speciality coffees, artisanal teas and a curated bakery, it
+          brings a moment of craft to the workplace, the campus, the hospital
+          lobby, the hotel lounge and anywhere a thoughtful break belongs.
+        </p>
+                <p>
+          The Daily Pour is Nekta's premium beverage and bakery concept, designed
+          for the spaces where modern professionals spend their day. Built
+          around speciality coffees, artisanal teas and a curated bakery, it
+          brings a moment of craft to the workplace, the campus, the hospital
+          lobby, the hotel lounge and anywhere a thoughtful break belongs.
+        </p>
+        <p class="dp-fade" id="dpFadeParagraph">
+          Operated on a flexible kiosk model, The Daily Pour fits beautifully
+          into corporate floors, hospitality venues, healthcare campuses and
+          event spaces without the complexity, footprint or cost of a full
+          cafe build-out. Each kiosk is staffed by trained baristas, anchored
+          by a thoughtfully developed menu and operated to the same
+          <span id="dpMoreText"> exacting standard of quality and hospitality across every location, no matter the scale of the space.</span>
+        </p>
+        <button type="button" class="dp-read-more" id="dpReadMoreBtn" aria-expanded="false" aria-controls="dpFadeParagraph">
+          <span id="dpReadMoreLabel">Read More</span> <span class="dp-plus">+</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRECISION IN EVERY CUP -->
+<section class="daily-pour-quote-banner dpq-banner">
+
+  <div class="dpq-deco dpq-deco-left">
+    <img src="/Assets/images/dailypour/deco-ground-coffee.png" alt="" aria-hidden="true" />
+  </div>
+
+  <div class="dpq-deco dpq-deco-right">
+    <img src="/Assets/images/dailypour/deco-holly-berries.png" alt="" aria-hidden="true" />
+  </div>
+
+  <div class="dpq-border-frame">
+    <div class="text-center mb-6 px-6 mx-auto max-w-7xl section-title--light-outer">
+      <h2 class="title-section " data-leaf-target letters-slide-down text-split>
+        <span class="title-section text-letters-slide"
+          >Precision in every cup. Consistency in every pour. <br/>
+          That's The Daily Pour.</span
+        >
+      </h2>
+    </div>
+  </div>
+
+</section>
+
+<!----------------- WHAT ON THE MENU Slider-------------------->
+<section class="whats-on-menu-section menu-section section-spacing">
+ 
+  <div class="menu-decor-dots" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+ 
+  <div class="menu-header">
+        <h2 class="title-section-red " data-leaf-target letters-slide-down text-split>
+            <span class="title-section  text-letters-slide">What's on the Menu</span>
+        </h2>
+     <div class="dp-divider" aria-hidden="true"></div>
+
+    <p class="menu-subtext">
+      A menu built around craft, balance and the rhythm of the day. Coffees pulled with
+      intention. Trendy beverages served as a showpiece. Delicacies that change with the season.
+    </p>
+  </div>
+ 
+  <div class="menu-slider-wrap">
+ 
+    <button type="button" class="menu-nav menu-nav-prev" id="menuPrev" aria-label="Previous menu category">&#8592;</button>
+ 
+    <div class="menu-slider-viewport">
+      <div class="menu-track" id="menuTrack">
+ 
+        <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="All-Time Classics" />
+            <h3 class="menu-card-title">All-Time Classics</h3>
+          </div>
+          <p class="menu-card-text">
+            At The Daily Pour, timeless favourites take centre stage. From a bold Espresso
+            and smooth Americano to a velvety Flat White, comforting Cappuccino, and other
+            beloved cafe classics, every cup is crafted with precision and consistency.
+          </p>
+        </article>
+ 
+        <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="Speciality Coffees" />
+            <h3 class="menu-card-title">Speciality Coffees</h3>
+          </div>
+          <p class="menu-card-text">
+            Explore a curated selection of speciality coffees, from indulgent frappes and
+            refreshing cold-foam creations to signature espresso-based beverages. Crafted by
+            trained baristas using carefully selected beans, each cup is designed to deliver
+            a distinctive and elevated coffee experience.
+          </p>
+        </article>
+ 
+        <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="Trendy Beverages" />
+            <h3 class="menu-card-title">Trendy Beverages</h3>
+          </div>
+          <p class="menu-card-text">
+            Stay refreshed with our collection of contemporary beverage favourites, crafted
+            for consumers who enjoy discovering the latest trends in cafe culture. From classic
+            iced teas with a refreshing twist and vibrant boba poppers to our signature cold
+            matcha range and indulgent cold foam creations, every drink is designed to be as
+            exciting as it is delicious.
+          </p>
+        </article>
+ 
+        <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="Bakery Pastries" />
+            <h3 class="menu-card-title">Bakery Pastries</h3>
+          </div>
+          <p class="menu-card-text">
+            Drawn from TajSATS' culinary expertise, our curated bakery menu offers an
+            all-day selection of freshly baked breads, sandwiches, savouries and delicate
+            pastries, each one crafted to be savoured alongside your favourite cup.
+          </p>
+        </article>
+                <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="Bakery Pastries" />
+            <h3 class="menu-card-title">Bakery Pastries</h3>
+          </div>
+          <p class="menu-card-text">
+            Drawn from TajSATS' culinary expertise, our curated bakery menu offers an
+            all-day selection of freshly baked breads, sandwiches, savouries and delicate
+            pastries, each one crafted to be savoured alongside your favourite cup.
+          </p>
+        </article>
+                <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="/Assets/images/dailypour/center-slider.png" alt="Bakery Pastries" />
+            <h3 class="menu-card-title">Bakery Pastries</h3>
+          </div>
+          <p class="menu-card-text">
+            Drawn from TajSATS' culinary expertise, our curated bakery menu offers an
+            all-day selection of freshly baked breads, sandwiches, savouries and delicate
+            pastries, each one crafted to be savoured alongside your favourite cup.
+          </p>
+        </article>
+ 
+      </div>
+    </div>
+ 
+    <button type="button" class="menu-nav menu-nav-next" id="menuNext" aria-label="Next menu category">&#8594;</button>
+ 
+  </div>
+ 
+</section>
+
+<!----------------- CEnter FOCUESED SLDIER-------------------->
+<section class="daily-pour-experience-section experience-section section-spacing">
+ 
+  <div class="experience-header">
+            <h2 class="title-section-red " data-leaf-target letters-slide-down text-split>
+            <span class="title-section  text-letters-slide">The Daily Pour Experience</span>
+        </h2>
+
+         <div class="dp-divider" aria-hidden="true"></div>
+    <p class="experience-subtext">
+      The Daily Pour is not just about what is in the cup. It is about how the moment is made.
+      A quiet pause built into a busy day. A small ritual you can count on.
+    </p>
+   
+   
+      <span class="experience-divider-line"></span>
+      <img class="experience-divider-icon" src="Assets/images/common-images/coffee-bean-icon.svg" alt="" />
+      <span class="experience-divider-line"></span>
+    </div>
+
+  </div>
+ 
+  <div class="experience-slider-viewport" id="experienceViewport">
+    <div class="experience-track" id="experienceTrack">
+ 
+      <div class="experience-slide" data-index="0">
+        <img src="/Assets/images/dailypour/center-slider.png" alt="A warm cafe corner with coffee and candlelight" />
+        <div class="experience-caption">
+          <h3 class="experience-caption-title">A Warm Welcome</h3>
+          <p class="experience-caption-text">
+            Every corner is designed to slow you down for a moment, with warm light,
+            honest materials and the quiet comfort of a well-made cup nearby.
+          </p>
+        </div>
+      </div>
+ 
+      <div class="experience-slide" data-index="1">
+        <img src="/Assets/images/dailypour/center-slider.png" alt="Barista pouring latte art into a blue ceramic cup" />
+        <div class="experience-caption">
+          <h3 class="experience-caption-title">Crafted with Care</h3>
+          <p class="experience-caption-text">
+            Every drink is prepared by trained baristas, every recipe is documented
+            and every cup is served with the small touches that turn each sip into
+            a moment. Craft is what separates a great coffee from a good one.
+          </p>
+        </div>
+      </div>
+ 
+      <div class="experience-slide" data-index="2">
+        <img src="/Assets/images/dailypour/center-slider.png" alt="Outdoor cafe seating area" />
+        <div class="experience-caption">
+          <h3 class="experience-caption-title">Made for the Moment</h3>
+          <p class="experience-caption-text">
+            Whether it's a five-minute break or a lingering catch-up, every seat
+            is set up to make the pause feel intentional, not rushed.
+          </p>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+ 
+  <div class="experience-controls">
+    <button type="button" class="experience-arrow" id="experiencePrev" aria-label="Previous">&#8592;</button>
+    <div class="experience-dots" id="experienceDots"></div>
+    <button type="button" class="experience-arrow" id="experienceNext" aria-label="Next">&#8594;</button>
+  </div>
+ 
+</section>
+
+<!----------------- ACCORDIAN SECTION-------------------->
+<section class="where-belongs-section belongs-section section-spacing">
+ 
+  <img
+    src="/Assets/images/dailypour/texture-corner-splash.png"
+    alt=""
+    class="belongs-bg-corner"
+    aria-hidden="true"
+  />
+ 
+  <img
+    src="/Assets/images/dailypour/texture-torn-edge.png"
+    alt=""
+    class="belongs-bg-edge"
+    aria-hidden="true"
+  />
+ 
+  <div class="belongs-header">
+                <h2 class="title-section-red " data-leaf-target letters-slide-down text-split>
+            <span class="title-section  text-letters-slide">Where The Daily Pour Belongs</span>
+        </h2>
+              <div class="dp-divider" aria-hidden="true"></div>
+            <p class="belongs-subtext">
+      The Daily Pour kiosks are designed to fit naturally into a range of premium settings —
+      wherever a curated beverage moment makes the day better.
+    </p>
+    
+    
+      <span class="belongs-divider-line"></span>
+      
+      <span class="belongs-divider-line"></span>
+    </div>
+
+  </div>
+ 
+  <div class="belongs-grid">
+ 
+    <div class="belongs-image-wrap">
+      <img
+        src="/Assets/images/dailypour/pour-blanket-scene.png"
+        alt="Coffee being poured into a mug on a cozy blanket, with cookies alongside"
+      />
+    </div>
+ 
+    <div class="belongs-accordion" id="belongsAccordion">
+ 
+      <div class="belongs-accordion-item is-open">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="true">
+          Corporate Workplaces
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            <p>
+              From boardrooms to break rooms, The Daily Pour brings a moment of craft
+              into the corporate day, offering employees a quality coffee break without
+              leaving the building.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="belongs-accordion-item">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="false">
+          Healthcare Facilities
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            <p>
+              For hospital lobbies and staff lounges, The Daily Pour offers a dependable,
+              comforting ritual amid long and demanding shifts — for staff and visitors alike.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="belongs-accordion-item">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="false">
+          Educational Campuses
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            <p>
+              Bringing quality coffee and curated bakery favourites to campus life —
+              wherever students, faculty and staff gather between classes and meetings.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="belongs-accordion-item">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="false">
+          Hospitality Venues
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            <p>
+              From hotel lounges to guest common areas, The Daily Pour adds a refined,
+              on-brand beverage experience that elevates the overall guest stay.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="belongs-accordion-item">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="false">
+          Event Spaces
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            <p>
+              For conferences, exhibitions and private gatherings, The Daily Pour serves
+              as a flexible, high-quality beverage station that scales to the size of the event.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+ 
+  </div>
+ 
+</section>
+
+<!----------------- Built on Nekta's Backbone -------------------->
+<section class="built-on-backbone-section backbone-section">
+ 
+  <img
+    src="Assets/images/dailypour/deco-coffee-splash-corner.png"
+    alt=""
+    class="backbone-deco-corner"
+    aria-hidden="true"
+  />
+ 
+  <div class="backbone-header">
+
+        <h2 class="title-section-red " data-leaf-target letters-slide-down text-split>
+            <span class="title-section  text-letters-slide">Built on Nekta's Backbone</span>
+        </h2>
+    <div class="dp-divider" aria-hidden="true"></div>
+    <p class="backbone-subtext">
+      Single block of copy. Briefly reassures on the trust foundation behind the brand experience —
+      TajSATS heritage, food safety, operational discipline. Not the main story, but the reason
+      the experience holds up every single day.
+    </p>
+      <span class="backbone-divider-line"></span>
+
+      <span class="backbone-divider-line"></span>
+    </div>
+
+  </div>
+ 
+  <div class="backbone-collage">
+    <img class="backbone-cell-a is-leaf is-leaf-left-top" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-b is-leaf is-leaf-left-top" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-c" src="/Assets/images/dailypour/collage-03.png" alt="" />
+    <img class="backbone-cell-d is-leaf is-leaf-right-top" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-e is-leaf is-leaf-right-top" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-f is-leaf is-leaf-left-bottom" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-g is-leaf is-leaf-left-bottom" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-h is-leaf is-leaf-right-bottom" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+    <img class="backbone-cell-i is-leaf is-leaf-right-bottom" src="/Assets/images/dailypour/collage-01.jpg" alt="" />
+  </div>
+ 
+  <div class="backbone-footer">
+    <h3 class="backbone-subheading">A Premium Experience, on a Trusted Foundation</h3>
+ 
+    <p class="dp-fade" id="backboneFadeParagraph">
+      Behind every kiosk, every cup and every croissant is the operational rigour of one of
+      India's largest food service organizations. The Daily Pour is built on Nekta's expertise,
+      TajSATS' aviation-grade food safety standards and the hospitality-driven catering
+      <span id="backboneMoreText"> legacy that comes with being part of the IHCL and Tata ecosystem — a foundation that shapes every detail, from sourcing to service.</span>
+    </p>
+ 
+    <button
+      type="button"
+      class="backbone-read-more"
+      id="backboneReadMoreBtn"
+      aria-expanded="false"
+      aria-controls="backboneFadeParagraph"
+    >
+      <span id="backboneReadMoreLabel">Read More</span> <span class="backbone-plus">+</span>
+    </button>
+  </div>
+ 
+</section>
+ 
+
+
+
+<!-----------------  BRING THE DAILY POUR TO YOUR SPACE — CTA banner -------------------->
+<section class="daily-pour-cta-section dp-cta-section">
+
+ 
+  <img
+    src="/Assets/images/dailypour/cta-banner-bg.webp"
+    alt="Coffee beans, latte art and pastries on a dark rustic table"
+    class="dp-cta-bg"
+  />
+  <div class="dp-cta-overlay" aria-hidden="true"></div>
+    <img
+    src="/Assets/images/dailypour/deco-coffee-cup-right-1.png"
+    alt=""
+    class="dp-cta-deco-right"
+    aria-hidden="true"
+  />
+ 
+  <div class="dp-cta-inner">
+    
+   
+              <h2 class="title-section " data-leaf-target letters-slide-down text-split>
+        <span class="title-section text-letters-slide"
+          >Bring <strong>THE DAILY POUR</strong> to Your Space</span
+        >
+      </h2>
+ 
+    <div class="dp-cta-divider" aria-hidden="true"></div>
+ 
+    <h3 class="dp-cta-lead">Some breaks are worth getting right.</h3>
+    <p class="dp-cta-text">
+      Tell us about your space, the people who fill it, and the kind of beverage moment
+      you want to create. Our team will take it forward.
+    </p>
+ 
+    <a href="/contact-us" class="dp-cta-btn">
+      <span>Bring The Daily Pour to Your Space</span>
+      <span class="dp-cta-btn-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+  </div>
+ 
+</section>
+
+
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/dailypour.js"></script>
+    
+
+}

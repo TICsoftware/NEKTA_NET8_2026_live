@@ -476,3 +476,27 @@ ease:"power2.out"
 );
 
 });
+
+
+// Read More functionality for the last section of the Daily Pour page
+// Read More functionality — works regardless of whether the button is wrapped
+(function () {
+  var buttons = document.querySelectorAll('.read-more-btn');
+
+  buttons.forEach(function (btn) {
+    // Walk up from the button to find the nearest .read-more-fade that appears before it,
+    // searching within the closest shared container rather than assuming direct siblings.
+    var container = btn.closest('.container') || btn.parentElement.parentElement || btn.parentElement;
+    var fadeBlock = container ? container.querySelector('.read-more-fade') : null;
+    var label = btn.querySelector('.read-more-label');
+
+    if (!fadeBlock) return;
+
+    btn.addEventListener('click', function () {
+      var expanded = fadeBlock.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded', expanded);
+      btn.setAttribute('aria-expanded', String(expanded));
+      if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
+    });
+  });
+})();

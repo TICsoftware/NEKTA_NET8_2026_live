@@ -35,6 +35,9 @@
         <div class="container">
             <!-- 01 — collapsed, no media -->
 
+            @{
+                int index = 1;
+            }
             @foreach (var item in Model.Articles_List)
             {
                 var mediaList = Model.Articles_Sliders_List
@@ -47,7 +50,7 @@
                 <div class="acc-item" data-acc-item data-acc-id="@item.Title.Replace(" ", "-").ToLower()">
 
                     <button class="acc-header" data-acc-toggle>
-                        <span class="acc-num">@item.Sequence</span>
+                        <span class="acc-num">@index.ToString("00")</span>
                         <span class="acc-title">@item.Title</span>
                         <span class="acc-toggle-icon"></span>
                     </button>
@@ -73,7 +76,9 @@
                                         @Html.Raw(item.Content)
                                     </div>
 
-                                    <div class="acc-media" @(isSlider ? "data-per-view=\"2\"" : "")>
+                                    <div class="acc-media" @Html.Raw(isSlider ? "data-per-view=\"2\"" : "")
+                                        style="--per-view: @(isSlider ? 2 : 1);">
+
 
                                         <div class="acc-slider" data-slider>
 
@@ -82,9 +87,9 @@
                                                 // If your table has MediaType column
                                                 if (!string.IsNullOrEmpty(media.Video_path))
                                                 {
-                                                    <div class="acc-slide">
+                                                    @* <div class="acc-slide">
                                                         <img src="@media.ThumbnailImage" alt="@media.ThumbnailAltText">
-                                                    </div>
+                                                    </div> *@
                                                     <div class="acc-slide" data-type="video">
                                                         <video src="@media.Video_path" poster="@media.ThumbnailImage" playsinline>
                                                         </video>
@@ -140,6 +145,7 @@
                     </div>
 
                 </div>
+                index++;
             }
 
 
