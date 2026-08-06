@@ -47,6 +47,7 @@ namespace Nekta_BusinessLogic.BAL
                 Masthead_image_Alt_text = row.Field<string>("Masthead_alt_text") ?? "",
                 CanonicalUrl = Config_Application_Website.GetMetaUrl(baseurl, canUrl),
                 cont_meta_image = Config_Application_Website.GetMetaUrl(baseurl, image),
+                cont_external_url = row.Field<string>("cont_external_url") ?? "",
                 cont_displaydate = row.Table.Columns.Contains("cont_displaydate")
                     ? row.Field<DateTime?>("cont_displaydate")
                     : null,

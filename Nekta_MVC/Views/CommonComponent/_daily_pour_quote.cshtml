@@ -1,0 +1,37 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+<section class="daily-pour-quote-banner dpq-banner">
+
+  <div class="dpq-deco dpq-deco-left">
+    <img
+      src="@(string.IsNullOrWhiteSpace(item.Component_LHS_icon1) ? "/Assets/images/dailypour/deco-ground-coffee.png" : item.Component_LHS_icon1)"
+      alt=""
+      aria-hidden="true" />
+  </div>
+
+  <div class="dpq-deco dpq-deco-right">
+    <img
+      src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon1) ? "/Assets/images/dailypour/deco-holly-berries.png" : item.Component_RHS_icon1)"
+      alt=""
+      aria-hidden="true" />
+  </div>
+
+  <div class="dpq-border-frame">
+    <div class="text-center mb-6 px-6 mx-auto max-w-7xl section-title--light-outer">
+      <h2 class="title-section" data-leaf-target letters-slide-down text-split>
+        <span class="title-section text-letters-slide">
+          @Html.Raw(
+            !string.IsNullOrWhiteSpace(item.DisplayTitle)
+              ? item.DisplayTitle.CleanParagraphTags()
+              : item.Title)
+        </span>
+      </h2>
+    </div>
+  </div>
+
+</section>
+}

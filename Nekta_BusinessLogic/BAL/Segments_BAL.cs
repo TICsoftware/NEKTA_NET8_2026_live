@@ -187,7 +187,32 @@ namespace Nekta_BusinessLogic.BAL
         }
 
 
+        public SegmentsModel GetDailyPour_BAL(string pagename, int languageId, int geographyId)
+        {
+            var model = new SegmentsModel();
+            var ds = GetContentComponentData_DAL(pagename, languageId, geographyId);
 
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                model.Content = MapContent(ds.Tables[0].Rows[0]);
+            }
+
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+            {
+                var groupedData = GetGroupedComponents(ds.Tables[1]);
+                model.Components = groupedData;
+
+                model.Craft_Meets_Workday_List = MapComponents(groupedData, 1);
+                model.Precision_Every_Cup_List = MapComponents(groupedData, 2);
+                model.Whats_On_Menu_List = MapComponents(groupedData, 3);
+                model.Daily_Pour_Experience_List = MapComponents(groupedData, 4);
+                model.Where_Belongs_List = MapComponents(groupedData, 5);
+                model.Built_On_Backbone_List = MapComponents(groupedData, 6);
+                model.Bring_Daily_Pour_CTA_List = MapComponents(groupedData, 7);
+            }
+
+            return model;
+        }
 
 
     }

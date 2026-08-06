@@ -55,6 +55,16 @@ namespace Nekta_BusinessLogic.Entity
         public List<ComponentModel> Proof_Is_On_The_Plate_Outdoor_List { get; set; } = new();
 
 
+        // The Daily Pour
+        public List<ComponentModel> Craft_Meets_Workday_List { get; set; } = new();
+        public List<ComponentModel> Precision_Every_Cup_List { get; set; } = new();
+        public List<ComponentModel> Whats_On_Menu_List { get; set; } = new();
+        public List<ComponentModel> Daily_Pour_Experience_List { get; set; } = new();
+        public List<ComponentModel> Where_Belongs_List { get; set; } = new();
+        public List<ComponentModel> Built_On_Backbone_List { get; set; } = new();
+        public List<ComponentModel> Bring_Daily_Pour_CTA_List { get; set; } = new();
+
+
         public List<ComponentModel> Case_Studies_Component_List { get; set; } = new();
         public List<ArticleModel> Case_Studies_List { get; set; } = new();
 

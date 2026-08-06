@@ -1,0 +1,54 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@foreach (var item in Model.Where(x => x.IsBlock == 0))
+{
+<section class="daily-pour-cta-section dp-cta-section">
+
+  <img
+    src="@(string.IsNullOrWhiteSpace(item.Componentbackground) ? "/Assets/images/dailypour/cta-banner-bg.webp" : item.Componentbackground)"
+    alt="@(string.IsNullOrWhiteSpace(item.ComponentbackgroundAltText) ? "Coffee beans, latte art and pastries" : item.ComponentbackgroundAltText)"
+    class="dp-cta-bg"
+  />
+  <div class="dp-cta-overlay" aria-hidden="true"></div>
+  <img
+    src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon1) ? "/Assets/images/dailypour/deco-coffee-cup-right-1.png" : item.Component_RHS_icon1)"
+    alt=""
+    class="dp-cta-deco-right"
+    aria-hidden="true"
+  />
+
+  <div class="dp-cta-inner">
+
+    <h2 class="title-section" data-leaf-target letters-slide-down text-split>
+      <span class="title-section text-letters-slide">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(item.DisplayTitle)
+            ? item.DisplayTitle.CleanParagraphTags()
+            : item.Title)
+      </span>
+    </h2>
+
+    <div class="dp-cta-divider" aria-hidden="true"></div>
+
+    @if (!string.IsNullOrWhiteSpace(item.Section_title))
+    {
+      <h3 class="dp-cta-lead">@Html.Raw(item.Section_title.CleanParagraphTags())</h3>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(item.Intro))
+    {
+      <p class="dp-cta-text">
+        @Html.Raw(item.Intro.CleanParagraphTags())
+      </p>
+    }
+
+    <a href="@(string.IsNullOrWhiteSpace(item.Url) ? "/contact-us" : item.Url)" class="dp-cta-btn">
+      <span>@(string.IsNullOrWhiteSpace(item.Url_Text) ? "Bring The Daily Pour to Your Space" : item.Url_Text)</span>
+      <span class="dp-cta-btn-arrow" aria-hidden="true">&#8594;</span>
+    </a>
+  </div>
+
+</section>
+}

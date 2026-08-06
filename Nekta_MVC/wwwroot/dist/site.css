@@ -321,7 +321,7 @@
     top: calc(50% * -1);
   }
   .top-0 {
-    top: 0px;
+    top: calc(var(--spacing) * 0);
   }
   .top-1 {
     top: var(--spacing);
@@ -393,7 +393,7 @@
     left: calc(var(--spacing) * -20);
   }
   .left-0 {
-    left: 0px;
+    left: calc(var(--spacing) * 0);
   }
   .left-1 {
     left: var(--spacing);
@@ -1389,10 +1389,12 @@
     margin-block-start: calc(var(--spacing) * var(--tw-space-y-reverse));
     margin-block-end: calc(var(--spacing) * calc(1 - var(--tw-space-y-reverse)));
   }
-  :where(.space-y-6 > :not(:last-child)) {
-    --tw-space-y-reverse: 0;
-    margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
-    margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+  .space-y-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
   }
   .truncate {
     overflow: hidden;
@@ -2306,7 +2308,9 @@
     .sm\:w-10 {
       width: calc(var(--spacing) * 10);
     }
-    .sm\:max-w-5xl {
+  }
+  .sm\:max-w-5xl {
+    @media (width >= 40rem) {
       max-width: var(--container-5xl);
     }
     .sm\:max-w-\[60vw\] {
@@ -2321,12 +2325,18 @@
     .sm\:gap-4 {
       gap: calc(var(--spacing) * 4);
     }
-    :where(.sm\:space-y-3 > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  .sm\:space-y-3 {
+    @media (width >= 40rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+      }
     }
-    .sm\:px-8 {
+  }
+  .sm\:px-8 {
+    @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 8);
     }
     .sm\:pr-2 {
@@ -2382,10 +2392,14 @@
     .md\:col-span-4 {
       grid-column: span 4 / span 4;
     }
-    .md\:mt-6 {
+  }
+  .md\:mt-6 {
+    @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 6);
     }
-    .md\:mt-12 {
+  }
+  .md\:mt-12 {
+    @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 12);
     }
     .md\:mb-6 {
@@ -2442,12 +2456,18 @@
     .md\:gap-8 {
       gap: calc(var(--spacing) * 8);
     }
-    :where(.md\:space-y-8 > :not(:last-child)) {
-      --tw-space-y-reverse: 0;
-      margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
-      margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
+  }
+  .md\:space-y-8 {
+    @media (width >= 48rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-y-reverse: 0;
+        margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
+        margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
+      }
     }
-    .md\:border-r {
+  }
+  .md\:border-r {
+    @media (width >= 48rem) {
       border-right-style: var(--tw-border-style);
       border-right-width: 1px;
     }
@@ -2463,10 +2483,14 @@
     .md\:px-8 {
       padding-inline: calc(var(--spacing) * 8);
     }
-    .md\:pt-10 {
+  }
+  .md\:pt-10 {
+    @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 10);
     }
-    .md\:pb-5 {
+  }
+  .md\:pb-5 {
+    @media (width >= 48rem) {
       padding-bottom: calc(var(--spacing) * 5);
     }
     .md\:pb-10 {

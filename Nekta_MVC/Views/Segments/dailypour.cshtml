@@ -1,0 +1,97 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model Nekta_BusinessLogic.Entity.SegmentsModel
+@{
+    ViewData["Title"] = "The Daily Pour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head {
+
+    <title>@Model.Content?.cont_window_title</title>
+
+    <meta content="@Model.Content?.cont_metatag" name="keywords" />
+    <meta content="@Model.Content?.cont_metadesc" name="description" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="@Model.Content?.ContTitle" />
+    <meta name="twitter:description" content="@Model.Content?.cont_metadesc" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content?.ContTitle" />
+    <meta property="og:description" content="@Model.Content?.cont_metadesc" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:image" content="@Model.Content?.cont_meta_image" />
+
+    <meta itemprop="name" content="Nekta" />
+    <meta itemprop="description" content="@Model.Content?.cont_metadesc" />
+    <meta itemprop="image" content="@Model.Content?.cont_meta_image" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nekta" />
+    <meta property="og:title" content="@Model.Content?.ContTitle" />
+    <meta property="og:description" content="@Model.Content?.cont_metadesc" />
+    <meta property="og:image" content="@Model.Content?.cont_meta_image" />
+    <meta property="og:url" content="https://www.nekta.com/" />
+
+    <link rel="canonical" href="@Model.Content?.CanonicalUrl" />
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/Assets/css/dailypour.css" />
+}
+
+<!-- HERO BANNER -->
+@if (Model?.Content != null)
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_page_banner.cshtml", Model.Content)
+}
+
+<!-- ==================== Where Craft Meets the Workday ==================== -->
+@if (Model.Craft_Meets_Workday_List != null && Model.Craft_Meets_Workday_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_intro.cshtml", Model.Craft_Meets_Workday_List)
+}
+
+<!-- ==================== Precision in Every Cup ==================== -->
+@if (Model.Precision_Every_Cup_List != null && Model.Precision_Every_Cup_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_quote.cshtml", Model.Precision_Every_Cup_List)
+}
+
+<!-- ==================== What's on the Menu ==================== -->
+@if (Model.Whats_On_Menu_List != null && Model.Whats_On_Menu_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_menu.cshtml", Model.Whats_On_Menu_List)
+}
+
+<!-- ==================== The Daily Pour Experience ==================== -->
+@if (Model.Daily_Pour_Experience_List != null && Model.Daily_Pour_Experience_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_experience.cshtml", Model.Daily_Pour_Experience_List)
+}
+
+<!-- ==================== Where The Daily Pour Belongs ==================== -->
+@if (Model.Where_Belongs_List != null && Model.Where_Belongs_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_belongs.cshtml", Model.Where_Belongs_List)
+}
+
+<!-- ==================== Built on Nekta's Backbone ==================== -->
+@if (Model.Built_On_Backbone_List != null && Model.Built_On_Backbone_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_backbone.cshtml", Model.Built_On_Backbone_List)
+}
+
+<!-- ==================== Bring The Daily Pour CTA ==================== -->
+@if (Model.Bring_Daily_Pour_CTA_List != null && Model.Bring_Daily_Pour_CTA_List.Any())
+{
+    @await Html.PartialAsync("~/Views/CommonComponent/_daily_pour_cta.cshtml", Model.Bring_Daily_Pour_CTA_List)
+}
+
+@section Scripts {
+    <script src="~/Assets/js/inner-banner-script.js"></script>
+    <script src="~/Assets/js/dailypour.js"></script>
+}

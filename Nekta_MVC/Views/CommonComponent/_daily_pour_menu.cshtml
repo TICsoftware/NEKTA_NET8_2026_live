@@ -1,0 +1,72 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var header = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var cards = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+}
+
+@if (header != null)
+{
+<section class="whats-on-menu-section menu-section section-spacing">
+
+  <div class="menu-decor-dots" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="menu-header">
+    <h2 class="title-section-red" data-leaf-target letters-slide-down text-split>
+      <span class="title-section text-letters-slide">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(header.DisplayTitle)
+            ? header.DisplayTitle.CleanParagraphTags()
+            : header.Title)
+      </span>
+    </h2>
+    <div class="dp-divider" aria-hidden="true"></div>
+
+    @if (!string.IsNullOrWhiteSpace(header.Intro))
+    {
+      <p class="menu-subtext">
+        @Html.Raw(header.Intro.CleanParagraphTags())
+      </p>
+    }
+  </div>
+
+  @if (cards.Any())
+  {
+  <div class="menu-slider-wrap">
+
+    <button type="button" class="menu-nav menu-nav-prev" id="menuPrev" aria-label="Previous menu category">&#8592;</button>
+
+    <div class="menu-slider-viewport">
+      <div class="menu-track" id="menuTrack">
+
+        @foreach (var item in cards)
+        {
+        <article class="menu-card">
+          <div class="menu-card-media">
+            <img src="@(!string.IsNullOrWhiteSpace(item.ThumbnailImage) ? item.ThumbnailImage : item.ComponentThumbnail)"
+                 alt="@(!string.IsNullOrWhiteSpace(item.ThumbnailAltText) ? item.ThumbnailAltText : item.ComponentThumbnailAltText)" />
+            <h3 class="menu-card-title">@item.Title</h3>
+          </div>
+          @if (!string.IsNullOrWhiteSpace(item.Intro))
+          {
+            <p class="menu-card-text">
+              @Html.Raw(item.Intro.CleanParagraphTags())
+            </p>
+          }
+        </article>
+        }
+
+      </div>
+    </div>
+
+    <button type="button" class="menu-nav menu-nav-next" id="menuNext" aria-label="Next menu category">&#8594;</button>
+
+  </div>
+  }
+
+</section>
+}

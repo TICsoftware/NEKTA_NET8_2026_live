@@ -1,0 +1,88 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@model List<ComponentModel>
+
+@{
+    var header = Model.FirstOrDefault(x => x.IsBlock == 0);
+    var items = Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence).ToList();
+}
+
+@if (header != null)
+{
+<section class="where-belongs-section belongs-section section-spacing">
+
+  <img
+    src="/Assets/images/dailypour/texture-corner-splash.png"
+    alt=""
+    class="belongs-bg-corner"
+    aria-hidden="true"
+  />
+
+  <img
+    src="/Assets/images/dailypour/texture-torn-edge.png"
+    alt=""
+    class="belongs-bg-edge"
+    aria-hidden="true"
+  />
+
+  <div class="belongs-header">
+    <h2 class="title-section-red" data-leaf-target letters-slide-down text-split>
+      <span class="title-section text-letters-slide">
+        @Html.Raw(
+          !string.IsNullOrWhiteSpace(header.DisplayTitle)
+            ? header.DisplayTitle.CleanParagraphTags()
+            : header.Title)
+      </span>
+    </h2>
+    <div class="dp-divider" aria-hidden="true"></div>
+    @if (!string.IsNullOrWhiteSpace(header.Intro))
+    {
+      <p class="belongs-subtext">
+        @Html.Raw(header.Intro.CleanParagraphTags())
+      </p>
+    }
+
+    <span class="belongs-divider-line"></span>
+    <span class="belongs-divider-line"></span>
+  </div>
+
+  <div class="belongs-grid">
+
+    <div class="belongs-image-wrap">
+      <img
+        src="@header.ComponentThumbnail"
+        alt="@header.ComponentThumbnailAltText"
+      />
+    </div>
+
+    @if (items.Any())
+    {
+    <div class="belongs-accordion" id="belongsAccordion">
+
+      @{ var isFirst = true; }
+      @foreach (var item in items)
+      {
+      <div class="belongs-accordion-item@(isFirst ? " is-open" : "")">
+        <button type="button" class="belongs-accordion-trigger" aria-expanded="@(isFirst ? "true" : "false")">
+          @item.Title
+          <span class="belongs-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="belongs-accordion-panel">
+          <div class="belongs-accordion-panel-inner">
+            @if (!string.IsNullOrWhiteSpace(item.Intro))
+            {
+              <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>
+            }
+          </div>
+        </div>
+      </div>
+      isFirst = false;
+      }
+
+    </div>
+    }
+
+  </div>
+
+</section>
+}
