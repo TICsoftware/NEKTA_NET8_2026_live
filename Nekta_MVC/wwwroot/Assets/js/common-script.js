@@ -500,3 +500,55 @@ ease:"power2.out"
     });
   });
 })();
+
+
+
+// Search popup functionality
+(function () {
+  const trigger    = document.getElementById('searchTrigger');
+  const popup      = document.getElementById('searchPopup');
+  const overlay    = document.getElementById('searchOverlay');
+  const closeBtn    = document.getElementById('searchClose');
+  const input       = document.getElementById('searchInput');
+  const form        = document.getElementById('searchForm');
+
+  function openSearch() {
+    popup.classList.add('active');
+    overlay.classList.add('active');
+    popup.setAttribute('aria-hidden', 'false');
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 200);
+  }
+
+  function closeSearch() {
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
+    popup.setAttribute('aria-hidden', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    input.value = '';
+  }
+
+  trigger.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  overlay.addEventListener('click', closeSearch);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && popup.classList.contains('active')) closeSearch();
+    // Optional: Ctrl/Cmd + K to open search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const query = input.value.trim();
+    if (query) {
+      // Replace with your actual search results route
+      window.location.href = '/search?q=' + encodeURIComponent(query);
+    }
+  });
+})();

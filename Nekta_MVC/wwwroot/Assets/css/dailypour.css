@@ -653,16 +653,13 @@
   .experience-caption-title {
 
     font-weight: 600;
-    font-size: 1.3rem;
-    color: #241f1a;
+    font-size: 1.35rem;
+
     margin: 0 0 10px;
   }
  
   .experience-caption-text {
- 
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: #5c5348;
+    font-size: 1rem;
     margin: 0;
   }
  
