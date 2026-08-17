@@ -443,7 +443,8 @@
     position: relative;
     border-radius: 999px 999px 100px 100px;
     overflow: hidden;
-    height: 340px;
+    /* height: 340px; */
+    aspect-ratio: 3 / 2.5;
     background: #1c1a19; /* fallback behind image while loading */
   }
  
