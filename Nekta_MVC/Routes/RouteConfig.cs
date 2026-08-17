@@ -76,9 +76,9 @@ namespace Nekta_MVC.Routes
             );
 
             app.MapControllerRoute(
-              name: "horcea",
-              pattern: "segments/horcea",
-              defaults: new { controller = "Segments", action = "BusinessCorporates", title = "horcea" }
+              name: "horeca",
+              pattern: "segments/horeca",
+              defaults: new { controller = "Segments", action = "BusinessCorporates", title = "horeca" }
           );
 
             app.MapControllerRoute(
