@@ -45,7 +45,7 @@ gsap.set(".signature-bg", {
         xPercent: 20,
         yPercent: -80,
         rotation: -28,
-        opacity: 0,
+        opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
@@ -62,7 +62,7 @@ gsap.set(".signature-bg", {
         xPercent: 0,
         yPercent: -100,
         rotation: 28,
-        opacity: 0,
+        opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
