@@ -57,7 +57,11 @@ right:0;
 
 }
 
-
+.story-gallery .story-gallery-right .story-leaf {
+    position: absolute;
+    left: 15vw !important;
+    bottom: 0;
+}
 
 .counter-odometer {display: inline-flex;align-items: baseline;gap: 0ch;font-variant-numeric: tabular-nums;line-height: 1;overflow: hidden;}
 .odometer-digit {overflow: hidden;display: inline-block;vertical-align: bottom;height: 1em;width: 1ch;text-align: center;font-family: inherit;font-weight: inherit;font-size: inherit;}
