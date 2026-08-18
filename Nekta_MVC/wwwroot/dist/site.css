@@ -1302,6 +1302,9 @@
   .resize {
     resize: both;
   }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -2290,6 +2293,9 @@
     }
     .sm\:max-w-\[85vw\] {
       max-width: 85vw;
+    }
+    .sm\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
     .sm\:flex-row {
       flex-direction: row;
