@@ -330,6 +330,7 @@ public class ContentManager : Content_DAL
                 objcontent.content = ds.Tables[0].Rows[0]["content"].ToString() ?? "";
                 objcontent.metatag = ds.Tables[0].Rows[0]["cont_metatag"].ToString() ?? "";
                 objcontent.metadesc = ds.Tables[0].Rows[0]["cont_metadesc"].ToString() ?? "";
+                objcontent.page_schema = ds.Tables[0].Rows[0]["cont_pageschema"].ToString() ?? "";
                 objcontent.metaexpiry = ds.Tables[0].Rows[0]["cont_metaexpiry"] == DBNull.Value ? null : Convert.ToDateTime(ds.Tables[0].Rows[0]["cont_metaexpiry"].ToString());
                 objcontent.external_url = ds.Tables[0].Rows[0]["cont_external_url"].ToString() ?? "";
                 objcontent.IsExternal = Convert.ToInt32(ds.Tables[0].Rows[0]["cont_IsExternal"].ToString());
@@ -637,6 +638,7 @@ public class ContentManager : Content_DAL
                 objcontent.content = ds.Tables[0].Rows[0]["content"].ToString() ?? "";
                 objcontent.metatag = ds.Tables[0].Rows[0]["cont_metatag"].ToString() ?? "";
                 objcontent.metadesc = ds.Tables[0].Rows[0]["cont_metadesc"].ToString() ?? "";
+                objcontent.page_schema = ds.Tables[0].Rows[0]["cont_pageschema"].ToString() ?? "";
                 objcontent.metaexpiry = ds.Tables[0].Rows[0]["cont_metaexpiry"] == DBNull.Value ? null : Convert.ToDateTime(ds.Tables[0].Rows[0]["cont_metaexpiry"].ToString());
                 objcontent.external_url = ds.Tables[0].Rows[0]["cont_external_url"].ToString() ?? "";
                 objcontent.IsExternal = Convert.ToInt32(ds.Tables[0].Rows[0]["cont_IsExternal"].ToString());

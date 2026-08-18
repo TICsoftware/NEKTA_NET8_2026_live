@@ -365,7 +365,7 @@ scrollTrigger:{
 
 trigger:footer,
 
-start:"top 85%",
+start:"top 90%",
 
 once:true
 
@@ -387,13 +387,13 @@ footer.querySelectorAll(
 
 opacity:0,
 
-y:100,
+y:32,
 
-duration:1.1,
+duration:.55,
 
-stagger:.18,
+stagger:.08,
 
-ease:"expo.out"
+ease:"power2.out"
 
 }
 
@@ -411,17 +411,17 @@ tl.from(
 
 opacity:0,
 
-y:18,
+y:12,
 
-duration:.45,
+duration:.3,
 
-stagger:.04,
+stagger:.02,
 
 ease:"power2.out"
 
 },
 
-"-=.6"
+"-=.35"
 
 );
 
@@ -439,15 +439,15 @@ opacity:0,
 
 scale:.85,
 
-duration:.4,
+duration:.28,
 
-stagger:.05,
+stagger:.03,
 
 ease:"power2.out"
 
 },
 
-"-=.4"
+"-=.25"
 
 );
 
@@ -463,15 +463,15 @@ tl.from(
 
 opacity:0,
 
-y:30,
+y:16,
 
-duration:.7,
+duration:.35,
 
 ease:"power2.out"
 
 },
 
-"-=.3"
+"-=.2"
 
 );
 

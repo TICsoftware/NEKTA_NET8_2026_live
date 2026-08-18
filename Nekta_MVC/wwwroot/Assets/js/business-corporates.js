@@ -342,7 +342,8 @@ function getSizes() {
         const vw = viewport.getBoundingClientRect().width;
         return { base: vw, active: vw, gap: 0 };
     }
-    return { base: 260, active: 600, gap: GAP };
+    const isLaptop = window.innerWidth >= 1200 && window.innerWidth <= 1366;
+    return { base: 260, active: isLaptop ? 540 : 600, gap: GAP };
 }
 
     const cardWidth = realCards[0].offsetWidth || 260;
@@ -373,7 +374,7 @@ function getSizes() {
 
     function centerTrack(withTransition = true) {
         track.style.transition = withTransition
-            ? 'transform 0.75s cubic-bezier(0.25, 0, 0.35, 1)'
+            ? 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'
             : 'none';
 
         const sizes = getSizes();
@@ -407,39 +408,15 @@ function getSizes() {
             }
         };
 
-        const isMobile = window.innerWidth <= 767;
-
-        if (isMobile) {
-            const mobileTimer = setTimeout(() => {
-                cancelContentReveal(card);
-                reveal();
-            }, 100);
-            card._bcRevealCleanup = () => {
-                clearTimeout(mobileTimer);
-                card._bcRevealCleanup = null;
-            };
-            return;
-        }
-
-        const onTransitionEnd = (e) => {
-            if (e.target !== card) return;
-            if (e.propertyName !== 'width') return;
+        const timer = setTimeout(() => {
             cancelContentReveal(card);
             reveal();
-        };
-
-        const fallbackTimer = setTimeout(() => {
-            cancelContentReveal(card);
-            reveal();
-        }, 420);
+        }, 80);
 
         card._bcRevealCleanup = () => {
-            card.removeEventListener('transitionend', onTransitionEnd);
-            clearTimeout(fallbackTimer);
+            clearTimeout(timer);
             card._bcRevealCleanup = null;
         };
-
-        card.addEventListener('transitionend', onTransitionEnd);
     }
 
     function updateClasses(withTransition = true) {
@@ -464,7 +441,6 @@ function getSizes() {
                 } else if (!wasActive) {
                     scheduleContentReveal(card);
                 }
-
             } else if (Math.abs(i - rIndex) === 1) {
                 card.classList.add('is-adjacent');
             }
@@ -502,8 +478,98 @@ function render(withTransition = true) {
     prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
     nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
 
+    const SWIPE_THRESHOLD = 50;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startTranslate = 0;
+    let dragging = false;
+    let didDrag = false;
+    let lockAxis = null;
+
+    function currentTranslate() {
+        const match = /translateX\(([-\d.]+)px\)/.exec(track.style.transform || '');
+        return match ? parseFloat(match[1]) : 0;
+    }
+
+    function onPointerDown(e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target.closest('.bc-arch-nav, .bc-arch-dots')) return;
+
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        startY = e.clientY;
+        startTranslate = currentTranslate();
+        dragging = true;
+        didDrag = false;
+        lockAxis = null;
+        track.style.transition = 'none';
+        viewport.classList.add('is-dragging');
+
+        if (viewport.setPointerCapture) {
+            viewport.setPointerCapture(e.pointerId);
+        }
+    }
+
+    function onPointerMove(e) {
+        if (!dragging || e.pointerId !== pointerId) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        if (!lockAxis) {
+            if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+            lockAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+
+            if (lockAxis === 'y') {
+                dragging = false;
+                viewport.classList.remove('is-dragging');
+                if (viewport.hasPointerCapture && viewport.hasPointerCapture(e.pointerId)) {
+                    viewport.releasePointerCapture(e.pointerId);
+                }
+                centerTrack(false);
+                return;
+            }
+        }
+
+        if (lockAxis !== 'x') return;
+
+        didDrag = Math.abs(dx) > 8;
+        track.style.transform = 'translateX(' + (startTranslate + dx) + 'px)';
+    }
+
+    function onPointerUp(e) {
+        if (e.pointerId !== pointerId) return;
+
+        const dx = e.clientX - startX;
+        const wasSwipe = dragging && lockAxis === 'x';
+
+        dragging = false;
+        pointerId = null;
+        lockAxis = null;
+        viewport.classList.remove('is-dragging');
+
+        if (wasSwipe && Math.abs(dx) > SWIPE_THRESHOLD) {
+            dx < 0 ? goTo(activeIndex + 1) : goTo(activeIndex - 1);
+        } else {
+            centerTrack(true);
+        }
+    }
+
+    viewport.addEventListener('pointerdown', onPointerDown);
+    viewport.addEventListener('pointermove', onPointerMove);
+    viewport.addEventListener('pointerup', onPointerUp);
+    viewport.addEventListener('pointercancel', onPointerUp);
+    viewport.addEventListener('dragstart', (e) => e.preventDefault());
+
     cards.forEach((card) => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', (e) => {
+            if (didDrag) {
+                e.preventDefault();
+                e.stopPropagation();
+                didDrag = false;
+                return;
+            }
             const i = Number(card.dataset.index);
             if (!isNaN(i) && i !== activeIndex) goTo(i);
         });

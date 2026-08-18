@@ -48,6 +48,7 @@
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --blur-sm: 8px;
@@ -60,7 +61,7 @@
     --font-body: "Poppins", sans-serif;
     --font-heading: "Cormorant Garamond", serif;
     --text-h1: clamp(3.75rem, 2rem + 5vw, 5.25rem);
-    --text-h2: clamp(2.175rem, 1.8rem + 4vw, 4.5rem);
+    --text-h2: clamp(2.25rem, 1.8rem + 1.875vw, 4.5rem);
     --text-h3: clamp(1.625rem, 1rem + 2vw, 2.125rem);
     --text-h4: clamp(1.75rem, 0.9rem + 1vw, 1.75rem);
     --text-h5: clamp(1.125rem, 1.073rem + 0.22vw, 1.25rem);
@@ -309,6 +310,9 @@
   .end-100 {
     inset-inline-end: calc(var(--spacing) * 100);
   }
+  .-top-2 {
+    top: calc(var(--spacing) * -2);
+  }
   .-top-20 {
     top: calc(var(--spacing) * -20);
   }
@@ -359,9 +363,6 @@
   }
   .right-5 {
     right: calc(var(--spacing) * 5);
-  }
-  .-bottom-6 {
-    bottom: calc(var(--spacing) * -6);
   }
   .bottom-0 {
     bottom: 0px;
@@ -1411,8 +1412,14 @@
     border-top-left-radius: calc(infinity * 1px);
     border-top-right-radius: calc(infinity * 1px);
   }
+  .rounded-br-3xl {
+    border-bottom-right-radius: var(--radius-3xl);
+  }
   .rounded-br-xl {
     border-bottom-right-radius: var(--radius-xl);
+  }
+  .rounded-bl-3xl {
+    border-bottom-left-radius: var(--radius-3xl);
   }
   .rounded-bl-xl {
     border-bottom-left-radius: var(--radius-xl);

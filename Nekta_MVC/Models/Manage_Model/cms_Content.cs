@@ -76,6 +76,9 @@ public class cms_Content
     [RegularExpression(@"^[^`\^~#<>{}]+", ErrorMessage = @"Please enter valid characters. The following characters are not accepted `^~#<> in the meta description")]
     public string? Metadesc { get; set; }
 
+    [ValidateNever]
+    public string? PageSchema { get; set; }
+
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
     public DateTime? Metaexpiry { get; set; }
     public bool? status { get; set; }

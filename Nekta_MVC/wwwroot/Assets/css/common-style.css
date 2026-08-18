@@ -119,14 +119,22 @@ INNER BANNER CSS
 /**=====================================
 Leaf travel CSS
 =====================================**/
-.ld-leaf-wrapper {position: relative; overflow: hidden;}
+.ld-leaf-wrapper {position: relative; overflow: visible;}
 .leaf-travel-anim{
     position:absolute;
-    top:10vw;
-    right:10vw;
+    top: 10vw;
+    right: 10vw;
+    left: auto;
+    width: clamp(72px, 9vw, 135px);
+    height: auto;
     pointer-events:none;
-    z-index:100;
+    z-index: 1;
     will-change:transform;
+    transform-origin: 32% 58%;
+    backface-visibility: hidden;
+}
+@media (max-width: 767px) {
+    .leaf-travel-anim {top: 8px; right: 8px;}
 }
 
 
@@ -170,7 +178,7 @@ Leaf travel CSS
  /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 
-.text-h2 {font-size: 3.813rem}
+.text-h2 {font-size: 3.375rem}
     p {
         font-size: 1.125rem !important;
     }
@@ -185,7 +193,7 @@ Leaf travel CSS
  /* 1920*1080 of 150% and 1600*900 of 125% */
  @media (min-width: 1200px) and (max-width: 1366px) {
 
-.text-h2 {font-size: 3rem}
+.text-h2 {font-size: 3.375rem}
  p {font-size: 1rem !important; }
 .section-title-center {max-width: 800px;}
 .md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
