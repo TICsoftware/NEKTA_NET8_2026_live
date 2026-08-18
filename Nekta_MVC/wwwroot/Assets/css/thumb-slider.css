@@ -1,7 +1,7 @@
 .bc-life-frame {background: #8b9e84; border-radius: 24px; padding: clamp(10px, 1.2vw, 16px);}
 .bc-life-frame img {display: block; width: 100%;  height: 100%; object-fit: cover; border-radius: 20px;}
 .bc-life-main { aspect-ratio: 880 / 810; max-height: 640px; width: 100%;}
-.bc-life-thumb { background: #889980; border-radius: 14px;padding: 6px; cursor: pointer;border: 0; box-shadow:0 20px 30px rgba(67, 60, 40, 0.21), 0 9px 21px rgba(67, 60, 40, 0.25); transition: transform var(--motion-fast) var(--ease-premium), outline-color var(--motion-fast) var(--ease-premium); outline: 2px solid transparent; outline-offset: 2px; aspect-ratio: 255 / 224;}
+.bc-life-thumb { background: #889980; border-radius: 14px;padding: 6px; cursor: pointer;border: 0; box-shadow:0 20px 30px rgba(67, 60, 40, 0.21), 0 9px 21px rgba(67, 60, 40, 0.25); transition: transform var(--motion-fast) var(--ease-premium), outline-color var(--motion-fast) var(--ease-premium); outline: 2px solid transparent; outline-offset: 2px; aspect-ratio: 255 / 224; flex: 0 0 calc((100% - 36px) / 4); width: calc((100% - 36px) / 4); max-width: calc((100% - 36px) / 4); height: auto; box-sizing: border-box;}
 .bc-life-thumb img { width: 100%; height: 100%; object-fit: cover;  border-radius: 10px;  display: block;}
 .bc-life-thumb:hover { transform: translateY(-4px);}
 .bc-life-thumb.is-active { outline-color: var(--color-cream);}
@@ -10,7 +10,7 @@
 .bc-life-polaroid { position: absolute;  top: 24px;  left: 24px; width: clamp(120px, 17vw, 322px); transform: rotate(-8deg);    border-radius: 8px; box-shadow: -15px 20px 25px rgba(43, 52, 40, 0.3); display: none;}
 
 .thumb-grid-wrapper { display: flex; align-items: center; gap: 10px; }
-.thumb-track {display: flex; gap: 12px;overflow-x: auto;scroll-behavior: smooth;scrollbar-width: none; flex: 1;  padding: 40px 20px;
+.thumb-track {display: flex; align-items: flex-start; gap: 12px;overflow-x: auto;scroll-behavior: smooth;scrollbar-width: none; flex: 1;  padding: 40px 20px;
    margin: -40px -20px;}
 .thumb-track::-webkit-scrollbar { display: none; }
 .thumb-arrow {display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 0;   background: var(--color-cream); cursor: pointer;flex-shrink: 0;font-size: 1.2rem;}
