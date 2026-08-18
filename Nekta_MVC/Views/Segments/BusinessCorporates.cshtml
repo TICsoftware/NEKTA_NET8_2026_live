@@ -107,6 +107,7 @@
 @foreach (var item in Model.Delivering_Experiences_List.Where(x => x.IsBlock == 0))
 {
     <section class="bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+        <img src="~/Assets/images/intro-leaf/green_leaf_travel.svg" alt="" class="bc-leaf-deco" aria-hidden="true" />
         <!-- Decorative sushi platter on far right -->
         <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Title"
             class="bc-deco hidden xl:block w-40 -right-0 top-1/4" aria-hidden="true" />
@@ -149,9 +150,6 @@
                             </div>
                         }
                     </div>
-                    <!-- Decorative leaf bottom-right -->
-                    <img loading="lazy" src="~/Assets/images/intro-leaf/green_leaf_travel.svg" alt=""
-                        class="bc-leaf-deco absolute -top-2 right-0 md:right-4 w-10 md:w-12" aria-hidden="true" />
                 </div>
             </div>
         </div>
