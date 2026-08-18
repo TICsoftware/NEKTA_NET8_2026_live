@@ -2022,6 +2022,9 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
+  .text-green {
+    color: var(--color-green);
+  }
   .text-primary {
     color: var(--color-primary);
   }
