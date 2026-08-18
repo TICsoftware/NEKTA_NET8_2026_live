@@ -100,6 +100,7 @@ public class ContentController : Controller
                     ContentObj.content = Modelobj.Content;
                     ContentObj.metatag = Modelobj.Metatag;
                     ContentObj.metadesc = Modelobj.Metadesc;
+                    ContentObj.page_schema = Modelobj.PageSchema;
                     ContentObj.metaexpiry = Modelobj.Metaexpiry;
                     ContentObj.external_url = string.IsNullOrWhiteSpace(Modelobj.External_url) ? "" : Modelobj.External_url.Trim();
                     ContentObj.IsExternal = Modelobj.IsExternal ? 1 : 0;
@@ -884,6 +885,7 @@ public class ContentController : Controller
                     ContentObj.content = Modelobj.Content;
                     ContentObj.metatag = Modelobj.Metatag;
                     ContentObj.metadesc = Modelobj.Metadesc;
+                    ContentObj.page_schema = Modelobj.PageSchema;
                     ContentObj.metaexpiry = Modelobj.Metaexpiry;
                     ContentObj.external_url = string.IsNullOrWhiteSpace(Modelobj.External_url) ? "" : Modelobj.External_url.Trim();
                     ContentObj.IsExternal = Modelobj.IsExternal ? 1 : 0;
@@ -1055,6 +1057,7 @@ public class ContentController : Controller
                 objModel.Content = objcontent.content;
                 objModel.Metatag = objcontent.metatag;
                 objModel.Metadesc = objcontent.metadesc;
+                objModel.PageSchema = objcontent.page_schema;
                 objModel.Metaexpiry = objcontent.metaexpiry;
                 objModel.External_url = objcontent.external_url;
                 objModel.IsExternal = objcontent.IsExternal == 1 ? true : false;
