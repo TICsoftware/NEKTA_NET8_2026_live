@@ -374,6 +374,13 @@
                                                         @Html.ValidationMessageFor(model => model.Metadesc, "", new { @class = "text-danger" })  
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12 col-12">
+                                                    <div class="form-group mb-3">
+                                                        <label for="PageSchema" class="form-label">Page schema</label>
+                                                        @Html.TextAreaFor(model => model.PageSchema, new { id = "PageSchema", @class = "form-control editor-full" })
+                                                        @Html.ValidationMessageFor(model => model.PageSchema, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-6 col-12 d-none">
                                                     <div class="form-group mb-3">
                                                         <label for="Metaexpiry" class="form-label">Meta expiry</label>
