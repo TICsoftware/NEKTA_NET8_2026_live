@@ -225,7 +225,8 @@ document.getElementById("year-foot").innerHTML = (new Date().getFullYear());
       normalizeWheel: true,
       syncTouch: false,
         prevent: (node) => {
-        return node.closest('.testimonial-content');
+        if (document.body.classList.contains('modal-open')) return true;
+        return node.closest('.testimonial-content, #contactModal, .modal-scroll, .modal-panel');
       }
     });
   
