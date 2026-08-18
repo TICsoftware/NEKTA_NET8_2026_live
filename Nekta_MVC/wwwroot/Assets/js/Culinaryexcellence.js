@@ -107,7 +107,7 @@ document.querySelectorAll('.bc-experience-section').forEach((wrapper) => {
 });
 
 
-// curve — topY must be >= maxCurve so the upward arc stays inside the viewBox
+// curve — drawn in the section's real pixel size so the arc is not stretched
 function buildPath(W, H, curveAmount, topY) {
   if (curveAmount <= 0) {
     return "M0," + topY + " L" + W + "," + topY +
@@ -116,9 +116,8 @@ function buildPath(W, H, curveAmount, topY) {
 
   var halfW = W / 2;
   var s = curveAmount;
-  var r = (halfW * halfW + s * s) / (2 * s); // radius from chord + sagitta
+  var r = (halfW * halfW + s * s) / (2 * s);
 
-  // sweep-flag 1 keeps the original upward mound (peak toward y=0)
   return (
     "M0," + topY +
     " A" + r + "," + r + " 0 0,1 " + W + "," + topY +
@@ -128,30 +127,50 @@ function buildPath(W, H, curveAmount, topY) {
   );
 }
 
-function setupCurveReveal(path, maxCurve) {
-  var W = 1000, H = 400;
-  // Chord sits at maxCurve (+ pad) so the peak lands just inside y=0, never clipped
-  var topY = Math.ceil(maxCurve) + 4;
-  var state = { curve: 0 };
+function setupCurveReveal(path, designedCurve) {
+  var svg = path.closest("svg");
+  var wrap = path.closest(".curveshape-wrap");
+  if (!wrap || !svg) {
+    console.warn("setupCurveReveal: no .curveshape-wrap ancestor found", path);
+    return;
+  }
+
+  var DESIGN_WIDTH = 1000;
+  var PAD = 4;
+  var W = DESIGN_WIDTH;
+  var H = 400;
+  var maxCurve = designedCurve;
+  var topY = designedCurve + PAD;
+  var state = { t: 0 };
+
+  function measure() {
+    var box = wrap.getBoundingClientRect();
+    W = Math.max(1, Math.round(box.width));
+    H = Math.max(1, Math.round(box.height));
+    maxCurve = Math.min(designedCurve * (W / DESIGN_WIDTH), H * 0.35);
+    topY = Math.ceil(maxCurve) + PAD;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("preserveAspectRatio", "none");
+  }
 
   function render() {
-    path.setAttribute("d", buildPath(W, H, state.curve, topY));
+    path.setAttribute("d", buildPath(W, H, state.t * maxCurve, topY));
   }
-  render();
+
+  function sync() {
+    measure();
+    render();
+  }
+
+  sync();
 
   var tween = gsap.to(state, {
-    curve: maxCurve,
+    t: 1,
     ease: "power2.inOut",
     duration: 1,
     paused: true,
     onUpdate: render
   });
-
-  var wrap = path.closest(".curveshape-wrap");
-  if (!wrap) {
-    console.warn("setupCurveReveal: no .curveshape-wrap ancestor found", path);
-    return;
-  }
 
   ScrollTrigger.create({
     trigger: wrap,
@@ -162,6 +181,17 @@ function setupCurveReveal(path, maxCurve) {
     onEnterBack: function () { tween.play(); },
     onLeaveBack: function () { tween.reverse(); }
   });
+
+  var resizeTimer;
+  function scheduleSync() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(sync, 80);
+  }
+
+  window.addEventListener("resize", scheduleSync);
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(scheduleSync).observe(wrap);
+  }
 }
 
 document.querySelectorAll(".curvePath").forEach(function (path) {
@@ -829,3 +859,89 @@ function initSolutionsMedia() {
 
   ScrollTrigger.refresh();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  var grid = document.querySelector("[data-arch-grid-slider]");
+  if (!grid) return;
+
+  var cards = Array.from(grid.querySelectorAll(".bc-arch-card"));
+  if (cards.length < 2) return;
+
+  var section = grid.closest(".bc-edge-section");
+  var prevBtn = section ? section.querySelector(".bc-arch-grid-prev") : null;
+  var nextBtn = section ? section.querySelector(".bc-arch-grid-next") : null;
+  var mq = window.matchMedia("(max-width: 767px)");
+  var scrollTimer;
+
+  function setActive(card) {
+    cards.forEach(function (c) {
+      c.classList.toggle("is-active", c === card);
+    });
+  }
+
+  function nearestCard() {
+    var mid = grid.scrollLeft + grid.clientWidth / 2;
+    var best = cards[0];
+    var bestDist = Infinity;
+    cards.forEach(function (card) {
+      var center = card.offsetLeft + card.offsetWidth / 2;
+      var dist = Math.abs(center - mid);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = card;
+      }
+    });
+    return best;
+  }
+
+  function scrollToCard(card, instant) {
+    var left = card.offsetLeft - (grid.clientWidth - card.offsetWidth) / 2;
+    grid.scrollTo({ left: Math.max(0, left), behavior: instant ? "auto" : "smooth" });
+    setActive(card);
+  }
+
+  function onScroll() {
+    if (!mq.matches) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function () {
+      setActive(nearestCard());
+    }, 120);
+  }
+
+  function currentIndex() {
+    var active = cards.find(function (c) { return c.classList.contains("is-active"); });
+    return Math.max(0, cards.indexOf(active));
+  }
+
+  function go(delta) {
+    if (!mq.matches) return;
+    var next = cards[Math.max(0, Math.min(cards.length - 1, currentIndex() + delta))];
+    scrollToCard(next);
+  }
+
+  function syncMode() {
+    if (mq.matches) {
+      var active = cards.find(function (c) { return c.classList.contains("is-active"); }) || cards[0];
+      setActive(active);
+      scrollToCard(active, true);
+    } else {
+      cards.forEach(function (c) { c.classList.remove("is-active"); });
+    }
+  }
+
+  grid.addEventListener("scroll", onScroll, { passive: true });
+
+  cards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      if (!mq.matches) return;
+      scrollToCard(card);
+    });
+  });
+
+  if (prevBtn) prevBtn.addEventListener("click", function () { go(-1); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { go(1); });
+
+  mq.addEventListener("change", syncMode);
+  syncMode();
+});
+
