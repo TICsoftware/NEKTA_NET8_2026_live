@@ -34,7 +34,8 @@
     left: 3vw;
   }
 @media (max-width: 992px){
-   .sce-copy-wrap{ padding: 2rem 1.25rem; }
+    .sce-section {overflow: hidden;}
+   .sce-copy-wrap{ padding: 2rem 0rem; }
    .sce-backdrop{ inset: 0; }
    .sce-photo{ transform: rotate(2deg); max-width: 340px; }
    .sce-photo {
