@@ -181,7 +181,7 @@ Leaf travel CSS
  /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 
-.text-h2 {font-size: 3.375rem}
+/* .text-h2 {font-size: 3.375rem} */
     p {
         font-size: 1.125rem !important;
     }
@@ -196,7 +196,7 @@ Leaf travel CSS
  /* 1920*1080 of 150% and 1600*900 of 125% */
  @media (min-width: 1200px) and (max-width: 1366px) {
 
-.text-h2 {font-size: 3.375rem}
+/* .text-h2 {font-size: 3.375rem} */
  p {font-size: 1rem !important; }
 .section-title-center {max-width: 800px;}
 .md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
