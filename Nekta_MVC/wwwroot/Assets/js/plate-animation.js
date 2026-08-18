@@ -43,14 +43,14 @@ gsap.set(".signature-bg", {
       ".signature-garlic-img",
       {
         xPercent: 20,
-        yPercent: -80,
+        yPercent: -100,
         rotation: -28,
         opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
         xPercent: 15,
-        yPercent: 20,
+        yPercent: 30,
         rotation: 0,
         opacity: 1,
       },
@@ -60,14 +60,14 @@ gsap.set(".signature-bg", {
       ".signature-leaf-img",
       {
         xPercent: 0,
-        yPercent: -100,
+        yPercent: -120,
         rotation: 28,
         opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
         xPercent: -50,
-        yPercent: 30,
+        yPercent: 50,
         rotation: 0,
         opacity: 1,
       },
@@ -76,7 +76,7 @@ gsap.set(".signature-bg", {
 
   ScrollTrigger.create({
     trigger: ".signature-section",
-    start: "top 50%",
+    start: "top 40%",
     end: "bottom top",
     onUpdate(self) {
       if (self.direction === 1) {
