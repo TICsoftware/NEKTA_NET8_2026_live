@@ -84,7 +84,7 @@
         aspect-ratio: 1 / 1;
       margin: 0 auto; 
       border-radius: 140% 140% 0 0 / 100% 100% 0 0; 
-      margin-left: -3%;
+      margin-left: 0;
       height: 65vh;
       padding-top: 80px;
    }
