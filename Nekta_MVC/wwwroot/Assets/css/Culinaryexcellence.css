@@ -3,7 +3,7 @@
 .bc-polaroid {position: absolute; background: #fdfcf6; border: 1px solid rgba(116, 141, 110, 0.2); border-radius: 10px; padding: 8px;
 box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px;}
-
+.bc-deco{right:-1vw !important;rotate:2deg !important;}
 /* Chili / basil decorations */
 .bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1234; width: 11vw; rotate: -33deg;}
 .bc-dining-deco--chili{left:5vw; top: 2vw; transform: rotate(-10deg); z-index: 2;max-width:280px; width:15vw}
@@ -71,7 +71,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
 .bg-darkcream-thumbslider .merge-imgs {position: absolute; top:0vw; left: 0;width: 100%; height: auto; display: flex;align-items: center;  justify-content: center;}
 .bg-darkcream-thumbslider  .merge-imgs img {position: absolute;}
-.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) {left: -7vw;top: 7vw;z-index: 10;}
+.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) {left: -7vw;top: 1vw;z-index: 10;}
 .bg-darkcream-thumbslider .merge-imgs img:nth-child(2) { left: -3vw; top: -3vw;z-index: -10;}
 
 .underline{text-decoration-line: underline;color:var(--color-third);}
