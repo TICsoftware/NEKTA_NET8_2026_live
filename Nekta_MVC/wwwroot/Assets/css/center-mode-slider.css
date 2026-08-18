@@ -149,6 +149,6 @@
 }
 @media (max-width: 992px) {
 .inner-center-slider {padding: 0 20px}
-.swiper.edgeSwiper {padding-top: 0px;}
+.swiper.edgeSwiper {padding-top: 0px;padding-left: 15px;padding-right: 15px;}
 
 }
