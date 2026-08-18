@@ -268,6 +268,48 @@ document.getElementById("year-foot").innerHTML = (new Date().getFullYear());
     ScrollTrigger.defaults({ scroller: window });
     ScrollTrigger.refresh();
   }
+
+  // --------------------------------------------
+  // BACK TO TOP
+  // --------------------------------------------
+  (function initBackToTop() {
+    const btn = document.querySelector(".back-to-top");
+    const circle = document.querySelector(".progress-ring-circle");
+    if (!btn) return;
+
+    const radius = circle ? Number(circle.getAttribute("r")) || 45 : 45;
+    const circumference = 2 * Math.PI * radius;
+    if (circle) {
+      circle.style.strokeDasharray = String(circumference);
+      circle.style.strokeDashoffset = String(circumference);
+    }
+
+    function getY() {
+      if (window.lenis && typeof window.lenis.scroll === "number") return window.lenis.scroll;
+      return window.scrollY || document.documentElement.scrollTop || 0;
+    }
+
+    function getMax() {
+      if (window.lenis && typeof window.lenis.limit === "number") return Math.max(1, window.lenis.limit);
+      return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function update() {
+      const y = getY();
+      const progress = Math.min(1, Math.max(0, y / getMax()));
+      if (circle) circle.style.strokeDashoffset = String(circumference - progress * circumference);
+      btn.classList.toggle("active", y > 240);
+    }
+
+    btn.addEventListener("click", function () {
+      if (window.lenis) window.lenis.scrollTo(0, { duration: 1.1 });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    if (window.lenis) window.lenis.on("scroll", update);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
   
 
 /* ======================

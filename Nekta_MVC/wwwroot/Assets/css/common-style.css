@@ -1,6 +1,9 @@
 p:last-child{ margin-bottom: 0 !important;}
 body{ overflow-x:hidden;}
 
+.back-to-top.active {opacity: 1 !important; pointer-events: auto !important; transform: translateY(0);}
+.progress-ring-circle {transition: stroke-dashoffset 0.15s ease-out;}
+
 /**=====================================
 TITLE ANIMATION
 =====================================**/
