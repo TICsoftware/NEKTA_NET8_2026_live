@@ -337,7 +337,7 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
 
     // These MUST mirror your CSS values exactly — update both together if you change sizes
 function getSizes() {
-    const isMobile = window.innerWidth <= 640;
+    const isMobile = window.innerWidth <= 767;
     if (isMobile) {
         const vw = viewport.getBoundingClientRect().width;
         return { base: vw, active: vw, gap: 0 };
