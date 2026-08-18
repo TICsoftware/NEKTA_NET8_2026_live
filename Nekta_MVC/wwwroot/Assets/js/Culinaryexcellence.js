@@ -8,40 +8,55 @@ window.addEventListener('load', () => {
 
   const backPhoto = section.querySelector('.nourish-photo-back');
   const frontPhoto = section.querySelector('.nourish-photo-front');
-  if (!backPhoto || !frontPhoto) return;
+  const media = section.querySelector('.nourish-media');
 
-  gsap.set(backPhoto, {
-    opacity: 0,
-    x: -150   // starts off to the left
-  });
-  gsap.set(frontPhoto, {
-    opacity: 0,
-    x: 150    // starts off to the right
-  });
+  if (backPhoto && frontPhoto) {
+    const travel = window.matchMedia('(max-width: 767px)').matches ? 28 : 72;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: 'top 70%',
-      end: 'bottom 20%',
-      toggleActions: 'restart none none reverse',
-      invalidateOnRefresh: true
-      // markers: true, // uncomment to debug the trigger lines while testing
-    }
-  });
+    gsap.set(backPhoto, { opacity: 0, x: -travel });
+    gsap.set(frontPhoto, { opacity: 0, x: travel, yPercent: -50 });
 
-  tl.to(backPhoto, {
-      opacity: 1,
-      x: 0,
-      duration: 1.2,
-      ease: 'power3.out'
-    })
-    .to(frontPhoto, {
-      opacity: 1,
-      x: 0,
-      duration: 1.2,
-      ease: 'power3.out'
-    }, '<0.15'); // starts 0.15s after back photo begins, so they arrive close together but not simultaneously
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true
+      }
+    });
+
+    tl.to(backPhoto, {
+        opacity: 1,
+        x: 0,
+        duration: 1.1,
+        ease: 'power3.out'
+      })
+      .to(frontPhoto, {
+        opacity: 1,
+        x: 0,
+        yPercent: -50,
+        duration: 1.1,
+        ease: 'power3.out'
+      }, '<0.12');
+  } else if (media) {
+    const travel = window.matchMedia('(max-width: 767px)').matches ? 28 : 72;
+
+    gsap.fromTo(media,
+      { opacity: 0, x: -travel },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
+      }
+    );
+  }
 
   ScrollTrigger.refresh();
 });
