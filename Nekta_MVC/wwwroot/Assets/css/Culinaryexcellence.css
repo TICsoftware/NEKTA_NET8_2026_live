@@ -307,7 +307,7 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
         justify-content: center;
         align-items: center;
         gap: 16px;
-        padding: 0 20px 12px;
+        padding: 0 20px 40px;
     }
     .bc-arch-grid-prev,
     .bc-arch-grid-next {
