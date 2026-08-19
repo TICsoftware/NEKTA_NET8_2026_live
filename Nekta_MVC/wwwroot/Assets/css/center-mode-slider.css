@@ -97,8 +97,8 @@
 /* Small tablets */
 @media (min-width: 290px) and (max-width: 575px) {
     .edge-nav-arrows {
-    top: 33% !important;
-    width: 92% !IMPORTANT;
+    top: 25% !important;
+    width: 90% !IMPORTANT;
 }
 }
 @media (min-width: 576px) and (max-width: 767px) {
@@ -149,6 +149,9 @@
 }
 @media (max-width: 992px) {
 .inner-center-slider {padding: 0 20px}
-.swiper.edgeSwiper {padding-top: 0px;padding-left: 15px;padding-right: 15px;}
+.swiper.edgeSwiper {padding-left: 20px;padding-right: 20px;}
+.swiper.edgeSwiper{margin-top: -25px;}
+.bg-green.center-slider .swiper.edgeSwiper {padding-left: 0;padding-right: 0;}
+.bg-green.green-wrapper.center-slider .swiper.edgeSwiper{padding-left: 20px;padding-right: 20px;}
 
 }
