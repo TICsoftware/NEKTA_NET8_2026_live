@@ -28,15 +28,14 @@
                 <!-- Slide 1 -->
                 @foreach (var item in Model.Where(x => x.IsBlock == 1))
                 {
-                      var @introclass="";
-                       @if (!string.IsNullOrWhiteSpace(item.Intro))
-                                    {
-                                      introclass = "withintro";
-                                      
-                                      }
+                    var introclass = "";
+                    if (!string.IsNullOrWhiteSpace(item.Intro))
+                    {
+                        introclass = "withintro";
+                    }
                     <div class="swiper-slide @introclass group cursor-pointer">
                         <div class="feature-card">
-                          
+                           
                            
                             <div class="playground-media w-full overflow-hidden rounded-t-full mb-6 relative">
                                 <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText"
@@ -50,7 +49,7 @@
                             </div>
                           @if (!string.IsNullOrWhiteSpace(item.Intro))
                                     {
-                                        @Html.Raw( @item.Intro )
+                                        @Html.Raw(item.Intro)
                                     }
                             @if (!string.IsNullOrWhiteSpace(item.Url))
                             {
