@@ -227,6 +227,9 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
         width: 38%;
         max-width: 90px;
     }
+    .curveshape-wrap .max-w-6xl {width: 100% !important;}
+     .read-more-fade{max-height: max-content;}
+
 }
 
 @media (max-width: 767px) {

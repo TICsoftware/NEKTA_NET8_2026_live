@@ -522,6 +522,8 @@
   @media (max-width: 900px) {
     .menu-nav-prev { left: 4px; }
     .menu-nav-next { right: 4px; }
+    .menu-header { padding: 0 15px;}
+
   }
  
   @media (max-width: 560px) {
@@ -1373,5 +1375,5 @@
 #main-wrapper{
   overflow-x: hidden;
 }
-    
+        .belongs-subtext {padding-left: 15px; padding-right: 15px;}
   }
