@@ -237,7 +237,7 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
   .thumb-slider-thumbs {margin-top: -15vw;}
   .bc-dining-deco--basil {display: none;}
 .counter-wrapper {flex-wrap: wrap;gap: 1rem;}
-.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) { left: -7vw; top: 52vw; z-index: 10;}
+.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) { left: -18vw; top: 10vw; z-index: 10;}
 .av-list {
     list-style: none;
     margin: 0;
