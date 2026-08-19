@@ -45,7 +45,7 @@
                                     <h3 class="text-white">@item.Title</h3>
                                     @if (!string.IsNullOrWhiteSpace(item.Intro))
                                     {
-                                        <p>@item.Intro</p>
+                                        @Html.Raw( @item.Intro )
                                     }
                                 </div>
                             </div>
