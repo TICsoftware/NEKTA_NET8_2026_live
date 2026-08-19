@@ -225,43 +225,72 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- 1. Position line + label for every map-item ----------
-items.forEach((item) => {
-  const circle = item.querySelector('.map-hover');
-  const line = item.querySelector('.map-line');
-  const labelGroup = item.querySelector('.map-label-group');
-  const labelBg = item.querySelector('.map-label-bg');
-  const labelText = item.querySelector('.map-label');
+  function svgUnitScale(svg) {
+    if (!svg) return 1;
+    var vb = svg.viewBox && svg.viewBox.baseVal;
+    var rect = svg.getBoundingClientRect();
+    if (!vb || !vb.width || !rect.width) return 1;
+    return rect.width / vb.width;
+  }
 
-  if (!circle || !line || !labelGroup || !labelBg || !labelText) return;
+  function layoutMapLabels() {
+    var isMobile = window.innerWidth <= 767;
 
-  const cx = parseFloat(circle.getAttribute('cx'));
-  const cy = parseFloat(circle.getAttribute('cy'));
-  const lx = parseFloat(item.getAttribute('data-lx')) || cx;
-  const ly = parseFloat(item.getAttribute('data-ly')) || cy - 40;
+    items.forEach((item) => {
+      const circle = item.querySelector('.map-hover');
+      const line = item.querySelector('.map-line');
+      const labelGroup = item.querySelector('.map-label-group');
+      const labelBg = item.querySelector('.map-label-bg');
+      const labelText = item.querySelector('.map-label');
 
-  const textLength = labelText.getComputedTextLength();
-  const paddingX = 16;
-  const minWidth = 40;
-  const labelHeight = parseFloat(labelBg.getAttribute('height')) || 25;
-  const labelWidth = Math.max(textLength + paddingX, minWidth);
+      if (!circle || !line || !labelGroup || !labelBg || !labelText) return;
 
-  line.setAttribute('d', `M${cx},${cy} L${lx},${ly}`);
+      const svg = circle.ownerSVGElement;
+      const scale = svgUnitScale(svg);
+      const fontPx = isMobile ? 14 : 11;
+      const fontSize = fontPx / scale;
+      labelText.setAttribute('font-size', String(fontSize));
+      labelText.style.fontSize = fontSize + 'px';
 
-  // NEW: decide which side the label falls on, and anchor the box accordingly
-  const isRightSide = lx >= cx;
-  const boxX = isRightSide ? lx : lx - labelWidth;
+      const cx = parseFloat(circle.getAttribute('cx'));
+      const cy = parseFloat(circle.getAttribute('cy'));
+      const lx = parseFloat(item.getAttribute('data-lx')) || cx;
+      const ly = parseFloat(item.getAttribute('data-ly')) || cy - 40;
 
-  labelGroup.setAttribute(
-    'transform',
-    `translate(${boxX}, ${ly - labelHeight / 2})`
-  );
-  labelBg.setAttribute('x', 0);
-  labelBg.setAttribute('y', 0);
-  labelBg.setAttribute('width', labelWidth);
-  labelBg.setAttribute('height', labelHeight);
-  labelText.setAttribute('x', labelWidth / 2);
-  labelText.setAttribute('y', labelHeight / 2);
-});
+      const paddingX = (isMobile ? 16 : 10) / scale;
+      const minWidth = (isMobile ? 72 : 40) / scale;
+      const labelHeight = (isMobile ? 30 : 22) / scale;
+
+      const textLength = labelText.getComputedTextLength();
+      const labelWidth = Math.max(textLength + paddingX, minWidth);
+
+      line.setAttribute('d', `M${cx},${cy} L${lx},${ly}`);
+
+      const isRightSide = lx >= cx;
+      const boxX = isRightSide ? lx : lx - labelWidth;
+
+      labelGroup.setAttribute(
+        'transform',
+        `translate(${boxX}, ${ly - labelHeight / 2})`
+      );
+      labelBg.setAttribute('x', 0);
+      labelBg.setAttribute('y', 0);
+      labelBg.setAttribute('width', labelWidth);
+      labelBg.setAttribute('height', labelHeight);
+      if (!labelBg.getAttribute('rx')) labelBg.setAttribute('rx', String(4 / scale));
+      labelText.setAttribute('x', labelWidth / 2);
+      labelText.setAttribute('y', labelHeight / 2);
+      labelText.setAttribute('dominant-baseline', 'middle');
+      labelText.setAttribute('text-anchor', 'middle');
+    });
+  }
+
+  layoutMapLabels();
+  var mapResizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(mapResizeTimer);
+    mapResizeTimer = setTimeout(layoutMapLabels, 120);
+  });
 
   // ---------- 2. Pin hover -> highlight linked state ----------
   items.forEach((item) => {

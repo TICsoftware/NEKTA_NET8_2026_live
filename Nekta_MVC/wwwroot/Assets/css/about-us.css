@@ -33,6 +33,8 @@
 .counter-divider{display: none;width:60px;height:1px;}
 .counter-number{ font-size:2rem;}
 .counter-title{ font-size:1.25rem;}
+.sub-intro-wrapper { padding-bottom: 30px}
+.swiper.edgeSwiper {padding-left: 0;padding-right: 0;}
 }
 
 /* CTA SECTIOM */
@@ -60,13 +62,40 @@
 /* Mobile */
 
 @media(max-width:767px){
-.footprint-section{ text-align:center;}
+.footprint-section{ text-align:center; overflow: visible;}
 .copy-tight{ font-size:16px; line-height:1.7;}
 .footprint-decor{ position:absolute; inset:auto; display:block;top: -25vw;  left: -12vw;}
 .footprint-map{margin-top:1rem;}
 .story-gallery-left {display: none;}
 .story-gallery-right {display: none;}
 .counter-item p {font-size: 20px;}
+.map-outer-warapper {
+  width: calc(100% + 24px);
+  margin-left: -12px;
+  margin-right: -12px;
+}
+.map-inside-wrapper { overflow: visible; }
+.map-inside-wrapper svg {
+  width: 132%;
+  max-width: none;
+  margin-left: -16%;
+  height: auto;
+}
+.map-item .map-label {
+  font-size: 28px;
+  font-weight: 600;
+}
+.map-item .map-line { stroke-width: 2; }
+.map-item .map-hover {
+  stroke-width: 5;
+  animation: mapPulseMobile 1.8s ease-out infinite;
+}
+.map-item .map-hover:hover,
+.map-item.linked-hover .map-hover,
+.map-item.active .map-hover,
+.map-item.linked-active .map-hover {
+  r: 3.5;
+}
 
 }
 
@@ -102,6 +131,11 @@
   0% {stroke-width: 0; stroke-opacity: 0.8;}
   70% { stroke-width: 14;stroke-opacity: 0.25;}
   100% {stroke-width: 20;stroke-opacity: 0;}
+}
+@keyframes mapPulseMobile {
+  0% {stroke-width: 0; stroke-opacity: 0.7;}
+  70% { stroke-width: 6; stroke-opacity: 0.22;}
+  100% {stroke-width: 9; stroke-opacity: 0;}
 }
 .map-item .map-hover:hover {fill: #E85A2A !important;r: 6.5;}
 .map-item.linked-hover .map-hover {fill: #E85A2A !important;r: 6.5;}
