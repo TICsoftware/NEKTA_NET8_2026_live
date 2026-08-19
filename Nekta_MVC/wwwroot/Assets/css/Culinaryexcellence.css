@@ -106,7 +106,7 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 .av-leaf{  width: 34px;  height: auto;opacity: 0.35; position: absolute; right: 0; bottom: -10px;}
 
 @media (max-width: 992px){
-   .av-media-wrap{ margin-bottom: 2.5rem; }
+   .av-media-wrap{ margin-bottom: 0rem; }
 }
 
 /* -----------------------------------AVIATION END----------------------------- */
