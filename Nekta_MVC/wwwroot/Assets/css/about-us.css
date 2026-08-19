@@ -62,7 +62,7 @@
 /* Mobile */
 
 @media(max-width:767px){
-.footprint-section{ text-align:center; overflow: visible;}
+.footprint-section{ text-align:center; overflow: visible !important;}
 .copy-tight{ font-size:16px; line-height:1.7;}
 .footprint-decor{ position:absolute; inset:auto; display:block;top: -25vw;  left: -12vw;}
 .footprint-map{margin-top:1rem;}
@@ -70,16 +70,18 @@
 .story-gallery-right {display: none;}
 .counter-item p {font-size: 20px;}
 .map-outer-warapper {
-  width: calc(100% + 24px);
-  margin-left: -12px;
-  margin-right: -12px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: visible;
 }
 .map-inside-wrapper { overflow: visible; }
 .map-inside-wrapper svg {
-  width: 132%;
+  width: 100%;
   max-width: none;
   margin-left: 0;
   height: auto;
+  overflow: visible;
 }
 .map-item .map-label {
   font-size: 28px;

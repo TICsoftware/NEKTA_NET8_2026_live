@@ -264,14 +264,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const textLength = labelText.getComputedTextLength();
       const labelWidth = Math.max(textLength + paddingX, minWidth);
 
-      line.setAttribute('d', `M${cx},${cy} L${lx},${ly}`);
+      const vb = svg && svg.viewBox && svg.viewBox.baseVal;
+      const minX = vb ? vb.x : 0;
+      const minY = vb ? vb.y : 0;
+      const maxX = vb ? vb.x + vb.width : Infinity;
+      const maxY = vb ? vb.y + vb.height : Infinity;
+      const edgePad = 10 / scale;
 
-      const isRightSide = lx >= cx;
-      const boxX = isRightSide ? lx : lx - labelWidth;
+      let placeRight = lx >= cx;
+      let boxX = placeRight ? lx : lx - labelWidth;
+      let boxY = ly - labelHeight / 2;
+
+      if (boxX < minX + edgePad) {
+        placeRight = true;
+        boxX = Math.max(cx + 14 / scale, minX + edgePad);
+      }
+      if (boxX + labelWidth > maxX - edgePad) {
+        placeRight = false;
+        boxX = cx - 14 / scale - labelWidth;
+      }
+
+      boxX = Math.min(Math.max(boxX, minX + edgePad), maxX - labelWidth - edgePad);
+      boxY = Math.min(Math.max(boxY, minY + edgePad), maxY - labelHeight - edgePad);
+
+      const lineEndX = placeRight ? boxX : boxX + labelWidth;
+      const lineEndY = boxY + labelHeight / 2;
+      line.setAttribute('d', `M${cx},${cy} L${lineEndX},${lineEndY}`);
 
       labelGroup.setAttribute(
         'transform',
-        `translate(${boxX}, ${ly - labelHeight / 2})`
+        `translate(${boxX}, ${boxY})`
       );
       labelBg.setAttribute('x', 0);
       labelBg.setAttribute('y', 0);
