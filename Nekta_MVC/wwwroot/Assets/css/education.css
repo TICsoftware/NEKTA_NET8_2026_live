@@ -25,7 +25,7 @@
     padding: 12px;
     border-radius: 999px 999px 22px 22px;
     overflow: hidden;
-    transition: transform .4s ease, box-shadow .4s ease;
+    transition: box-shadow .4s ease;
     margin: 0 auto;
 }
 
@@ -37,11 +37,15 @@
     border-radius: 999px 999px 16px 16px;
 
     object-fit: cover;
+    transition: transform .4s ease;
 }
 
 .nourish-media:hover {
-    transform: translateY(-6px);
     box-shadow: 0 30px 60px rgba(0,0,0,.12);
+}
+
+.nourish-media:hover img {
+    transform: translateY(-6px);
 }
  
   /* ---------- Copy ---------- */

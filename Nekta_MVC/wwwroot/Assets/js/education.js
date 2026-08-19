@@ -9,26 +9,23 @@ window.addEventListener('load', () => {
   const media = section.querySelector('.nourish-media');
   if (!media) return;
 
-  gsap.set(media, {
-    opacity: 0,
-    x: -150,          // starts well off to the left
-    transformOrigin: '50% 50%'
-  });
+  const travel = window.matchMedia('(max-width: 767px)').matches ? 28 : 72;
 
-  gsap.to(media, {
-    opacity: 1,
-    x: 0,              // travels to its resting position
-    duration: 1.3,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: section,
-      start: 'top 70%',
-      end: 'bottom 20%',
-      toggleActions: 'restart none none reverse',
-      invalidateOnRefresh: true
-      // markers: true, // uncomment to debug the trigger lines while testing
+  gsap.fromTo(media,
+    { opacity: 0, x: -travel },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse',
+        invalidateOnRefresh: true
+      }
     }
-  });
+  );
 
   ScrollTrigger.refresh();
 });

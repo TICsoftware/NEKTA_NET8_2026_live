@@ -76,10 +76,9 @@
 
     @if (!string.IsNullOrWhiteSpace(header.Content))
     {
-      
+      <div class="backbone-copy dp-fade" id="backboneFadeParagraph">
         @Html.Raw(header.Content)
-        
-   
+      </div>
 
       <button
         type="button"

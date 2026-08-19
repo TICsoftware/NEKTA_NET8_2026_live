@@ -22,7 +22,7 @@
     padding: 12px;
     border-radius: 999px 999px 22px 22px;
     overflow: hidden;
-    transition: transform .4s ease, box-shadow .4s ease;
+    transition: box-shadow .4s ease;
     margin: 0 auto;
 }
 

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevEl = slider.querySelector(".blogs-prev");
 
     new Swiper(slider, {
-      slidesPerView: 1.1,
+      slidesPerView: 1,
       spaceBetween: 20,
       centeredSlides: true,
       loop: totalSlides > 3,
