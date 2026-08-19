@@ -59,6 +59,49 @@
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
 }
 
+
+/*card with intro css */
+/* Equal height cards across the swiper */
+.three-box-slider .swiper-wrapper {
+    align-items: stretch;
+}
+
+.three-box-slider .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
+.three-box-slider .swiper-slide .feature-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Push intro content to grow and link to bottom, only when withintro is present */
+.three-box-slider .swiper-slide.withintro .feature-card > div:not(.playground-media) {
+    flex-grow: 1;
+}
+
+.three-box-slider .swiper-slide.withintro .feature-card .link-md {
+    margin-top: auto;
+}
+
+.three-box-slider .swiper-slide.withintro .feature-card h3,
+.three-box-slider .swiper-slide.withintro .feature-card p,
+.three-box-slider .swiper-slide.withintro .feature-card .link-md {
+    transition: color 0.3s ease;
+}
+
+.three-box-slider .swiper-slide.withintro:hover .feature-card h3,
+.three-box-slider .swiper-slide.withintro:hover .feature-card p,
+.three-box-slider .swiper-slide.withintro:hover .feature-card .link-md {
+    color: #ffffff;
+}
+
+.three-box-slider .swiper-slide.withintro:hover .feature-card .link-md span {
+    color: #ffffff;
+}
+
 @media (min-width: 640px) {
     .feature-card {
         padding-inline: 2rem;
