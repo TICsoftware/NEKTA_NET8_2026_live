@@ -590,4 +590,10 @@ border-radius: 50% 50% 20px 20px;
     .acc-grid{ grid-template-columns:1fr; padding-left:34px; }
     .acc-slider{ height:200px; }
       .mp-deco{ width:50px; }
+
   }
+
+    @media (max-width:992px){
+      .mp-head {padding-left: 1.25rem;padding-right: 1.25rem;}
+      .mp-section {overflow: hidden;}
+    }
