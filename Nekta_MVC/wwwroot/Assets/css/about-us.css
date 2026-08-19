@@ -78,7 +78,7 @@
 .map-inside-wrapper svg {
   width: 132%;
   max-width: none;
-  margin-left: -16%;
+  margin-left: 0;
   height: auto;
 }
 .map-item .map-label {
