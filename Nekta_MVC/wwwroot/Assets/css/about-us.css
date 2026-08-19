@@ -98,7 +98,7 @@
 .map-item.linked-active .map-hover {
   r: 3.5;
 }
-
+.story-gallery{ padding-top: 30px;}
 }
 
 .footprint-decor { opacity: 0; transform: translateY(40px) rotate(-10deg); transition: opacity 0.9s ease-out, transform 0.9s ease-out;}
