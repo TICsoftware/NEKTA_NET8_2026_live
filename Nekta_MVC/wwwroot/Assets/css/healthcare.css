@@ -67,5 +67,7 @@ right: -9vw;
    }
  .bc-experience-section .bc-plate-mini {right: -25%;}
 }
-
+@media (max-width: 992px) {
+    .story-intro {padding-left: 20px;padding-right: 20px;}
+}
 
