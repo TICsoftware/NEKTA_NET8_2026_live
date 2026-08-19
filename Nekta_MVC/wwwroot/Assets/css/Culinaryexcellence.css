@@ -79,7 +79,6 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bg-darkcream-thumbslider .merge-imgs img:nth-child(2) { left: -3vw; top: -3vw;z-index: -10;}
 
 .underline{text-decoration-line: underline;color:var(--color-third);}
-.read-more-content.is-collapsed::after {background: linear-gradient(   to bottom, rgba(247, 242, 231, 0), rgb(228, 215, 171)) !important;}
 
 
 /* WWhy client choose nekta Thumb slider */
