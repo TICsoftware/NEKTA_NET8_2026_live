@@ -29,7 +29,7 @@
 @media(max-width:767px){
 .counter-section {margin-top: -15vw;}
 .counter-item {    padding-top: 0; padding-bottom: 0;}
-.counter-wrapper{flex-wrap:wrap;gap:1rem;}
+.counter-wrapper{gap:0.5rem;}
 .counter-divider{display: none;width:60px;height:1px;}
 .counter-number{ font-size:2rem;}
 .counter-title{ font-size:1.25rem;}
