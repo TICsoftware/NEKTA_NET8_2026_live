@@ -106,7 +106,7 @@ $(document).on("click", ".btn-delete-mapping", function () {
     var contextMasterId = btn.data("context-id");
 
     var confirmed = confirm(
-        "All the details tagged to this component mapping will be deleted from context_details and context_template_reference.\n\nAre you sure you want to continue?"
+        "All the details tagged to this component mapping will be moved to history and then deleted from context_details. The mapping will be deactivated.\n\nAre you sure you want to continue?"
     );
 
     if (!confirmed) {

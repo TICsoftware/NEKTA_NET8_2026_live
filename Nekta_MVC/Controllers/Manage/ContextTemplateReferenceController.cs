@@ -122,13 +122,23 @@ namespace Nekta_MVC.Controllers.Manage
                 return Json(new { success = false, message = "Invalid mapping id." });
             }
 
+            if (contextMasterId == null || contextMasterId <= 0)
+            {
+                return Json(new { success = false, message = "Invalid component layout id." });
+            }
+
             try
             {
                 _bal.Delete(id, contextMasterId);
-                return Json(new { success = true, message = "Mapping and related details deleted successfully." });
+                return Json(new
+                {
+                    success = true,
+                    message = "Mapping deactivated and related details moved to history successfully."
+                });
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
+                Console.WriteLine(ex.Message);
                 return Json(new { success = false, message = "Something went wrong while deleting. Please try again." });
             }
         }
