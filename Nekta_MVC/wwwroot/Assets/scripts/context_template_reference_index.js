@@ -98,6 +98,43 @@ $(document).on("click", ".btn-save", function () {
     });
 });
 
+// CLICK DELETE
+$(document).on("click", ".btn-delete-mapping", function () {
+    var btn = $(this);
+    var row = btn.closest("tr");
+    var id = btn.data("id") || row.data("id");
+    var contextMasterId = btn.data("context-id");
+
+    var confirmed = confirm(
+        "All the details tagged to this component mapping will be deleted from context_details and context_template_reference.\n\nAre you sure you want to continue?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    $.ajax({
+        url: '/ContextTemplateReference/Delete',
+        type: 'POST',
+        data: {
+            id: id,
+            contextMasterId: contextMasterId
+        },
+        success: function (res) {
+            if (res && res.success) {
+                row.fadeOut(200, function () {
+                    $(this).remove();
+                });
+            } else {
+                alert((res && res.message) || "Delete failed. Please try again.");
+            }
+        },
+        error: function () {
+            alert("Something went wrong while deleting. Please try again.");
+        }
+    });
+});
+
 // ENTER KEY SAVE
 $(document).on("keypress", ".label-input", function (e) {
     if (e.which == 13) {

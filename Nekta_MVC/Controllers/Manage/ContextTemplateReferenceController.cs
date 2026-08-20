@@ -113,5 +113,24 @@ namespace Nekta_MVC.Controllers.Manage
             _bal.UpdateOrder(items);
             return Ok();
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id, int? contextMasterId)
+        {
+            if (id <= 0)
+            {
+                return Json(new { success = false, message = "Invalid mapping id." });
+            }
+
+            try
+            {
+                _bal.Delete(id, contextMasterId);
+                return Json(new { success = true, message = "Mapping and related details deleted successfully." });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false, message = "Something went wrong while deleting. Please try again." });
+            }
+        }
     }
 }

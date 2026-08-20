@@ -76,5 +76,10 @@ namespace Core_project_BusinessLogic.BAL
             _dal.UpdateOrder(items);
         }
 
+        public void Delete(int id, int? contextMasterId = null)
+        {
+            _dal.Delete(id, contextMasterId);
+        }
+
     }
 }
