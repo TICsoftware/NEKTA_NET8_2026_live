@@ -279,7 +279,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
     .bc-arch-center .bc-arch-card.is-active.content-ready p.edge-content {
         max-height: none;
         overflow: visible;
-        font-size: 0.9rem;
+        font-size: 0.875rem;
         line-height: 1.45;
         margin-top: 10px;
         padding: 0 0.15rem;

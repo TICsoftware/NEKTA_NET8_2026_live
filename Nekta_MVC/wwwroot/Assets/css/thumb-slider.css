@@ -55,6 +55,7 @@
   .thumb-slider-thumbs {margin-top: -15vw;}
 
   /* small laptop + 150% */
+  .bc-life-thumb {padding: 4px;}
 } 
 
 @media (max-width: 992px) {
