@@ -52,8 +52,10 @@
     position: relative;
     /* top: -19vw; */
     /* left: -1vw; */
+    top: -9vw;
 }
 .merge-imgs {left: 8vw !important;}
+
 }
 
 

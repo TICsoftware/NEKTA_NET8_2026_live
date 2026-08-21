@@ -178,6 +178,11 @@
                     spaceBetween: 2,
                 },
                 768: {
+                    slidesPerView: 1.45,
+                    centeredSlides: true,
+                    spaceBetween: 16,
+                },
+                1200: {
                     slidesPerView: 2.6,
                     centeredSlides: true,
                     spaceBetween: 30,
