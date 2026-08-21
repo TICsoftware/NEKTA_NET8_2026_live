@@ -22,6 +22,35 @@
             ? qs(".edge-swiper-next", navContainer)
             : null;
 
+        const placeNavArrows = () => {
+            if (!navContainer) return;
+            const swiperInst = sliderRoot.swiper;
+            if (
+                swiperInst &&
+                (swiperInst.animating ||
+                    sliderRoot.classList.contains("edge-swiper-jumping"))
+            ) {
+                return;
+            }
+            const img = qs(".swiper-slide-active .edge-card-image", sliderRoot);
+            if (!img) return;
+            const rootRect = sliderRoot.getBoundingClientRect();
+            const imgRect = img.getBoundingClientRect();
+            if (imgRect.height < 8 || imgRect.width < 8) return;
+            const top = imgRect.top - rootRect.top + imgRect.height / 2;
+            navContainer.style.setProperty("--edge-nav-top", `${top}px`);
+            navContainer.style.setProperty("--edge-nav-width", `${imgRect.width}px`);
+        };
+
+        let placeNavRaf = 0;
+        const schedulePlaceNav = () => {
+            if (placeNavRaf) cancelAnimationFrame(placeNavRaf);
+            placeNavRaf = requestAnimationFrame(() => {
+                placeNavRaf = 0;
+                placeNavArrows();
+            });
+        };
+
         const wrapperEl = qs(".swiper-wrapper", sliderRoot);
         const originalSlides = qsa(".swiper-slide", sliderRoot);
         const originalCount = originalSlides.length;
@@ -162,7 +191,10 @@
             on: {
                 init(swiper) {
                     if (typeof swiper.update === "function") swiper.update();
-                    if (!enableManualLoop) return;
+                    schedulePlaceNav();
+                    if (!enableManualLoop) {
+                        return;
+                    }
 
                     swiper.slideTo(middleStart, 0, false);
                     swiper.slides.forEach((slide) => {
@@ -173,6 +205,7 @@
                             img.decode().catch(() => {});
                         }
                     });
+                    schedulePlaceNav();
                 },
                 touchStart() {
                     userInteracted = true;
@@ -201,6 +234,8 @@
         if (!edgeSwiper || typeof edgeSwiper.slideNext !== "function") return;
 
         sliderRoot.dataset.edgeSwiperReady = "1";
+        schedulePlaceNav();
+        setTimeout(placeNavArrows, 750);
 
         qsa(".edgeArrow", sliderRoot).forEach((item) =>
             item.classList.add("hidden"),
@@ -237,6 +272,9 @@
                 } else {
                     snapToMiddleSet(edgeSwiper);
                 }
+                if (!userInteracted) {
+                    placeNavArrows();
+                }
                 resyncScheduled = false;
             });
         };
@@ -247,6 +285,15 @@
             }
         });
         window.addEventListener("load", forceResync, { once: true });
+        window.addEventListener("resize", schedulePlaceNav);
+
+        if (typeof ResizeObserver !== "undefined") {
+            const firstImg = qs(".edge-card-image", sliderRoot);
+            if (firstImg) {
+                const ro = new ResizeObserver(schedulePlaceNav);
+                ro.observe(firstImg);
+            }
+        }
 
         if (typeof IntersectionObserver !== "undefined") {
             const io = new IntersectionObserver(
