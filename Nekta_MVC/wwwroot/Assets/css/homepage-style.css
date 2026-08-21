@@ -370,4 +370,6 @@ backface-visibility: hidden;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
 }
+.edge-nav-arrows { top: 55% !important;}
+
 }

@@ -214,6 +214,11 @@
     }
  }
 
+ @media (max-width: 992px) {
+.edge-nav-arrows { top: 48% !important;}
+ }
+
+
 /* 1920px 150% */
  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
    .left-copy{margin-left: 0px;}

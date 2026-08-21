@@ -42,13 +42,16 @@
 
 .read-more-icon { transition: transform 0.25s ease;}
 .read-more-toggle.active .read-more-icon {transform: rotate(45deg);}
+.green-wrapper .thumb-slider-thumbs .thumb-arrow{    color: #2b2b2b !important;}
+
+
 @media (min-width: 1024px) {
     .bc-life-polaroid { display: block;}
 }
 
 @media (max-width: 768px) {
  .thumb-grid-wrapper {position: relative; left: 0; margin-top: 0;}
-  .merge-imgs {top: 18vw;left: -10vw;max-width: 175px;}
+  .merge-imgs {top: 12vw;left: -6vw;max-width: 175px;}
   .thumb-slider-thumbs {margin-top: -15vw;}
 
   /* small laptop + 150% */
@@ -61,6 +64,10 @@
     left: 0vw;
     margin-top: 0vw;
 }
+
+.thumb-slider-main-arrows{bottom: 40px;}
+.thumb-slider-main-arrow { width: 40px;height: 40px;}
+
 }
 
 
