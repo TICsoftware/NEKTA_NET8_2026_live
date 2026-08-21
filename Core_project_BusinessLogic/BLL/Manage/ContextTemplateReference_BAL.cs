@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using Core_project_BusinessLogic.DAL;
 using Core_project_BusinessLogic.Entity;
 using Microsoft.Extensions.Configuration;
@@ -65,7 +66,10 @@ namespace Core_project_BusinessLogic.BAL
             int? contextId,
             string label)
         {
-            return _dal.GetAll(templateId, contextId, label);
+            // Hide soft-deleted mappings (status = 0)
+            return _dal.GetAll(templateId, contextId, label)
+                .Where(x => x.Status == null || x.Status != 0)
+                .ToList();
         }
 
         public void Add(ContextTemplateReference m)
@@ -74,6 +78,11 @@ namespace Core_project_BusinessLogic.BAL
         public void UpdateOrder(List<ComponentOrderModel> items)
         {
             _dal.UpdateOrder(items);
+        }
+
+        public void Delete(int id, int? contextMasterId = null)
+        {
+            _dal.Delete(id, contextMasterId);
         }
 
     }
