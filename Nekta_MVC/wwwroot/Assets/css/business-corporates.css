@@ -30,7 +30,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
 /* Chili / basil decorations */
 .bc-dining-deco--chili {left: 9vw; top: -6vw; transform: rotate(-10deg); z-index: 2;}
-.bc-dining-deco--basil { right:12vw; bottom:-8vw; transform: rotate(15deg); z-index: 2;}
+.bc-dining-deco--basil { right:14vw; bottom:3vw; transform: rotate(15deg); z-index: 2;}
 .outer-polaroids {top: 3vw; left: 5vw; position: absolute;}
 
 .curveshape-wrap {position: relative;width: 100%;min-height: 80vh;overflow: visible;display: flex; align-items: center;  justify-content: center; padding-top:5vw;}

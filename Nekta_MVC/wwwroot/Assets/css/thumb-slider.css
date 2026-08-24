@@ -32,8 +32,8 @@
 
 .merge-imgs {position: absolute; top:0; left: 0;width: 100%; height: auto; display: flex;align-items: center;  justify-content: center;}
 .merge-imgs img {position: absolute;}
-.merge-imgs img:nth-child(1) {left: -12vw;top: -4vw;z-index: 10;}
-.merge-imgs img:nth-child(2) { left: -3vw; top: -3vw;z-index: -10;}
+.merge-imgs img:nth-child(1) {left: -6vw;top: 0vw;z-index: 10;}
+.merge-imgs img:nth-child(2) { left: -5vw; top: -2vw;z-index: -10;}
 .thumb-grid-wrapper {position: relative;left: -8vw; margin-top: 3vw;}
 .merge-img {will-change: transform, opacity;}
 .read-more-content {overflow: hidden;  transition: max-height 0.4s ease; position: relative;}

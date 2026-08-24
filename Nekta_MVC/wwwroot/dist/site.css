@@ -376,11 +376,20 @@
   .-left-0 {
     left: 0px;
   }
+  .-left-5 {
+    left: calc(var(--spacing) * -5);
+  }
+  .-left-10 {
+    left: calc(var(--spacing) * -10);
+  }
   .-left-16 {
     left: calc(var(--spacing) * -16);
   }
   .-left-20 {
     left: calc(var(--spacing) * -20);
+  }
+  .-left-22 {
+    left: calc(var(--spacing) * -22);
   }
   .left-0 {
     left: 0px;
