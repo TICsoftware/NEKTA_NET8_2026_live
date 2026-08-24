@@ -202,18 +202,17 @@
   /* ---------- Decorative bowl / plate (illustrative, swap for real photography) ---------- */
   .deco-bowl{
     position:absolute;
-    top:21%;
-    right:-11%;
-    width:550px;
+    top:38%;
+    right:-5%;
+    width:325px;
    
     z-index:1;
   }
   .deco-plate{
     position:absolute;
     bottom:26px;
-    left:-9%;
-    width:580px;
-   
+    left:-5%;
+    width:325px;
     z-index:1;
   }
 
@@ -404,9 +403,9 @@
  
   .solutions-salad{
     position: absolute;
-     top: -6vw;
-    left: -16vw;
-    max-width: 48vw;
+     top: -7vw;
+    left: -3vw;
+    max-width: 26vw;
     z-index: 2;
     rotate: 34deg;
   }
@@ -435,7 +434,7 @@
   .solutions-splash{
 position: absolute;
     top: 33%;
-    right: -12%;
+    right: -10%;
     height: 100%;
     width: auto;
     /* max-width: 340px; */

@@ -36,7 +36,7 @@
   }
 
 .dp-deco-left {
-    left: -6vw;
+    left: -9vw;
     width: clamp(180px, 20vw, 424px);
     height: auto;
     rotate: 106deg;

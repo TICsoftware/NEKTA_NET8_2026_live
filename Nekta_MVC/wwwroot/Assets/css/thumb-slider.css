@@ -51,7 +51,7 @@
 
 @media (max-width: 768px) {
  .thumb-grid-wrapper {position: relative; left: 0; margin-top: 0;}
-  .merge-imgs {top: 12vw;left: -6vw;max-width: 175px;}
+  .merge-imgs {top: 15vw;left: -6vw;max-width: 150px;}
   .thumb-slider-thumbs {margin-top: -15vw;}
 
   /* small laptop + 150% */
@@ -73,7 +73,7 @@
 
 
 @media (min-width: 1200px) and (max-width: 1366px) {
-.merge-imgs img:nth-child(1) {max-width: 30vw;left: -12vw;top: -4vw;z-index: 10;}
+/* .merge-imgs img:nth-child(1) {max-width: 30vw;left: -9vw;top: -1vw;z-index: 10;} */
 
 
  }
