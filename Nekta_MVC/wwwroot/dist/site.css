@@ -1687,9 +1687,6 @@
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
-  .mask-repeat {
-    mask-repeat: repeat;
-  }
   .object-cover {
     object-fit: cover;
   }
