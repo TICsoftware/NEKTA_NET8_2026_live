@@ -327,6 +327,12 @@ footer h4{font-size: var(--text-h4);font-family: var(--font-heading);  font-weig
 .footer-brand-copy { padding-bottom: 1rem;}
 }
 
+/* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+.nav-header-text p{font-size: 0.875rem !important;}
+}
+
+
 @media (min-width: 1200px) and (max-width: 1366px){
 .footer-text, .footer-link { font-size: 0.875rem; font-weight: 500;}
 .logo img { transition: max-width .20s ease; max-width: 10vw;}
@@ -342,6 +348,7 @@ footer h4{font-size: var(--text-h4);font-family: var(--font-heading);  font-weig
 .footer-nav-list{ margin-bottom:10px !important}
 .footer-nav-list li{ margin-bottom:15px !important}
 .footer-bottom *{ font-size: 0.85rem !important}
+.nav-header-text p{font-size: 0.875rem !important;}
 
 }
 

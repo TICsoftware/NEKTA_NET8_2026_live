@@ -66,8 +66,8 @@
 
 /* ---- Decorative images ---- */
 .bc-catering-deco {  position: absolute;  z-index: 4;  pointer-events: none;}
-.bc-catering-deco--fork { left: -3vw; top: 0vw; width: 17vw;}
-.bc-catering-deco--tomato {right: -5vw; top: 2vw; width: 12vw;;}
+.bc-catering-deco--fork { left: -10vw; top: 0vw; width: auto;}
+.bc-catering-deco--tomato {right: -5vw; top: 2vw; width: auto;;}
 .bc-catering-deco--leaf-top { right: 40px; top: -10px; width: 60px; z-index: 3;}
 .bc-catering-deco--corner { left: 0; top: -50px; width: 160px; border-radius: 0 0 12px 0; z-index: 3;}
 .bc-catering-deco--bar {left: 130px;bottom: 20px;width: 4px; height: 28px; background: var(--color-third); z-index: 2;}
@@ -75,7 +75,7 @@
 /* ---- Responsive ---- */
 @media (max-width: 992px) {
    .bc-catering-dome { aspect-ratio: 1.4 / 1; }
-   .bc-catering-deco--fork { width: 110px; top: 0px; left: -20px; }
+   .bc-catering-deco--fork { width: 160px; top: 0px; left: -48px; }
    .bc-catering-deco--tomato { width: 100px; top: 15px; right: -10px; }
    .bc-catering-deco--leaf-top { width: 40px; right: 15px; }
    .bc-catering-deco--corner { width: 100px; top: -20px; }
@@ -98,6 +98,13 @@
 
 }
 
+/* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+    .bc-catering-deco--fork { left: -13vw;}
+}
+
+
+
  @media (min-width: 1200px) and (max-width: 1366px) {
 .section-title-outer {
     margin-bottom: 30px;
@@ -110,6 +117,6 @@
         top: 0vw;
         z-index: 10;
     }
-
+ .bc-catering-deco--fork { left: -15vw;}
     }
     

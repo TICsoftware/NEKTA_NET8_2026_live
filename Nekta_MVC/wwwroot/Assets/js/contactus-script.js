@@ -242,8 +242,8 @@ function initSolutionsMedia() {
       )
         .fromTo(
           salad,
-          { xPercent: -18, yPercent: 12, rotation: 52, opacity: 0, scale: 0.9 },
-          { xPercent: 0, yPercent: 0, rotation: 34, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.4 },
+          { xPercent: -18, yPercent: 12, rotation: 32, opacity: 0, scale: 0.9 },
+          { xPercent: 0, yPercent: 0, rotation: 8, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.4 },
           0.05
         );
 

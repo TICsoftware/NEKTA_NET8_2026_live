@@ -128,13 +128,52 @@ app.UseStaticFiles(new StaticFileOptions
 
 var redirects = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 {
-    { "^testslist$", "/tests-and-services" },
-    { "^joinTeam$", "/clinical-expertise/our-team" },
-    { "^antibodies$", "/" },
-    { "^trainingAcademy$", "/" },
-    { "^researchMaterial$", "/" },
-    { "^aboutCOP$", "/about-cop" },
-    { "^contactUs$", "/contactus" }
+   
+    // What We Do
+    { @"^what-we-do/?$", "/about-us/who-we-are" },
+
+    // What We Do - specific old pages/sections
+    { @"^what-we-do/#what-we-do$", "/about-us/company-information" },
+    { @"^what-we-do/#what-we-do-popup$", "/segments/business-and-corporates" },
+    { @"^what-we-do/#corporate-catering$", "/segments/business-and-corporates" },
+    { @"^what-we-do/#corporate-events$", "/segments/business-and-corporates" },
+    { @"^what-we-do/#green-meetings$", "/contact-us" },
+    { @"^what-we-do/#education$", "/segments/education" },
+    { @"^what-we-do/#healthcare$", "/segments/healthcare" },
+    { @"^what-we-do/#sports-catering$", "/segments/sports" },
+
+    // Menu Curation
+    { @"^menu-curation/?$", "/solutions/culinary-excellence" },
+
+    // Cuisines & Trends
+    { @"^cuisines-trends/?$", "/case-studies/Top-Catering-Trends" },
+
+    // Sustainability
+    { @"^sustainability/?$", "/" },
+
+    // About Us
+    { @"^about-us/?$", "/about-us/who-we-are" },
+
+    // Meet The Team
+    { @"^meet-the-team/?$", "/about-us/leadership" },
+    { @"^meet-the-team/#companyDetails$", "/about-us/company-information" },
+
+    // Partner With Us
+    { @"^partner-with-us/?$", "/contact-us" },
+    { @"^partner-with-us/#inquire-now-form$", "/contact-us" },
+
+    // Gallery
+    { @"^gallery/?$", "/" },
+
+    // Privacy Policy
+    { @"^privacy-policy/?$", "/privacy-policy" },
+
+    // Terms of Use
+    { @"^terms-of-use/?$", "/terms-and-conditions" },
+
+    // Old 404 URLs
+    { @"^our-brands/?$", "/solutions/culinary-excellence" },
+    { @"^giftqlub/?$", "/" }
 };
 
 var options = new RewriteOptions();
