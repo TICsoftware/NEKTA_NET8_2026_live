@@ -37,16 +37,16 @@
     pointer-events:none;
   }
   .deco-left{
-    bottom: 12vw;
+    bottom: 10vw;
     left: -9vw;
     transform: rotate(-6deg);
-    /* max-width: 18vw; */
+    max-width: 18vw;
   }
   .deco-right{
     top: 14vw;
     right: -3vw;
     transform: rotate(-30deg);
-    /* max-width: 13vw; */
+    max-width: 17vw;
   }
 
   .plates-inner{
@@ -194,7 +194,7 @@ border-radius: 50% 50% 20px 20px;
     max-width:680px;
   }
   .av-leaf-icon{
-    width:32px;
+    width:auto;
     height:auto;
     margin-bottom:18px;
     display:block;

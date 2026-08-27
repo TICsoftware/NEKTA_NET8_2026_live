@@ -325,6 +325,16 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
         font-size: 1rem;
         line-height: 1;
     }
+    .bc-arch-grid-prev:disabled,
+    .bc-arch-grid-next:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .cu-plate-left {
+    left: -12%;
+    bottom: -3%;}
 
 }
 

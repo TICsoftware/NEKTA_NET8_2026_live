@@ -909,10 +909,28 @@ document.addEventListener("DOMContentLoaded", function () {
     return best;
   }
 
+  function currentIndex() {
+    var active = cards.find(function (c) { return c.classList.contains("is-active"); });
+    return Math.max(0, cards.indexOf(active));
+  }
+
+  function updateNav() {
+    if (!prevBtn || !nextBtn) return;
+    if (!mq.matches) {
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      return;
+    }
+    var i = currentIndex();
+    prevBtn.disabled = i <= 0;
+    nextBtn.disabled = i >= cards.length - 1;
+  }
+
   function scrollToCard(card, instant) {
     var left = card.offsetLeft - (grid.clientWidth - card.offsetWidth) / 2;
     grid.scrollTo({ left: Math.max(0, left), behavior: instant ? "auto" : "smooth" });
     setActive(card);
+    updateNav();
   }
 
   function onScroll() {
@@ -920,12 +938,8 @@ document.addEventListener("DOMContentLoaded", function () {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(function () {
       setActive(nearestCard());
+      updateNav();
     }, 120);
-  }
-
-  function currentIndex() {
-    var active = cards.find(function (c) { return c.classList.contains("is-active"); });
-    return Math.max(0, cards.indexOf(active));
   }
 
   function go(delta) {
@@ -941,6 +955,7 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollToCard(active, true);
     } else {
       cards.forEach(function (c) { c.classList.remove("is-active"); });
+      updateNav();
     }
   }
 
