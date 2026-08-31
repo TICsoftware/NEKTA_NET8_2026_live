@@ -1,7 +1,9 @@
   /* ---------------------------------------
      DAILY POUR SECTION
   --------------------------------------- */
-
+    html {
+    overflow-x: hidden;
+}
   body{overflow-x: hidden;} /* prevent horizontal scroll from the decorative corner images */
   .inside-banner-outer {
     z-index: 0;
@@ -88,7 +90,7 @@
 .dp-content-grid{
     display:grid;
     grid-template-columns: repeat(2,1fr);
-    gap:0rem;
+    gap:4rem;
     align-items:center;
 }
 
@@ -121,7 +123,7 @@
     height: clamp(300px, 32vw, 495px);
     object-fit: cover;
     object-position: center 30%;
-    border-radius: 999px 999px 14px 14px; /* slightly tighter than wrapper so the frame reads evenly */
+    border-radius: 999px 999px 130px 130px; /* slightly tighter than wrapper so the frame reads evenly */
   }
 
   .dp-text-block {
@@ -501,7 +503,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65);
     transition: opacity 0.2s ease, transform 0.2s ease;
     z-index: 5;
   }
@@ -516,8 +518,8 @@
     pointer-events: none;
   }
  
-  .menu-nav-prev { left: -14px; }
-  .menu-nav-next { right: -14px; }
+  .menu-nav-prev { left: 16px; }
+  .menu-nav-next { right: 8px; }
  
   @media (max-width: 900px) {
     .menu-nav-prev { left: 4px; }
@@ -1099,6 +1101,12 @@
   justify-self: center;
   align-self: center;
 }
+
+@media (min-width: 1280px) and (max-width: 1440px) {
+.daily-pour-quote-banner .title-section {
+font-size: 3.75rem;
+}
+}
  
   @media (max-width: 760px) {
     .backbone-collage {
@@ -1377,3 +1385,24 @@
 }
         .belongs-subtext {padding-left: 15px; padding-right: 15px;}
   }
+
+  /* 1920px 150% */
+ @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+.dp-inner { max-width: 1050px;}
+.dp-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1050px;}
+.belongs-bg-corner {
+    position: absolute;
+    top: 18vw;
+    left: -4vw;}
+    .backbone-collage {
+
+    max-width: 1050px;
+    gap: 14px;
+    height: clamp(280px, 32vw, 335px);
+    overflow: hidden;
+}
+
+ }

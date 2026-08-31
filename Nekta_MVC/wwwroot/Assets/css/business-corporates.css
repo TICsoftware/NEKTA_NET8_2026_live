@@ -207,7 +207,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 }
 @media (min-width: 1024px) {
     .bc-polaroid { display: block;}
-    .bc-polaroid--left { width: clamp(280px, 10vw, 449px); aspect-ratio: 449 / 418;left: clamp(-20px, 1.5vw, 30px);   transform: rotate(-20deg); position: relative;}
+    .bc-polaroid--left { width: clamp(270px, 10vw, 449px); aspect-ratio: 449 / 418;left: clamp(-20px, 1.5vw, 30px);   transform: rotate(-20deg); position: relative;}
     .bc-polaroid--right {width: clamp(230px, 18vw, 250px); aspect-ratio: 341 / 315;right: clamp(24px, 3.5vw, 68px);top: 6%;right: 11%;   transform: rotate(4deg);}
 }
 

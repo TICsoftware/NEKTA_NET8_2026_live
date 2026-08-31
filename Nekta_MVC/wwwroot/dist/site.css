@@ -1651,6 +1651,9 @@
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
+  .mask-repeat {
+    mask-repeat: repeat;
+  }
   .object-cover {
     object-fit: cover;
   }
@@ -1973,9 +1976,6 @@
   }
   .text-gray-900 {
     color: var(--color-gray-900);
-  }
-  .text-green {
-    color: var(--color-green);
   }
   .text-primary {
     color: var(--color-primary);

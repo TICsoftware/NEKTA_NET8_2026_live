@@ -544,6 +544,53 @@ ease:"power2.out"
   });
 })();
 
+// Page intro: hide 3rd+ paragraphs behind Read More
+(function () {
+  function meaningfulParas(wrap) {
+    var direct = Array.prototype.filter.call(wrap.children, function (el) {
+      return el.tagName === 'P' && el.textContent.replace(/\u00a0/g, ' ').trim();
+    });
+    if (direct.length) return direct;
+    return Array.prototype.filter.call(wrap.querySelectorAll('p'), function (p) {
+      return p.textContent.replace(/\u00a0/g, ' ').trim();
+    });
+  }
+
+  document.querySelectorAll('.page-intro-section .intro-outer-wrapper').forEach(function (wrap) {
+    if (wrap.getAttribute('data-intro-readmore') === 'ready') return;
+
+    var paras = meaningfulParas(wrap);
+    if (paras.length < 3) return;
+
+    wrap.setAttribute('data-intro-readmore', 'ready');
+
+    var extra = document.createElement('div');
+    extra.className = 'intro-readmore-extra';
+    var inner = document.createElement('div');
+    inner.className = 'intro-readmore-extra-inner';
+    paras.slice(2).forEach(function (p) {
+      inner.appendChild(p);
+    });
+    extra.appendChild(inner);
+    paras[1].after(extra);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'read-more-btn intro-readmore-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="read-more-label">Read More</span> <span class="read-more-plus">+</span>';
+    extra.after(btn);
+
+    var label = btn.querySelector('.read-more-label');
+    btn.addEventListener('click', function () {
+      var expanded = extra.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded', expanded);
+      btn.setAttribute('aria-expanded', String(expanded));
+      if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
+    });
+  });
+})();
+
 
 
 // Search popup functionality

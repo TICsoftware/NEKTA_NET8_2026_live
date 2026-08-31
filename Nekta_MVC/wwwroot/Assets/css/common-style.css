@@ -1,5 +1,6 @@
 p:last-child{ margin-bottom: 0 !important;}
 body{ overflow-x:hidden;}
+:root { --swiper-pagination-bottom: 0px; }
 
 .back-to-top.active {opacity: 1 !important; pointer-events: auto !important; transform: translateY(0);}
 .progress-ring-circle {transition: stroke-dashoffset 0.15s ease-out;}
@@ -64,6 +65,13 @@ TITLE ANIMATION
 .swiper-button-next,
 .swiper-button-prev {
     display: none;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: var(--swiper-pagination-bottom, 0px);
 }
 
 .swiper-pagination-custom,
@@ -251,4 +259,23 @@ Leaf travel CSS
 
 .read-more-btn.is-expanded .read-more-plus {
   transform: rotate(45deg);
+}
+
+.page-intro-section .intro-readmore-extra {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s ease;
+}
+
+.page-intro-section .intro-readmore-extra-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-intro-section .intro-readmore-extra.is-expanded {
+  grid-template-rows: 1fr;
+}
+
+.page-intro-section .intro-readmore-btn {
+  padding-top: 16px;
 }
