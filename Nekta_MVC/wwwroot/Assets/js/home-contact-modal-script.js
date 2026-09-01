@@ -92,9 +92,9 @@ $(document).ready(function () {
             $form.find('[data-valmsg-for="Email"]').text("Please enter your email address.");
             isValid = false;
         } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailRegex = /^[a-zA-Z0-9._%+-]{2,}@(?:[a-zA-Z0-9-]{2,}\.)+[a-zA-Z]{2,}$/;
             if (!emailRegex.test(email)) {
-                $form.find('[data-valmsg-for="Email"]').text("Please enter a valid email address.");
+                $form.find('[data-valmsg-for="Email"]').text("Please enter a valid email address (e.g. name@company.com).");
                 isValid = false;
             }
         }

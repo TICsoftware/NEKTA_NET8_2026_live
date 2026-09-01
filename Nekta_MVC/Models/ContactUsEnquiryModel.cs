@@ -60,7 +60,7 @@ namespace Nekta_MVC.Models
         public string? Organisation { get; set; }
 
         [Required(ErrorMessage = "Please enter your work email")]
-        [EmailAddress(ErrorMessage = "Enter a valid email address")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]{2,}@(?:[a-zA-Z0-9-]{2,}\.)+[a-zA-Z]{2,}$", ErrorMessage = "Enter a valid email address (e.g. name@company.com)")]
         [StringLength(150)]
         public string? Email { get; set; }
 
