@@ -18,6 +18,7 @@ namespace Nekta_MVC.Controllers
             {
                 Page_Manage_BAL _bal = new Page_Manage_BAL(objconfig);
                 var data = _bal.GetPageData_BAL("contact", 1, 1);
+                ViewData["Content"] = data?.Content;
                 return View(data);
             }
             catch (Exception ex)
@@ -36,6 +37,7 @@ namespace Nekta_MVC.Controllers
             {
                 Page_Manage_BAL _bal = new Page_Manage_BAL(objconfig);
                 var data = _bal.GetPageData_BAL(id, 1, 1);
+                ViewData["Content"] = data?.Content;
                 return View(data);
             }
             catch (Exception ex)

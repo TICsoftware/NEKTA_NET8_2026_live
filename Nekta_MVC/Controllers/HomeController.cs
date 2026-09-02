@@ -35,7 +35,7 @@ public class HomeController : Controller
 
 
         var data = _bal.GetHomepage_BAL(1, 1);
-        //  ViewBag.TestFinder = _Testbal.Fetch_Tests_Details_BAL();
+        ViewData["Content"] = data?.Home_Content;
         return View(data);
     }
 

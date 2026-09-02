@@ -1,0 +1,23 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+@{
+    ContentViewModel? content = ViewData["Content"] as ContentViewModel;
+
+    if (content == null && Model is HomePageModel homeModel)
+    {
+        content = homeModel.Home_Content;
+    }
+    else if (content == null && Model is PageViewModel pageModel)
+    {
+        content = pageModel.Content;
+    }
+    else if (content == null && Model != null)
+    {
+        var contentProp = Model.GetType().GetProperty("Content");
+        content = contentProp?.GetValue(Model) as ContentViewModel;
+    }
+}
+@if (!string.IsNullOrWhiteSpace(content?.page_schema))
+{
+    @Html.Raw(content.page_schema.CleanParagraphTags())
+}

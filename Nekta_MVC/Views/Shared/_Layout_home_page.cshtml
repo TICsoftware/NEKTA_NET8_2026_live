@@ -55,6 +55,8 @@
     </script>
 
    @RenderSection("Styles", required: false)
+
+   @await Html.PartialAsync("~/Views/Shared/_PageSchema.cshtml")
 </head>
 
 <body>

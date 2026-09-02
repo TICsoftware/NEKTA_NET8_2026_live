@@ -165,8 +165,8 @@ var redirects = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
     // Gallery
     { @"^gallery/?$", "/" },
 
-    // Privacy Policy
-    { @"^privacy-policy/?$", "/privacy-policy" },
+    // Privacy Policy (legacy URL without hyphen)
+    { @"^privacypolicy/?$", "/privacy-policy" },
 
     // Terms of Use
     { @"^terms-of-use/?$", "/terms-and-conditions" },
