@@ -2,67 +2,119 @@ gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("load", () => {
   initCuFormLeaves();
+  initReachDecos();
   initCuEnquiryPlates();
   initSolutionsMedia();
 });
 
 function initCuFormLeaves() {
-  const rightLeaf = document.querySelector(".cu-leaf-right");
-  const leftLeaf = document.querySelector(".cu-leaf-left");
+  const section = document.querySelector(".cu-form-section");
+  const rightLeaf = section && section.querySelector(".cu-leaf-right");
+  const leftLeaf = section && section.querySelector(".cu-leaf-left");
 
-  if (!rightLeaf || !leftLeaf) return;
+  if (!section || !rightLeaf || !leftLeaf) return;
 
-  gsap.set([rightLeaf, leftLeaf], {
+  gsap.set(rightLeaf, {
+    xPercent: -35,
+    yPercent: 10,
+    scale: 0.6,
     opacity: 0,
-    scale: 0.6
   });
 
-  function revealLeaves() {
-    gsap.fromTo(rightLeaf,
-      {
-        xPercent: -35,
-        yPercent: 10,
-        scale: 0.6,
-        opacity: 0
-      },
-      {
-        xPercent: 0,
-        yPercent: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        overwrite: true
-      }
-    );
+  gsap.set(leftLeaf, {
+    xPercent: 35,
+    yPercent: -10,
+    scale: 0.6,
+    opacity: 0,
+  });
 
-    gsap.fromTo(leftLeaf,
+  gsap.to(rightLeaf, {
+    xPercent: 0,
+    yPercent: 0,
+    scale: 1,
+    opacity: 1,
+    duration: 1.2,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: section,
+      start: "top 25%",
+      end: "bottom 25%",
+      toggleActions: "restart none none reverse",
+      invalidateOnRefresh: true,
+    },
+  });
+
+  gsap.to(leftLeaf, {
+    xPercent: 0,
+    yPercent: 0,
+    scale: 1,
+    opacity: 1,
+    duration: 1.2,
+    ease: "power3.out",
+    delay: 0.1,
+    scrollTrigger: {
+      trigger: section,
+      start: "top 25%",
+      end: "bottom 25%",
+      toggleActions: "restart none none reverse",
+      invalidateOnRefresh: true,
+    },
+  });
+}
+
+function initReachDecos() {
+  const section = document.querySelector(".reach-section");
+  if (!section) return;
+
+  const bowl = section.querySelector(".deco-bowl");
+  const plate = section.querySelector(".deco-plate");
+  if (!bowl && !plate) return;
+
+  const scroller = window.matchMedia("(max-width: 992px)").matches
+    ? window
+    : document.documentElement;
+
+  const triggerVars = function () {
+    return {
+      trigger: section,
+      scroller: scroller,
+      start: "top 70%",
+      end: "bottom top",
+      toggleActions: "restart none none reverse",
+      invalidateOnRefresh: true,
+    };
+  };
+
+  if (bowl) {
+    gsap.fromTo(
+      bowl,
+      { x: 80, y: -140, rotation: -8, transformOrigin: "50% 50%" },
       {
-        xPercent: 35,
-        yPercent: -10,
-        scale: 0.6,
-        opacity: 0
-      },
-      {
-        xPercent: 0,
-        yPercent: 0,
-        scale: 1,
-        opacity: 1,
+        x: 0,
+        y: 0,
+        rotation: 0,
         duration: 1.2,
         ease: "power3.out",
-        delay: 0.1,
-        overwrite: true
+        scrollTrigger: triggerVars(),
       }
     );
   }
 
-  ScrollTrigger.create({
-    trigger: ".cu-form-section",
-    start: "top 75%",
-    end: "bottom 25%",
-    onEnter: revealLeaves,
-    onEnterBack: revealLeaves
-  });
+  if (plate) {
+    gsap.fromTo(
+      plate,
+      { x: -80, y: 140, rotation: 8, transformOrigin: "50% 50%" },
+      {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.12,
+        scrollTrigger: triggerVars(),
+      }
+    );
+  }
 }
 
 function initCuEnquiryPlates() {
@@ -190,8 +242,8 @@ function initSolutionsMedia() {
       )
         .fromTo(
           salad,
-          { xPercent: -18, yPercent: 12, rotation: 52, opacity: 0, scale: 0.9 },
-          { xPercent: 0, yPercent: 0, rotation: 34, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.4 },
+          { xPercent: -18, yPercent: 12, rotation: 32, opacity: 0, scale: 0.9 },
+          { xPercent: 0, yPercent: 0, rotation: 8, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.4 },
           0.05
         );
 

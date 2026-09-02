@@ -55,7 +55,7 @@ document.querySelectorAll('.bc-experience-section').forEach((wrapper) => {
 });
 
 
-// curve — topY must be >= maxCurve so the upward arc stays inside the viewBox
+// curve — drawn in the section's real pixel size so the arc is not stretched
 function buildPath(W, H, curveAmount, topY) {
   if (curveAmount <= 0) {
     return "M0," + topY + " L" + W + "," + topY +
@@ -64,9 +64,8 @@ function buildPath(W, H, curveAmount, topY) {
 
   var halfW = W / 2;
   var s = curveAmount;
-  var r = (halfW * halfW + s * s) / (2 * s); // radius from chord + sagitta
+  var r = (halfW * halfW + s * s) / (2 * s);
 
-  // sweep-flag 1 keeps the original upward mound (peak toward y=0)
   return (
     "M0," + topY +
     " A" + r + "," + r + " 0 0,1 " + W + "," + topY +
@@ -76,30 +75,50 @@ function buildPath(W, H, curveAmount, topY) {
   );
 }
 
-function setupCurveReveal(path, maxCurve) {
-  var W = 1000, H = 400;
-  // Chord sits at maxCurve (+ pad) so the peak lands just inside y=0, never clipped
-  var topY = Math.ceil(maxCurve) + 4;
-  var state = { curve: 0 };
+function setupCurveReveal(path, designedCurve) {
+  var svg = path.closest("svg");
+  var wrap = path.closest(".curveshape-wrap");
+  if (!wrap || !svg) {
+    console.warn("setupCurveReveal: no .curveshape-wrap ancestor found", path);
+    return;
+  }
+
+  var DESIGN_WIDTH = 1000;
+  var PAD = 4;
+  var W = DESIGN_WIDTH;
+  var H = 400;
+  var maxCurve = designedCurve;
+  var topY = designedCurve + PAD;
+  var state = { t: 0 };
+
+  function measure() {
+    var box = wrap.getBoundingClientRect();
+    W = Math.max(1, Math.round(box.width));
+    H = Math.max(1, Math.round(box.height));
+    maxCurve = Math.min(designedCurve * (W / DESIGN_WIDTH), H * 0.35);
+    topY = Math.ceil(maxCurve) + PAD;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("preserveAspectRatio", "none");
+  }
 
   function render() {
-    path.setAttribute("d", buildPath(W, H, state.curve, topY));
+    path.setAttribute("d", buildPath(W, H, state.t * maxCurve, topY));
   }
-  render();
+
+  function sync() {
+    measure();
+    render();
+  }
+
+  sync();
 
   var tween = gsap.to(state, {
-    curve: maxCurve,
+    t: 1,
     ease: "power2.inOut",
     duration: 1,
     paused: true,
     onUpdate: render
   });
-
-  var wrap = path.closest(".curveshape-wrap");
-  if (!wrap) {
-    console.warn("setupCurveReveal: no .curveshape-wrap ancestor found", path);
-    return;
-  }
 
   ScrollTrigger.create({
     trigger: wrap,
@@ -110,6 +129,17 @@ function setupCurveReveal(path, maxCurve) {
     onEnterBack: function () { tween.play(); },
     onLeaveBack: function () { tween.reverse(); }
   });
+
+  var resizeTimer;
+  function scheduleSync() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(sync, 80);
+  }
+
+  window.addEventListener("resize", scheduleSync);
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(scheduleSync).observe(wrap);
+  }
 }
 
 document.querySelectorAll(".curvePath").forEach(function (path) {
@@ -307,12 +337,13 @@ document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
 
     // These MUST mirror your CSS values exactly — update both together if you change sizes
 function getSizes() {
-    const isMobile = window.innerWidth <= 640;
+    const isMobile = window.innerWidth <= 767;
     if (isMobile) {
         const vw = viewport.getBoundingClientRect().width;
         return { base: vw, active: vw, gap: 0 };
     }
-    return { base: 260, active: 600, gap: GAP };
+    const isLaptop = window.innerWidth >= 1200 && window.innerWidth <= 1366;
+    return { base: 260, active: isLaptop ? 540 : 600, gap: GAP };
 }
 
     const cardWidth = realCards[0].offsetWidth || 260;
@@ -343,7 +374,7 @@ function getSizes() {
 
     function centerTrack(withTransition = true) {
         track.style.transition = withTransition
-            ? 'transform 0.75s cubic-bezier(0.25, 0, 0.35, 1)'
+            ? 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'
             : 'none';
 
         const sizes = getSizes();
@@ -377,39 +408,15 @@ function getSizes() {
             }
         };
 
-        const isMobile = window.innerWidth <= 767;
-
-        if (isMobile) {
-            const mobileTimer = setTimeout(() => {
-                cancelContentReveal(card);
-                reveal();
-            }, 100);
-            card._bcRevealCleanup = () => {
-                clearTimeout(mobileTimer);
-                card._bcRevealCleanup = null;
-            };
-            return;
-        }
-
-        const onTransitionEnd = (e) => {
-            if (e.target !== card) return;
-            if (e.propertyName !== 'width') return;
+        const timer = setTimeout(() => {
             cancelContentReveal(card);
             reveal();
-        };
-
-        const fallbackTimer = setTimeout(() => {
-            cancelContentReveal(card);
-            reveal();
-        }, 420);
+        }, 80);
 
         card._bcRevealCleanup = () => {
-            card.removeEventListener('transitionend', onTransitionEnd);
-            clearTimeout(fallbackTimer);
+            clearTimeout(timer);
             card._bcRevealCleanup = null;
         };
-
-        card.addEventListener('transitionend', onTransitionEnd);
     }
 
     function updateClasses(withTransition = true) {
@@ -434,7 +441,6 @@ function getSizes() {
                 } else if (!wasActive) {
                     scheduleContentReveal(card);
                 }
-
             } else if (Math.abs(i - rIndex) === 1) {
                 card.classList.add('is-adjacent');
             }
@@ -472,8 +478,98 @@ function render(withTransition = true) {
     prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
     nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
 
+    const SWIPE_THRESHOLD = 50;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startTranslate = 0;
+    let dragging = false;
+    let didDrag = false;
+    let lockAxis = null;
+
+    function currentTranslate() {
+        const match = /translateX\(([-\d.]+)px\)/.exec(track.style.transform || '');
+        return match ? parseFloat(match[1]) : 0;
+    }
+
+    function onPointerDown(e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target.closest('.bc-arch-nav, .bc-arch-dots')) return;
+
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        startY = e.clientY;
+        startTranslate = currentTranslate();
+        dragging = true;
+        didDrag = false;
+        lockAxis = null;
+        track.style.transition = 'none';
+        viewport.classList.add('is-dragging');
+
+        if (viewport.setPointerCapture) {
+            viewport.setPointerCapture(e.pointerId);
+        }
+    }
+
+    function onPointerMove(e) {
+        if (!dragging || e.pointerId !== pointerId) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        if (!lockAxis) {
+            if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+            lockAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+
+            if (lockAxis === 'y') {
+                dragging = false;
+                viewport.classList.remove('is-dragging');
+                if (viewport.hasPointerCapture && viewport.hasPointerCapture(e.pointerId)) {
+                    viewport.releasePointerCapture(e.pointerId);
+                }
+                centerTrack(false);
+                return;
+            }
+        }
+
+        if (lockAxis !== 'x') return;
+
+        didDrag = Math.abs(dx) > 8;
+        track.style.transform = 'translateX(' + (startTranslate + dx) + 'px)';
+    }
+
+    function onPointerUp(e) {
+        if (e.pointerId !== pointerId) return;
+
+        const dx = e.clientX - startX;
+        const wasSwipe = dragging && lockAxis === 'x';
+
+        dragging = false;
+        pointerId = null;
+        lockAxis = null;
+        viewport.classList.remove('is-dragging');
+
+        if (wasSwipe && Math.abs(dx) > SWIPE_THRESHOLD) {
+            dx < 0 ? goTo(activeIndex + 1) : goTo(activeIndex - 1);
+        } else {
+            centerTrack(true);
+        }
+    }
+
+    viewport.addEventListener('pointerdown', onPointerDown);
+    viewport.addEventListener('pointermove', onPointerMove);
+    viewport.addEventListener('pointerup', onPointerUp);
+    viewport.addEventListener('pointercancel', onPointerUp);
+    viewport.addEventListener('dragstart', (e) => e.preventDefault());
+
     cards.forEach((card) => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', (e) => {
+            if (didDrag) {
+                e.preventDefault();
+                e.stopPropagation();
+                didDrag = false;
+                return;
+            }
             const i = Number(card.dataset.index);
             if (!isNaN(i) && i !== activeIndex) goTo(i);
         });

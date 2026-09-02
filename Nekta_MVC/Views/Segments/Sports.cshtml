@@ -24,7 +24,7 @@
     <meta property="og:site_name" content="Nekta" />
     <meta property="og:title" content="@Model.Content.ContTitle" />
     <meta property="og:description" content="@Model.Content.cont_metadesc" />
-    <meta property="og:url" content="https://www.nekta.com/" />
+         <meta property="og:url" content="@Model.Content.CanonicalUrl" />
     <meta property="og:image" content="@Model.Content.cont_meta_image" />
 
     <meta itemprop="name" content="Nekta" />
@@ -37,7 +37,7 @@
     <meta property="og:title" content="@Model.Content.ContTitle" />
     <meta property="og:description" content="@Model.Content.cont_metadesc" />
     <meta property="og:image" content="@Model.Content.cont_meta_image" />
-    <meta property="og:url" content="https://www.nekta.com/" />
+         <meta property="og:url" content="@Model.Content.CanonicalUrl" />
 
     <link rel="canonical" href="@Model.Content.CanonicalUrl" />
 }
@@ -66,6 +66,7 @@
 @foreach (var item in Model.Delivering_Experiences_Sports_List.Where(x => x.IsBlock == 0))
 {
     <section class=" bc-experience-section relative section-spacing overflow-hidden page-intro-section">
+        <img src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt="" class="bc-leaf-deco" aria-hidden="true" />
 
         <div class="container relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -105,10 +106,6 @@
 
 
                     </div>
-
-                    <!-- Decorative leaf bottom-right -->
-                    <img loading="lazy" src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt=""
-                        class="bc-leaf-deco absolute -bottom-6 right-0 md:right-4 w-10 md:w-12" aria-hidden="true" />
 
                 </div>
             </div>
@@ -190,5 +187,6 @@
     <script src="~/Assets/js/three-box-slider.js"></script>
     <script src="~/Assets/js/thumb-slider.js"></script>
     <script src="~/Assets/js/sports.js"></script>
+    <script src="~/Assets/js/page-intro-leaf.js" asp-append-version="true"></script>
     <script src="~/Assets/js/blogs-cards-slider.js"></script>
 }

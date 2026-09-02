@@ -225,7 +225,8 @@ document.getElementById("year-foot").innerHTML = (new Date().getFullYear());
       normalizeWheel: true,
       syncTouch: false,
         prevent: (node) => {
-        return node.closest('.testimonial-content');
+        if (document.body.classList.contains('modal-open')) return true;
+        return node.closest('.testimonial-content, #contactModal, .modal-scroll, .modal-panel');
       }
     });
   
@@ -268,6 +269,48 @@ document.getElementById("year-foot").innerHTML = (new Date().getFullYear());
     ScrollTrigger.defaults({ scroller: window });
     ScrollTrigger.refresh();
   }
+
+  // --------------------------------------------
+  // BACK TO TOP
+  // --------------------------------------------
+  (function initBackToTop() {
+    const btn = document.querySelector(".back-to-top");
+    const circle = document.querySelector(".progress-ring-circle");
+    if (!btn) return;
+
+    const radius = circle ? Number(circle.getAttribute("r")) || 45 : 45;
+    const circumference = 2 * Math.PI * radius;
+    if (circle) {
+      circle.style.strokeDasharray = String(circumference);
+      circle.style.strokeDashoffset = String(circumference);
+    }
+
+    function getY() {
+      if (window.lenis && typeof window.lenis.scroll === "number") return window.lenis.scroll;
+      return window.scrollY || document.documentElement.scrollTop || 0;
+    }
+
+    function getMax() {
+      if (window.lenis && typeof window.lenis.limit === "number") return Math.max(1, window.lenis.limit);
+      return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function update() {
+      const y = getY();
+      const progress = Math.min(1, Math.max(0, y / getMax()));
+      if (circle) circle.style.strokeDashoffset = String(circumference - progress * circumference);
+      btn.classList.toggle("active", y > 240);
+    }
+
+    btn.addEventListener("click", function () {
+      if (window.lenis) window.lenis.scrollTo(0, { duration: 1.1 });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    if (window.lenis) window.lenis.on("scroll", update);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  })();
   
 
 /* ======================
@@ -365,7 +408,7 @@ scrollTrigger:{
 
 trigger:footer,
 
-start:"top 85%",
+start:"top 90%",
 
 once:true
 
@@ -387,13 +430,13 @@ footer.querySelectorAll(
 
 opacity:0,
 
-y:100,
+y:32,
 
-duration:1.1,
+duration:.55,
 
-stagger:.18,
+stagger:.08,
 
-ease:"expo.out"
+ease:"power2.out"
 
 }
 
@@ -411,17 +454,17 @@ tl.from(
 
 opacity:0,
 
-y:18,
+y:12,
 
-duration:.45,
+duration:.3,
 
-stagger:.04,
+stagger:.02,
 
 ease:"power2.out"
 
 },
 
-"-=.6"
+"-=.35"
 
 );
 
@@ -439,15 +482,15 @@ opacity:0,
 
 scale:.85,
 
-duration:.4,
+duration:.28,
 
-stagger:.05,
+stagger:.03,
 
 ease:"power2.out"
 
 },
 
-"-=.4"
+"-=.25"
 
 );
 
@@ -463,15 +506,15 @@ tl.from(
 
 opacity:0,
 
-y:30,
+y:16,
 
-duration:.7,
+duration:.35,
 
 ease:"power2.out"
 
 },
 
-"-=.3"
+"-=.2"
 
 );
 
@@ -498,5 +541,104 @@ ease:"power2.out"
       btn.setAttribute('aria-expanded', String(expanded));
       if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
     });
+  });
+})();
+
+// Page intro: hide 3rd+ paragraphs behind Read More
+(function () {
+  function meaningfulParas(wrap) {
+    var direct = Array.prototype.filter.call(wrap.children, function (el) {
+      return el.tagName === 'P' && el.textContent.replace(/\u00a0/g, ' ').trim();
+    });
+    if (direct.length) return direct;
+    return Array.prototype.filter.call(wrap.querySelectorAll('p'), function (p) {
+      return p.textContent.replace(/\u00a0/g, ' ').trim();
+    });
+  }
+
+  document.querySelectorAll('.page-intro-section .intro-outer-wrapper').forEach(function (wrap) {
+    if (wrap.getAttribute('data-intro-readmore') === 'ready') return;
+
+    var paras = meaningfulParas(wrap);
+    if (paras.length < 3) return;
+
+    wrap.setAttribute('data-intro-readmore', 'ready');
+
+    var extra = document.createElement('div');
+    extra.className = 'intro-readmore-extra';
+    var inner = document.createElement('div');
+    inner.className = 'intro-readmore-extra-inner';
+    paras.slice(2).forEach(function (p) {
+      inner.appendChild(p);
+    });
+    extra.appendChild(inner);
+    paras[1].after(extra);
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'read-more-btn intro-readmore-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="read-more-label">Read More</span> <span class="read-more-plus">+</span>';
+    extra.after(btn);
+
+    var label = btn.querySelector('.read-more-label');
+    btn.addEventListener('click', function () {
+      var expanded = extra.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded', expanded);
+      btn.setAttribute('aria-expanded', String(expanded));
+      if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
+    });
+  });
+})();
+
+
+
+// Search popup functionality
+(function () {
+  const trigger    = document.getElementById('searchTrigger');
+  const popup      = document.getElementById('searchPopup');
+  const overlay    = document.getElementById('searchOverlay');
+  const closeBtn    = document.getElementById('searchClose');
+  const input       = document.getElementById('searchInput');
+  const form        = document.getElementById('searchForm');
+
+  function openSearch() {
+    popup.classList.add('active');
+    overlay.classList.add('active');
+    popup.setAttribute('aria-hidden', 'false');
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 200);
+  }
+
+  function closeSearch() {
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
+    popup.setAttribute('aria-hidden', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    input.value = '';
+  }
+
+  trigger.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+  overlay.addEventListener('click', closeSearch);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && popup.classList.contains('active')) closeSearch();
+    // Optional: Ctrl/Cmd + K to open search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const query = input.value.trim();
+    if (query) {
+      // Replace with your actual search results route
+      window.location.href = '/search?q=' + encodeURIComponent(query);
+    }
   });
 })();

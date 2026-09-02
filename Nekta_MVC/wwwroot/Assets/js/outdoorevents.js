@@ -12,36 +12,36 @@ window.addEventListener('load', () => {
 
   gsap.set(backPhoto, {
     opacity: 0,
-    x: -150   // starts off to the left
+    x: window.matchMedia('(max-width: 767px)').matches ? -28 : -72
   });
   gsap.set(frontPhoto, {
     opacity: 0,
-    x: 150    // starts off to the right
+    x: window.matchMedia('(max-width: 767px)').matches ? 28 : 72,
+    yPercent: -50
   });
 
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
-      start: 'top 70%',
-      end: 'bottom 20%',
-      toggleActions: 'restart none none reverse',
+      start: 'top 75%',
+      toggleActions: 'play none none reverse',
       invalidateOnRefresh: true
-      // markers: true, // uncomment to debug the trigger lines while testing
     }
   });
 
   tl.to(backPhoto, {
       opacity: 1,
       x: 0,
-      duration: 1.2,
+      duration: 1.1,
       ease: 'power3.out'
     })
     .to(frontPhoto, {
       opacity: 1,
       x: 0,
-      duration: 1.2,
+      yPercent: -50,
+      duration: 1.1,
       ease: 'power3.out'
-    }, '<0.15'); // starts 0.15s after back photo begins, so they arrive close together but not simultaneously
+    }, '<0.12');
 
   ScrollTrigger.refresh();
 });

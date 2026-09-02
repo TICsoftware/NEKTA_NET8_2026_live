@@ -21,7 +21,7 @@
         <a href="/" class="logo"> <img src="/Assets/images/logo/Nekta-color.svg" class="max-w-max" alt="logo " /> </a>
 
         <nav class="desktop-nav" id="desktopNav" aria-label="Main">
-          <div class="nav-item plain"><a href="#" class="nav-plain">Home</a></div>
+          <div class="nav-item plain"><a href="/" class="nav-plain">Home</a></div>
           <div class="nav-item" data-menu="about" data-index="1">
             <button type="button" aria-haspopup="true" aria-expanded="false">About us <svg class="chev" width="12" height="8"><use href="#ic-chevron-down"/></svg></button>
           </div>
@@ -35,7 +35,13 @@
         </nav>
 
         <a href="/contact-us" class="cta" type="button">Contact us <svg width="14" height="14"><use href="#ic-arrow"/></svg></a>
-        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg width="22" height="22"><use href="#ic-menu"/></svg></button>
+
+        <div class="search-chamberger flex items-center gap-2.5">
+          <button class="search-trigger" id="searchTrigger" type="button" aria-label="Open search" aria-expanded="false" aria-controls="searchPopup">
+                <img src="/Assets/images/logo/search.svg" alt="" class="search-icon">
+          </button>
+          <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg width="22" height="22"><use href="#ic-menu"/></svg></button>
+        </div>
     </div>
 
     <div class="dropdown-anchor" id="dropdownAnchor">
@@ -69,7 +75,7 @@
             <div class="dropdown-body">
               <ul class="dropdown-list grid-2">
                 <li><a class="dropdown-link" href="/segments/business-and-corporates"><strong>Business &amp; corporates</strong><span>Workplace dining</span></a></li>
-                <li><a class="dropdown-link" href="/segments/Horcea"><strong>Horeca</strong><span>Hotels, restaurants, cafes</span></a></li>
+                <li><a class="dropdown-link" href="/segments/Horeca"><strong>Horeca</strong><span>Hotels, restaurants, cafes</span></a></li>
                 <li><a class="dropdown-link" href="/segments/education"><strong>Education</strong><span>Campus catering</span></a></li>
                 <li><a class="dropdown-link" href="/segments/healthcare"><strong>Healthcare</strong><span>Patient nutrition</span></a></li>
                 <li><a class="dropdown-link" href="/segments/sports"><strong>Sports</strong><span>Stadiums &amp; events</span></a></li>
@@ -95,7 +101,7 @@
             <div class="dropdown-body">
               <ul class="dropdown-list">
                 <li><a class="dropdown-link" href="/solutions/culinary-excellence"><strong>Culinary excellence</strong><span>Our kitchen standards</span></a></li>
-                <li><a class="dropdown-link" href="/solutions/food-programs"><strong>Food programs</strong><span>Nutrition planning</span></a></li>
+                <li><a class="dropdown-link" href="/solutions/food-program"><strong>Food program</strong><span>Nutrition planning</span></a></li>
                 <li><a class="dropdown-link" href="/solutions/people"><strong>People</strong><span>Our workforce</span></a></li>
                 <li><a class="dropdown-link" href="/solutions/food-safety-and-hygiene"><strong>Food safety &amp; hygiene</strong><span>Compliance standards</span></a></li>
               </ul>
@@ -118,13 +124,30 @@
 </header>
 
 <div class="overlay" id="overlay" aria-hidden="true"></div>
+@* Search Popup *@
+<div class="search-overlay" id="searchOverlay" aria-hidden="true"></div>
+<div class="search-popup" id="searchPopup" role="dialog" aria-modal="true" aria-label="Site search" aria-hidden="true">
+    <div class="search-popup-inner">
+        <form class="search-form" id="searchForm" role="search">            
+            <input type="text" id="searchInput" class="search-input" placeholder="Search Nekta..." autocomplete="off">
+            <button type="submit" class="search-submit" aria-label="Search">              
+                <span>Search</span>
+            </button>
+            <button type="button" class="search-close" id="searchClose" aria-label="Close search">
+                <svg width="18" height="18"><use href="#ic-close"/></svg>
+            </button>
+        </form>
+        <div class="search-hint">Press <kbd>Esc</kbd> to close</div>
+    </div>
+</div>
+@* end *@
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <div class="drawer-head">
     <div class="logo"><img src="/Assets/images/logo/Nekta-color.svg" class="max-w-max" alt="logo " /></div>
     <button class="drawer-close" id="drawerClose" type="button" aria-label="Close menu"><svg width="20" height="20"><use href="#ic-close"/></svg></button>
   </div>
   <div class="drawer-body" id="drawerBody">
-    <a href="#" class="drawer-link">
+    <a href="/" class="drawer-link">
       <span class="ic"><svg width="16" height="16"><use href="#ic-home"/></svg></span>
       Home
     </a>
@@ -184,7 +207,7 @@
           <div class="mobile-callout solutions"><strong>End-to-End Solutions</strong> Culinary craft, food safety, and people-first operations for exceptional dining.</div>
           <a href="/solutions/culinary-excellence">Culinary excellence</a>
          
-          <a href="/solutions/food-programs">Food programs</a>
+          <a href="/solutions/food-program">Food programs</a>
           <a href="/solutions/people">People</a>
           <a href="/solutions/food-safety-and-hygiene">Food safety &amp; hygiene</a>
         </div>
@@ -196,8 +219,13 @@
       Careers
     </a>
   </div>
-  <div class="drawer-footer">
-    <button class="cta" type="button">Contact us <svg width="14" height="14"><use href="#ic-arrow"/></svg></button>
-  </div>
+<div class="drawer-footer">
+    <a class="cta" href="/contact-us">
+        Contact us
+        <svg width="14" height="14">
+            <use href="#ic-arrow"/>
+        </svg>
+    </a>
+</div>
 </div>
 

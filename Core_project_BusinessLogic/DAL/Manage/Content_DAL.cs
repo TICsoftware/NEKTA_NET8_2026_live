@@ -48,6 +48,7 @@ public class Content_DAL : DBHelper
             Sqlparam.Add(new SqlParameter("@IsExternal", content.IsExternal ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metatag", content.metatag ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metadesc", content.metadesc ?? (object)DBNull.Value));
+            Sqlparam.Add(new SqlParameter("@page_schema", content.page_schema ?? (object)DBNull.Value));
             if (content.metaexpiry.HasValue)
             {
                 Sqlparam.Add(new SqlParameter("@metaexpiry", content.metaexpiry.Value));
@@ -212,6 +213,7 @@ public class Content_DAL : DBHelper
             Sqlparam.Add(new SqlParameter("@IsExternal", content.IsExternal ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metatag", content.metatag ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metadesc", content.metadesc ?? (object)DBNull.Value));
+            Sqlparam.Add(new SqlParameter("@page_schema", content.page_schema ?? (object)DBNull.Value));
             if (content.metaexpiry.HasValue)
             {
                 Sqlparam.Add(new SqlParameter("@metaexpiry", content.metaexpiry.Value));
@@ -322,6 +324,7 @@ public class Content_DAL : DBHelper
             Sqlparam.Add(new SqlParameter("@IsExternal", content.IsExternal ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metatag", content.metatag ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metadesc", content.metadesc ?? (object)DBNull.Value));
+            Sqlparam.Add(new SqlParameter("@page_schema", content.page_schema ?? (object)DBNull.Value));
             if (content.metaexpiry.HasValue)
             {
                 Sqlparam.Add(new SqlParameter("@metaexpiry", content.metaexpiry.Value));
@@ -427,6 +430,7 @@ public class Content_DAL : DBHelper
             Sqlparam.Add(new SqlParameter("@IsExternal", content.IsExternal ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metatag", content.metatag ?? (object)DBNull.Value));
             Sqlparam.Add(new SqlParameter("@metadesc", content.metadesc ?? (object)DBNull.Value));
+            Sqlparam.Add(new SqlParameter("@page_schema", content.page_schema ?? (object)DBNull.Value));
             if (content.metaexpiry.HasValue)
             {
                 Sqlparam.Add(new SqlParameter("@metaexpiry", content.metaexpiry.Value));

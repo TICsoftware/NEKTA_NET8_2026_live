@@ -1,5 +1,4 @@
 
-
 function initContactModal() {
     const modal = document.querySelector("#contactModal");
     if (!modal) return;
@@ -17,6 +16,11 @@ function initContactModal() {
         modal.hidden = false;
         document.body.classList.add("modal-open");
 
+        const scroller = modal.querySelector(".modal-scroll");
+        if (scroller) scroller.scrollTop = 0;
+
+        if (window.lenis) window.lenis.stop();
+
         if (window.gsap) {
             gsap.fromTo(
                 panel,
@@ -29,6 +33,9 @@ function initContactModal() {
                     x: 0,
                     duration: 0.45,
                     ease: "power3.out",
+                    onComplete: () => {
+                        gsap.set(panel, { clearProps: "transform" });
+                    },
                 }
             );
         }
@@ -42,6 +49,7 @@ function initContactModal() {
         const finish = () => {
             modal.hidden = true;
             document.body.classList.remove("modal-open");
+            if (window.lenis) window.lenis.start();
 
             lastFocused?.focus();
         };

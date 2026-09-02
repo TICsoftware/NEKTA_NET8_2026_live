@@ -21,8 +21,8 @@
     inset: 0;
     z-index: 1000;
     display: flex;
-    align-items: flex-start;     /* was center */
-    justify-content: flex-end;   /* was center */
+    align-items: stretch;
+    justify-content: flex-end;
     /* padding: 24px; */
 }
  
@@ -33,13 +33,19 @@
 .modal-backdrop {
     position: absolute;
     inset: 0;
+    z-index: 0;
     /* background: rgb(0 0 0 / 0.84); */
 }
  
 .modal-panel {
     position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
     width: min(100%, 600px);
-    max-height: 100vh;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
     background: var(--color-cream);
     color: var(--color-ink);
     /* border-radius: 22px; */
@@ -49,11 +55,20 @@
  
 
 .modal-scroll {
-    max-height: 100vh;
-    overflow-y: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     padding: 40px;
     scrollbar-color: var(--color-green) rgb(116 141 110 / 0.18);
     scrollbar-width: thin;
+}
+
+.modal-scroll:focus {
+    outline: none;
 }
 
 .modal-scroll::-webkit-scrollbar {
@@ -247,12 +262,16 @@ body.modal-open {
 
     .modal-panel {
         width: 100%;
+        height: 100%;
         max-height: 92vh;
+        min-height: 0;
+        align-self: center;
         border-radius: 22px;
     }
 
     .modal-scroll {
-        max-height: 92vh;
+        flex: 1 1 0%;
+        min-height: 0;
         padding: 32px 20px 24px;
     }
 

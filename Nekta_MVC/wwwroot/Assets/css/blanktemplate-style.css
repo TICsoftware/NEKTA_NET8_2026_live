@@ -23,8 +23,9 @@
 .blank-template-inner .list-alpha li::marker,
 .blank-template-inner .list-disc li::marker{ display:none !important;}
 
-.blank-template-inner{ max-width:990px;}
+.blankpage_outer{ max-width:1024px; margin:0 auto; }
 
+.banner-inner-section .breadcrumb_container ol li, .banner-inner-section .breadcrumb_container ol li a{color: var(--color-text);}
 
 
 @media (max-width: 1023px) {

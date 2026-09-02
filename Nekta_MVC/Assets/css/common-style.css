@@ -52,6 +52,13 @@ TITLE ANIMATION
     display: none;
 }
 
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: var(--swiper-pagination-bottom, 0px);
+}
+
 .swiper-pagination-custom,
 .testimonial-pagination {
     width: auto !important;
@@ -103,12 +110,20 @@ INNER BANNER CSS
 /**=====================================
 Leaf travel CSS
 =====================================**/
-.ld-leaf-wrapper {position: relative; overflow: hidden;}
+.ld-leaf-wrapper {position: relative; overflow: visible;}
 .leaf-travel-anim{
     position:absolute;
-    top:10vw;
-    right:10vw;
+    top: 10vw;
+    right: 10vw;
+    left: auto;
+    width: clamp(72px, 9vw, 135px);
+    height: auto;
     pointer-events:none;
-    z-index:100;
+    z-index:20;
     will-change:transform;
+    transform-origin: 32% 58%;
+    backface-visibility: hidden;
+}
+@media (max-width: 767px) {
+    .leaf-travel-anim {top: 8px; right: 8px;}
 }

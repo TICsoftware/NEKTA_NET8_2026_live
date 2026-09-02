@@ -4,7 +4,7 @@
     border-color: var(--color-cream);
     box-shadow: 0 12px 24px rgb(0 0 0 / 0.16);
 }
-.swiper.edgeSwiper {padding-top: 25px;}
+.swiper.edgeSwiper {padding-top: 25px; position: relative;}
 
 /* Mute transitions during seamless loop wrap so active scale/blur doesn't re-fire */
 .edgeSwiper.edge-swiper-jumping .swiper-wrapper,
@@ -41,13 +41,13 @@
 }
 .edge-nav-arrows {
     position: absolute;
-    top: 45%;
+    top: var(--edge-nav-top, 45%);
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 43%;
+    width: var(--edge-nav-width, 43%);
     z-index: 20;
     pointer-events: none;
 }
@@ -94,58 +94,18 @@
 }
 
 
-/* Small tablets */
-@media (min-width: 290px) and (max-width: 575px) {
-    .edge-nav-arrows {
-    top: 33% !important;
-    width: 92% !IMPORTANT;
-}
-}
-@media (min-width: 576px) and (max-width: 767px) {
-    .edge-nav-arrows {
-        top: 43% !important;
-        width: 92% !IMPORTANT;
-    }
-}
 /* Tablets */
 @media (min-width: 768px) {
-    .edge-nav-arrows {
-        top: 35% !important;
-    }
     .edgeSwiper .swiper-slide-active .p-8, .edgeSwiper .swiper-slide-active .edge-details {
     display: block;
 }
 }
 
-/* Laptops */
-@media (min-width: 992px) {
-    .edge-nav-arrows {
-        top: 36% !important;
-    }
-}
-
 /* Desktop */
 @media (min-width: 1200px) {
-    .edge-nav-arrows {
-    top: 40% !IMPORTANT;
-}
 .edgeSwiper .swiper-slide-active .p-8, .edgeSwiper .swiper-slide-active .edge-details {
     display: flex;
 }
-}
-
-/* Large Desktop */
-@media (min-width: 1600px) {
-    .edge-nav-arrows {
-        width: 42% !IMPORTANT;
-    }
-}
-
-/* Ultra Wide */
-@media (min-width: 2100px) {
-    .edge-nav-arrows {
-        top: 30%;
-    }
 }
 @media (max-width: 992px) {
 .inner-center-slider {padding: 0 20px}

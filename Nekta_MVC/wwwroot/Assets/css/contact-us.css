@@ -202,29 +202,28 @@
   /* ---------- Decorative bowl / plate (illustrative, swap for real photography) ---------- */
   .deco-bowl{
     position:absolute;
-    top:21%;
-    right:-11%;
-    width:550px;
+    top:38%;
+    right:-5%;
+    width:325px;
    
     z-index:1;
   }
   .deco-plate{
     position:absolute;
     bottom:26px;
-    left:-9%;
-    width:580px;
-   
+    left:-5%;
+    width:325px;
     z-index:1;
   }
 
   @media (max-width:900px){
     .reach-grid{ grid-template-columns:1fr; }
-    .deco-bowl{ width:150px; height:150px; top:40px; right:-60px; opacity:0.85;}
+    .deco-bowl{ width:130px; height:130px; top:40px; right:-60px; opacity:0.85;}
   .deco-plate{
     position:absolute;
     bottom:18px;
     left:-9%;
-    width:150px; height:150px;
+    width:120px; height:120px;
    
     z-index:1;
   }
@@ -404,9 +403,9 @@
  
   .solutions-salad{
     position: absolute;
-     top: -6vw;
-    left: -16vw;
-    max-width: 48vw;
+     top: -7vw;
+    left: -3vw;
+    max-width: 26vw;
     z-index: 2;
     rotate: 34deg;
   }
@@ -435,7 +434,7 @@
   .solutions-splash{
 position: absolute;
     top: 33%;
-    right: -12%;
+    right: -10%;
     height: 100%;
     width: auto;
     /* max-width: 340px; */
@@ -803,12 +802,12 @@ position: absolute;
       display:none;
     }
     .solutions-salad {
-    position: absolute;
-    top: 1%;
-    left: -37%;
-    max-width: 120vw;
-    z-index: 2;
-    rotate: 34deg;
+        position: absolute;
+        top: -5%;
+        left: -4%;
+        max-width: 68vw;
+        z-index: 2;
+        rotate: -32deg !important;
 }
   }
  
@@ -846,7 +845,7 @@ position: absolute;
 
     .cu-plate-left{
         left:-14%;
-        bottom:2%;
+        bottom:-5%;
         width:clamp(88px, 24vw, 110px);
     }
 
@@ -855,6 +854,14 @@ position: absolute;
         top:6%;
         width:clamp(80px, 22vw, 100px);
     }
+
+.reach-card {padding: 33px 27px 41px;}
+.reach-line { gap: 6px}
+.reach-icon {width: 18px;height: 18px;}
+.reach-line h4 {font-size: 1.2rem;}
+.reach-value {font-size: 0.875rem;}
+
+
   }
 
   @media (min-width:768px) and (max-width:1023px){
@@ -939,7 +946,15 @@ position: absolute;
 
   /* Small screen laptop */
  @media (min-width: 1200px) and (max-width: 1366px) {
-
+    .solutions-splash {top: 28%;right: -16%;}
+    .deco-bowl {width: 285px;}
+    .deco-plate {width: 280px;}
+    .solutions-salad {
+    
+    top: -3vw;
+    left: -1vw;
+    max-width: 29vw;
+    }
  }
 
   /* 125% zoom */

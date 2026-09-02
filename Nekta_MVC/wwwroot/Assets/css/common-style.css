@@ -1,5 +1,9 @@
 p:last-child{ margin-bottom: 0 !important;}
 body{ overflow-x:hidden;}
+:root { --swiper-pagination-bottom: 0px; }
+
+.back-to-top.active {opacity: 1 !important; pointer-events: auto !important; transform: translateY(0);}
+.progress-ring-circle {transition: stroke-dashoffset 0.15s ease-out;}
 
 /**=====================================
 TITLE ANIMATION
@@ -63,6 +67,13 @@ TITLE ANIMATION
     display: none;
 }
 
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    bottom: var(--swiper-pagination-bottom, 0px);
+}
+
 .swiper-pagination-custom,
 .testimonial-pagination {
     width: auto !important;
@@ -119,14 +130,29 @@ INNER BANNER CSS
 /**=====================================
 Leaf travel CSS
 =====================================**/
-.ld-leaf-wrapper {position: relative; overflow: hidden;}
+.ld-leaf-wrapper {position: relative; overflow: visible;}
 .leaf-travel-anim{
     position:absolute;
-    top:10vw;
-    right:10vw;
+    top: 10vw;
+    right: 10vw;
+    left: auto;
+    width: clamp(72px, 9vw, 135px);
+    height: auto;
     pointer-events:none;
-    z-index:100;
+    z-index: 1;
     will-change:transform;
+    transform-origin: 32% 58%;
+    backface-visibility: hidden;
+}
+@media (max-width: 767px) {
+    .leaf-travel-anim {top: 8px; right: 8px;}
+    .counter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+}
 }
 
 
@@ -170,7 +196,7 @@ Leaf travel CSS
  /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 
-.text-h2 {font-size: 3.813rem}
+.text-h2 {font-size: 3.375rem}
     p {
         font-size: 1.125rem !important;
     }
@@ -185,7 +211,7 @@ Leaf travel CSS
  /* 1920*1080 of 150% and 1600*900 of 125% */
  @media (min-width: 1200px) and (max-width: 1366px) {
 
-.text-h2 {font-size: 3rem}
+.text-h2 {font-size: 3.375rem}
  p {font-size: 1rem !important; }
 .section-title-center {max-width: 800px;}
 .md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
@@ -240,4 +266,23 @@ Leaf travel CSS
 
 .read-more-btn.is-expanded .read-more-plus {
   transform: rotate(45deg);
+}
+
+.page-intro-section .intro-readmore-extra {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s ease;
+}
+
+.page-intro-section .intro-readmore-extra-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-intro-section .intro-readmore-extra.is-expanded {
+  grid-template-rows: 1fr;
+}
+
+.page-intro-section .intro-readmore-btn {
+  padding-top: 16px;
 }

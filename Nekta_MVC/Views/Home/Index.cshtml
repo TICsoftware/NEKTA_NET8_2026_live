@@ -3,39 +3,40 @@
 @{
     ViewData["Title"] = "Nekta";
     Layout = "~/Views/Shared/_Layout_home_page.cshtml";
+       var content = Model?.Home_Content;
 }
 
 @section head {
-    <title></title>
+    <title>@(content?.cont_window_title)</title>
 
-    <meta content="" name="keywords" />
-    <meta content="" name="description" />
+     <meta content="@(content?.cont_metatag)" name="keywords" />
+    <meta content="@(content?.cont_metadesc)" name="description" />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:description" content="" />
+    <meta name="twitter:site" content="Nekta" />
+    <meta name="twitter:title" content="@(content?.ContTitle)" />
+    <meta name="twitter:description" content="@(content?.cont_metadesc)" />
 
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Nekta" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="https://www.nekta.com/" />
-    <meta property="og:image" content="" />
+    <meta property="og:title" content="@(content?.ContTitle)" />
+    <meta property="og:description" content="@(content?.cont_metadesc)" />
+    <meta property="og:url" content="https://www.nekta.com" />
+    <meta property="og:image" content="@(content?.cont_meta_image)" />
 
     <meta itemprop="name" content="Nekta" />
-    <meta itemprop="description" content="" />
-    <meta itemprop="image" content="" />
+    <meta itemprop="description" content="@(content?.cont_metadesc)" />
+    <meta itemprop="image" content="@(content?.cont_meta_image)" />
 
     <!-- Facebook / Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nekta" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="https://www.nekta.com/" />
+    <meta property="og:title" content="@(content?.ContTitle)" />
+    <meta property="og:description" content="@(content?.cont_metadesc)" />
+    <meta property="og:image" content="@(content?.cont_meta_image)" />
+    <meta property="og:url" content="https://www.nekta.com" />
 
-    <link rel="canonical" href="https://www.nekta.com/" />
+    <link rel="canonical" href="https://www.nekta.com" />
 }
 
 @section Styles {

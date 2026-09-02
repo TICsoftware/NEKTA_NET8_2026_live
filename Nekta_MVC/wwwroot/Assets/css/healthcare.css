@@ -19,14 +19,14 @@
 
 /* theree cards deco image position*/
 .story-gallery {margin-top: 0px !important;}
-.story-gallery-left { position: absolute; left: -6vw !important; bottom: -6vw !important;}
-.story-gallery-right .story-turmuric { position: relative; left: -1vw !important; bottom: 0 !important;}
-.story-gallery-right .story-leaf { position: absolute; left: 20vw !important; bottom: 0 !important;}
-.story-gallery-right .story-leaf {
+.story-gallery-left { position: absolute; left: -14vw !important; bottom: -9vw !important;}
+.story-gallery-right .story-turmuric { position: relative; left: 13vw !important; bottom: 0 !important;}
+.story-gallery-right .story-leaf { position: absolute; left: 13vw !important; bottom: -6vw !important;}
+/* .story-gallery-right .story-leaf {
     position: absolute;
     left: -1vw !important;
     bottom: -9vw !important;
-}
+} */
 
 .bg-darkcream-thumbslider .read-more-wrapper h3 {    color: var( --color-text-heading);}
 .bg-darkcream-thumbslider .read-more-wrapper p {    color: var( --color-text-heading);}
@@ -56,7 +56,12 @@ right: -9vw;
 }
 
 
-
+@media (max-width: 992px) {
+    .story-intro {padding-left: 20px;padding-right: 20px;}
+    .story-gallery-left {max-width: 250px;}
+    .story-gallery-right .story-turmuric {left: 13vw !important;bottom: 20vw !important;}
+    .story-gallery-right .story-leaf {bottom: -18vw !important;}
+}
  
 /* Responsive scaling for smaller screens */
 @media (max-width: 768px) {
@@ -65,6 +70,21 @@ right: -9vw;
       right: -10px;
       bottom: -20px;
    }
+ .bc-experience-section .bc-plate-mini {right: -25%;}
 }
 
+
+/* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+    .story-gallery-left {left: -20vw !important;bottom: -12vw !important;}
+    .story-gallery-right .story-turmuric {bottom: 2vw !important; left: 12vw !important;}
+    .story-gallery-right .story-leaf {left: 10vw !important;bottom: -6vw !important;}
+}
+
+
+ @media (min-width: 1200px) and (max-width: 1366px) {
+    .story-gallery-left {left: -15vw !important;bottom: -12vw !important;}
+    .story-gallery-right .story-turmuric {bottom: 4vw !important; left: 5vw !important;}
+    .story-gallery-right .story-leaf {left: 4vw !important;bottom: -6vw !important;}
+ }
 

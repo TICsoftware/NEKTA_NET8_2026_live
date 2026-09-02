@@ -11,13 +11,13 @@ gsap.to(".innerbanner-image", {
     }
 });
 
-// Slow zoom while scrolling
+// Slow zoom while scrolling — start at 1, grow as the banner leaves
 gsap.fromTo(".innerbanner-image",
 {
-    scale: 1.15
+    scale: 1
 },
 {
-    scale: 1,
+    scale: 1.15,
     ease: "none",
     scrollTrigger: {
         trigger: ".inside-banner-outer",

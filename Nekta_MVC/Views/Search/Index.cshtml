@@ -22,7 +22,7 @@
     <meta property="og:site_name" content="Nekta" />
     <meta property="og:title" content="Search Results | TCCF Labs" />
     <meta property="og:description" content="" />
-    <meta property="og:url" content="https://www.nekta.com/" />
+         <meta property="og:url" content="https://www.nekta.com/search" />
     <meta property="og:image" content="" />
 
     <meta itemprop="name" content="Nekta" />
@@ -35,152 +35,151 @@
     <meta property="og:title" content="Search Results | TCCF Labs" />
     <meta property="og:description" content="" />
     <meta property="og:image" content="" />
-    <meta property="og:url" content="https://www.nekta.com/" />
+         <meta property="og:url" content="https://www.nekta.com/search" />
 }
 
 @section Styles {
     <link rel="stylesheet" href="/Assets/css/blanktemplate-style.css" />
 }
+<div class="blankpage_outer">
+    <section class=" mt-[10vw] h-full relative">
+        <div class="inner-banner-vector">
+            <div class="relative w-full inner-banner-caption">
+                <div class="container">
+                    <nav aria-label="breadcrumb" class="breadcrumb_container pb-2 lg:pb-0 mb-2">
+                        <ol class="flex items-center gap-2 text-sm border-b pb-0.5 border-[#fc713c] w-fit">
+                                <li class="flex items-center gap-2 group">
+                                    <a href="/" class="text-sm transition-all duration-300 group-hover:text-[#fc713c]">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="text-gray-400">/</span>
+                                </li>
 
-<section class="banner-inner-section mt-[10vw] h-full relative">
-    <div class="inner-banner-vector">
-        <div class="relative w-full px-0 md:px-8 xl:px-6 2xl:px-8 inner-banner-caption">
-            <div class="container">
-                <nav aria-label="breadcrumb" class="breadcrumb_container pb-2 lg:pb-0 mb-2">
-                    <ol class="flex items-center gap-2 text-sm border-b pb-0.5 border-[#fc713c] w-fit">
-                            <li class="flex items-center gap-2 group">
-                                <a href="/" class="text-sm transition-all duration-300 group-hover:text-[#fc713c]">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <span class="text-gray-400">/</span>
-                            </li>
+                                <li class="text-secondary font-medium">
+                                Search
+                                </li>
 
-                            <li class="text-secondary font-medium">
-                               Search
-                            </li>
-
-                        </ol>
-                </nav>
-                <div class="w-full sm:max-w-[60vw] lg:max-w-[35vw] innerbanner-title-outer">
-                    <h1 class="text-h1 innerbanner-title-heading ">
-                        Search
-                    </h1>
+                            </ol>
+                    </nav>
+                    <div class="w-full sm:max-w-[60vw] lg:max-w-[35vw] innerbanner-title-outer">
+                        <h1 class="text-h1 innerbanner-title-heading ">
+                            Search
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    </div>
-</section>
+        </div>   
+    </section>
 
-<section class="section-pb pt-15 blank-template-section relative">
-    <div class="container">
-        <div class="blank-template-inner">
-            <div class="flex flex-col lg:flex-row gap-0 lg:gap-15 justify-start">
-                <div class="max-w-full w-full">
-                    <!-- Search Bar -->
-                    <section class="mb-10 searchFilter-content">
-                        <form class="flex flex-col md:flex-row gap-4 " id="frmSearch">
-                            <div class="flex-1">
-                                <label for="search" class="sr-only">Search</label>
-                                <input id="search" type="text" placeholder="Search..." name="Id" value="@Model.keyword"
-                                    class="w-full h-12 px-4 rounded-md border border-gray-300 focus:ring-2 focus:ring-black focus:border-transparent outline-none dark-textwhite" />
-                            </div>
-                            <button type="submit" id="btnSearch"
-                                class="h-12 px-8 bg-black text-white dark-bglight rounded-md hover:bg-gray-800"> Search
-                            </button>
-                        </form>
-                    </section>
+    <section class="section-pb pt-5 blank-template-section relative">
+        <div class="container">
+            <div class="blank-template-inner">
+                <div class="flex flex-col lg:flex-row gap-0 lg:gap-15 justify-start">
+                    <div class="max-w-full w-full">
+                        <!-- Search Bar -->
+                        <section class="mb-10 searchFilter-content">
+                            <form class="flex flex-col md:flex-row gap-4 " id="frmSearch">
+                                <div class="flex-1">
+                                    <label for="search" class="sr-only">Search</label>
+                                    <input id="search" type="text" placeholder="Search..." name="Id" value="@Model.keyword"
+                                        class="w-full h-12 px-4 rounded-md border border-gray-300 bg-gray-50 focus:ring-[0.5px] focus:ring-black focus:border-transparent outline-none dark-textwhite" />
+                                </div>
+                                <button type="submit" id="btnSearch"
+                                    class="h-12 px-8 bg-black text-white dark-bglight rounded-md hover:bg-gray-800"> Search
+                                </button>
+                            </form>
+                        </section>
 
-                    <!-- Results Section -->
-                    <section class="searchResult-container lg:col-span-3">
-                        <div class="searchResult-content">
-                            <!-- Result Header -->
-                            <div class="flex flex-col md:flex-row md:items-start md:justify-start mb-6 gap-4">
-                                <h2 class="text-30 font-medium dark-textwhite">
-                                    Showing results for <span class="font-bold text-primary dark-textwhite">
-                                        @Model.keyword</span>
-                                </h2>
-                            </div>
+                        <!-- Results Section -->
+                        <section class="searchResult-container lg:col-span-3">
+                            <div class="searchResult-content">
+                                <!-- Result Header -->
+                                <div class="flex flex-col md:flex-row md:items-start md:justify-start mb-6 gap-4">
+                                    <h2 class="text-30 font-medium dark-textwhite">
+                                        Showing results for <span class="font-bold text-primary dark-textwhite">
+                                            @Model.keyword</span>
+                                    </h2>
+                                </div>
 
-                            <!-- Results List -->
-                            <ul class="search_list space-y-6" id="SearchResultDiv">
-                                @if (Model.objsearchdisplay != null && Model.objsearchdisplay.Count > 0)
-                                {
-                                    foreach (var item in Model.objsearchdisplay)
+                                <!-- Results List -->
+                                <ul class="search_list space-y-6" id="SearchResultDiv">
+                                    @if (Model.objsearchdisplay != null && Model.objsearchdisplay.Count > 0)
                                     {
-                                        <li
-                                            class="bg-white dark-bglight p-5 rounded-lg border border-black/25 hover:shadow-md transition flex flex-col group search-list-group">
+                                        foreach (var item in Model.objsearchdisplay)
+                                        {
+                                            <li
+                                                class="bg-white dark-bglight p-5 rounded-lg border border-black/10 hover:shadow-md transition flex flex-col group search-list-group">
 
-                                            <div class="flex flex-col">
+                                                <div class="flex flex-col">
 
-                                                <a href="@item.URL">
+                                                    <a href="@item.URL">
 
-                                                    <h3
-                                                        class="text-lg sm:text-xl dark-textwhite font-semibold mb-2 group-hover:text-primary transition-colors">
+                                                        <h3
+                                                            class="dark-textwhite font-semibold mb-2  transition-colors">
 
-                                                        @Html.Raw(item.cont_title)
+                                                            @Html.Raw(item.cont_title)
 
-                                                    </h3>
+                                                        </h3>
 
-                                                    @if (!string.IsNullOrWhiteSpace(item.intro))
-                                                    {
-                                                        <p>
-                                                            @Html.Raw(item.intro)
-                                                        </p>
-                                                    }
-                                                    else if (!string.IsNullOrWhiteSpace(item.hmpg_intro))
-                                                    {
-                                                        <p>
-                                                            @Html.Raw(item.hmpg_intro)
-                                                        </p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p>
-                                                            @Html.Raw(item.content)
-                                                        </p>
-                                                    }
+                                                        @if (!string.IsNullOrWhiteSpace(item.intro))
+                                                        {
+                                                            <p>
+                                                                @Html.Raw(item.intro)
+                                                            </p>
+                                                        }
+                                                        else if (!string.IsNullOrWhiteSpace(item.hmpg_intro))
+                                                        {
+                                                            <p>
+                                                                @Html.Raw(item.hmpg_intro)
+                                                            </p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>
+                                                                @Html.Raw(item.content)
+                                                            </p>
+                                                        }
 
-                                                </a>
+                                                    </a>
 
-                                            </div>
+                                                </div>
+
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li class="bg-white dark-bglight p-5 rounded-lg border border-black/25">
+
+                                            <p class="text-center dark-textwhite">
+                                                No search results found.
+                                            </p>
 
                                         </li>
                                     }
-                                }
-                                else
+                                </ul>
+
+                                @if (Model.count > Model.currentpage)
                                 {
-                                    <li class="bg-white dark-bglight p-5 rounded-lg border border-black/25">
-
-                                        <p class="text-center dark-textwhite">
-                                            No search results found.
-                                        </p>
-
-                                    </li>
+                                    <div class="btn-wrap flex justify-center mt-10 text-center">
+                                         <a href="/contact-us" class="cta" type="button" id="btnLoadMore"> Load more <svg width="14" height="14"class="icon-rotate-down"><use href="#ic-arrow"/></svg></a>
+                              
+                                    </div>
                                 }
-                            </ul>
 
-                            @if (Model.count > Model.currentpage)
-                            {
-                                <div class="btn-wrap mt-10 text-center">
-                                    <a id="btnLoadMore" class="themeht-btn color-btn">
-                                        Load more
-                                    </a>
-                                </div>
-                            }
+                            </div>
 
-                        </div>
+                        </section>
 
-                    </section>
-
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 
 <input type="hidden" id="SearchCurrentPage" value="@Model.currentpage" />

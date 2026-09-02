@@ -30,6 +30,7 @@ public class Content_Master
     public int? IsExternal { get; set; }
     public string? metatag { get; set; }
     public string? metadesc { get; set; }
+    public string? page_schema { get; set; }
     public DateTime? metaexpiry { get; set; }
     public int? status { get; set; }
     public bool? IsInProcess { get; set; }

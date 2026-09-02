@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevEl = slider.querySelector(".blogs-prev");
 
     new Swiper(slider, {
-      slidesPerView: 1.1,
+      slidesPerView: 1,
       spaceBetween: 20,
       centeredSlides: true,
       loop: totalSlides > 3,
@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       breakpoints: {
         768: {
-          slidesPerView: 2.2,
-          centeredSlides: true,
+          slidesPerView: 2,
+          centeredSlides: false,
+          spaceBetween: 24,
         },
         1024: {
           slidesPerView: 3,

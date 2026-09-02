@@ -275,6 +275,17 @@ namespace Core_project_BusinessLogic.DAL
             SQLInsert_Update_Delete_Data("sp_ContextTemplateRef_DeleteByContext", p);
         }
 
+        public void Delete(int id, int? contextMasterId = null)
+        {
+            SqlParameter[] p =
+            {
+                new SqlParameter("@ID", id),
+                new SqlParameter("@context_master_id", (object?)contextMasterId ?? DBNull.Value)
+            };
+
+            SQLInsert_Update_Delete_Data("sp_ContextTemplateReference_Delete", p);
+        }
+
         public List<int> GetTemplatesByContext(int contextId)
         {
             SqlParameter[] p = { new("@context_master_id", contextId) };

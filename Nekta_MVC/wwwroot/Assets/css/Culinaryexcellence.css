@@ -3,11 +3,11 @@
 .bc-polaroid {position: absolute; background: #fdfcf6; border: 1px solid rgba(116, 141, 110, 0.2); border-radius: 10px; padding: 8px;
 box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 8px;}
-
+.bc-deco{right:-1vw !important;rotate:2deg !important;}
 /* Chili / basil decorations */
 .bc-deco { position: absolute; pointer-events: none; user-select: none; z-index: 1234; width: 11vw; rotate: -33deg;}
-.bc-dining-deco--chili{left:5vw; top: 2vw; transform: rotate(-10deg); z-index: 2;max-width:280px; width:15vw}
-.bc-dining-deco--basil{right:0vw; top:10vw; transform: rotate(15deg); z-index: 2; max-width:465px; width:25vw;}
+.bc-dining-deco--chili{left:5vw; top: 2vw; transform: rotate(-10deg); z-index: 2;max-width:280px; width:20vw}
+.bc-dining-deco--basil{right:0vw; top:10vw; transform: rotate(15deg); z-index: 2; max-width:425px; width:25vw;}
 
 .outer-polaroids {top: 3vw; left: 5vw; position: absolute;}
 
@@ -40,10 +40,14 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-arch-card img {width: clamp(52px, 4.6vw, 88px); height: auto; margin-bottom: 12px; transition: transform var(--motion-base) var(--ease-premium);}
 .bc-arch-card h3 {font-family:var(--font-heading); font-weight: 500; font-size: var(--text-h4); max-width: 100%; margin-inline: auto;}
 .bc-arch-copy {display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0; transition: grid-template-rows var(--motion-base) var(--ease-premium), opacity var(--motion-base) var(--ease-premium), margin-top var(--motion-base) var(--ease-premium);}
-.bc-arch-copy p {font-size: 1rem; overflow: hidden; margin: 0;}
-.bc-arch-card:hover { background-color: rgba(116, 141, 110, 0.10);}
-.bc-arch-card:hover img {transform: translateY(-4px) scale(1.05);}
-.bc-arch-card:hover .bc-arch-copy {grid-template-rows: 1fr; opacity: 1; margin-top: 8px;}
+.bc-arch-copy p {font-size: 1rem; overflow: hidden; margin: 0; min-height: 0;}
+.bc-arch-card:hover,
+.bc-arch-card.is-active { background-color: rgba(116, 141, 110, 0.10);}
+.bc-arch-card:hover img,
+.bc-arch-card.is-active img {transform: translateY(-4px) scale(1.05);}
+.bc-arch-card:hover .bc-arch-copy,
+.bc-arch-card.is-active .bc-arch-copy {grid-template-rows: 1fr; opacity: 1; margin-top: 8px;}
+.bc-arch-grid-controls { display: none; }
 
 /* Left tommato decoration three tilt card */
 .story-gallery-left { position: absolute; left: -6%; top: -4vw;}
@@ -71,11 +75,10 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
 .bg-darkcream-thumbslider .merge-imgs {position: absolute; top:0vw; left: 0;width: 100%; height: auto; display: flex;align-items: center;  justify-content: center;}
 .bg-darkcream-thumbslider  .merge-imgs img {position: absolute;}
-.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) {left: -7vw;top: 7vw;z-index: 10;}
+.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) {left: -7vw;top: 1vw;z-index: 10;}
 .bg-darkcream-thumbslider .merge-imgs img:nth-child(2) { left: -3vw; top: -3vw;z-index: -10;}
 
 .underline{text-decoration-line: underline;color:var(--color-third);}
-.read-more-content.is-collapsed::after {background: linear-gradient(   to bottom, rgba(247, 242, 231, 0), rgb(228, 215, 171)) !important;}
 
 
 /* WWhy client choose nekta Thumb slider */
@@ -103,7 +106,7 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 .av-leaf{  width: 34px;  height: auto;opacity: 0.35; position: absolute; right: 0; bottom: -10px;}
 
 @media (max-width: 992px){
-   .av-media-wrap{ margin-bottom: 2.5rem; }
+   .av-media-wrap{ margin-bottom: 0rem; }
 }
 
 /* -----------------------------------AVIATION END----------------------------- */
@@ -195,7 +198,39 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 @media (max-width:991px){
     .bc-plate-wrap::before{ width: 100%; height: 100%; right: 2%;top: 50%;}
     .bc-plate-img{width:320px;}
-    .bc-plate-mini{position: absolute; right: -4%; top: 7%;width: 5rem;}    
+    .bc-plate-mini{position: absolute; right: -4%; top: 7%;width: 5rem;}
+    .story-gallery { overflow: hidden; }
+    .story-gallery-wrap { overflow: visible; }
+    .cards-wrapper { z-index: 3; }
+    .story-gallery-right {
+        right: -10%;
+        left: auto;
+        top: 90%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: min(72vw, 280px);
+        z-index: 0;
+        pointer-events: none;
+    }
+    .story-gallery-right img,
+    .story-gallery-right .story-turmuric {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .story-gallery-right .story-leaf {
+        position: absolute;
+        left: auto;
+        right: 6%;
+        bottom: 4%;
+        width: 38%;
+        max-width: 90px;
+    }
+    .curveshape-wrap .max-w-6xl {width: 100% !important;}
+     .read-more-fade{max-height: max-content;}
+.story-gallery-left {max-width: 200px;left: -10vw;}
+
 }
 
 @media (max-width: 767px) {
@@ -204,10 +239,9 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
   .thumb-grid-wrapper {position: relative; left: 0; margin-top: 0;}
   .merge-imgs {top: 18vw;left: -10vw;max-width: 175px;}
   .thumb-slider-thumbs {margin-top: -15vw;}
-  .bc-arch-grid {padding: 0 20px;}
   .bc-dining-deco--basil {display: none;}
 .counter-wrapper {flex-wrap: wrap;gap: 1rem;}
-.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) { left: -7vw; top: 52vw; z-index: 10;}
+.bg-darkcream-thumbslider .merge-imgs img:nth-child(1) { left: -18vw; top: 10vw; z-index: 10;}
 .av-list {
     list-style: none;
     margin: 0;
@@ -217,4 +251,100 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
         flex-wrap: wrap;
         gap: 1rem;
     }
+
+    .bc-arch-grid[data-arch-grid-slider] {
+        display: flex;
+        align-items: stretch;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        scroll-padding-inline: 20px;
+        gap: 12px;
+        padding: 8px 20px 20px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .bc-arch-grid[data-arch-grid-slider]::-webkit-scrollbar { display: none; }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card {
+        flex: 0 0 78vw;
+        width: 78vw;
+        max-width: 320px;
+        aspect-ratio: auto;
+        height: 420px;
+        min-height: 420px;
+        max-height: 420px;
+        scroll-snap-align: center;
+        opacity: 0.5;
+        justify-content: flex-end;
+        overflow: hidden;
+        box-sizing: border-box;
+        transition: opacity 0.3s ease, background-color var(--motion-base) var(--ease-premium);
+    }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card img,
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card.is-active img {
+        transform: none;
+    }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-copy {
+        display: block;
+        min-height: 7.5em;
+        opacity: 0;
+        margin-top: 8px;
+        transition: opacity 0.25s ease;
+    }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card:hover:not(.is-active) .bc-arch-copy {
+        opacity: 0;
+        margin-top: 8px;
+        grid-template-rows: unset;
+    }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card.is-active {
+        opacity: 1;
+        min-height: 420px;
+        height: 420px;
+        max-height: 420px;
+    }
+    .bc-arch-grid[data-arch-grid-slider] .bc-arch-card.is-active .bc-arch-copy {
+        grid-template-rows: unset;
+        opacity: 1;
+        margin-top: 8px;
+    }
+    .bc-arch-grid-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 0 20px 40px;
+    }
+    .bc-arch-grid-prev,
+    .bc-arch-grid-next {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 0;
+        background: var(--color-cream, #f7f2e7);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1;
+    }
+    .bc-arch-grid-prev:disabled,
+    .bc-arch-grid-next:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .cu-plate-left {
+    left: -12%;
+    bottom: -3%;}
+
 }
+
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+.bc-dining-deco--basil {width: 22vw;}
+
+}
+
+ @media (min-width: 1200px) and (max-width: 1366px) {
+
+ }
+
+

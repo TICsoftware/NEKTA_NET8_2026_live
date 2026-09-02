@@ -113,5 +113,34 @@ namespace Nekta_MVC.Controllers.Manage
             _bal.UpdateOrder(items);
             return Ok();
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id, int? contextMasterId)
+        {
+            if (id <= 0)
+            {
+                return Json(new { success = false, message = "Invalid mapping id." });
+            }
+
+            if (contextMasterId == null || contextMasterId <= 0)
+            {
+                return Json(new { success = false, message = "Invalid component layout id." });
+            }
+
+            try
+            {
+                _bal.Delete(id, contextMasterId);
+                return Json(new
+                {
+                    success = true,
+                    message = "Mapping deactivated and related details moved to history successfully."
+                });
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+                return Json(new { success = false, message = "Something went wrong while deleting. Please try again." });
+            }
+        }
     }
 }

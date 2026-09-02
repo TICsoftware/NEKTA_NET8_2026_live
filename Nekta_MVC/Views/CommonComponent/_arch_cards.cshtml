@@ -32,7 +32,7 @@
         </div>
     }
 
-    <div class="bc-arch-grid">
+    <div class="bc-arch-grid" data-arch-grid-slider>
         @foreach (var item in Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
         {
             <div class="bc-arch-card">
@@ -43,5 +43,9 @@
                 </div>
             </div>
         }
+    </div>
+    <div class="bc-arch-grid-controls">
+        <button type="button" class="bc-arch-grid-prev" aria-label="Previous">&#10094;</button>
+        <button type="button" class="bc-arch-grid-next" aria-label="Next">&#10095;</button>
     </div>
 </section>

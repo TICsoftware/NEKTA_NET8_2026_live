@@ -32,15 +32,10 @@ gsap.set(".signature-bg", {
     0,
   );
 
-  // Garlic + leaf — starts when section top hits 50% of viewport
+  // Garlic + leaf — drop on scroll down, lift on scroll up
   const garnishTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".signature-section",
-      start: "top 50%",
-      end: "top 20%",
-      scrub: 1.2,
-      // markers: true,
-    },
+    paused: true,
+    defaults: { duration: 0.9, ease: "power2.out" },
   });
 
   garnishTimeline
@@ -48,17 +43,16 @@ gsap.set(".signature-bg", {
       ".signature-garlic-img",
       {
         xPercent: 20,
-        yPercent: -180,
+        yPercent: -100,
         rotation: -28,
-        opacity: 0,
+        opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
         xPercent: 15,
-        yPercent: 20,
+        yPercent: 30,
         rotation: 0,
         opacity: 1,
-        ease: "none",
       },
       0.2,
     )
@@ -66,18 +60,30 @@ gsap.set(".signature-bg", {
       ".signature-leaf-img",
       {
         xPercent: 0,
-        yPercent: -200,
+        yPercent: -120,
         rotation: 28,
-        opacity: 0,
+        opacity: 1,
         transformOrigin: "50% 50%",
       },
       {
         xPercent: -50,
-        yPercent: 30,
+        yPercent: 50,
         rotation: 0,
         opacity: 1,
-        ease: "none",
       },
       0.3,
     );
+
+  ScrollTrigger.create({
+    trigger: ".signature-section",
+    start: "top 40%",
+    end: "bottom top",
+    onUpdate(self) {
+      if (self.direction === 1) {
+        garnishTimeline.play();
+      } else {
+        garnishTimeline.reverse();
+      }
+    },
+  });
 }
