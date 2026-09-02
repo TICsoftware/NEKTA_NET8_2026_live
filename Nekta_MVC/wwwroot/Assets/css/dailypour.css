@@ -1163,10 +1163,6 @@ font-size: 3.75rem;
     position: relative;
     max-height: 4.9em;
     overflow: hidden;
-
-    font-size: 18px;
-    line-height: 1.75;
- 
     margin: 0 0 14px;
     -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
             mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
@@ -1231,8 +1227,7 @@ font-size: 3.75rem;
     }
     .backbone-footer p,
     .backbone-footer .backbone-copy {
-      font-size: 16px;
-      line-height: 1.7;
+
       margin: 0 0 14px;
     }
   }

@@ -146,6 +146,13 @@ Leaf travel CSS
 }
 @media (max-width: 767px) {
     .leaf-travel-anim {top: 8px; right: 8px;}
+    .counter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column;
+}
 }
 
 

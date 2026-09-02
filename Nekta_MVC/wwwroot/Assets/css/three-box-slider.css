@@ -45,7 +45,7 @@
 .three-box-slider {
     padding-bottom: 20px;
     margin-bottom: -20px;
-    padding-top: 10px !important;
+    padding-top: 35px !important; ;
     margin-top: -5px;
     container-type: inline-size;
     --tb-gap: 30px;
