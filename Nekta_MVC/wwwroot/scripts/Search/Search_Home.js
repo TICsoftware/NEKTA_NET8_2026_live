@@ -1,19 +1,14 @@
-$(document).on("submit", ".search-form", function (e) {
 
+$(document).on("submit", "#searchForm", function (e) {
     e.preventDefault();
 
-    var keyword = $("#txtSearch").val().trim();
+    var keyword = $("#searchInput").val().trim();
 
-    if (keyword == "") {
-
+    if (keyword === "") {
         alert("Please enter search keyword.");
-
-        $("#txtSearch").focus();
-
+        $("#searchInput").focus();
         return false;
     }
 
-    window.location.href =
-        "/search/" + encodeURIComponent(keyword);
+    window.location.href = "/search/" + encodeURIComponent(keyword);
 });
-
