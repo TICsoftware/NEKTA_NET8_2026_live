@@ -71,7 +71,8 @@
       ViewContext.RouteData.Values["action"]?.ToString() == "Index";
    }
 
-   @Html.Partial("~/Views/Shared/_Header.cshtml")
+   @* @Html.Partial("~/Views/Shared/_Header.cshtml") *@
+     @await Component.InvokeAsync("HeaderMenu")
 
    <div class="hero-assistant fixed top-1/2 right-0 z-50">
       <button type="button" class="assistant-trigger" data-modal-open="contactModal"
@@ -85,7 +86,8 @@
       @RenderBody()
 
 
-      @Html.Partial("~/Views/Shared/_Footer.cshtml")
+      @* @Html.Partial("~/Views/Shared/_Footer.cshtml") *@
+      @await Component.InvokeAsync("FooterMenu")
 
    </main>
 

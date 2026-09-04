@@ -1,0 +1,349 @@
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+
+@model List<MenuFooter>
+
+@{
+    var footerMenus = Model ?? new List<MenuFooter>();
+
+    // =========================================================
+    // FOOTER COLUMNS
+    // =========================================================
+
+    var columns = footerMenus
+        .Where(x => (x.ParentFooterId == null || x.ParentFooterId == 0)
+                    && x.FooterType == "Column")
+        .OrderBy(x => Convert.ToInt32(x.Sequence))
+        .ToList();
+
+
+    // =========================================================
+    // SOCIAL LINKS
+    // =========================================================
+
+    var socialMenus = footerMenus
+        .Where(x => x.FooterType == "Social")
+        .OrderBy(x => Convert.ToInt32(x.Sequence))
+        .ToList();
+
+
+    // =========================================================
+    // COMPANY INFORMATION
+    // =========================================================
+
+    var companyInfo = footerMenus
+        .FirstOrDefault(x => x.FooterType == "CompanyInfo");
+
+
+    // =========================================================
+    // COPYRIGHT
+    // =========================================================
+
+    var copyright = footerMenus
+        .FirstOrDefault(x => x.FooterType == "Copyright");
+
+
+    // =========================================================
+    // BOTTOM LINKS
+    // =========================================================
+
+    var bottomLinks = footerMenus
+        .Where(x => x.FooterType == "BottomLink")
+        .OrderBy(x => Convert.ToInt32(x.Sequence))
+        .ToList();
+}
+
+
+<footer class="footer-bg bg-cover bg-center bg-no-repeat relative">
+
+    <!-- Footer Background -->
+    <img src="/Assets/images/footerBackground.jpg" class="object-cover w-full h-full absolute inset-0 bottom-0" alt="">
+
+
+    <div class="container">
+
+        <!-- ================================================= -->
+        <!-- MAIN FOOTER -->
+        <!-- ================================================= -->
+
+        <div class="footer-grid grid md:grid-cols-12 gap-2 md:pl-0">
+
+
+            <!-- ================================================= -->
+            <!-- LEFT COLUMN - LOGO & COMPANY INFO -->
+            <!-- ================================================= -->
+
+            <div class="md:col-span-4
+                md:border-r-[#F6F4E6]/35
+                md:border-r
+                sm:pr-2
+                lg:pr-0
+                pb-4
+                md:pb-10
+                pt-4
+                md:pt-10">
+
+
+                <!-- LOGO -->
+
+                <img src="@(companyInfo?.FooterThumbImage
+                                                                      ?? "/Assets/images/logo/Nekta-white.svg")"
+                     alt="@(companyInfo?.Title ?? "Nekta")" class="footer-logo mb-6" />
+
+
+                <!-- TAGLINE -->
+
+                @if (!string.IsNullOrWhiteSpace(companyInfo?.Title))
+                {
+                    <p class="text-h3 font-heading mb-0!">
+                        @companyInfo.Title
+                    </p>
+                }
+                else
+                {
+                    <p class="text-h3 font-heading mb-0!">
+                        Life is a beautiful plate
+                    </p>
+                }
+
+
+                <div class="menu-divider">
+                    <span></span>
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- SUBSIDIARY -->
+                <!-- ================================================= -->
+
+                <div
+                    class="footer-brand-copy footer-indent mt-2 text-cream font-normal border-b border-b-[#F6F4E6]/35 pb-5 md:pb-5">
+                    <p class="">@(companyInfo?.ColumnNo?.ToString() ?? "")</p>
+                    @if (!string.IsNullOrWhiteSpace(companyInfo?.FooterThumbImage))
+                    {
+                        <img src="@companyInfo.FooterThumbImage" alt="TAJ Sats" class="footer-subsidiary-logo w-30" />
+                    }
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- ADDRESS + CONTACT -->
+                <!-- ================================================= -->
+                @if (!string.IsNullOrEmpty(companyInfo?.Description))
+                {
+                    <div class="flex flex-col lg:flex-row gap-4 sm:gap-4 mt-5 md:mt-6 pr-5">
+                        @Html.Raw(companyInfo.Description)
+
+                        @* <div class="footer-indent ">
+                            <h4 class=" border-0! mb-0!">Address</h4>
+                            <p>
+                                9th Floor, Express Towers, <br />
+                                Nariman Point, Mumbai 400 021
+                            </p>
+                        </div>
+
+                        <div class="footer-indent ">
+                            <h4 class=" border-0! mb-0!">Contact Us</h4>
+                            <p> <a href="tel:+912231220200">+91 22 3122 0200</a> </p>
+                            <p class="footer-text"> <a href="mailto:sales@nektafoods.com">sales@nektafoods.com</a></p>
+                        </div> *@
+                    </div>
+                }
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- DYNAMIC FOOTER COLUMNS -->
+            <!-- ================================================= -->
+
+            @foreach (var column in columns)
+            {
+                var links = footerMenus
+                    .Where(x => x.ParentFooterId == column.FooterId)
+                    .OrderBy(x => Convert.ToInt32(x.Sequence))
+                    .ToList();
+
+
+                // -----------------------------------------------
+                // Column width
+                // -----------------------------------------------
+
+                var columnClass = "md:col-span-3";
+
+                if (column.Title != null &&
+                    column.Title.Equals("Solutions",
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    columnClass = "md:col-span-2";
+                }
+
+
+                <div class="@columnClass @column.IconClass
+                    md:pt-10
+                    footer-quick-link-click">
+
+
+                    <!-- COLUMN TITLE -->
+
+                    <h4>
+                        @column.Title
+                    </h4>
+
+
+                    <!-- COLUMN LINKS -->
+
+                    @if (links.Any())
+                    {
+                        <ul class="footer-nav-list
+                            space-y-3
+                            sm:space-y-3
+                            lg:space-y-5">
+
+
+                            @foreach (var link in links)
+                            {
+                                <li>
+
+                                    <a href="@(link.Url ?? "#")" target="@(link.Target ?? "_self")" class="footer-link">
+
+                                        @link.Title
+
+                                    </a>
+
+                                </li>
+                            }
+
+
+                        </ul>
+                    }
+
+                </div>
+            }
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- BOTTOM BAR -->
+        <!-- ================================================= -->
+
+        <div class="footer-bottom
+            border-t
+            border-[#F6F4E6]/35
+            py-2
+            flex
+            flex-col
+            lg:flex-row
+            justify-between
+            items-center
+            gap-3
+            md:gap-4
+            lg:gap-4
+            text-xs">
+
+
+            <!-- ================================================= -->
+            <!-- COPYRIGHT -->
+            <!-- ================================================= -->
+
+            <p class="copyright-text">
+
+                Copyright ©
+
+                <span id="year-foot"></span>
+
+                @if (copyright != null &&
+                     !string.IsNullOrWhiteSpace(copyright.Description))
+                {
+                    @Html.Raw(
+                        copyright.Description.CleanParagraphTags()
+                    )
+                }
+                else
+                {
+                    <text>Nekta. All Rights Reserved.</text>
+                }
+
+            </p>
+
+
+            <!-- ================================================= -->
+            <!-- SOCIAL ICONS -->
+            <!-- ================================================= -->
+
+            @if (socialMenus.Any())
+            {
+                <div class="flex gap-4 md:gap-4">
+
+                    @foreach (var social in socialMenus)
+                    {
+                        <a href="@(social.Url ?? "#")" target="@(social.Target ?? "_blank")" class="social-link
+                            text-cream
+                            hover:text-green
+                            transition
+                            border
+                            border-cream
+                            rounded-full
+                            flex
+                            items-center
+                            justify-center" aria-label="@social.Title">
+
+
+                            @if (!string.IsNullOrWhiteSpace(social.FooterImage))
+                            {
+                                <img src="@social.FooterImage" alt="@social.Title" />
+                            }
+                            else
+                            {
+                                @social.Title
+                            }
+
+
+                        </a>
+                    }
+
+                </div>
+            }
+
+
+            <!-- ================================================= -->
+            <!-- LEGAL LINKS -->
+            <!-- ================================================= -->
+
+            @if (bottomLinks.Any())
+            {
+                <div class="footer-legal
+                    flex
+                    flex-wrap
+                    justify-center
+                    gap-2">
+
+
+                    @for (int i = 0; i < bottomLinks.Count; i++)
+                    {
+                        var link = bottomLinks[i];
+
+                        <a href="@(link.Url ?? "#")" target="@(link.Target ?? "_self")" class="legal-link
+                            @(i < bottomLinks.Count - 1
+                              ? "legal-divider pr-2 border-r"
+                              : "")">
+
+                            @link.Title
+
+                        </a>
+                    }
+
+
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+
+</footer>
+
+

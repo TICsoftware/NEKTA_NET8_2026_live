@@ -1,0 +1,677 @@
+
+@using Nekta_BusinessLogic.Entity
+@using Nekta_MVC.Helpers
+
+@model List<MenuHeader>
+
+@{
+var menus = Model?.ToList() ?? new List<MenuHeader>();
+
+// Main menu
+var parentMenus = menus
+    .Where(x => x.ParentMenuId == null && x.MenuCategory == 3)
+    .OrderBy(x => Convert.ToInt32(x.Sequence))
+    .ToList();
+
+// Header logo
+var headerLogo = Model?.FirstOrDefault(x => x.MenuCategory == 1);
+
+}
+
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="ic-chevron-down" viewBox="0 0 12 8"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-chevron-right" viewBox="0 0 8 12"><path d="M1.5 1L6.5 6L1.5 11" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-close" viewBox="0 0 20 20"><path d="M4 4L16 16M16 4L4 16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="ic-menu" viewBox="0 0 24 24"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 14 14"><path d="M2 7H12M12 7L7 2M12 7L7 12" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 11v5.5M12 8v.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M15.5 13.2c2.4.3 4 2 4.2 4.3" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="ic-briefcase" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+  <symbol id="ic-store" viewBox="0 0 24 24"><path d="M4 9l1-4h14l1 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M4 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M5 9.5V20h14V9.5" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+  <symbol id="ic-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9v.7h5v-.7c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3z" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="ic-briefcase-sm" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+</svg>
+
+
+<!-- ========================================================= -->
+
+<!-- HEADER -->
+
+<!-- ========================================================= -->
+
+<header class="header-wrap" id="headerWrap">
+
+
+<div class="container">
+
+    <div class="bar" id="navBar">
+
+        <!-- LOGO -->
+
+        <a href="@(headerLogo?.Url ?? "/")"
+           class="logo"
+           aria-label="@(headerLogo?.MenuName ?? "Home")">
+
+            <img src="@(headerLogo?.ThumbImage ?? "/Assets/images/logo/Nekta-color.svg")"
+                 class="max-w-max"
+                 alt="@(headerLogo?.MenuName ?? "Logo")" />
+
+        </a>
+
+
+        <!-- ================================================= -->
+        <!-- DESKTOP NAV -->
+        <!-- ================================================= -->
+
+        <nav class="desktop-nav"
+             id="desktopNav"
+             aria-label="Main">
+
+            @foreach (var parent in parentMenus)
+            {
+                var children = menus
+                    .Where(x => x.ParentMenuId == parent.MenuId)
+                    .OrderBy(x => Convert.ToInt32(x.Sequence))
+                    .ToList();
+
+                var menuKey = !string.IsNullOrWhiteSpace(parent.MenuName)
+                    ? parent.MenuName
+                        .ToLower()
+                        .Replace(" ", "-")
+                        .Replace("&", "and")
+                    : $"menu-{parent.MenuId}";
+
+
+                <!-- MENU WITH CHILDREN -->
+
+                if (children.Any())
+                {
+                    <div class="nav-item"
+                         data-menu="@menuKey"
+                         data-index="@parent.Sequence">
+
+                        <button type="button"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+
+                            @parent.MenuName
+
+                            <svg class="chev"
+                                 width="12"
+                                 height="8">
+
+                                <use href="#ic-chevron-down"></use>
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+                }
+                else
+                {
+                    <!-- SIMPLE MENU -->
+
+                    <div class="nav-item plain">
+
+                        <a href="@(parent.Url ?? "#")"
+                           class="nav-plain"
+                           target="@(parent.Target ?? "_self")">
+
+                            @parent.MenuName
+
+                        </a>
+
+                    </div>
+                }
+            }
+
+        </nav>
+
+
+        <!-- CONTACT BUTTON -->
+
+        @{
+            var contactMenu = menus
+                .Where(x => x.MenuName != null &&
+                            x.MenuName.ToLower().Contains("contact"))
+                .OrderBy(x => Convert.ToInt32(x.Sequence))
+                .FirstOrDefault();
+        }
+
+        <a href="@(contactMenu?.Url ?? "/contact-us")"
+           class="cta"
+           target="@(contactMenu?.Target ?? "_self")">
+
+            @(contactMenu?.MenuName ?? "Contact us")
+
+            <svg width="14"
+                 height="14">
+
+                <use href="#ic-arrow"></use>
+
+            </svg>
+
+        </a>
+
+
+        <!-- SEARCH + HAMBURGER -->
+
+        <div class="search-chamberger flex items-center gap-2.5">
+
+            <button class="search-trigger"
+                    id="searchTrigger"
+                    type="button"
+                    aria-label="Open search"
+                    aria-expanded="false"
+                    aria-controls="searchPopup">
+
+                <img src="/Assets/images/logo/search.svg"
+                     alt=""
+                     class="search-icon">
+
+            </button>
+
+
+            <button class="hamburger"
+                    id="hamburgerBtn"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="drawer">
+
+                <svg width="22"
+                     height="22">
+
+                    <use href="#ic-menu"></use>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- DESKTOP DROPDOWN -->
+    <!-- ================================================= -->
+
+    <div class="dropdown-anchor"
+         id="dropdownAnchor">
+
+        <div class="nav-viewport"
+             id="navViewport"
+             aria-hidden="true">
+
+
+            @foreach (var parent in parentMenus)
+            {
+                var children = menus
+                    .Where(x => x.ParentMenuId == parent.MenuId)
+                    .OrderBy(x => Convert.ToInt32(x.Sequence))
+                    .ToList();
+
+                var menuKey = !string.IsNullOrWhiteSpace(parent.MenuName)
+                    ? parent.MenuName
+                        .ToLower()
+                        .Replace(" ", "-")
+                        .Replace("&", "and")
+                    : $"menu-{parent.MenuId}";
+
+
+                if (!children.Any())
+                {
+                    continue;
+                }
+
+
+                <div class="nav-panel"
+                     id="panel-@menuKey"
+                     data-menu="@menuKey">
+
+                    <div class="dropdown-layout @(children.Count > 4 ? "wide" : "")">
+
+
+                        <!-- DROPDOWN BODY -->
+
+                        <div class="dropdown-body">
+
+                            <ul class="dropdown-list @(children.Count > 4 ? "grid-2" : "")">
+
+
+                                @foreach (var child in children)
+                                {
+                                    <li>
+
+                                        <a class="dropdown-link"
+                                           href="@(child.Url ?? "#")"
+                                           target="@(child.Target ?? "_self")">
+
+                                            <strong>
+                                                @child.MenuName
+                                            </strong>
+
+
+                                            @if (!string.IsNullOrWhiteSpace(child.FeatureDescription))
+                                            {
+                                                <span>
+                                                    @Html.Raw(
+                                                        child.FeatureDescription
+                                                            .CleanParagraphTags()
+                                                    )
+                                                </span>
+                                            }
+
+                                        </a>
+
+                                    </li>
+                                }
+
+
+                            </ul>
+
+                        </div>
+
+
+                        <!-- FEATURE / CALLOUT -->
+
+                        @if (!string.IsNullOrWhiteSpace(parent.FeatureImage) ||
+                             !string.IsNullOrWhiteSpace(parent.FeatureTitle) ||
+                             !string.IsNullOrWhiteSpace(parent.FeatureDescription))
+                        {
+                            <a class="dropdown-callout @menuKey"
+                               href="@(parent.FeatureButtonUrl ?? parent.Url ?? "#")"
+                               target="@(parent.FeatureButtonTarget ?? parent.Target ?? "_self")">
+
+
+                                @if (!string.IsNullOrWhiteSpace(parent.FeatureImage))
+                                {
+                                    <img src="@parent.FeatureImage"
+                                         alt="@(parent.FeatureTitle ?? parent.MenuName)"
+                                         class="nav-header-image" />
+                                }
+
+
+                                <div class="nav-header-text">
+
+
+                                    @if (!string.IsNullOrWhiteSpace(parent.FeatureTitle))
+                                    {
+                                        <h3>
+                                            @parent.FeatureTitle
+                                        </h3>
+                                    }
+
+
+                                    @if (!string.IsNullOrWhiteSpace(parent.FeatureDescription))
+                                    {
+                                        <p>
+                                            @Html.Raw(
+                                                parent.FeatureDescription
+                                                    .CleanParagraphTags()
+                                            )
+                                        </p>
+                                    }
+
+
+                                    @if (!string.IsNullOrWhiteSpace(parent.FeatureButtonText))
+                                    {
+                                        <span class="nav-callout-button">
+
+                                            @parent.FeatureButtonText
+
+                                            <svg width="14"
+                                                 height="14">
+
+                                                <use href="#ic-arrow"></use>
+
+                                            </svg>
+
+                                        </span>
+                                    }
+
+                                </div>
+
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</header>
+
+<!-- ========================================================= -->
+
+<!-- OVERLAY -->
+
+<!-- ========================================================= -->
+
+<div class="overlay"
+     id="overlay"
+     aria-hidden="true">
+</div>
+
+<!-- ========================================================= -->
+
+<!-- SEARCH POPUP -->
+
+<!-- ========================================================= -->
+
+<div class="search-overlay"
+     id="searchOverlay"
+     aria-hidden="true">
+</div>
+
+<div class="search-popup"
+     id="searchPopup"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Site search"
+     aria-hidden="true">
+
+
+<div class="search-popup-inner">
+
+    <form class="search-form"
+          id="searchForm"
+          role="search">
+
+
+        <input type="text"
+               id="searchInput"
+               class="search-input"
+               placeholder="Search Nekta..."
+               autocomplete="off">
+
+
+        <button type="submit"
+                class="search-submit"
+                aria-label="Search">
+
+            <span>
+                Search
+            </span>
+
+        </button>
+
+
+        <button type="button"
+                class="search-close"
+                id="searchClose"
+                aria-label="Close search">
+
+            <svg width="18"
+                 height="18">
+
+                <use href="#ic-close"></use>
+
+            </svg>
+
+        </button>
+
+    </form>
+
+
+    <div class="search-hint">
+
+        Press <kbd>Esc</kbd> to close
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- ========================================================= -->
+
+<!-- MOBILE DRAWER -->
+
+<!-- ========================================================= -->
+
+<div class="drawer"
+     id="drawer"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Navigation menu">
+
+
+<!-- DRAWER HEADER -->
+
+<div class="drawer-head">
+
+    <div class="logo">
+
+        <img src="@(headerLogo?.ThumbImage ?? "/Assets/images/logo/Nekta-color.svg")"
+             class="max-w-max"
+             alt="@(headerLogo?.MenuName ?? "Logo")" />
+
+    </div>
+
+
+    <button class="drawer-close"
+            id="drawerClose"
+            type="button"
+            aria-label="Close menu">
+
+        <svg width="20"
+             height="20">
+
+            <use href="#ic-close"></use>
+
+        </svg>
+
+    </button>
+
+</div>
+
+
+<!-- DRAWER BODY -->
+
+<div class="drawer-body"
+     id="drawerBody">
+
+
+    <!-- HOME -->
+
+    <a href="/"
+       class="drawer-link">
+
+        <span class="ic">
+
+            <svg width="16"
+                 height="16">
+
+                <use href="#ic-home"></use>
+
+            </svg>
+
+        </span>
+
+        Home
+
+    </a>
+
+
+    <!-- DYNAMIC MENUS -->
+
+    @foreach (var parent in parentMenus)
+    {
+        var children = menus
+            .Where(x => x.ParentMenuId == parent.MenuId)
+            .OrderBy(x => Convert.ToInt32(x.Sequence))
+            .ToList();
+
+        var menuKey = !string.IsNullOrWhiteSpace(parent.MenuName)
+            ? parent.MenuName
+                .ToLower()
+                .Replace(" ", "-")
+                .Replace("&", "and")
+            : $"menu-{parent.MenuId}";
+
+
+        if (children.Any())
+        {
+            <!-- MOBILE ACCORDION -->
+
+            <div class="accordion-row"
+                 data-accordion
+                 data-menu="@menuKey">
+
+
+                <button type="button"
+                        class="accordion-trigger"
+                        aria-expanded="false">
+
+
+                    <span class="label">
+
+                        <span class="ic">
+
+                            <svg width="16"
+                                 height="16">
+
+                                <use href="#ic-info"></use>
+
+                            </svg>
+
+                        </span>
+
+                        @parent.MenuName
+
+                    </span>
+
+
+                    <svg class="chev"
+                         width="8"
+                         height="12">
+
+                        <use href="#ic-chevron-right"></use>
+
+                    </svg>
+
+                </button>
+
+
+                <div class="accordion-panel">
+
+                    <div class="accordion-panel-inner">
+
+
+                        <!-- MOBILE CALLOUT -->
+
+                        @if (!string.IsNullOrWhiteSpace(parent.FeatureTitle) ||
+                             !string.IsNullOrWhiteSpace(parent.FeatureDescription))
+                        {
+                            <div class="mobile-callout @menuKey">
+
+
+                                @if (!string.IsNullOrWhiteSpace(parent.FeatureTitle))
+                                {
+                                    <strong>
+                                        @parent.FeatureTitle
+                                    </strong>
+                                }
+
+
+                                @if (!string.IsNullOrWhiteSpace(parent.FeatureDescription))
+                                {
+                                    <span>
+                                        @Html.Raw(
+                                            parent.FeatureDescription
+                                                .CleanParagraphTags()
+                                        )
+                                    </span>
+                                }
+
+
+                            </div>
+                        }
+
+
+                        <!-- CHILDREN -->
+
+                        @foreach (var child in children)
+                        {
+                            <a href="@(child.Url ?? "#")"
+                               target="@(child.Target ?? "_self")">
+
+                                @child.MenuName
+
+                            </a>
+                        }
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <!-- SIMPLE MOBILE MENU -->
+
+            <a href="@(parent.Url ?? "#")"
+               class="drawer-link"
+               target="@(parent.Target ?? "_self")">
+
+                <span class="ic">
+
+                    <svg width="16"
+                         height="16">
+
+                        <use href="#ic-briefcase"></use>
+
+                    </svg>
+
+                </span>
+
+                @parent.MenuName
+
+            </a>
+        }
+    }
+
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MOBILE FOOTER -->
+<!-- ================================================= -->
+
+<div class="drawer-footer">
+
+    <a class="cta"
+       href="@(contactMenu?.Url ?? "/contact-us")"
+       target="@(contactMenu?.Target ?? "_self")">
+
+        @(contactMenu?.MenuName ?? "Contact us")
+
+        <svg width="14"
+             height="14">
+
+            <use href="#ic-arrow"></use>
+
+        </svg>
+
+    </a>
+
+</div>
+
+</div>
