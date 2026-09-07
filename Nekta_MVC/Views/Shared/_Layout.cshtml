@@ -47,12 +47,14 @@
   }
 
   <!-- Header -->
-@Html.Partial("~/Views/Shared/_Header.cshtml")
+ @* @Html.Partial("~/Views/Shared/_Header.cshtml") *@
+     @await Component.InvokeAsync("HeaderMenu")
 
   <main id="main-wrapper">
     @RenderBody()
 
-  @Html.Partial("~/Views/Shared/_Footer.cshtml") 
+   @* @Html.Partial("~/Views/Shared/_Footer.cshtml") *@
+      @await Component.InvokeAsync("FooterMenu")
 
   </main>
 <!-- Back to top button -->
