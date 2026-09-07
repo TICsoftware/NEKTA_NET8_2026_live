@@ -42,9 +42,8 @@ namespace Nekta_BusinessLogic.BAL
                 cont_window_title = row.Field<string>("cont_window_title") ?? "",
                 cont_metadesc = row.Field<string>("cont_metadesc") ?? "",
                 cont_metatag = row.Field<string>("cont_metatag") ?? "",
-                page_schema = row.Table.Columns.Contains("page_schema")
-                    ? row.Field<string>("page_schema") ?? ""
-                    : "",
+                page_schema = row.Table.Columns.Contains("page_schema") ? row.Field<string>("page_schema") ?? "" : "",
+                home_schema = row.Table.Columns.Contains("home_schema") ? row.Field<string>("home_schema") ?? "" : "",
                 Hmpg_thumbnail = row.Field<string>("Hmpg_thumbnail") ?? "",
                 Hmpg_thumbnail_alt_text = row.Field<string>("Hmpg_thumbnail_alt_text") ?? "",
                 Masthead_image_Alt_text = row.Field<string>("Masthead_alt_text") ?? "",
@@ -96,7 +95,7 @@ namespace Nekta_BusinessLogic.BAL
         {
             return Config_Application_Website.MapComponent(data, sequence, (group, dict) => new ComponentModel
             {
-                GroupId = group.GroupId,    
+                GroupId = group.GroupId,
                 Cont_Id = group.Fields.FirstOrDefault()?.Cont_Id ?? 0,
                 Title = Config_Application_Website.GetValue(dict, "Title", "Component Title"),
                 Intro = Config_Application_Website.GetValue(dict, "Intro", "Component Intro"),

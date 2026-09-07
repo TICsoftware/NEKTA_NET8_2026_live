@@ -17,7 +17,15 @@
         content = contentProp?.GetValue(Model) as ContentViewModel;
     }
 }
+
+@if (!string.IsNullOrWhiteSpace(content?.home_schema))
+{
+    @Html.Raw(content.home_schema.CleanParagraphTags())
+}
+
+
 @if (!string.IsNullOrWhiteSpace(content?.page_schema))
 {
     @Html.Raw(content.page_schema.CleanParagraphTags())
 }
+
