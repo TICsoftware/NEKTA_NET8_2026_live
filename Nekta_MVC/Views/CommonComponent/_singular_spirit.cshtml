@@ -26,7 +26,7 @@
         <div class="swiper mySwiper three-box-slider px-0 md:px-4 pt-10">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
-                @foreach (var item in Model.Where(x => x.IsBlock == 1))
+                @foreach (var item in Model.Where(x => x.IsBlock == 1).OrderBy(x => x.Sequence))
                 {
                     var introclass = "";
                     if (!string.IsNullOrWhiteSpace(item.Intro))
