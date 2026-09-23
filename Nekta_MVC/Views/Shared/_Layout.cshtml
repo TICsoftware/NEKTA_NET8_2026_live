@@ -47,12 +47,14 @@
   }
 
   <!-- Header -->
-@Html.Partial("~/Views/Shared/_Header.cshtml")
+ @* @Html.Partial("~/Views/Shared/_Header.cshtml") *@
+     @await Component.InvokeAsync("HeaderMenu")
 
   <main id="main-wrapper">
     @RenderBody()
 
-  @Html.Partial("~/Views/Shared/_Footer.cshtml") 
+   @* @Html.Partial("~/Views/Shared/_Footer.cshtml") *@
+      @await Component.InvokeAsync("FooterMenu")
 
   </main>
 <!-- Back to top button -->
@@ -100,6 +102,7 @@
   <script src="~/Assets/js/common-script.js"></script>
   <script src="~/Assets/js/title-animation.js"></script>
    <script src="~/Assets/js/swiper-bundle.min.js"></script>
+   <script src="~/scripts/Search/Search_Home.js" asp-append-version="true"></script>
   <!-- <script defer type="text/javascript" src="~/Assets/js/cookie-script.js"></script> -->
   
 

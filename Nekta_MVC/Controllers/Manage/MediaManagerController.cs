@@ -9,6 +9,7 @@ using Nekta_MVC.Models.Manage_Model;
 using Microsoft.AspNetCore.Mvc;
 using Nekta_MVC.Filters;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
 
 
 namespace Nekta_MVC.Controllers.Manage
@@ -86,14 +87,16 @@ namespace Nekta_MVC.Controllers.Manage
                 foreach (var file in files)
                 {
                     string ext = Path.GetExtension(file.FileName);
-                    string newName = file.FileName;  // use same name
+                    string newName = Regex.Replace(Path.GetFileName(file.FileName).Trim(), @"\s+", "-");
+                    //string newName = file.FileName;  // use same name
                     string fullPath = Path.Combine(basePath, newName);
 
                     string dbPath = $"/uploads/{folderName}/{newName}";
 
                     var media = new MediaItem
                     {
-                        media_file_name = file.FileName,
+                        //media_file_name = file.FileName,
+                        media_file_name = newName,
                         file_path = dbPath,
                         file_type = ext.Replace(".", ""),
                         //file_size = Math.Round(file.Length / 1024.0, 2) + " KB",
