@@ -52,6 +52,16 @@
     --tb-cols: 1;
 }
 
+.link-dark :hover
+
+ {
+    color: var(--color-primary) !important;
+}
+
+.link-md:hover img {
+    filter: brightness(0) invert(1);
+}
+
 @media (min-width: 768px) {
     .three-box-slider {
         --tb-cols: 2;

@@ -527,6 +527,8 @@ ease:"power2.out"
   var buttons = document.querySelectorAll('.read-more-btn');
 
   buttons.forEach(function (btn) {
+    if (btn.closest('.curveshape-wrap')) return;
+
     // Walk up from the button to find the nearest .read-more-fade that appears before it,
     // searching within the closest shared container rather than assuming direct siblings.
     var container = btn.closest('.container') || btn.parentElement.parentElement || btn.parentElement;
@@ -545,6 +547,7 @@ ease:"power2.out"
 })();
 
 // Page intro: hide 3rd+ paragraphs behind Read More
+// Curve intro: show Read More only when there are more than 3 paragraphs
 (function () {
   function meaningfulParas(wrap) {
     var direct = Array.prototype.filter.call(wrap.children, function (el) {
@@ -556,6 +559,29 @@ ease:"power2.out"
     });
   }
 
+  function wrapExtraParas(anchorPara, extraParas) {
+    var extra = document.createElement('div');
+    extra.className = 'intro-readmore-extra';
+    var inner = document.createElement('div');
+    inner.className = 'intro-readmore-extra-inner';
+    extraParas.forEach(function (p) {
+      inner.appendChild(p);
+    });
+    extra.appendChild(inner);
+    anchorPara.after(extra);
+    return extra;
+  }
+
+  function bindReadMore(btn, extra) {
+    var label = btn.querySelector('.read-more-label');
+    btn.addEventListener('click', function () {
+      var expanded = extra.classList.toggle('is-expanded');
+      btn.classList.toggle('is-expanded', expanded);
+      btn.setAttribute('aria-expanded', String(expanded));
+      if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
+    });
+  }
+
   document.querySelectorAll('.page-intro-section .intro-outer-wrapper').forEach(function (wrap) {
     if (wrap.getAttribute('data-intro-readmore') === 'ready') return;
 
@@ -564,15 +590,7 @@ ease:"power2.out"
 
     wrap.setAttribute('data-intro-readmore', 'ready');
 
-    var extra = document.createElement('div');
-    extra.className = 'intro-readmore-extra';
-    var inner = document.createElement('div');
-    inner.className = 'intro-readmore-extra-inner';
-    paras.slice(2).forEach(function (p) {
-      inner.appendChild(p);
-    });
-    extra.appendChild(inner);
-    paras[1].after(extra);
+    var extra = wrapExtraParas(paras[1], paras.slice(2));
 
     var btn = document.createElement('button');
     btn.type = 'button';
@@ -581,13 +599,27 @@ ease:"power2.out"
     btn.innerHTML = '<span class="read-more-label">Read More</span> <span class="read-more-plus">+</span>';
     extra.after(btn);
 
-    var label = btn.querySelector('.read-more-label');
-    btn.addEventListener('click', function () {
-      var expanded = extra.classList.toggle('is-expanded');
-      btn.classList.toggle('is-expanded', expanded);
-      btn.setAttribute('aria-expanded', String(expanded));
-      if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
-    });
+    bindReadMore(btn, extra);
+  });
+
+  document.querySelectorAll('.curveshape-wrap .curve-intro-copy').forEach(function (wrap) {
+    if (wrap.getAttribute('data-intro-readmore') === 'ready') return;
+
+    var section = wrap.closest('.curveshape-wrap');
+    var btnWrap = section ? section.querySelector('.curve-readmore-wrap') : null;
+    var btn = btnWrap ? btnWrap.querySelector('.read-more-btn') : null;
+    var paras = meaningfulParas(wrap);
+
+    if (paras.length <= 3) {
+      if (btnWrap) btnWrap.classList.add('hidden');
+      return;
+    }
+
+    wrap.setAttribute('data-intro-readmore', 'ready');
+
+    var extra = wrapExtraParas(paras[2], paras.slice(3));
+    if (btnWrap) btnWrap.classList.remove('hidden');
+    if (btn) bindReadMore(btn, extra);
   });
 })();
 
