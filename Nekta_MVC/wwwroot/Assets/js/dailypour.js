@@ -2,14 +2,40 @@
     var btn = document.getElementById('dpReadMoreBtn');
     var label = document.getElementById('dpReadMoreLabel');
     var paragraph = document.getElementById('dpFadeParagraph');
-    if (!btn || !paragraph) return;
+    var img = document.querySelector('.daily-pour-section .dp-image-wrap');
+    var text = document.querySelector('.daily-pour-section .dp-text-block');
 
-    btn.addEventListener('click', function () {
-      var expanded = paragraph.classList.toggle('is-expanded');
-      btn.classList.toggle('is-expanded', expanded);
-      btn.setAttribute('aria-expanded', String(expanded));
-      label.textContent = expanded ? 'Read Less' : 'Read More';
-    });
+    function centerTextBesideImage() {
+      if (!img || !text) return;
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        text.style.paddingTop = '';
+        return;
+      }
+      if (paragraph && paragraph.classList.contains('is-expanded')) return;
+
+      text.style.paddingTop = '0px';
+      var offset = Math.max(0, Math.round((img.offsetHeight - text.offsetHeight) / 2));
+      text.style.paddingTop = offset + 'px';
+    }
+
+    if (btn && paragraph) {
+      btn.addEventListener('click', function () {
+        var expanded = paragraph.classList.toggle('is-expanded');
+        btn.classList.toggle('is-expanded', expanded);
+        btn.setAttribute('aria-expanded', String(expanded));
+        if (label) label.textContent = expanded ? 'Read Less' : 'Read More';
+        if (!expanded) centerTextBesideImage();
+      });
+    }
+
+    centerTextBesideImage();
+    window.addEventListener('resize', centerTextBesideImage);
+
+    var pic = img && img.querySelector('img');
+    if (pic && !pic.complete) pic.addEventListener('load', centerTextBesideImage);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(centerTextBesideImage);
+    }
   })();
 
 

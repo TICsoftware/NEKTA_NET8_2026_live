@@ -335,8 +335,15 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
     .cu-plate-left {
     left: -12%;
     bottom: -3%;}
+        .counter-divider {
+        display: none;
+        width: 60px;
+        height: 1px;
+    }
 
 }
+
+
 
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 .bc-dining-deco--basil {width: 22vw;}

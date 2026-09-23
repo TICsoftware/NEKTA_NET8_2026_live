@@ -206,22 +206,51 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  function clearAllActive() {
-    states.forEach((s) => s.classList.remove('active'));
-    items.forEach((i) => i.classList.remove('active', 'linked-active'));
+  let currentActive = null;
+  let restoreTimer = null;
+
+  function clearVisual() {
+    states.forEach((s) => s.classList.remove('active', 'hover-linked'));
+    items.forEach((i) => i.classList.remove('active', 'linked-active', 'linked-hover'));
     wrapper.classList.remove('has-active');
   }
 
-  function activateLocation(location) {
-    clearAllActive();
+  function showVisual(location) {
+    clearVisual();
+    if (!location) return;
 
     const state = getStateByLocation(location);
     const item = getItemByLocation(location);
 
-    if (state) state.classList.add('active');   // <-- map-state gets "active" class here
+    if (state) state.classList.add('active');
     if (item) item.classList.add('linked-active');
-
     wrapper.classList.add('has-active');
+  }
+
+  function clearAllActive() {
+    currentActive = null;
+    clearVisual();
+  }
+
+  function activateLocation(location) {
+    currentActive = location || null;
+    showVisual(currentActive);
+  }
+
+  function previewLocation(location) {
+    if (restoreTimer) {
+      clearTimeout(restoreTimer);
+      restoreTimer = null;
+    }
+    showVisual(location);
+  }
+
+  function endPreview() {
+    if (restoreTimer) clearTimeout(restoreTimer);
+    restoreTimer = setTimeout(() => {
+      showVisual(currentActive);
+      restoreTimer = null;
+    }, 80);
   }
 
   // ---------- 1. Position line + label for every map-item ----------
@@ -321,13 +350,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!location) return;
 
     item.addEventListener('mouseenter', () => {
-      const state = getStateByLocation(location);
-      if (state) state.classList.add('hover-linked');
+      previewLocation(location);
     });
 
     item.addEventListener('mouseleave', () => {
-      const state = getStateByLocation(location);
-      if (state) state.classList.remove('hover-linked');
+      endPreview();
     });
   });
 
@@ -336,13 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const location = state.getAttribute('data-location');
 
     state.addEventListener('mouseenter', () => {
-      const item = getItemByLocation(location);
-      if (item) item.classList.add('linked-hover');
+      previewLocation(location);
     });
 
     state.addEventListener('mouseleave', () => {
-      const item = getItemByLocation(location);
-      if (item) item.classList.remove('linked-hover');
+      endPreview();
     });
   });
 
@@ -377,6 +402,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Open Mumbai by default. Hover and click still work as before.
+  const defaultItem = Array.from(items).find((item) => {
+    const loc = item.querySelector('.map-hover')?.getAttribute('data-location') || '';
+    const label = item.querySelector('.map-label')?.textContent?.trim() || '';
+    return loc.toLowerCase() === 'mumbai' || label.toLowerCase() === 'mumbai';
+  });
+  const defaultLocation = defaultItem?.querySelector('.map-hover')?.getAttribute('data-location');
+  if (defaultLocation) {
+    activateLocation(defaultLocation);
+  }
 });
 
 

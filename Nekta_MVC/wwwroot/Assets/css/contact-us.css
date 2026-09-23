@@ -674,6 +674,9 @@ position: absolute;
     transform:rotate(8deg);
 }
 
+
+
+
 @media (min-width:768px) and (max-width:1279px){
     .cu-plate-left{
         left:-4%;
@@ -987,3 +990,55 @@ position: absolute;
 
 
   }
+
+  .reach-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.reach-line > p:first-child {
+    flex: 0 0 18px;
+    margin: 0;
+}
+
+.reach-line > p:first-child .reach-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* Email id : */
+.reach-line > h4 {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+/* Email address */
+.reach-line > p:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.reach-line > p:last-child a {
+    display: block;
+    max-width: 100%;
+}
+
+.reach-line .reach-value {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}

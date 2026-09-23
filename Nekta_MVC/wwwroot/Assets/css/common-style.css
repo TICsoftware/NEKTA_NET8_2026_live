@@ -153,6 +153,10 @@ Leaf travel CSS
     gap: 1rem;
     flex-direction: column;
 }
+
+.search-hint{
+    display: none !important;   
+}
 }
 
 
@@ -268,18 +272,22 @@ Leaf travel CSS
   transform: rotate(45deg);
 }
 
-.page-intro-section .intro-readmore-extra {
+.page-intro-section .intro-readmore-extra,
+.curveshape-wrap .intro-readmore-extra {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.45s ease;
+  width: 100%;
 }
 
-.page-intro-section .intro-readmore-extra-inner {
+.page-intro-section .intro-readmore-extra-inner,
+.curveshape-wrap .intro-readmore-extra-inner {
   min-height: 0;
   overflow: hidden;
 }
 
-.page-intro-section .intro-readmore-extra.is-expanded {
+.page-intro-section .intro-readmore-extra.is-expanded,
+.curveshape-wrap .intro-readmore-extra.is-expanded {
   grid-template-rows: 1fr;
 }
 

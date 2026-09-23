@@ -91,7 +91,7 @@
     display:grid;
     grid-template-columns: repeat(2,1fr);
     gap:4rem;
-    align-items:center;
+    align-items:start;
 }
 
 .dp-image-wrap{
@@ -1158,18 +1158,18 @@ font-size: 3.75rem;
     margin: 0 0 16px;
   }
  
-  .backbone-footer p.dp-fade,
+  .backbone-footer > p.dp-fade,
   .backbone-footer .backbone-copy.dp-fade {
     position: relative;
-    max-height: 4.9em;
+    max-height: 5.1em;
     overflow: hidden;
     margin: 0 0 14px;
-    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
-            mask-image: linear-gradient(to bottom, #000 60%, transparent 97%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
     transition: max-height 0.4s ease, -webkit-mask-image 0.3s ease;
   }
  
-  .backbone-footer p.dp-fade.is-expanded,
+  .backbone-footer > p.dp-fade.is-expanded,
   .backbone-footer .backbone-copy.dp-fade.is-expanded {
     max-height: 30em;
     -webkit-mask-image: none;
