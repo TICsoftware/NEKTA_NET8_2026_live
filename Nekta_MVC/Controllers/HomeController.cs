@@ -30,9 +30,8 @@ public class HomeController : Controller
         //ViewBag.encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr);
       
         string encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr1);
-
-
-
+ 
+      
 
         var data = _bal.GetHomepage_BAL(1, 1);
         ViewData["Content"] = data?.Home_Content;
