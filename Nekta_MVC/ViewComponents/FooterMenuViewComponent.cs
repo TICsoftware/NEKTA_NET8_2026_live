@@ -7,7 +7,7 @@ using Nekta_BusinessLogic.BAL;
 using Nekta_BusinessLogic.Common;
 using Nekta_BusinessLogic.Entity;
 
-namespace Priya_Cement_MVC.ViewComponents
+namespace Nekta_MVC.ViewComponents
 {
     public class FooterMenuViewComponent : ViewComponent
     {
