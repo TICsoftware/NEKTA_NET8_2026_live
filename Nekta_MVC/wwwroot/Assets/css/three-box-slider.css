@@ -52,7 +52,7 @@
     --tb-cols: 1;
 }
 
-.link-dark :hover
+.link-dark:hover
 
  {
     color: var(--color-primary) !important;

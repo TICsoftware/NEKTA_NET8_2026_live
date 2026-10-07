@@ -14,9 +14,10 @@
 .dot-col-3{ left:66.666%; }
 .dot-col-4{ left:100%; }
 
-.dot-row-1{ top:0%; }
-.dot-row-2{ top:50%; }
-.dot-row-3{ top:100%; }
+.dot-row-1 { top: 0%; }
+.dot-row-2 { top: 32.333%; }
+.dot-row-3 { top: 64.666%; }
+.dot-row-4 { top: 100%; }
 .cu-hero-title { font-weight: 400; font-size: clamp(30px, 2.7vw, 52px); letter-spacing: -0.02em; line-height: 1.52; color: #f6f6f6;}
 
 /* ---------- ENQUIRY FORM SECTION ---------- */
@@ -31,6 +32,7 @@
   .cu-field--full { grid-column: 1 / -1;}
 }
 
+.cu-field-error {font-size:14px}
 .cu-field label {  display: block;  font-size: var(--text-small);  font-weight: 500;  color: #f6f6f6;  margin-bottom: 8px;}
 .cu-field label .req {  color: var(--color-primary);}
 .cu-field input,
@@ -295,9 +297,16 @@
   /* .office-card:nth-child(1n){
     border-left:none;
   } */
-  .office-card:nth-child(n+4){
+  /* .office-card:nth-child(n+4){
     border-bottom:none;
-  }
+  } */
+
+  .office-card:nth-child(7) {
+    border-left: 2px dashed var(--line);
+}
+.office-card:nth-child(8) {
+    border-bottom: none;
+}
   .offices-grid{
     border-top:2px dashed var(--line);
   }

@@ -134,7 +134,7 @@ Leaf travel CSS
 .leaf-travel-anim{
     position:absolute;
     top: 10vw;
-    right: 10vw;
+    right: 4vw;
     left: auto;
     width: clamp(72px, 9vw, 135px);
     height: auto;
