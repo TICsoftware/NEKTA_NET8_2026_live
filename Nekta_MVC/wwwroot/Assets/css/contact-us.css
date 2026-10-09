@@ -62,7 +62,7 @@
 .cu-leaf-deco { position: absolute;  pointer-events: none;  user-select: none;}
 
 /* ---------- HOW TO REACH US ---------- */
-  .reach-section{ position:relative; overflow:hidden; background-color: var(  --color-darkcream);}
+  .reach-section{ position:relative; overflow: hidden; background-color: var(  --color-darkcream);}
 
   /* ---------- Heading ---------- */
   .reach-heading-wrap{
@@ -359,6 +359,8 @@
     border-bottom:1px solid var(--terracotta);
     padding-bottom:2px;
     transition:gap 0.2s ease, opacity 0.2s ease;
+    position: absolute;
+    bottom: 15px;
   }
   .view-map:hover{
     gap:10px;
@@ -873,6 +875,11 @@ position: absolute;
 .reach-line h4 {font-size: 1.2rem;}
 .reach-value {font-size: 0.875rem;}
 
+.view-map{
+  position:relative;
+  bottom:0;
+}
+
 
   }
 
@@ -971,7 +978,7 @@ position: absolute;
 
   /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
-
+ .cu-follow-section .section-title-outer  {max-width: 55vw}
 }
 
 
@@ -984,18 +991,22 @@ position: absolute;
   .cu-leaf-right { right: -2vw;}
 
   .careers p {text-align: center;max-width: 515px; margin: 15px auto;}
-  .deco-plate { position: absolute; bottom: -7vw; left: -7%; width: 33vw; z-index: 1;}
-  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 28vw;z-index: 1;}
+  .deco-plate { position: absolute; bottom: 0vw; left: -4%; width: 25vw; z-index: 1;}
+  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 25vw;z-index: 1;}
   .offices-grid-wrap {width: 800px; margin: 0 auto;}
 
   .solutions-salad {
-    position: absolute;
-    top: -6vw;
-    left: -11vw;
-    max-width: 48vw;}
+    position: absolute;top: -9vw; left: -1vw; max-width: 30vw;}
     .solutions-grid {gap: 10px;}
     .solutions-circle { position: absolute; left: 5vw; bottom: 6vw; width: 21vw;}
     .solutions-splash {position: absolute;top: 33%;right: -12%;height: 85%;}
+    .dot-row-2 {top: 31.6%;}
+    .dot-row-3 { top: 63.2%;}
+    .cu-follow-section .section-title-outer  {max-width: 65vw}
+    .reach-card {padding: 36px 35px 44px;}
+    .office-card {padding: 33px 28px 40px !important;}
+
+
 
 
   }

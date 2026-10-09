@@ -634,3 +634,10 @@ html.bc-edge-modal-open body {
     }
     
 }
+
+
+ /* 150% */
+  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi){
+    .bc-edge-section .bc-deco {max-width: 20vw;}
+        .edge-card-text { max-width: 100vw;}
+  }
