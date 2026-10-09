@@ -217,6 +217,9 @@ Leaf travel CSS
 
 .text-h2 {font-size: 3.375rem}
  p {font-size: 1rem !important; }
+ .intro-section-wrap p {
+    font-size: var(--text-22) !important;
+}
 .section-title-center {max-width: 800px;}
 .md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
 .h-170 {height: calc(var(--spacing) * 130);}
