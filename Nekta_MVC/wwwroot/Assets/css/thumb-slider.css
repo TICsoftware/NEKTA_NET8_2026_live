@@ -13,7 +13,7 @@
 .thumb-track {display: flex; align-items: flex-start; gap: 12px;overflow-x: auto;scroll-behavior: smooth;scrollbar-width: none; flex: 1;  padding: 40px 20px;
    margin: -40px -20px;}
 .thumb-track::-webkit-scrollbar { display: none; }
-.thumb-arrow {display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 0;   background: var(--color-cream); cursor: pointer;flex-shrink: 0;font-size: 1.2rem;}
+.thumb-arrow {display: none; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 0;   background: var(--color-cream); cursor: pointer;flex-shrink: 0;font-size: 1.2rem; z-index:123}
 .thumb-grid-wrapper.has-overflow .thumb-arrow { display: flex; }
 
 .thumb-slider-main { position: relative; overflow: hidden; border-radius: 24px; }

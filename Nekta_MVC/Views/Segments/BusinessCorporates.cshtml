@@ -250,7 +250,7 @@
     </div> *@
 
     @* newslider *@
-    <div class="bc-arch-slider bc-arch-center" data-center-slider>
+    @* <div class="bc-arch-slider bc-arch-center" data-center-slider>
 
         <div class="bc-arch-viewport">
             <div class="bc-arch-track">
@@ -275,7 +275,43 @@
             <button class="bc-arch-nav bc-arch-next" type="button" aria-label="Next">&#10095;</button>
         </div>
 
+    </div> *@
+    @* ==================== NEKTA'S EDGE – ARCH CARDS ==================== *@
+@* Desktop/tablet: static arch cards, click opens popup.
+   Mobile (<=767px): swipe slider with prev/next, text shown inside the centered card. *@
+<div class="bc-edge-wrap" data-edge-grid>
+
+    <div class="bc-edge-grid">
+        @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 1))
+        {
+            <div class="bc-edge-card" role="button" tabindex="0" aria-haspopup="dialog"
+                 aria-label="Read more about @item.Title">
+                @* "Read More +" badge at the top of the arch — tells users the card opens more info *@
+                <span class="bc-edge-card__badge" aria-hidden="true">Read More <i>+</i></span>
+
+                <div class="bc-edge-card__inner">
+                    <img loading="lazy" class="bc-edge-card__icon" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+                    <h3 class="bc-edge-card__title">@item.Title</h3>
+
+                    @* hidden on desktop (shown in popup), visible in the mobile slider *@
+                    <div class="edge-content bc-edge-card__text">@Html.Raw(item.Intro.CleanParagraphTags())</div>
+
+                    @* mobile only: tap hint on the centered card *@
+                    <span class="bc-edge-card__more" aria-hidden="true">Read More <span>+</span></span>
+                </div>
+            </div>
+        }
     </div>
+
+    <div class="bc-edge-controls">
+        <button type="button" class="bc-edge-nav bc-edge-prev" aria-label="Previous">&#10094;</button>
+        <button type="button" class="bc-edge-nav bc-edge-next" aria-label="Next">&#10095;</button>
+    </div>
+
+</div>
+
+
+
 
 
 

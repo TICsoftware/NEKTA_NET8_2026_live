@@ -79,6 +79,11 @@ right: -9vw;
     .story-gallery-left {left: -20vw !important;bottom: -12vw !important;}
     .story-gallery-right .story-turmuric {bottom: 2vw !important; left: 12vw !important;}
     .story-gallery-right .story-leaf {left: 10vw !important;bottom: -6vw !important;}
+            .edge-card-text {
+        font-size: 1rem;
+        max-width: 80vw;
+    }
+
 }
 
 
@@ -87,4 +92,10 @@ right: -9vw;
     .story-gallery-right .story-turmuric {bottom: 4vw !important; left: 5vw !important;}
     .story-gallery-right .story-leaf {left: 4vw !important;bottom: -6vw !important;}
  }
+
+ /* 150% */
+  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+
+ }
+
 

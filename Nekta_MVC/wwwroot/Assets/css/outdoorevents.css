@@ -101,6 +101,10 @@
 /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
     .bc-catering-deco--fork { left: -13vw;}
+                .edge-card-text {
+        font-size: 1rem;
+        max-width: 80vw;
+    }
 }
 
 
@@ -119,4 +123,6 @@
     }
  .bc-catering-deco--fork { left: -15vw;}
     }
+    
+
     

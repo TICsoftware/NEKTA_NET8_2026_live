@@ -201,6 +201,8 @@ backface-visibility: hidden;
     background: #5f7a64;
     z-index: 20;
 }
+
+.testimonial-card:hover
 .testimonial-card:hover p, .testimonial-card:hover h5{color: #fff;}
 .testimonial-text {
     color: var(--color-copy);

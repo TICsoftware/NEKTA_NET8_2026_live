@@ -13,7 +13,6 @@
 .bc-plate-mini{position: absolute; top: 30px; right: -20px; z-index: 3;}
 
 
-
 /* ---------- DELIVERING EXPERIENCES ---------- */
 .bc-experience-section {  position: relative;}
 .bc-plate-wrap { position: relative; width: min(88%, 620px); margin-inline: auto; aspect-ratio: 1 / 1; border-radius: 50%; padding: clamp(16px, 3vw, 35px);}
@@ -38,10 +37,10 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .curveshape-wrap svg {position: absolute;top: 0;left: 0;width: 100%;height: 100%; display: block; overflow: visible;}
 
 
-
-
-/* ---------- NEKTA'S EDGE (arch cards) ---------- */
+/* ---------- NEKTA'S EDGE section ---------- */
 .bc-edge-section { position: relative; background-color: var(--color-cream); overflow: hidden;}
+
+/* ---------- OLD ARCH GRID (.bc-arch-grid / .bc-arch-card) — kept in case other sections still use it ---------- */
 .bc-arch-grid { display: grid;grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem;}
 
 .bc-arch-card {position: relative; border: 1px solid var(--color-green); border-radius: 336px 336px 0 0; aspect-ratio: 320 / 416;    display: flex; flex-direction: column; justify-content:center; align-items: center; text-align: center; padding: 1rem 1rem 2.5rem; overflow: hidden; transition: background-color var(--motion-base) var(--ease-premium);}
@@ -54,90 +53,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-arch-card:hover img {transform: translateY(-4px) scale(1.05);}
 
 
-/* Nekta edge making slider */
-.bc-arch-center { position: relative; display: flex; flex-direction: column;align-items: center; gap: 12px; padding: 0px 20px 40px;  }
-.bc-arch-center .bc-arch-viewport { overflow: hidden; width: 100%; height: 580px; padding:20px 0px ; touch-action: pan-y; cursor: grab; user-select: none;}
-.bc-arch-center .bc-arch-viewport.is-dragging { cursor: grabbing; }
-.bc-arch-center .bc-arch-track {display: flex;align-items: flex-end;  gap: 24px; height: 100%; will-change: transform; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);}
-.bc-arch-center .bc-arch-card {flex: 0 0 auto; aspect-ratio: auto; width: 260px; height: 320px; min-height: 320px; max-height: 320px; align-self: flex-end; box-sizing: border-box; cursor: pointer; opacity: 0.45;
- transform: scale(0.82);
- padding-top: 1.25rem;
- transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-             height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-             min-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-             max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-             transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-             opacity 0.55s ease,
-             filter 0.55s ease,
-             padding-top 0.55s cubic-bezier(0.22, 1, 0.36, 1);
- filter: grayscale(30%);
- overflow: hidden;
- justify-content: flex-end;
- padding-bottom: 2.5rem;
-}
-
-.bc-arch-center .bc-arch-card.is-active {
-    width: 600px;
-    height: 560px;
-    min-height: 560px;
-    max-height: 560px;
-    opacity: 1;
-    transform: scale(1);
-    z-index: 3;
-    overflow: hidden;
-    justify-content: flex-end;
-    padding-top: clamp(2rem, 10%, 3.5rem);
-    padding-bottom: 2.5rem;
-    filter: grayscale(0);
-}
-
-.bc-arch-center .bc-arch-card img,
-.bc-arch-center .bc-arch-card h3 {
-    flex-shrink: 0;
-    -webkit-user-drag: none;
-    user-select: none;
-    transition:
-        opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Copy waits for content-ready so the arch never goes blank while growing */
-.bc-arch-center .bc-arch-card p.edge-content {
-    max-height: 0;
-    margin-top: 0;
-    overflow: hidden;
-    pointer-events: none;
-    flex-shrink: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-        max-height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-        margin-top 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.22s ease,
-        transform 0.22s ease;
-}
-
-.bc-arch-center .bc-arch-card.is-active.content-ready p.edge-content {
-    max-height: 360px;
-    margin-top: 16px;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    transition:
-        max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.04s,
-        margin-top 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.04s,
-        opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s,
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
-}
-
-@media (max-width: 640px) {
-
-.bc-arch-center .bc-arch-card { width: 100%;}
-
-}
-
-/* remove old absolute positioning for nav buttons */
+/* arch slider controls — used by the [data-slider] slider (bc-arch-track / prev / next / dots) */
 .bc-arch-nav {
     position: static;        
     transform: none;
@@ -201,8 +117,6 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 }
 @media (min-width: 1280px) {
     .bc-arch-grid {grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0;}
-}
-@media (min-width: 1280px) {
     .bc-arch-card + .bc-arch-card {margin-left: -1px;margin-bottom: -1px;}
 }
 @media (min-width: 1024px) {
@@ -230,66 +144,8 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
   .bc-arch-grid {padding: 0 20px;}
   .bc-dining-deco--basil {display: none;}
 
-  /*  nekta edge cards css*/
-    .bc-arch-center { padding: 0 16px 28px; }
-    .bc-arch-center .bc-arch-viewport {
-        height: auto;
-        padding: 8px 0;
-    }
-    .bc-arch-center .bc-arch-track {
-        gap: 0;
-        align-items: flex-start;
-        height: auto;
-    }
-    .bc-arch-center .bc-arch-card {
-        width: 100%;
-        height: auto;
-        min-height: 360px;
-        max-height: none;
-        opacity: 0;
-        pointer-events: none;
-        transform: none;
-        filter: none;
-        justify-content: flex-start;
-        padding: 5.5rem 1.4rem 1.6rem;
-        overflow: hidden;
-        align-self: flex-start;
-    }
-    .bc-arch-center .bc-arch-card.is-active {
-        width: 100%;
-        height: auto;
-        min-height: 360px;
-        max-height: none;
-        opacity: 1;
-        pointer-events: auto;
-        transform: none;
-        justify-content: flex-start;
-        padding: 5.5rem 1.4rem 1.6rem;
-    }
-    .bc-arch-center .bc-arch-card h3 {
-        font-size: 1.45rem;
-        line-height: 1.2;
-        max-width: 16ch;
-        padding: 0 0.25rem;
-    }
-    .bc-arch-center .bc-arch-card img {
-        width: 48px;
-        margin-bottom: 8px;
-    }
-    .bc-arch-center .bc-arch-card.is-active.content-ready p.edge-content {
-        max-height: none;
-        overflow: visible;
-        font-size: 0.875rem;
-        line-height: 1.45;
-        margin-top: 10px;
-        padding: 0 0.15rem;
-    }
     .curveshape-wrap { min-height: 50vh;padding-top: 8vw;}
 }
-
-
-
-
 
 
  
@@ -301,16 +157,9 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
     /* .bc-dining-deco--basil { width: 20vw; right: 1vw;} */
     .bc-polaroid--right { width: clamp(210px, 10vw, 449px);}
     .bc-edge-section .section-title-outer {max-width: 58vw;}
-    /* .bc-arch-center .bc-arch-card.is-active {width: 638px;min-height: 550px;} */
     
 
 }
-
-/* 1920px 150% */
- @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
-
-
- }
 
  /* Small screen laptop */
  @media (min-width: 1200px) and (max-width: 1366px) {
@@ -320,9 +169,468 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-dining-intro {max-width: 60%;}
 /* .bc-dining-deco--basil { width: 25vw; right: 1vw;} */
 .bc-edge-section .section-title-outer { max-width: 60vw;}
-.edge-content {font-size: 14px !important;}
-.bc-arch-center .bc-arch-card.is-active { width: 540px; height: 450px; min-height: 450px; max-height: 450px; opacity: 1; transform: scale(1); z-index: 3; overflow: hidden; justify-content: flex-end; padding-top: clamp(1.5rem, 8%, 2.5rem);}
-.bc-arch-center .bc-arch-card.is-active.content-ready p.edge-content { max-height: 260px; }
 .bc-arch-card + .bc-arch-card {  margin-left: 5px; margin-bottom: -10px;}
-.bc-arch-center .bc-arch-viewport { overflow: hidden; width: 100%; height: 495px; padding:20px 0px ;}
+}
+
+
+/* ==================== NEKTA EDGE – STATIC ARCH CARDS ==================== */
+
+/* flex + center: works for any number of cards (5, 6 …) — leftovers stay centered */
+.bc-edge-grid {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1760px;
+    margin: 60px auto 0;
+    padding: 0 40px;
+}
+
+.bc-edge-card {
+    position: relative;
+    flex: 0 0 calc(100% / 6);          /* card width = 1/6 of the row, same on every page */
+    min-width: 0;
+    aspect-ratio: 330 / 430;
+    margin-left: -1px;                 /* neighbouring arches share one border line */
+    border: 1px solid #8fa58c;
+    border-bottom: 0;
+    border-radius: 999px 999px 0 0;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.35s ease;
+}
+
+.bc-edge-card:first-child {
+    margin-left: 0;
+}
+
+.bc-edge-card__inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 14px;
+    text-align: center;
+}
+
+.bc-edge-card__icon {
+    display: block;
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 14px;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bc-edge-card__title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #2b2b2b;
+    min-height: 2.2em;                  /* keeps one-line and two-line titles on the same baseline */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* intro text: hidden on desktop (it opens in the popup), shown in the mobile slider */
+.bc-edge-card__text {
+    display: none;
+}
+
+/* "Read More +" hint: mobile only */
+/* ---------- "click for more" indicator ---------- */
+
+/* "Read More +" pill badge at the top of the arch — appears on hover / keyboard focus (desktop / tablet) */
+.bc-edge-card__badge {
+    position: absolute;
+    top: 14%;
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px 7px 16px;
+    border: 1px solid #5f7a5c;
+    border-radius: 999px;
+    background: #5f7a5c;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    pointer-events: none;               /* the whole card is the click target */
+    opacity: 0;
+    transform: translate(-50%, 10px);
+    transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bc-edge-card__badge i {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.4s ease 0.1s;
+}
+
+.bc-edge-card:hover .bc-edge-card__badge,
+.bc-edge-card:focus-visible .bc-edge-card__badge {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.bc-edge-card:hover .bc-edge-card__badge i,
+.bc-edge-card:focus-visible .bc-edge-card__badge i {
+    transform: rotate(90deg);
+}
+
+
+/* "Read More +" link under the title — mobile only (styled in the mobile block) */
+.bc-edge-card__more {
+    display: none;
+}
+
+/* prev / next buttons — mobile slider only (styled in the mobile block) */
+.bc-edge-controls {
+    display: none;
+}
+
+/* hover / keyboard focus */
+.bc-edge-card:hover,
+.bc-edge-card:focus-visible {
+    background-color: rgba(143, 165, 140, 0.12);
+}
+
+.bc-edge-card:hover .bc-edge-card__icon,
+.bc-edge-card:focus-visible .bc-edge-card__icon {
+    transform: translateY(-8px);
+}
+
+.bc-edge-card:focus-visible {
+    box-shadow: inset 0 0 0 2px #8fa58c;
+}
+
+/* ---------- Laptop ---------- */
+@media (max-width: 1366px) {
+    .bc-edge-grid { padding: 0 24px; }
+    .bc-edge-card__icon { width: 72px; height: 72px; }
+    .bc-edge-card__title { font-size: 21px; }
+    .bc-edge-card__inner { bottom: 28px; }
+}
+
+/* ---------- Tablet: 3 per row ---------- */
+@media (max-width: 1024px) {
+    .bc-edge-card { flex-basis: calc(100% / 3); }
+    .bc-edge-card:nth-child(3n + 1) { margin-left: 0; }
+    .bc-edge-card { border-bottom: 1px solid #8fa58c; }
+    .bc-edge-card__title { font-size: 22px; }
+}
+
+/* ---------- Mobile: swipe slider with prev / next ---------- */
+@media (max-width: 767px) {
+    .bc-edge-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;        /* centering a scroll row would cut off the first card */
+        gap: 12px;
+        margin-top: 36px;
+        padding: 0 12%;                     /* lets the first / last card sit in the center */
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .bc-edge-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .bc-edge-card,
+    .bc-edge-card:first-child,
+    .bc-edge-card:nth-child(3n + 1) {
+        flex: 0 0 76%;
+        margin-left: 0;
+        aspect-ratio: 300 / 395;
+        border-bottom: 1px solid #8fa58c;
+        scroll-snap-align: center;
+        opacity: 0.55;
+        transition: opacity 0.35s ease, background-color 0.35s ease;
+    }
+
+    .bc-edge-card.is-active {
+        opacity: 1;
+        background-color: #e7e8d8;
+    }
+
+    /* no hover lift on touch */
+    .bc-edge-card:hover .bc-edge-card__icon {
+        transform: none;
+    }
+
+    /* mobile uses the "Read More +" link on the centered card instead of the badge */
+    .bc-edge-card__badge {
+        display: none;
+    }
+
+    .bc-edge-card__inner {
+        bottom: 40px;
+        padding: 0 16px;
+    }
+
+    .bc-edge-card__icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 10px;
+    }
+
+    .bc-edge-card__title {
+        font-size: 24px;
+        min-height: 0;
+    }
+
+    .bc-edge-card__text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-top: 12px;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #4a4a4a;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .bc-edge-card.is-active .bc-edge-card__text {
+        opacity: 1;
+    }
+
+    /* tap hint on the centered card — tapping it opens the popup */
+    .bc-edge-card__more {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #5f7a5c;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .bc-edge-card__more span {
+        font-size: 18px;
+        line-height: 1;
+        text-decoration: none;
+    }
+
+    .bc-edge-card.is-active .bc-edge-card__more {
+        opacity: 1;
+    }
+
+    .bc-edge-controls {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 24px;
+                padding: 0 20px 40px;
+    }
+
+    .bc-edge-nav {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #f5f2e6;
+        color: #2b2b2b;
+        font-size: 16px;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        transition: transform 0.2s ease;
+    }
+
+    .bc-edge-nav:active {
+        transform: scale(0.92);
+    }
+}
+
+
+/* ==================== NEKTA EDGE – CENTERED POPUP ==================== */
+
+html.bc-edge-modal-open,
+html.bc-edge-modal-open body {
+    overflow: hidden;
+}
+
+.bc-edge-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px 24px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.bc-edge-modal.is-open {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.bc-edge-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(35, 45, 34, 0.55);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.bc-edge-modal.is-open .bc-edge-modal__backdrop {
+    opacity: 1;
+}
+
+/* arch-shaped dialog, same language as the cards */
+.bc-edge-modal__dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    background: #f5f2e6;
+    color: #3a3a3a;
+    border: 1px solid #8fa58c;
+    border-radius: 360px 360px 0 0;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    outline: none;
+}
+
+.bc-edge-modal.is-open .bc-edge-modal__dialog {
+    opacity: 1;
+    transform: none;
+}
+
+.bc-edge-modal__close {
+    position: absolute;
+        top: -54px;
+    right: 329px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #8fa58c;
+    border-radius: 50%;
+    background: #fff;
+    color: #3a4a38;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.bc-edge-modal__close:hover {
+    transform: rotate(90deg);
+    background: #eef1e8;
+}
+
+.bc-edge-modal__media {
+    flex: 0 0 auto;
+    padding: 110px 40px 0;
+}
+
+.bc-edge-modal__media img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.bc-edge-modal__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 20px 56px 48px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.bc-edge-modal__title {
+    margin: 0 0 18px;
+    font-family: inherit;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #2b2b2b;
+}
+
+.bc-edge-modal__content {
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.bc-edge-modal__content p + p {
+    margin-top: 14px;
+}
+
+.bc-edge-modal__body::-webkit-scrollbar { width: 6px; }
+.bc-edge-modal__body::-webkit-scrollbar-thumb { background: #b8c7b5; border-radius: 6px; }
+
+@media (max-width: 767px) {
+    .bc-edge-modal {
+        padding: 32px 14px 14px;
+    }
+
+    .bc-edge-modal__dialog {
+        border-radius: 180px 180px 0 0;
+        max-height: calc(100dvh - 46px);
+    }
+
+    .bc-edge-modal__close {
+        top: -14px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+    }
+
+    .bc-edge-modal__media {
+        padding: 60px 24px 0;
+    }
+
+    .bc-edge-modal__media img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .bc-edge-modal__body {
+        padding: 14px 22px 32px;
+    }
+
+    .bc-edge-modal__title {
+        font-size: 24px;
+    }
+
+    .bc-edge-modal__content {
+        font-size: 15px;
+    }
+    
 }
