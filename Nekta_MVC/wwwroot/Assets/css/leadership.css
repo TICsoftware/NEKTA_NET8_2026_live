@@ -140,6 +140,16 @@
 }
 
 /* ---------- QUOTE BANDS ---------- */
+.ld-quote-band .bc-leaf-deco {
+    position: absolute;
+    top: 0;
+    right: clamp(12px, 2.5vw, 36px);
+    z-index: 12;
+    width: clamp(64px, 7vw, 120px);
+    pointer-events: none;
+    user-select: none;
+}
+
 .ld-quote-band {
     position: relative;
     background: linear-gradient(
