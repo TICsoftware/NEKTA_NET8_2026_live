@@ -56,6 +56,23 @@
 
   /* small laptop + 150% */
   .bc-life-thumb {padding: 4px;}
+
+  .read-more-content.is-collapsed::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.5em;
+    background: none;
+}
+ /* .read-more-text {
+    color: var(--color-text-heading);;
+}
+.read-more-icon {
+    filter: brightness(0);
+} */
+
 } 
 
 @media (max-width: 992px) {
