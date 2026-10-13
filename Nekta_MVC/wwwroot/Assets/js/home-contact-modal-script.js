@@ -101,10 +101,8 @@ $(document).ready(function () {
 
         // Phone
         let phone = $form.find("#Phone").val().trim();
-        if (phone === "") {
-            $form.find('[data-valmsg-for="Phone"]').text("Please enter your contact number.");
-            isValid = false;
-        } else {
+        if (phone !== "") {
+           
             let cleanPhone = phone.replace(/[\s()-]/g, "");
             const phoneRegex = /^\+?[1-9]\d{6,14}$/;
 
