@@ -14,9 +14,9 @@ namespace Nekta_MVC.Controllers.Manage
 
         private readonly TemplateMaster_BAL _bal;
         
-        private readonly ILogger<ContentController> _logger;
+        private readonly ILogger<TemplateMasterController> _logger;
         private readonly IConfiguration objconfig;
-        public TemplateMasterController(ILogger<ContentController> logger, IConfiguration configuration)
+        public TemplateMasterController(ILogger<TemplateMasterController> logger, IConfiguration configuration)
         {
             _logger = logger;
             objconfig = configuration;

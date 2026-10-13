@@ -335,16 +335,49 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
     .cu-plate-left {
     left: -12%;
     bottom: -3%;}
+        .counter-divider {
+        display: none;
+        width: 60px;
+        height: 1px;
+    }
 
 }
 
-@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
-.bc-dining-deco--basil {width: 22vw;}
 
-}
+
+
 
  @media (min-width: 1200px) and (max-width: 1366px) {
 
  }
 
 
+  /* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+.bc-dining-deco--basil {width: 22vw;}
+    .bc-arch-grid {grid-template-columns: repeat(5, 280px);}
+.bc-arch-card h3 {font-size: 22px;}    
+.bc-arch-copy p {font-size: 14px !important;}
+.bc-arch-card img { width: clamp(52px, 3.5vw, 88px);}
+.edge-card-text { font-size: 1rem !important; max-width: 100%;}
+.av-media-wrap { max-width: 570px !important;  margin-inline: auto;}
+
+
+}
+
+
+ /* 1920px 150% */
+ @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
+ .bc-arch-grid {grid-template-columns: repeat(5, 240px);}
+ .bc-arch-card h3 {font-size: 22px;}    
+.bc-arch-copy p {font-size: 14px !important;}
+.bc-arch-card img {width: clamp(52px, 3.5vw, 88px);}
+.edge-card-text {font-size: 1rem !important; max-width: 100%;}
+
+.cu-plate-left{  left:12%;  top:42%;  bottom:auto;  width:250px;  transform:rotate(-6deg);}
+    .cu-plate-right{ right:12%; top:40%; width:250px; transform:rotate(6deg);
+ }
+ .av-media-wrap {  max-width: 510px !important; 
+    margin-inline: auto;
+}
+ }

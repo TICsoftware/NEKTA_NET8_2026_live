@@ -14,9 +14,10 @@
 .dot-col-3{ left:66.666%; }
 .dot-col-4{ left:100%; }
 
-.dot-row-1{ top:0%; }
-.dot-row-2{ top:50%; }
-.dot-row-3{ top:100%; }
+.dot-row-1 { top: 0%; }
+.dot-row-2 { top: 32.333%; }
+.dot-row-3 { top: 64.666%; }
+.dot-row-4 { top: 100%; }
 .cu-hero-title { font-weight: 400; font-size: clamp(30px, 2.7vw, 52px); letter-spacing: -0.02em; line-height: 1.52; color: #f6f6f6;}
 
 /* ---------- ENQUIRY FORM SECTION ---------- */
@@ -31,6 +32,7 @@
   .cu-field--full { grid-column: 1 / -1;}
 }
 
+.cu-field-error {font-size:14px}
 .cu-field label {  display: block;  font-size: var(--text-small);  font-weight: 500;  color: #f6f6f6;  margin-bottom: 8px;}
 .cu-field label .req {  color: var(--color-primary);}
 .cu-field input,
@@ -60,7 +62,7 @@
 .cu-leaf-deco { position: absolute;  pointer-events: none;  user-select: none;}
 
 /* ---------- HOW TO REACH US ---------- */
-  .reach-section{ position:relative; overflow:hidden; background-color: var(  --color-darkcream);}
+  .reach-section{ position:relative; overflow: hidden; background-color: var(  --color-darkcream);}
 
   /* ---------- Heading ---------- */
   .reach-heading-wrap{
@@ -295,9 +297,16 @@
   /* .office-card:nth-child(1n){
     border-left:none;
   } */
-  .office-card:nth-child(n+4){
+  /* .office-card:nth-child(n+4){
     border-bottom:none;
-  }
+  } */
+
+  .office-card:nth-child(7) {
+    border-left: 2px dashed var(--line);
+}
+.office-card:nth-child(8) {
+    border-bottom: none;
+}
   .offices-grid{
     border-top:2px dashed var(--line);
   }
@@ -350,6 +359,8 @@
     border-bottom:1px solid var(--terracotta);
     padding-bottom:2px;
     transition:gap 0.2s ease, opacity 0.2s ease;
+    position: absolute;
+    bottom: 15px;
   }
   .view-map:hover{
     gap:10px;
@@ -674,6 +685,9 @@ position: absolute;
     transform:rotate(8deg);
 }
 
+
+
+
 @media (min-width:768px) and (max-width:1279px){
     .cu-plate-left{
         left:-4%;
@@ -861,6 +875,11 @@ position: absolute;
 .reach-line h4 {font-size: 1.2rem;}
 .reach-value {font-size: 0.875rem;}
 
+.view-map{
+  position:relative;
+  bottom:0;
+}
+
 
   }
 
@@ -959,7 +978,7 @@ position: absolute;
 
   /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
-
+ .cu-follow-section .section-title-outer  {max-width: 55vw}
 }
 
 
@@ -972,18 +991,74 @@ position: absolute;
   .cu-leaf-right { right: -2vw;}
 
   .careers p {text-align: center;max-width: 515px; margin: 15px auto;}
-  .deco-plate { position: absolute; bottom: -7vw; left: -7%; width: 33vw; z-index: 1;}
-  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 28vw;z-index: 1;}
+  .deco-plate { position: absolute; bottom: 0vw; left: -4%; width: 25vw; z-index: 1;}
+  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 25vw;z-index: 1;}
   .offices-grid-wrap {width: 800px; margin: 0 auto;}
 
   .solutions-salad {
-    position: absolute;
-    top: -6vw;
-    left: -11vw;
-    max-width: 48vw;}
+    position: absolute;top: -9vw; left: -1vw; max-width: 30vw;}
     .solutions-grid {gap: 10px;}
     .solutions-circle { position: absolute; left: 5vw; bottom: 6vw; width: 21vw;}
     .solutions-splash {position: absolute;top: 33%;right: -12%;height: 85%;}
+    .dot-row-2 {top: 31.6%;}
+    .dot-row-3 { top: 63.2%;}
+    .cu-follow-section .section-title-outer  {max-width: 65vw}
+    .reach-card {padding: 36px 35px 44px;}
+    .office-card {padding: 33px 28px 40px !important;}
+
+
 
 
   }
+
+  .reach-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.reach-line > p:first-child {
+    flex: 0 0 18px;
+    margin: 0;
+}
+
+.reach-line > p:first-child .reach-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* Email id : */
+.reach-line > h4 {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+/* Email address */
+.reach-line > p:last-child {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    margin: 0 !important;
+    overflow: hidden;
+}
+
+.reach-line > p:last-child a {
+    display: block;
+    max-width: 100%;
+}
+
+.reach-line .reach-value {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
