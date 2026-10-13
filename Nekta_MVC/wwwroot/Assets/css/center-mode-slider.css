@@ -113,5 +113,6 @@
 .swiper.edgeSwiper{margin-top: -25px;}
 .bg-green.center-slider .swiper.edgeSwiper {padding-left: 0;padding-right: 0;}
 .bg-green.green-wrapper.center-slider .swiper.edgeSwiper{padding-left: 20px;padding-right: 20px;}
+ .edgeSwiper .swiper-slide-active .edge-details { gap:8px}
 
 }

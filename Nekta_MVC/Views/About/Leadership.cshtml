@@ -99,18 +99,13 @@
 </section>
 <!-- HERO BANNER END -->
  
-<div class="ld-leaf-wrapper">
-    <img src="/Assets/images/leadership/green_leaf.svg" alt="" aria-hidden="true" class=" leaf-travel-anim">
-
-
     <!-- ==================== QUOTE 1 ==================== -->
     @foreach (var item in Model.leadership_intro_1_List.Where(x => x.IsBlock == 0))
     {
-        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="80"
-            data-leaf-rotation="-20">
+        <section class="ld-quote-band section-spacing relative overflow-hidden">
+            <img src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt="" class="bc-leaf-deco" aria-hidden="true" />
             <!-- Background Pattern -->
             <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
-            <!-- Decorative Leaf -->
 
             <div class="container relative z-10">
                 <div class="max-w-6xl mx-auto">
@@ -142,7 +137,7 @@
     <!-- ==================== CORE TEAM ==================== -->
 
 
-    <section class="ld-team-section section-pb ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
+    <section class="ld-team-section section-pb">
         <div class="container relative z-10">
             @foreach (var item in Model.Core_team_List.Where(x => x.IsBlock == 0))
             {
@@ -174,7 +169,7 @@
     </section>
 
     <!-- ==================== MANAGEMENT TEAM ==================== -->
-    <section class="ld-team-section section-spacing ld-leaf-waypoint" data-leaf-x="35" data-leaf-rotation="20">
+    <section class="ld-team-section section-spacing">
         <div class="container relative z-10">
             @foreach (var item in Model.Support_Functions_List.Where(x => x.IsBlock == 0))
             {
@@ -212,8 +207,8 @@
     <!-- ==================== QUOTE 2 ==================== -->
     @foreach (var item in Model.leadership_intro_2_List.Where(x => x.IsBlock == 0))
     {
-        <section class="ld-quote-band section-spacing relative overflow-hidden ld-leaf-waypoint" data-leaf-x="75"
-            data-leaf-rotation="-10">
+        <section class="ld-quote-band section-spacing relative overflow-hidden">
+            <img src="/Assets/images/intro-leaf/green_leaf_travel.svg" alt="" class="bc-leaf-deco" aria-hidden="true" />
             <!-- Background Pattern -->
             <img src="/Assets/images/leadership/quote-bg-pattern.webp" alt="" class="ld-quote-bg" aria-hidden="true">
 
@@ -241,7 +236,7 @@
 
     <!-- ==================== BOARD OF DIRECTORS ==================== -->
 
-    <section class="ld-board-section section-spacing ld-leaf-waypoint" data-leaf-x="20" data-leaf-rotation="15">
+    <section class="ld-board-section section-spacing">
         <div class="container relative z-10">
             @foreach (var item in Model.Board_of_directors_List.Where(x => x.IsBlock == 0))
             {
@@ -274,11 +269,8 @@
     </section>
 
 
-</div>
-
-
 @section Scripts {
     <script src="~/Assets/js/inner-banner-script.js"></script>
-    <script src="~/Assets/js/leaf-travel-anim.js"></script>
+    <script src="~/Assets/js/page-intro-leaf.js" asp-append-version="true"></script>
     <script src="~/Assets/js/leadership-script.js"></script>
 }

@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .to(beans, { xPercent: 0, opacity: 1, duration: 1, ease: 'power3.out' }, '<0.15');
     });
 
-    // ================= GALLERY =================
+    // ================= GALLERY (manual only — no auto slide) =================
     (function initLifeGallery() {
         const mainImage = document.getElementById("lifeMainImage");
         const thumbs = document.querySelectorAll(".bc-life-thumb");
@@ -150,9 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!mainImage || !thumbs.length) return;
 
         const total = thumbs.length;
-        const AUTO_SLIDE_DELAY = 5000;
         const SLIDE_OUT_DURATION = 380;
-        let autoSlideTimer = null;
 
         function getActiveIndex() {
             const activeThumb = document.querySelector(".bc-life-thumb.is-active");
@@ -166,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function updateArrows() {
+            if (!track || !wrapper) return;
             const hasOverflow = track.scrollWidth > track.clientWidth + 2;
             wrapper.classList.toggle("has-overflow", hasOverflow);
         }
@@ -225,20 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
             setActive(index);
         }
 
-        thumbs.forEach(function (thumb) {
-            thumb.addEventListener("click", function () {
-                goToFrame(thumb);
-                startAutoSlide();
-            });
-        });
-
-        if (prevBtn) prevBtn.addEventListener("click", function () {
-            track.scrollBy({ left: -160, behavior: "smooth" });
-        });
-        if (nextBtn) nextBtn.addEventListener("click", function () {
-            track.scrollBy({ left: 160, behavior: "smooth" });
-        });
-
         function goToNextFrame() {
             const current = getActiveIndex();
             const nextIndex = (current % total) + 1;
@@ -253,26 +238,28 @@ document.addEventListener("DOMContentLoaded", function () {
             if (prevThumb) goToFrame(prevThumb, -1);
         }
 
-        function startAutoSlide() {
-            if (total < 2) return;
-            clearInterval(autoSlideTimer);
-            autoSlideTimer = setInterval(goToNextFrame, AUTO_SLIDE_DELAY);
-        }
-
-        if (mainNextBtn) mainNextBtn.addEventListener("click", function () {
-            goToNextFrame();
-            startAutoSlide();
+        // Thumbnail click
+        thumbs.forEach(function (thumb) {
+            thumb.addEventListener("click", function () {
+                goToFrame(thumb);
+            });
         });
 
-        if (mainPrevBtn) mainPrevBtn.addEventListener("click", function () {
-            goToPrevFrame();
-            startAutoSlide();
+        // Thumbnail strip scroll arrows
+        if (prevBtn) prevBtn.addEventListener("click", function () {
+            track.scrollBy({ left: -160, behavior: "smooth" });
         });
+        if (nextBtn) nextBtn.addEventListener("click", function () {
+            track.scrollBy({ left: 160, behavior: "smooth" });
+        });
+
+        // Main image prev / next
+        if (mainNextBtn) mainNextBtn.addEventListener("click", goToNextFrame);
+        if (mainPrevBtn) mainPrevBtn.addEventListener("click", goToPrevFrame);
 
         window.addEventListener("resize", updateArrows);
 
-        goToFrame(thumbs[0]); // Frame 1 active on load — reinitReadMore already exists by now
-        startAutoSlide();
+        goToFrame(thumbs[0]); // Frame 1 active on load
     })();
 
 });

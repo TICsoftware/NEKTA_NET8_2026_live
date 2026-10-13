@@ -192,6 +192,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const wrapper = document.querySelector('.map-outer-warapper');
   const states = document.querySelectorAll('.map-state');
   const items = document.querySelectorAll('.map-item');
+  const mapHint = wrapper?.querySelector('.map-hint');
+  const mapHintKey = 'nekta-map-hint-seen';
+
+  function markMapHintSeen() {
+    if (!mapHint || mapHint.classList.contains('is-seen')) return;
+    mapHint.classList.add('is-seen');
+    try { sessionStorage.setItem(mapHintKey, '1'); } catch (err) {}
+  }
+
+  try {
+    if (mapHint && sessionStorage.getItem(mapHintKey) === '1') mapHint.classList.add('is-seen');
+  } catch (err) {}
 
   // ---------- Helpers ----------
   function getItemByLocation(location) {
@@ -276,9 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const svg = circle.ownerSVGElement;
       const scale = svgUnitScale(svg);
-      const fontPx = isMobile ? 14 : 11;
+      const fontPx = isMobile ? 15 : 20;
       const fontSize = fontPx / scale;
       labelText.setAttribute('font-size', String(fontSize));
+      labelText.setAttribute('font-weight', '600');
       labelText.style.fontSize = fontSize + 'px';
 
       const cx = parseFloat(circle.getAttribute('cx'));
@@ -286,9 +299,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const lx = parseFloat(item.getAttribute('data-lx')) || cx;
       const ly = parseFloat(item.getAttribute('data-ly')) || cy - 40;
 
-      const paddingX = (isMobile ? 16 : 10) / scale;
-      const minWidth = (isMobile ? 72 : 40) / scale;
-      const labelHeight = (isMobile ? 30 : 22) / scale;
+      const paddingX = (isMobile ? 18 : 24) / scale;
+      const minWidth = (isMobile ? 76 : 72) / scale;
+      const labelHeight = (isMobile ? 32 : 42) / scale;
 
       const textLength = labelText.getComputedTextLength();
       const labelWidth = Math.max(textLength + paddingX, minWidth);
@@ -350,6 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!location) return;
 
     item.addEventListener('mouseenter', () => {
+      markMapHintSeen();
       previewLocation(location);
     });
 
@@ -363,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const location = state.getAttribute('data-location');
 
     state.addEventListener('mouseenter', () => {
+      markMapHintSeen();
       previewLocation(location);
     });
 
@@ -374,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- 4. Click on state OR pin -> toggle active class for both ----------
   states.forEach((state) => {
     state.addEventListener('click', () => {
+      markMapHintSeen();
       const location = state.getAttribute('data-location');
       const isAlreadyActive = state.classList.contains('active');
 
@@ -391,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!circle) return;
 
     circle.addEventListener('click', () => {
+      markMapHintSeen();
       const location = circle.getAttribute('data-location');
       const isAlreadyActive = item.classList.contains('linked-active');
 

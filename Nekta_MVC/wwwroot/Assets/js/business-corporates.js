@@ -321,268 +321,195 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+ // ==================== NEKTA EDGE POPUP (shared, built once) ==================== //
 
- // ==================== NEKTA EDGE NEW SLIDER UPDATED==================== //
+let edgeModal = null;
 
-document.querySelectorAll('[data-center-slider]').forEach(function (slider) {
-    const viewport = slider.querySelector('.bc-arch-viewport');
-    const track = slider.querySelector('.bc-arch-track');
-    const prevBtn = slider.querySelector('.bc-arch-prev');
-    const nextBtn = slider.querySelector('.bc-arch-next');
-    const dotsWrap = slider.querySelector('.bc-arch-dots');
+function getEdgeModal() {
+    if (edgeModal) return edgeModal;
 
-    const realCards = Array.from(track.children);
-    const realCount = realCards.length;
-    const GAP = 24;
+    const el = document.createElement('div');
+    el.className = 'bc-edge-modal';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML =
+        '<div class="bc-edge-modal__backdrop" data-edge-close></div>' +
+        '<div class="bc-edge-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bcEdgeModalTitle" tabindex="-1">' +
+            '<button type="button" class="bc-edge-modal__close" aria-label="Close" data-edge-close>&times;</button>' +
+            '<div class="bc-edge-modal__media"><img alt="" /></div>' +
+            '<div class="bc-edge-modal__body" data-lenis-prevent>' +
+                '<h3 id="bcEdgeModalTitle" class="bc-edge-modal__title"></h3>' +
+                '<div class="bc-edge-modal__content"></div>' +
+            '</div>' +
+        '</div>';
+    document.body.appendChild(el);
 
-    // These MUST mirror your CSS values exactly — update both together if you change sizes
-function getSizes() {
-    const isMobile = window.innerWidth <= 767;
-    if (isMobile) {
-        const vw = viewport.getBoundingClientRect().width;
-        return { base: vw, active: vw, gap: 0 };
-    }
-    const isLaptop = window.innerWidth >= 1200 && window.innerWidth <= 1366;
-    return { base: 260, active: isLaptop ? 540 : 600, gap: GAP };
-}
+    const dialog = el.querySelector('.bc-edge-modal__dialog');
+    const media = el.querySelector('.bc-edge-modal__media');
+    const img = media.querySelector('img');
+    const title = el.querySelector('.bc-edge-modal__title');
+    const content = el.querySelector('.bc-edge-modal__content');
+    const body = el.querySelector('.bc-edge-modal__body');
+    let lastFocus = null;
 
-    const cardWidth = realCards[0].offsetWidth || 260;
-    const gap = parseFloat(getComputedStyle(track).gap) || 24;
-    const viewportWidth = viewport.getBoundingClientRect().width;
-    const peekCount = Math.max(2, Math.ceil((viewportWidth / 2) / (cardWidth + gap)) + 1);
+    function open(card) {
+        const cardImg = card.querySelector('img');
+        const cardTitle = card.querySelector('h3');
+        const cardText = card.querySelector('.edge-content');
 
-    const clonesStart = realCards.slice(-peekCount).map(c => {
-        const clone = c.cloneNode(true);
-        clone.classList.add('is-clone');
-        return clone;
-    });
-    const clonesEnd = realCards.slice(0, peekCount).map(c => {
-        const clone = c.cloneNode(true);
-        clone.classList.add('is-clone');
-        return clone;
-    });
-
-    clonesStart.forEach(c => track.insertBefore(c, track.firstChild));
-    clonesEnd.forEach(c => track.appendChild(c));
-
-    const cards = Array.from(track.children);
-    const offset = clonesStart.length;
-
-    let activeIndex = 0;
-
-    function renderedIndex(i) { return i + offset; }
-
-    function centerTrack(withTransition = true) {
-        track.style.transition = withTransition
-            ? 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)'
-            : 'none';
-
-        const sizes = getSizes();
-        const vw = viewport.getBoundingClientRect().width;
-        const rIndex = renderedIndex(activeIndex);
-
-        // Use KNOWN target width, not offsetWidth (which lies mid-transition)
-        const activeWidth = sizes.active;
-
-        let offsetToCard = 0;
-        for (let i = 0; i < rIndex; i++) {
-            offsetToCard += sizes.base + sizes.gap;
-        }
-
-        const centerOffset = (vw / 2) - (activeWidth / 2);
-        track.style.transform = `translateX(${centerOffset - offsetToCard}px)`;
-    }
-
-    function cancelContentReveal(card) {
-        if (card._bcRevealCleanup) {
-            card._bcRevealCleanup();
-        }
-    }
-
-    function scheduleContentReveal(card) {
-        cancelContentReveal(card);
-
-        const reveal = () => {
-            if (card.classList.contains('is-active')) {
-                card.classList.add('content-ready');
-            }
-        };
-
-        const timer = setTimeout(() => {
-            cancelContentReveal(card);
-            reveal();
-        }, 80);
-
-        card._bcRevealCleanup = () => {
-            clearTimeout(timer);
-            card._bcRevealCleanup = null;
-        };
-    }
-
-    function updateClasses(withTransition = true) {
-        const rIndex = renderedIndex(activeIndex);
-
-        cards.forEach((card, i) => {
-            const wasActive = card.classList.contains('is-active');
-            const willBeActive = (i === rIndex);
-
-            if (wasActive && !willBeActive) {
-                cancelContentReveal(card);
-                card.classList.remove('content-ready');
-            }
-
-            card.classList.remove('is-active', 'is-adjacent');
-
-            if (willBeActive) {
-                card.classList.add('is-active');
-
-                if (!withTransition) {
-                    card.classList.add('content-ready');
-                } else if (!wasActive) {
-                    scheduleContentReveal(card);
-                }
-            } else if (Math.abs(i - rIndex) === 1) {
-                card.classList.add('is-adjacent');
-            }
-        });
-    }
-
-function render(withTransition = true) {
-    updateClasses(withTransition);
-    centerTrack(withTransition);
-    updateDots();
-}
-
-    function buildDots() {
-        dotsWrap.innerHTML = '';
-        realCards.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.addEventListener('click', () => goTo(i));
-            dotsWrap.appendChild(dot);
-        });
-        updateDots();
-    }
-
-    function updateDots() {
-        Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-    }
-
-
-
-    function goTo(index, withTransition = true) {
-        activeIndex = (index + realCount) % realCount;
-        render(withTransition);
-    }
-
-    prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
-    nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
-
-    const SWIPE_THRESHOLD = 50;
-    let pointerId = null;
-    let startX = 0;
-    let startY = 0;
-    let startTranslate = 0;
-    let dragging = false;
-    let didDrag = false;
-    let lockAxis = null;
-
-    function currentTranslate() {
-        const match = /translateX\(([-\d.]+)px\)/.exec(track.style.transform || '');
-        return match ? parseFloat(match[1]) : 0;
-    }
-
-    function onPointerDown(e) {
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        if (e.target.closest('.bc-arch-nav, .bc-arch-dots')) return;
-
-        pointerId = e.pointerId;
-        startX = e.clientX;
-        startY = e.clientY;
-        startTranslate = currentTranslate();
-        dragging = true;
-        didDrag = false;
-        lockAxis = null;
-        track.style.transition = 'none';
-        viewport.classList.add('is-dragging');
-
-        if (viewport.setPointerCapture) {
-            viewport.setPointerCapture(e.pointerId);
-        }
-    }
-
-    function onPointerMove(e) {
-        if (!dragging || e.pointerId !== pointerId) return;
-
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-
-        if (!lockAxis) {
-            if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-            lockAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-
-            if (lockAxis === 'y') {
-                dragging = false;
-                viewport.classList.remove('is-dragging');
-                if (viewport.hasPointerCapture && viewport.hasPointerCapture(e.pointerId)) {
-                    viewport.releasePointerCapture(e.pointerId);
-                }
-                centerTrack(false);
-                return;
-            }
-        }
-
-        if (lockAxis !== 'x') return;
-
-        didDrag = Math.abs(dx) > 8;
-        track.style.transform = 'translateX(' + (startTranslate + dx) + 'px)';
-    }
-
-    function onPointerUp(e) {
-        if (e.pointerId !== pointerId) return;
-
-        const dx = e.clientX - startX;
-        const wasSwipe = dragging && lockAxis === 'x';
-
-        dragging = false;
-        pointerId = null;
-        lockAxis = null;
-        viewport.classList.remove('is-dragging');
-
-        if (wasSwipe && Math.abs(dx) > SWIPE_THRESHOLD) {
-            dx < 0 ? goTo(activeIndex + 1) : goTo(activeIndex - 1);
+        if (cardImg && (cardImg.currentSrc || cardImg.src)) {
+            img.src = cardImg.currentSrc || cardImg.src;
+            img.alt = cardImg.getAttribute('alt') || '';
+            media.style.display = '';
         } else {
-            centerTrack(true);
+            media.style.display = 'none';
+        }
+
+        title.textContent = cardTitle ? cardTitle.textContent.trim() : '';
+        content.innerHTML = cardText ? cardText.innerHTML : '';
+        body.scrollTop = 0;
+
+        lastFocus = document.activeElement;
+        el.classList.add('is-open');
+        el.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('bc-edge-modal-open');
+        if (window.lenis && typeof window.lenis.stop === 'function') window.lenis.stop();
+
+        setTimeout(() => dialog.focus(), 50);
+    }
+
+    function close() {
+        if (!el.classList.contains('is-open')) return;
+        el.classList.remove('is-open');
+        el.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('bc-edge-modal-open');
+        if (window.lenis && typeof window.lenis.start === 'function') window.lenis.start();
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    el.addEventListener('click', (e) => {
+        if (e.target.closest('[data-edge-close]')) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+
+        // keep Tab focus inside the popup
+        if (e.key === 'Tab' && el.classList.contains('is-open')) {
+            const focusables = dialog.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+
+    edgeModal = { open, close };
+    return edgeModal;
+}
+
+
+ // ==================== NEKTA EDGE – ARCH CARDS ==================== //
+// Desktop / tablet : static cards, click opens the popup
+// Mobile (<=767px) : swipe slider with prev / next, text shown in the centered card
+
+document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
+    const modal = getEdgeModal();
+    const grid = wrap.querySelector('.bc-edge-grid');
+    const cards = Array.from(grid.querySelectorAll('.bc-edge-card'));
+    const prevBtn = wrap.querySelector('.bc-edge-prev');
+    const nextBtn = wrap.querySelector('.bc-edge-next');
+    const mq = window.matchMedia('(max-width: 767px)');
+    let activeIndex = 0;
+    let ticking = false;
+
+    if (!cards.length) return;
+
+    function isMobile() { return mq.matches; }
+
+    function setActive(i) {
+        activeIndex = i;
+        cards.forEach((c, idx) => c.classList.toggle('is-active', isMobile() && idx === i));
+    }
+
+    // card whose center is closest to the slider's center
+    function findCenteredIndex() {
+        const box = grid.getBoundingClientRect();
+        const center = box.left + box.width / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        cards.forEach((c, idx) => {
+            const r = c.getBoundingClientRect();
+            const d = Math.abs(r.left + r.width / 2 - center);
+            if (d < bestDist) { bestDist = d; best = idx; }
+        });
+        return best;
+    }
+
+    function scrollToCard(i, smooth = true) {
+        const card = cards[i];
+        const left = card.offsetLeft - (grid.clientWidth - card.offsetWidth) / 2;
+        grid.scrollTo({ left: left, behavior: smooth ? 'smooth' : 'auto' });
+        setActive(i);
+    }
+
+    function goTo(i) {
+        const total = cards.length;
+        scrollToCard((i + total) % total); // loops: last -> first, first -> last
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
+
+    // keep "active" in sync while the user swipes
+    grid.addEventListener('scroll', function () {
+        if (!isMobile() || ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+            setActive(findCenteredIndex());
+            ticking = false;
+        });
+    }, { passive: true });
+
+    cards.forEach(function (card, idx) {
+        function handle(e) {
+            e.preventDefault();
+            // mobile: a side card slides to the center first;
+            // the centered card (and every card on desktop) opens the popup
+            if (isMobile() && idx !== activeIndex) {
+                scrollToCard(idx);
+                return;
+            }
+            modal.open(card);
+        }
+
+        card.addEventListener('click', handle);
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') handle(e);
+        });
+    });
+
+    function onModeChange() {
+        if (isMobile()) {
+            scrollToCard(activeIndex, false);
+        } else {
+            grid.scrollLeft = 0;
+            setActive(activeIndex); // clears is-active on desktop
         }
     }
 
-    viewport.addEventListener('pointerdown', onPointerDown);
-    viewport.addEventListener('pointermove', onPointerMove);
-    viewport.addEventListener('pointerup', onPointerUp);
-    viewport.addEventListener('pointercancel', onPointerUp);
-    viewport.addEventListener('dragstart', (e) => e.preventDefault());
-
-    cards.forEach((card) => {
-        card.addEventListener('click', (e) => {
-            if (didDrag) {
-                e.preventDefault();
-                e.stopPropagation();
-                didDrag = false;
-                return;
-            }
-            const i = Number(card.dataset.index);
-            if (!isNaN(i) && i !== activeIndex) goTo(i);
-        });
-    });
+    if (mq.addEventListener) mq.addEventListener('change', onModeChange);
+    else mq.addListener(onModeChange);
 
     let resizeTimer;
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => centerTrack(false), 100);
+        resizeTimer = setTimeout(function () {
+            if (isMobile()) scrollToCard(activeIndex, false);
+        }, 120);
     });
 
-    buildDots();
-    render(false);
+    onModeChange();
 });
 
 
