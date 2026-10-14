@@ -371,7 +371,7 @@ window.Load_Edit_context_details = function (isrefresh, _templateid, _language_i
                     if (data.listsections == null) {
                         ddsections.append(`<option value="0">Select</option>`);
                     }
-                    else {
+                    else {  
                         $.each(data.listsections, function (i, item) {
                             ddsections.append(`<option value="${item.value}">${item.text}</option>`);
                         });
@@ -709,7 +709,7 @@ window.Load_Edit_context_details = function (isrefresh, _templateid, _language_i
             success: function (data) {
                 alert(data.message);
                 if (data.refreshstatus == 1) {
-                    if (trcontent.attr("data-routeId") == "section") {
+                    if (trcontent.attr("data-contenttype") == "section") {
                         trcontent.closest("tr.js-pagination-section-item").remove();
                     }
                     else {
