@@ -145,18 +145,12 @@ Leaf travel CSS
     backface-visibility: hidden;
 }
 @media (max-width: 767px) {
-    .leaf-travel-anim {top: 8px; right: 8px;}
-    .counter-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    flex-direction: column;
-}
 
-.search-hint{
-    display: none !important;   
-}
+.leaf-travel-anim {top: 8px; right: 8px;}
+.counter-wrapper {  display: flex; align-items: center; justify-content: center; gap: 1rem; flex-direction: column;}
+.search-hint{display: none !important; }
+.read-more-btn {padding-top: 0px !important;}
+
 }
 
 
@@ -175,7 +169,7 @@ Leaf travel CSS
 
 .cta-section h2{ font-family:var(--font-body) !important; font-weight:500;}
 
-
+.link-light:hover{color: var(--color-cream) !important; text-decoration: underline !important;}
 
 /* tab */
 /* Tab */
@@ -184,6 +178,7 @@ Leaf travel CSS
 .text-h2 { font-size: 2.875rem;}
 
  }
+
 
 
 

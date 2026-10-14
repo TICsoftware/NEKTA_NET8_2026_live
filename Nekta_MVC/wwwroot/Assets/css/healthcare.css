@@ -71,6 +71,13 @@ right: -9vw;
       bottom: -20px;
    }
  .bc-experience-section .bc-plate-mini {right: -25%;}
+ .bg-darkcream-thumbslider .read-more-toggle .read-more-text {
+       color: var(--color-text-heading)
+}
+
+.bg-darkcream-thumbslider .read-more-toggle .read-more-icon {
+    filter: brightness(0);
+}
 }
 
 

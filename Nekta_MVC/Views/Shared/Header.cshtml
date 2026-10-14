@@ -76,6 +76,12 @@
     <symbol id="ic-briefcase-sm" viewBox="0 0 24 24">
         <rect x="3" y="8" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6" fill="none" />
     </symbol>
+    <symbol id="ic-segments" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="6.5" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.6" fill="none" />
+        <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.6" fill="none" />
+        <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.6" fill="none" />
+        <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2" stroke="currentColor" stroke-width="1.6" fill="none" />
+    </symbol>
 </svg>
 
 
@@ -498,6 +504,14 @@
                     .Replace("&", "and")
                 : $"menu-{parent.MenuId}";
 
+            var menuNameKey = (parent.MenuName ?? "").ToLower();
+            var iconId = menuNameKey.Contains("home") ? "ic-home"
+                : menuNameKey.Contains("about") ? "ic-users"
+                : menuNameKey.Contains("segment") ? "ic-segments"
+                : menuNameKey.Contains("solution") ? "ic-bulb"
+                : menuNameKey.Contains("career") ? "ic-briefcase"
+                : (!string.IsNullOrWhiteSpace(parent.CssClass) ? parent.CssClass : "ic-info");
+
 
             if (children.Any())
             {
@@ -515,7 +529,7 @@
 
                                 <svg width="16" height="16">
 
-                                    <use href="#ic-info"></use>
+                                    <use href="#@iconId"></use>
 
                                 </svg>
 
@@ -601,7 +615,7 @@
 
                             <svg width="16" height="16">
 
-                                <use href="#@parent.CssClass"></use>
+                                <use href="#@iconId"></use>
 
                             </svg>
 

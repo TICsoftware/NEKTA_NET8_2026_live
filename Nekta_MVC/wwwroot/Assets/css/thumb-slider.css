@@ -88,6 +88,13 @@
 .thumb-track {gap: 8px;}
 }
 
+@media (min-width: 768px) and (max-width: 1024px){
+.merge-imgs {
+    max-width: 200px !important;
+    top: 10vw !important;
+}
+}
+
 
 @media (min-width: 1200px) and (max-width: 1366px) {
 /* .merge-imgs img:nth-child(1) {max-width: 30vw;left: -9vw;top: -1vw;z-index: 10;} */
