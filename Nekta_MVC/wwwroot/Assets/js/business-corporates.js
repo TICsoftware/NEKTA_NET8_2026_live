@@ -410,8 +410,8 @@ function getEdgeModal() {
 
 
  // ==================== NEKTA EDGE – ARCH CARDS ==================== //
-// Desktop / tablet : static cards, click opens the popup
-// Mobile (<=767px) : swipe slider with prev / next, text shown in the centered card
+// Desktop (>1024px) : static cards, click opens the popup
+// Tablet and mobile (<=1024px) : swipe slider with prev / next, text shown in the centered card
 
 document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
     const modal = getEdgeModal();
@@ -419,17 +419,17 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
     const cards = Array.from(grid.querySelectorAll('.bc-edge-card'));
     const prevBtn = wrap.querySelector('.bc-edge-prev');
     const nextBtn = wrap.querySelector('.bc-edge-next');
-    const mq = window.matchMedia('(max-width: 767px)');
+    const mq = window.matchMedia('(max-width: 1024px)');
     let activeIndex = 0;
     let ticking = false;
 
     if (!cards.length) return;
 
-    function isMobile() { return mq.matches; }
+    function isSlider() { return mq.matches; }
 
     function setActive(i) {
         activeIndex = i;
-        cards.forEach((c, idx) => c.classList.toggle('is-active', isMobile() && idx === i));
+        cards.forEach((c, idx) => c.classList.toggle('is-active', isSlider() && idx === i));
     }
 
     // card whose center is closest to the slider's center
@@ -463,7 +463,7 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
 
     // keep "active" in sync while the user swipes
     grid.addEventListener('scroll', function () {
-        if (!isMobile() || ticking) return;
+        if (!isSlider() || ticking) return;
         ticking = true;
         requestAnimationFrame(function () {
             setActive(findCenteredIndex());
@@ -474,9 +474,9 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
     cards.forEach(function (card, idx) {
         function handle(e) {
             e.preventDefault();
-            // mobile: a side card slides to the center first;
+            // slider: a side card slides to the center first;
             // the centered card (and every card on desktop) opens the popup
-            if (isMobile() && idx !== activeIndex) {
+            if (isSlider() && idx !== activeIndex) {
                 scrollToCard(idx);
                 return;
             }
@@ -490,7 +490,7 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
     });
 
     function onModeChange() {
-        if (isMobile()) {
+        if (isSlider()) {
             scrollToCard(activeIndex, false);
         } else {
             grid.scrollLeft = 0;
@@ -505,7 +505,7 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
     window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () {
-            if (isMobile()) scrollToCard(activeIndex, false);
+            if (isSlider()) scrollToCard(activeIndex, false);
         }, 120);
     });
 

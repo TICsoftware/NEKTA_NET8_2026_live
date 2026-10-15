@@ -1130,7 +1130,7 @@ font-size: 3.75rem;
         "f g"
         "d h"
         "e i";
-      height: clamp(520px, 160vw, 640px);
+      height: clamp(520px, 160vw, 720px);
     }
   }
  
