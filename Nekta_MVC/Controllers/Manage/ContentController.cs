@@ -119,6 +119,7 @@ public class ContentController : Controller
                     ContentObj.Background_image_id = Modelobj.Background_image_id ?? null;
                     ContentObj.Background_image_Alttext = Modelobj.Background_image_Alttext;
                     ContentObj.Attach_file_id = Modelobj.Attach_file_id ?? null;
+                    ContentObj.search_url = Modelobj.Search_url ?? null;
                     ContentObj.Spot_temp_id = Modelobj.Spot_temp_id;
 
                     if (Modelobj.SelectedMapping_sections != null && Modelobj.SelectedMapping_sections.Length > 0)
@@ -1027,6 +1028,7 @@ public class ContentController : Controller
                     ContentObj.Background_image_id = Modelobj.Background_image_id ?? null;
                     ContentObj.Background_image_Alttext = Modelobj.Background_image_Alttext;
                     ContentObj.Attach_file_id = Modelobj.Attach_file_id ?? null;
+                    ContentObj.search_url = Modelobj.Search_url ?? null;
                     if (Modelobj.SelectedMapping_sections != null && Modelobj.SelectedMapping_sections.Length > 0)
                     {
                         ContentObj.Mapped_sections = string.Join(",", Modelobj.SelectedMapping_sections);
