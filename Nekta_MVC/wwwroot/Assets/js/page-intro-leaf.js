@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
     return { startY: startY, endY: endY };
   }
 
-  document.querySelectorAll(".bc-experience-section").forEach(function (section) {
+  document.querySelectorAll(".bc-experience-section, .ld-quote-band").forEach(function (section) {
     var leaf = section.querySelector(".bc-leaf-deco");
     if (!leaf) return;
 

@@ -114,11 +114,8 @@ $(document).ready(function () {
         // Phone
         let phone = $("#Phone").val().trim();
 
-        if (phone === "") {
-            $('[data-valmsg-for="Phone"]').text("Please enter your contact number.");
-            isValid = false;
-        } else {
-        
+        if (phone != "") {
+            
             // Remove spaces, hyphens, and parentheses
             let cleanPhone = phone.replace(/[\s()-]/g, "");
         

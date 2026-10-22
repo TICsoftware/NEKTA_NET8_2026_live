@@ -234,12 +234,20 @@ button:focus-visible, a:focus-visible{ outline:2px solid var(--color-secondary);
 @media (max-width: 480px) {
    
 
-   .search-form { gap: 8px; padding: 12px 14px; }
+   .search-form { gap: 5px; padding: 10px 5px; }
+   .search-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-third, #FC713C);
+    color: #fff;
+    border: none;
+    padding: 10px 10px;}
 }
 
 @media (max-width: 767px) {
    .search-popup { top: 8%; width: 92%; }
-   .search-input { font-size: 16px; }
+   .search-input { font-size: 13px; }
 }
 
 @media (max-width:900px){
@@ -260,7 +268,13 @@ button:focus-visible, a:focus-visible{ outline:2px solid var(--color-secondary);
 ========================= */
 .footer-grid {color:#fff;}
 .footer-logo { width: auto; height: 40px; margin-bottom:5px !important;}
-.footer-brand-copy { font-size: 1rem; line-height: 1.5; }
+.footer-brand-copy {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
 .footer-nav-list { font-size: 0.875rem;}
 .social-link { width: 35px; height: 35px; font-size:1rem;}
 .footer-legal { color: #fff;}
@@ -287,7 +301,8 @@ footer *{backface-visibility:hidden;}
 transform:translateY(-50%);}
 
 
-@media (min-width: 1280px) {
+
+@media (min-width: 1280px)  {
 
 }
 @media (min-width: 1280px) {
@@ -321,7 +336,7 @@ footer h4{font-size: var(--text-h4);font-family: var(--font-heading);  font-weig
 .footer-link:hover::after { width: 100%;}
 
 .footer-indent h4{ padding-bottom:0.5rem;}
-
+.footer-add p { font-size:14px !important;}
 @media (max-width: 992px) {
 
 .footer-brand-copy { padding-bottom: 1rem;}

@@ -134,7 +134,7 @@ Leaf travel CSS
 .leaf-travel-anim{
     position:absolute;
     top: 10vw;
-    right: 10vw;
+    right: 4vw;
     left: auto;
     width: clamp(72px, 9vw, 135px);
     height: auto;
@@ -145,14 +145,12 @@ Leaf travel CSS
     backface-visibility: hidden;
 }
 @media (max-width: 767px) {
-    .leaf-travel-anim {top: 8px; right: 8px;}
-    .counter-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    flex-direction: column;
-}
+
+.leaf-travel-anim {top: 8px; right: 8px;}
+.counter-wrapper {  display: flex; align-items: center; justify-content: center; gap: 1rem; flex-direction: column;}
+.search-hint{display: none !important; }
+.read-more-btn {padding-top: 0px !important;}
+
 }
 
 
@@ -171,7 +169,7 @@ Leaf travel CSS
 
 .cta-section h2{ font-family:var(--font-body) !important; font-weight:500;}
 
-
+.link-light:hover{color: var(--color-cream) !important; text-decoration: underline !important;}
 
 /* tab */
 /* Tab */
@@ -180,6 +178,7 @@ Leaf travel CSS
 .text-h2 { font-size: 2.875rem;}
 
  }
+
 
 
 
@@ -197,12 +196,10 @@ Leaf travel CSS
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 
 .text-h2 {font-size: 3.375rem}
-    p {
-        font-size: 1.125rem !important;
-    }
-        .edge-card-text {
-        font-size: 1rem;
-        max-width: 27vw;
+    p {  font-size: 1.125rem !important;} 
+    .edge-card-text {  font-size: 1rem;  max-width: 27vw;}
+        #playgrounds-section .feature-card h3.text-white {
+        font-size: 1.625rem;
     }
 
 }
@@ -213,6 +210,9 @@ Leaf travel CSS
 
 .text-h2 {font-size: 3.375rem}
  p {font-size: 1rem !important; }
+ .intro-section-wrap p {
+    font-size: var(--text-22) !important;
+}
 .section-title-center {max-width: 800px;}
 .md\:mt-6 { margin-top: calc(var(--spacing) * 3);}
 .h-170 {height: calc(var(--spacing) * 130);}
@@ -268,18 +268,22 @@ Leaf travel CSS
   transform: rotate(45deg);
 }
 
-.page-intro-section .intro-readmore-extra {
+.page-intro-section .intro-readmore-extra,
+.curveshape-wrap .intro-readmore-extra {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.45s ease;
+  width: 100%;
 }
 
-.page-intro-section .intro-readmore-extra-inner {
+.page-intro-section .intro-readmore-extra-inner,
+.curveshape-wrap .intro-readmore-extra-inner {
   min-height: 0;
   overflow: hidden;
 }
 
-.page-intro-section .intro-readmore-extra.is-expanded {
+.page-intro-section .intro-readmore-extra.is-expanded,
+.curveshape-wrap .intro-readmore-extra.is-expanded {
   grid-template-rows: 1fr;
 }
 
