@@ -409,6 +409,9 @@ background-color: #F1EDDE;
     .ld-quote-mark--close{
         right: 5px;
     }
+    .ld-quote-band .bc-leaf-deco {
+
+    width: clamp(32px, 7vw, 120px);}
 }
 
 

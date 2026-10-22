@@ -56,6 +56,12 @@ right: -9vw;
 }
 
 
+.merge-imgs img:nth-child(1) {
+    left: -6vw;
+    top: 4vw;
+    z-index: 10;
+}
+
 @media (max-width: 992px) {
     .story-intro {padding-left: 20px;padding-right: 20px;}
     .story-gallery-left {max-width: 250px;}
