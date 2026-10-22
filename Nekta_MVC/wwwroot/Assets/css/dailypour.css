@@ -39,9 +39,9 @@
 
 .dp-deco-left {
     left: -9vw;
-    width: clamp(180px, 20vw, 424px);
+    width: clamp(195px, 48vw, 581px);
     height: auto;
-    rotate: 106deg;
+    /* rotate: 106deg; */
     z-index: 3;
 }
   .dp-deco-right {
@@ -190,9 +190,9 @@
 
   /* --------- Responsive --------- */
   @media (max-width: 900px) {
-    .dp-content-grid {
+    /* .dp-content-grid {
       grid-template-columns: 1fr;
-    }
+    } */
     .dp-image-wrap {
       max-width: 420px;
       margin: 0 auto;
@@ -426,14 +426,30 @@
     max-width: 1790px;
     margin: 0 auto;
   }
- 
 
- 
+  .menu-slider-viewport {
+    touch-action: pan-y;
+  }
+
+  .menu-slider-viewport.is-swipeable {
+    cursor: grab;
+  }
+
+  .menu-slider-viewport.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+
   .menu-track {
     display: flex;
     gap: 26px;
     transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
     will-change: transform;
+    
+  }
+
+  .menu-track.is-dragging {
+    transition: none;
   }
  
 .menu-card {
@@ -455,6 +471,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
   }
  
   .menu-card-media::after {
@@ -578,11 +596,16 @@
     background: #b6825f;
   }
  
-  .experience-divider-icon {
-    width: 18px;
-    height: 18px;
+
+
+.experience-divider-icon {
+    width: 20vw;
+    height: 13vw;
     object-fit: contain;
-  }
+    position: absolute;
+    right: -7vw;
+    top: -2vw;
+}
  
   .experience-subtext {
 
@@ -599,6 +622,16 @@
     position: relative;
     overflow: hidden;
     padding: 20px 0 40px;
+    touch-action: pan-y;
+  }
+
+  .experience-slider-viewport.is-swipeable {
+    cursor: grab;
+  }
+
+  .experience-slider-viewport.is-dragging {
+    cursor: grabbing;
+    user-select: none;
   }
  
   .experience-track {
@@ -607,6 +640,10 @@
     gap: 24px;
     transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
     will-change: transform;
+  }
+
+  .experience-track.is-dragging {
+    transition: none;
   }
  
   .experience-slide {
@@ -633,6 +670,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
   }
  
   /* --------- Caption card, only meaningful on the active slide --------- */
@@ -1211,8 +1250,14 @@ font-size: 3.75rem;
     transform: rotate(45deg) translateY(-1px);
   }
  
-  @media (max-width: 560px) {
-    .backbone-section {
+  @media (max-width: 992px) {
+    .belongs-image-wrap {border-radius: 20px 20px 20px 20px;}
+    .belongs-image-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;}
+
+   .whats-on-menu-section ,.home-daily-pour-section ,.where-belongs-section , .backbone-section {
       padding: 70px 18px 80px;
     }
     .backbone-deco-corner {
@@ -1237,8 +1282,19 @@ font-size: 3.75rem;
   --------------------------------------- */
   .dp-cta-section {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     isolation: isolate;
+    z-index: 2;
+  }
+
+  /* Clips the oversized parallax photo. The cup sits outside this box
+     so it can cross into the cream section above. */
+  .dp-cta-media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
   }
  
 .dp-cta-bg {
@@ -1255,17 +1311,43 @@ font-size: 3.75rem;
 }
 .dp-cta-deco-right {
   position: absolute;
-  right: -20px;
-  top: -30px;
-  width: clamp(120px, 12vw, 200px);
+  right: -22px;
+  top: 0;
+  width: clamp(160px, 16.5vw, 270px);
   height: auto;
-  z-index: 2;           /* above .dp-cta-overlay (z-index: 1) so it isn't dimmed by the dark gradient */
+  transform: translateY(-38%);
+  z-index: 4;
   pointer-events: none;
   user-select: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .dp-cta-deco-right {
+    width: 132px;
+    right: -16px;
+    transform: translateY(-42%);
+  }
+}
 
+@media (max-width: 640px) {
+  .dp-cta-deco-right {
+    width: 88px;
+    right: -10px;
+    transform: translateY(-64%);
+  }
+}
+
+/* Scroll drift sits on the translate property so it does not
+   replace rotate or the cup's existing transform. */
+@media (prefers-reduced-motion: no-preference) {
+  .dp-deco-left,
+  .dp-deco-right,
+  .dpq-deco-left,
+  .dpq-deco-right,
+  .belongs-bg-corner,
+  .dp-cta-deco-right {
+    translate: 0 var(--deco-shift, 0px);
+  }
 }
   .dp-cta-overlay {
     position: absolute;
@@ -1363,7 +1445,7 @@ font-size: 3.75rem;
     transform: translateX(3px);
   }
  
-  @media (max-width: 560px) {
+  @media (max-width: 992px) {
     .dp-cta-inner {
       padding: 64px 20px 72px;
     }
@@ -1380,6 +1462,30 @@ font-size: 3.75rem;
 }
         .belongs-subtext {padding-left: 15px; padding-right: 15px;}
   }
+
+   @media (max-width: 768px){
+    .dp-content-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);}
+    .experience-divider-icon {
+    width: 20vw;
+    height: 19vw;
+    object-fit: contain;
+    position: absolute;
+    right: -8vw;
+    top: 9vw;
+}
+   }
+
+
+   @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
+    .menu-slider-wrap { max-width: 1450px;}
+    .dp-deco-left {left: -6vw;width: clamp(195px, 48vw, 424px);}
+    .dp-image-wrap { max-width: 40rem;}
+
+
+    
+   }
 
   /* 1920px 150% */
  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
@@ -1399,5 +1505,6 @@ font-size: 3.75rem;
     height: clamp(280px, 32vw, 335px);
     overflow: hidden;
 }
+.menu-slider-wrap { max-width: 1200px;}
 
  }
