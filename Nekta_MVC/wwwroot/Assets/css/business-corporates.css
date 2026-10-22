@@ -323,16 +323,8 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
     .bc-edge-card__inner { bottom: 28px; }
 }
 
-/* ---------- Tablet: 3 per row ---------- */
+/* ---------- Tablet and mobile: swipe slider with prev / next ---------- */
 @media (max-width: 1024px) {
-    .bc-edge-card { flex-basis: calc(100% / 3); }
-    .bc-edge-card:nth-child(3n + 1) { margin-left: 0; }
-    .bc-edge-card { border-bottom: 1px solid #8fa58c; }
-    .bc-edge-card__title { font-size: 22px; }
-}
-
-/* ---------- Mobile: swipe slider with prev / next ---------- */
-@media (max-width: 767px) {
     .bc-edge-grid {
         display: flex;
         flex-wrap: nowrap;
@@ -461,6 +453,21 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 
     .bc-edge-nav:active {
         transform: scale(0.92);
+    }
+}
+
+/* Tablet: keep the swipe slider, but cap the arch so the dome does not scale up with the wider screen */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bc-edge-card,
+    .bc-edge-card:first-child,
+    .bc-edge-card:nth-child(3n + 1) {
+        flex: 0 0 min(62%, 400px);
+        aspect-ratio: 400 / 420;
+    }
+
+    .bc-edge-card__inner {
+        bottom: 22px;
+        padding: 0 20px;
     }
 }
 
@@ -601,7 +608,7 @@ html.bc-edge-modal-open body {
     }
 
     .bc-edge-modal__dialog {
-        border-radius: 180px 180px 0 0;
+        border-radius: 210px 210px 0 0;
         max-height: calc(100dvh - 46px);
     }
 
