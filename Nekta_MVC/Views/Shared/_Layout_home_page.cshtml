@@ -22,15 +22,15 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+   rel="stylesheet">
 
 
 
    @RenderSection("head", required: false)
 
    <link rel="preload" href="/dist/site.css" as="style" onload="this.onload=null;this.rel='stylesheet'"
-      asp-append-version="true">
+         asp-append-version="true">
    <link rel="stylesheet" href="/dist/site.css" asp-append-version="true" />
 
 
@@ -45,14 +45,14 @@
    <link rel="stylesheet" href="/Assets/css/blogs-cards-slider.css">
    <link rel="stylesheet" href="/Assets/css/assistant-popup.css">
 
-<script>
-        window.markerConfig = {
+   <script>
+         window.markerConfig = {
             project: '6a67453b87a771686690c241',
             source: 'snippet'
-        };
+         };
 
-        !function (e, r, a) { if (!e.__Marker) { e.__Marker = {}; var t = [], n = { __cs: t };["show", "hide", "isVisible", "capture", "cancelCapture", "unload", "reload", "isExtensionInstalled", "setReporter", "clearReporter", "setCustomData", "on", "off"].forEach(function (e) { n[e] = function () { var r = Array.prototype.slice.call(arguments); r.unshift(e), t.push(r) } }), e.Marker = n; var s = r.createElement("script"); s.async = 1, s.src = "https://edge.marker.io/latest/shim.js"; var i = r.getElementsByTagName("script")[0]; i.parentNode.insertBefore(s, i) } }(window, document);
-    </script>
+         !function (e, r, a) { if (!e.__Marker) { e.__Marker = {}; var t = [], n = { __cs: t };["show", "hide", "isVisible", "capture", "cancelCapture", "unload", "reload", "isExtensionInstalled", "setReporter", "clearReporter", "setCustomData", "on", "off"].forEach(function (e) { n[e] = function () { var r = Array.prototype.slice.call(arguments); r.unshift(e), t.push(r) } }), e.Marker = n; var s = r.createElement("script"); s.async = 1, s.src = "https://edge.marker.io/latest/shim.js"; var i = r.getElementsByTagName("script")[0]; i.parentNode.insertBefore(s, i) } }(window, document);
+   </script>
 
    @RenderSection("Styles", required: false)
 
@@ -62,7 +62,7 @@
 <body>
    <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KKXV4K9H" height="0" width="0"
-         style="display:none;visibility:hidden"></iframe>
+              style="display:none;visibility:hidden"></iframe>
    </noscript>
 
    @{
@@ -72,12 +72,13 @@
    }
 
    @* @Html.Partial("~/Views/Shared/_Header.cshtml") *@
-     @await Component.InvokeAsync("HeaderMenu")
+   @await Component.InvokeAsync("HeaderMenu")
 
    <div class="hero-assistant fixed top-1/2 right-0 z-50">
       <button type="button" class="assistant-trigger" data-modal-open="contactModal"
-         aria-label="Open assistant enquiry form">
-         <img loading="lazy" src="/Assets/images/assistant.png" alt="" class="hero-section-ass-img" aria-hidden="true" />
+              aria-label="Open assistant enquiry form">
+         <img loading="lazy" src="/Assets/images/assistant.png" alt="" class="hero-section-ass-img"
+              aria-hidden="true" />
       </button>
    </div>
 
@@ -98,7 +99,7 @@
          <button type="button" class="modal-close" data-modal-close aria-label="Close enquiry form">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                <path
-                  d="m6.23 4.93 5.77 5.77 5.77-5.77 1.3 1.3L13.3 12l5.77 5.77-1.3 1.3L12 13.3l-5.77 5.77-1.3-1.3L10.7 12 4.93 6.23z" />
+               d="m6.23 4.93 5.77 5.77 5.77-5.77 1.3 1.3L13.3 12l5.77 5.77-1.3 1.3L12 13.3l-5.77 5.77-1.3-1.3L10.7 12 4.93 6.23z" />
             </svg>
          </button>
          <div class="modal-scroll" tabindex="0">
@@ -111,21 +112,22 @@
                Please share your requirements.<br />
                An associate will connect with you shortly.
             </p>
-            @await Html.PartialAsync("~/Views/CommonComponent/_home_contact_modal_form.cshtml", new Nekta_MVC.Models.SalesEnquiryModel())
+            @await Html.PartialAsync("~/Views/CommonComponent/_home_contact_modal_form.cshtml", new
+            Nekta_MVC.Models.SalesEnquiryModel())
          </div>
       </div>
    </div>
 
    <!--back to top-->
    <div class="back-to-top fixed bottom-3 right-5 w-8 h-8 sm:w-10 sm:h-10 rounded-full
-                     bg-black/70 text-white flex items-center justify-center
-                     cursor-pointer z-50 opacity-0 pointer-events-none
-                     transition-all duration-300">
+      bg-black/70 text-white flex items-center justify-center
+      cursor-pointer z-50 opacity-0 pointer-events-none
+      transition-all duration-300">
 
       <svg class="progress-ring absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100"
-         preserveAspectRatio="xMidYMid meet">
+           preserveAspectRatio="xMidYMid meet">
          <circle class="progress-ring-circle" cx="50" cy="50" r="45" stroke="#FC713C" stroke-width="6"
-            fill="transparent" stroke-linecap="round" />
+                 fill="transparent" stroke-linecap="round" />
       </svg>
 
       <span class="relative z-10 flex items-center justify-center">
@@ -138,48 +140,54 @@
 
 
    <!-- COOKIE POLICY -->
-   <!-- <div class="privacy_policy_botm" id="popup-privacypolicy">
-        <div class="container">
-            <div class="privacy_policy_bg">
-                <p>We use cookies on cop.com to enhance your browsing experience. By continuing to browse this site you are consenting to the use of cookies on this website.</p>
-                <div class="privacy_btn">
-                    <div class="privacy_close transition_all_4s hvr-shutter-out-horizontal acceptbtn" id="acceptCookie">Accept</div>
-                    <a href="/legal-disclaimer" class="transition_all_4s acceptbtn text-white hover:text-fontColorOne">Read our legal disclaimer</a>
-                </div>
+   <div class="privacy_policy_botm" id="popup-privacypolicy">
+      <div class="container">
+         <div class="privacy_policy_bg">
+            <p>
+               We use cookies on nektafoods.com to enhance your browsing experience. By continuing to browse this site
+               you are consenting to the use of cookies on this website.
+            </p>
+            <div class="privacy_btn">
+               <div class="privacy_close transition_all_4s hvr-shutter-out-horizontal acceptbtn" id="acceptCookie">
+                  Accept cookies
+               </div>
+               <a href="/privacy-policy" class="transition_all_4s acceptbtn text-white hover:text-fontColorOne">Privacy
+                  policy</a>
+               </div>
             </div>
-        </div>
-    </div> -->
-   <!-- COOKIE POLICY -->
+         </div>
+      </div>
+      <!-- COOKIE POLICY -->
 
 
-   @* COMMON SCRIPT  *@
-   <script src="/Assets/js/jquery.min.js"></script>
-   <script src="/Assets/js/gsap.min.js"></script>
-   <script src="/Assets/js/ScrollTrigger.min.js"></script>
-   <script src="/Assets/js/lenis.min.js"></script>
-   <script src="/Assets/js/common-script.js"></script>
-   <script src="/Assets/js/title-animation.js"></script>
-   <script src="/Assets/js/swiper-bundle.min.js"></script>
+      @* COMMON SCRIPT  *@
+      <script src="/Assets/js/jquery.min.js"></script>
+      <script src="/Assets/js/gsap.min.js"></script>
+      <script src="/Assets/js/ScrollTrigger.min.js"></script>
+      <script src="/Assets/js/lenis.min.js"></script>
+      <script src="/Assets/js/common-script.js"></script>
+      <script src="/Assets/js/title-animation.js"></script>
+      <script src="/Assets/js/swiper-bundle.min.js"></script>
 
 
-   @* ADDED SCRIPT  *@
-   <script src="/Assets/js/homepage-script.js"></script>
-   <script src="/Assets/js/three-box-slider.js"></script>
-   <script src="/Assets/js/hero-media-slider.js"></script>
-   <script src="/Assets/js/plate-animation.js"></script>
-   <script src="/Assets/js/testimonial-slider-script.js"></script>
-   <script src="/Assets/js/center-mode-slider.js"></script>
-   <script src="/Assets/js/blogs-cards-slider.js"></script>
-   <script src="/Assets/js/assistant-popup-script.js" asp-append-version="true"></script>
+      @* ADDED SCRIPT  *@
+      <script src="/Assets/js/homepage-script.js"></script>
+      <script src="/Assets/js/three-box-slider.js"></script>
+      <script src="/Assets/js/hero-media-slider.js"></script>
+      <script src="/Assets/js/plate-animation.js"></script>
+      <script src="/Assets/js/testimonial-slider-script.js"></script>
+      <script src="/Assets/js/center-mode-slider.js"></script>
+      <script src="/Assets/js/blogs-cards-slider.js"></script>
+      <script src="/Assets/js/assistant-popup-script.js" asp-append-version="true"></script>
 
-   @* CONTACT MODAL VALIDATION + SUBMIT  *@
-   <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-   <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-   <script src="/Assets/js/home-contact-modal-script.js" asp-append-version="true"></script>
-   <script src="~/scripts/Search/Search_Home.js" asp-append-version="true"></script>
+      @* CONTACT MODAL VALIDATION + SUBMIT  *@
+      <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+      <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+      <script src="/Assets/js/home-contact-modal-script.js" asp-append-version="true"></script>
+      <script src="~/scripts/Search/Search_Home.js" asp-append-version="true"></script>
 
-   <!-- <script defer type="text/javascript" src="/Assets/js/cookie-script.js"></script> -->
-   @await RenderSectionAsync("Scripts", required: false)
-</body>
+      <script defer type="text/javascript" src="/Assets/js/cookie-script.js"></script>
+      @await RenderSectionAsync("Scripts", required: false)
+   </body>
 
 </html>
