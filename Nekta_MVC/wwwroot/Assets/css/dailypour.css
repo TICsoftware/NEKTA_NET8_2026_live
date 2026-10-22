@@ -428,6 +428,7 @@
   }
 
   .menu-slider-viewport {
+    overflow: hidden;
     touch-action: pan-y;
   }
 
@@ -454,7 +455,7 @@
  
 .menu-card {
     flex: 0 0 auto;
-    width: 494px;
+    width: calc((100% - 52px) / 3); /* two 26px gaps between three cards */
 }
  
   .menu-card-media {
@@ -508,7 +509,7 @@
   /* --------- Nav arrows --------- */
   .menu-nav {
     position: absolute;
-    top: 170px; /* vertically centered against the 340px media height */
+    top: 300px; /* vertically centered against the 340px media height */
     transform: translateY(-50%);
     width: 46px;
     height: 46px;

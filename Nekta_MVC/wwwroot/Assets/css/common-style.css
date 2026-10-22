@@ -290,3 +290,151 @@ Leaf travel CSS
 .page-intro-section .intro-readmore-btn {
   padding-top: 16px;
 }
+
+/**=====================================
+COOKIE CONSENT
+Scoped to #popup-privacypolicy so layout, buttons, and links elsewhere stay unchanged.
+Show/hide position is still driven by cookie-script.js.
+=====================================**/
+#popup-privacypolicy {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -400px;
+  z-index: 9999;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 1.25rem env(safe-area-inset-bottom, 0px);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+#popup-privacypolicy > .container {
+  width: min(1680px, 100%);
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+  flex: 0 1 auto;
+}
+
+body.cookie-banner-open .back-to-top {
+  bottom: calc(6.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+#popup-privacypolicy .privacy_policy_bg {
+  display: flex;
+  align-items: center;
+  gap: 18px 28px;
+  background: #fffdf8;
+  border: 1px solid rgba(28, 25, 24, 0.08);
+  border-top: 3px solid #748d6e;
+  border-radius: 18px 18px 0 0;
+  border-bottom: 0;
+  box-shadow: 0 16px 40px rgba(28, 25, 24, 0.14);
+  padding: 16px 18px 16px 22px;
+}
+
+#popup-privacypolicy .privacy_policy_bg > p {
+  margin: 0 !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-body), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #454545;
+}
+
+#popup-privacypolicy .privacy_btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+#popup-privacypolicy #acceptCookie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #fc713c;
+  color: #fff;
+  font-family: var(--font-body), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#popup-privacypolicy #acceptCookie:hover {
+  background: #e05a25;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(252, 113, 60, 0.35);
+}
+
+#popup-privacypolicy .privacy_btn a.acceptbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(28, 25, 24, 0.16);
+  border-radius: 999px;
+  background: transparent;
+  color: #1c1918;
+  font-family: var(--font-body), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#popup-privacypolicy .privacy_btn a.acceptbtn:hover {
+  color: #748d6e;
+  border-color: #748d6e;
+  background: rgba(116, 141, 110, 0.08);
+}
+
+#popup-privacypolicy .privacy_btn a.acceptbtn:focus-visible {
+  outline: 2px solid #748d6e;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  body.cookie-banner-open .back-to-top {
+    bottom: calc(12.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  #popup-privacypolicy .privacy_policy_bg {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 14px 14px 16px;
+  }
+
+  #popup-privacypolicy .privacy_policy_bg > p {
+    flex: 0 1 auto;
+  }
+
+  #popup-privacypolicy .privacy_btn {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  #popup-privacypolicy #acceptCookie,
+  #popup-privacypolicy .privacy_btn a.acceptbtn {
+    flex: 1 1 auto;
+  }
+}

@@ -75,7 +75,8 @@
     var trackWidth = track.scrollWidth;
     var viewportWidth = viewport.getBoundingClientRect().width;
     var maxScroll = Math.max(0, trackWidth - viewportWidth);
-    var maxIdx = step > 0 ? Math.ceil(maxScroll / step) : 0;
+    // Ignore sub-pixel remainder so the next arrow disables when the last card is already flush.
+    var maxIdx = step > 0 ? Math.max(0, Math.ceil((maxScroll - 1) / step)) : 0;
     return { step: step, maxScroll: maxScroll, maxIdx: maxIdx };
   }
 
