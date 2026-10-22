@@ -616,6 +616,7 @@ public class EditContentController : Controller
                     ContentObj.Background_image_id = Modelobj.Background_image_id ?? null;
                     ContentObj.Background_image_Alttext = Modelobj.Background_image_Alttext;
                     ContentObj.Attach_file_id = Modelobj.Attach_file_id ?? null;
+                    ContentObj.search_url = Modelobj.Search_url ?? null;
                     if (Modelobj.SelectedMapping_sections != null && Modelobj.SelectedMapping_sections.Length > 0)
                     {
                         ContentObj.Mapped_sections = string.Join(",", Modelobj.SelectedMapping_sections);
@@ -833,7 +834,7 @@ public class EditContentController : Controller
                     Model.Language_subSections.Add(new SelectListItem { Text = item.title, Value = item.id.ToString() });
                 }
             }
-         
+
             cmsObj = objBal.CMS_Section_articles_RepublishedList(cont_id, Model.searchquery ?? "", Model.language_id, Model.current_page ?? 1);
 
             if (cmsObj.sections != null && cmsObj.sections.Count > 0)
@@ -1145,6 +1146,7 @@ public class EditContentController : Controller
                     ContentObj.Background_image_id = Modelobj.Background_image_id ?? null;
                     ContentObj.Background_image_Alttext = Modelobj.Background_image_Alttext;
                     ContentObj.Attach_file_id = Modelobj.Attach_file_id ?? null;
+                    ContentObj.search_url = Modelobj.Search_url ?? null;
                     if (Modelobj.SelectedMapping_sections != null && Modelobj.SelectedMapping_sections.Length > 0)
                     {
                         ContentObj.Mapped_sections = string.Join(",", Modelobj.SelectedMapping_sections);

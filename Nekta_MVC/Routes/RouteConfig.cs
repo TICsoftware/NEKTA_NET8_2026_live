@@ -210,7 +210,12 @@ namespace Nekta_MVC.Routes
               defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
           );
 
-
+ app.MapControllerRoute(
+              name: "sitemap",
+              pattern: "sitemap",
+              defaults: new { controller = "pagearticle", action = "article", id = "sitemap" }
+          );
+          
             app.MapControllerRoute(
                 name: "Error",
                 pattern: "Error",
