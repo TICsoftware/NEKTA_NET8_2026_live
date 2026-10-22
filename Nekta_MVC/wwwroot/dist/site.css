@@ -338,11 +338,7 @@
     top: calc(50% * -1);
   }
   .top-0 {
-<<<<<<< HEAD
     top: calc(var(--spacing) * 0);
-=======
-    top: 0px;
->>>>>>> fed0152144494e07d9e02e50d4a16d9615c08086
   }
   .top-1\/2 {
     top: calc(1 / 2 * 100%);
@@ -399,11 +395,7 @@
     left: calc(var(--spacing) * -22);
   }
   .left-0 {
-<<<<<<< HEAD
     left: calc(var(--spacing) * 0);
-=======
-    left: 0px;
->>>>>>> fed0152144494e07d9e02e50d4a16d9615c08086
   }
   .left-1\/2 {
     left: calc(1 / 2 * 100%);
