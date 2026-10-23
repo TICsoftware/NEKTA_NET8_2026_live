@@ -262,6 +262,16 @@
     .footprint-decor { z-index: 2; max-width: 18vw; top: -14vw;}
 }
 
+/* Phone: grow the map visually. Scale does not change layout size, so the vertical margin keeps the text above and below clear. */
+@media (max-width: 767px) {
+  .map-inside-wrapper svg {
+    transform: scale(1.20);
+    transform-origin: center center;
+    margin-top: 7%;
+    margin-bottom: 7%;
+  }
+}
+
 /* 1920px 150% */
  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
    .left-copy{margin-left: 0px;}
