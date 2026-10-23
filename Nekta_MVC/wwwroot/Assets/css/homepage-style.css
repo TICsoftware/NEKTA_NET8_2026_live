@@ -248,7 +248,9 @@ background: transparent;
 .insight-card { height: 100%;}
 .insight-card-wrapper{padding-bottom:40px;}
 .insight-card-wrapper a { position: absolute; bottom: 0;}
-
+h5.swiper-no-swiping {
+    font-size: 26px;
+}
 @media (min-width: 768px) {
     .testimonial-text {
         margin-bottom: 2rem;
