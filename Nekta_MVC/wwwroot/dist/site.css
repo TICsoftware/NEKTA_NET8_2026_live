@@ -320,10 +320,14 @@
     top: calc(50% * -1);
   }
   .top-0 {
+<<<<<<< HEAD
+    top: calc(var(--spacing) * 0);
+=======
     top: 0px;
   }
   .top-1 {
     top: var(--spacing);
+>>>>>>> 82b4938c88562775915ed3e9c5b9afc95361c355
   }
   .top-1\/2 {
     top: calc(1 / 2 * 100%);
@@ -380,10 +384,14 @@
     left: calc(var(--spacing) * -22);
   }
   .left-0 {
+<<<<<<< HEAD
+    left: calc(var(--spacing) * 0);
+=======
     left: 0px;
   }
   .left-1 {
     left: var(--spacing);
+>>>>>>> 82b4938c88562775915ed3e9c5b9afc95361c355
   }
   .left-1\/2 {
     left: calc(1 / 2 * 100%);
