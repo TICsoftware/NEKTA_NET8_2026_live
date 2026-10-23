@@ -30,7 +30,7 @@ public class HomeController : Controller
             //string connstr = "user id=sa;data source=TIC_DBNET;persist security info=True;initial catalog=Nekta_2026;password=DB#SqL2023TiC;Encrypt=True;TrustServerCertificate=True";
             string connstr1 = "user id=sa;data source=192.168.2.6;persist security info=True;initial catalog=Nekta_2026;password=26%TiC@SqL20;Encrypt=True;TrustServerCertificate=True";
             string connstruat = "user id=sa;data source=10.55.1.4;persist security info=True;initial catalog=Nekta_2026;password=gA5(6JkhvT*Xr%;Encrypt=True;TrustServerCertificate=True";
- string connstrlive = "user id=sa;data source=10.55.1.3;persist security info=True;initial catalog=Nekta_2026;password=zmU#U1x^x1@-ny;Encrypt=True;TrustServerCertificate=True";
+ string connstrlive = "user id=sa;data source=10.55.1.3;persist security info=True;initial catalog=Nekta_live;password=zmU#U1x^x1@-ny;Encrypt=True;TrustServerCertificate=True";
 
             //ViewBag.encryptstr = Core_project_BusinessLogic.CryptoEngine.Encrypt(connstr);
 

@@ -62,7 +62,7 @@ namespace Nekta_BusinessLogic.BAL
                 dt = _dal.AddSalesEnquiry_DAL(model);
                 if (dt.Rows[0][0].ToString() == "updated")
                 {
-                    //SendMail(MailSalesEnquiryContent(model), "New Requirement Enquiry from " + model.FullName);
+                    SendMail(MailSalesEnquiryContent(model), "New Requirement Enquiry from " + model.FullName);
                 }
             }
             catch (Exception ex)
