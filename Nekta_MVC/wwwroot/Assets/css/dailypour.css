@@ -540,6 +540,12 @@
   .menu-nav-prev { left: 16px; }
   .menu-nav-next { right: 8px; }
  
+  @media (max-width: 1024px) {
+    .menu-card {
+      width: calc((100% - 26px) / 2); /* one 26px gap between two cards */
+    }
+  }
+
   @media (max-width: 900px) {
     .menu-nav-prev { left: 4px; }
     .menu-nav-next { right: 4px; }

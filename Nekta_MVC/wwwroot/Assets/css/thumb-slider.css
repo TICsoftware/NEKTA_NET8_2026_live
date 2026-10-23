@@ -107,3 +107,8 @@
     color: #2b2b2b !important;
     z-index: 12;
 }}
+
+ /* 125% zoom */
+@media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
+.merge-imgs {max-width: 18vw;}
+}
