@@ -107,7 +107,7 @@ public class SitemapController : Controller
 
                 writer.WriteStartElement("url");
 
-                writer.WriteElementString("loc", url);
+                writer.WriteElementString("loc", url.ToLower());
                 writer.WriteElementString(
                     "lastmod",
                     lastModified.ToString("yyyy-MM-dd"));
