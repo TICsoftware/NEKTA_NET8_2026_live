@@ -24,7 +24,7 @@
     @foreach (var item in cards)
     {
         <div class="reach-card">
-            <h3>@item.Title</h3>
+            <h3 class="mb-3">@item.Title</h3>
             @if (!string.IsNullOrWhiteSpace(item.Intro))
             {
                 <p>@Html.Raw(item.Intro.CleanParagraphTags())</p>

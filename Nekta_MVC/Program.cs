@@ -116,7 +116,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 
 //uncomment while live
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {

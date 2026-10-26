@@ -885,7 +885,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var section = grid.closest(".bc-edge-section");
   var prevBtn = section ? section.querySelector(".bc-arch-grid-prev") : null;
   var nextBtn = section ? section.querySelector(".bc-arch-grid-next") : null;
-  var mq = window.matchMedia("(max-width: 767px)");
+  var mq = window.matchMedia("(max-width: 1279px)");
   var scrollTimer;
 
   function setActive(card) {

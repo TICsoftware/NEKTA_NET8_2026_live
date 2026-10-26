@@ -463,16 +463,16 @@ position: absolute;
     z-index:1;
 
   }
-  .deco-avocado{
-    width:115px;
-    top:-12%;
-    left:-5%;
-    transform:rotate(-14deg);
+.deco-avocado {
+    width: 7vw;
+    top: -9%;
+    left: -6%;
+    transform: rotate(-14deg);
     z-index: 12;
-  }
+}
   .deco-jam{
     width: 113px;
-    top: calc(50% - 56px);
+    top: calc(33% - 56px);
     right: 29%;
     transform: rotate(10deg);
     z-index: 12;
@@ -979,6 +979,8 @@ position: absolute;
   /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
  .cu-follow-section .section-title-outer  {max-width: 55vw}
+ /* Email id : */
+.reach-line > h4 {font-size: 1.25rem;}
 }
 
 
@@ -992,7 +994,7 @@ position: absolute;
 
   .careers p {text-align: center;max-width: 515px; margin: 15px auto;}
   .deco-plate { position: absolute; bottom: 0vw; left: -4%; width: 25vw; z-index: 1;}
-  .deco-bowl { position: absolute; top: 28%; right: -7%;width: 25vw;z-index: 1;}
+  .deco-bowl { position: absolute; top: 33%; right: -7%;width: 20vw;z-index: 1;}
   .offices-grid-wrap {width: 800px; margin: 0 auto;}
 
   .solutions-salad {
@@ -1005,6 +1007,8 @@ position: absolute;
     .cu-follow-section .section-title-outer  {max-width: 65vw}
     .reach-card {padding: 36px 35px 44px;}
     .office-card {padding: 33px 28px 40px !important;}
+
+    .reach-line > h4 {font-size: 1.25rem !important;}
 
 
 
@@ -1038,7 +1042,7 @@ position: absolute;
     margin: 0 !important;
     padding: 0 !important;
     white-space: nowrap !important;
-    font-size: 1.2rem;
+    font-size: 1.45rem;
     line-height: 1.2;
 }
 

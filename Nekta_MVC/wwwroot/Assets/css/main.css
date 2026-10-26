@@ -389,3 +389,10 @@ img, picture, video, canvas {
 @media (max-width: 992px) {
   .container { width: 100%;}
 }
+
+.innerbanner-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.4) 100%);
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+  pointer-events: none;
+}

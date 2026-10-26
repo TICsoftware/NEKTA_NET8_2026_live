@@ -6,12 +6,14 @@
 {
 <section class="daily-pour-cta-section dp-cta-section">
 
-  <img
-    src="@(string.IsNullOrWhiteSpace(item.Componentbackground) ? "/Assets/images/dailypour/cta-banner-bg.webp" : item.Componentbackground)"
-    alt="@(string.IsNullOrWhiteSpace(item.ComponentbackgroundAltText) ? "Coffee beans, latte art and pastries" : item.ComponentbackgroundAltText)"
-    class="dp-cta-bg"
-  />
-  <div class="dp-cta-overlay" aria-hidden="true"></div>
+  <div class="dp-cta-media">
+    <img
+      src="@(string.IsNullOrWhiteSpace(item.Componentbackground) ? "/Assets/images/dailypour/cta-banner-bg.webp" : item.Componentbackground)"
+      alt="@(string.IsNullOrWhiteSpace(item.ComponentbackgroundAltText) ? "Coffee beans, latte art and pastries" : item.ComponentbackgroundAltText)"
+      class="dp-cta-bg"
+    />
+    <div class="dp-cta-overlay" aria-hidden="true"></div>
+  </div>
   <img
     src="@(string.IsNullOrWhiteSpace(item.Component_RHS_icon1) ? "/Assets/images/dailypour/deco-coffee-cup-right-1.png" : item.Component_RHS_icon1)"
     alt=""

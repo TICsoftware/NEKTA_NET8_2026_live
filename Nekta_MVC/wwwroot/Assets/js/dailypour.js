@@ -49,7 +49,19 @@
   if (!track || !prevBtn || !nextBtn || !viewport) return;
 
   var cards = Array.prototype.slice.call(track.children);
+  if (!cards.length) return;
+
   var index = 0;
+  var pointerId = null;
+  var startX = 0;
+  var startY = 0;
+  var startTranslate = 0;
+  var tracking = false;
+  var axisLocked = false;
+  var horizontal = false;
+  var blockClick = false;
+  var SWIPE_THRESHOLD = 50;
+  var AXIS_SLOP = 8;
 
   function cardStep() {
     var card = cards[0];
@@ -58,22 +70,104 @@
     return card.getBoundingClientRect().width + gap;
   }
 
-  function update() {
+  function limits() {
     var step = cardStep();
-    var trackWidth = track.scrollWidth;               // real full width of all cards + gaps
+    var trackWidth = track.scrollWidth;
     var viewportWidth = viewport.getBoundingClientRect().width;
-    var maxScroll = Math.max(0, trackWidth - viewportWidth); // real max pixel distance, no guessing
-    var maxIdx = step > 0 ? Math.ceil(maxScroll / step) : 0;
+    var maxScroll = Math.max(0, trackWidth - viewportWidth);
+    // Ignore sub-pixel remainder so the next arrow disables when the last card is already flush.
+    var maxIdx = step > 0 ? Math.max(0, Math.ceil((maxScroll - 1) / step)) : 0;
+    return { step: step, maxScroll: maxScroll, maxIdx: maxIdx };
+  }
 
-    if (index > maxIdx) index = maxIdx;
+  function currentTranslate(lim) {
+    return Math.min(index * lim.step, lim.maxScroll);
+  }
+
+  function update() {
+    var lim = limits();
+    if (index > lim.maxIdx) index = lim.maxIdx;
     if (index < 0) index = 0;
 
-    // clamp the actual translate to maxScroll so it can never overshoot past the last card
-    var translateX = Math.min(index * step, maxScroll);
-    track.style.transform = 'translateX(-' + translateX + 'px)';
-
+    track.style.transform = 'translateX(-' + currentTranslate(lim) + 'px)';
     prevBtn.disabled = index <= 0;
-    nextBtn.disabled = index >= maxIdx;
+    nextBtn.disabled = index >= lim.maxIdx;
+    viewport.classList.toggle('is-swipeable', lim.maxScroll > 1);
+  }
+
+  function resistedTranslate(raw, maxScroll) {
+    if (raw < 0) return raw * 0.28;
+    if (raw > maxScroll) return maxScroll + (raw - maxScroll) * 0.28;
+    return raw;
+  }
+
+  function onPointerDown(e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (tracking) return;
+
+    var lim = limits();
+    tracking = true;
+    axisLocked = false;
+    horizontal = false;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startY = e.clientY;
+    startTranslate = currentTranslate(lim);
+
+    if (e.pointerType === 'mouse') {
+      viewport.setPointerCapture(e.pointerId);
+    }
+  }
+
+  function onPointerMove(e) {
+    if (!tracking || e.pointerId !== pointerId) return;
+
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+
+    if (!axisLocked) {
+      if (Math.abs(dx) < AXIS_SLOP && Math.abs(dy) < AXIS_SLOP) return;
+      axisLocked = true;
+      horizontal = Math.abs(dx) >= Math.abs(dy);
+      if (!horizontal) {
+        tracking = false;
+        return;
+      }
+      track.classList.add('is-dragging');
+      viewport.classList.add('is-dragging');
+      if (viewport.setPointerCapture) {
+        try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+    }
+
+    if (!horizontal) return;
+    if (e.cancelable) e.preventDefault();
+
+    var lim = limits();
+    var next = resistedTranslate(startTranslate - dx, lim.maxScroll);
+    track.style.transform = 'translateX(-' + next + 'px)';
+  }
+
+  function finish(e) {
+    if (!tracking || e.pointerId !== pointerId) return;
+
+    var dx = e.clientX - startX;
+    var wasHorizontal = horizontal;
+    tracking = false;
+    horizontal = false;
+    axisLocked = false;
+    viewport.classList.remove('is-dragging');
+
+    if (wasHorizontal && Math.abs(dx) > AXIS_SLOP) blockClick = true;
+
+    if (wasHorizontal) {
+      if (dx <= -SWIPE_THRESHOLD) index += 1;
+      else if (dx >= SWIPE_THRESHOLD) index -= 1;
+      track.classList.remove('is-dragging');
+      void track.offsetWidth;
+    }
+
+    update();
   }
 
   prevBtn.addEventListener('click', function () {
@@ -85,6 +179,18 @@
     index += 1;
     update();
   });
+
+  viewport.addEventListener('pointerdown', onPointerDown);
+  viewport.addEventListener('pointermove', onPointerMove, { passive: false });
+  viewport.addEventListener('pointerup', finish);
+  viewport.addEventListener('pointercancel', finish);
+  viewport.addEventListener('dragstart', function (e) { e.preventDefault(); });
+  viewport.addEventListener('click', function (e) {
+    if (!blockClick) return;
+    e.preventDefault();
+    e.stopPropagation();
+    blockClick = false;
+  }, true);
 
   window.addEventListener('resize', update);
   update();
@@ -161,6 +267,123 @@
       currentIndex += 1;
       update();
     });
+
+    var pointerId = null;
+    var startX = 0;
+    var startY = 0;
+    var startTranslate = 0;
+    var tracking = false;
+    var axisLocked = false;
+    var horizontal = false;
+    var blockClick = false;
+    var SWIPE_THRESHOLD = 50;
+    var AXIS_SLOP = 8;
+
+    function translateFor(index) {
+      var slide = slides[index];
+      var viewportWidth = viewport.getBoundingClientRect().width;
+      var slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      return viewportWidth / 2 - slideCenter;
+    }
+
+    function readTranslate() {
+      var value = window.getComputedStyle(track).transform;
+      if (!value || value === 'none') return translateFor(currentIndex);
+      var match = value.match(/matrix\(([^)]+)\)/);
+      if (!match) return translateFor(currentIndex);
+      var parts = match[1].split(',');
+      var x = parseFloat(parts[4]);
+      return isNaN(x) ? translateFor(currentIndex) : x;
+    }
+
+    function resistedTranslate(raw) {
+      var maxT = translateFor(0);
+      var minT = translateFor(total - 1);
+      if (raw > maxT) return maxT + (raw - maxT) * 0.28;
+      if (raw < minT) return minT + (raw - minT) * 0.28;
+      return raw;
+    }
+
+    function onPointerDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (tracking) return;
+
+      tracking = true;
+      axisLocked = false;
+      horizontal = false;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      startTranslate = readTranslate();
+
+      if (e.pointerType === 'mouse') {
+        try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+    }
+
+    function onPointerMove(e) {
+      if (!tracking || e.pointerId !== pointerId) return;
+
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (!axisLocked) {
+        if (Math.abs(dx) < AXIS_SLOP && Math.abs(dy) < AXIS_SLOP) return;
+        axisLocked = true;
+        horizontal = Math.abs(dx) >= Math.abs(dy);
+        if (!horizontal) {
+          tracking = false;
+          return;
+        }
+        var visual = readTranslate();
+        startTranslate = visual - dx;
+        track.classList.add('is-dragging');
+        viewport.classList.add('is-dragging');
+        track.style.transition = 'none';
+        try { viewport.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+
+      if (!horizontal) return;
+      if (e.cancelable) e.preventDefault();
+
+      track.style.transform = 'translateX(' + resistedTranslate(startTranslate + dx) + 'px)';
+    }
+
+    function finish(e) {
+      if (!tracking || e.pointerId !== pointerId) return;
+
+      var dx = e.clientX - startX;
+      var wasHorizontal = horizontal;
+      tracking = false;
+      horizontal = false;
+      axisLocked = false;
+      viewport.classList.remove('is-dragging');
+
+      if (wasHorizontal && Math.abs(dx) > AXIS_SLOP) blockClick = true;
+
+      if (wasHorizontal) {
+        if (dx <= -SWIPE_THRESHOLD) currentIndex += 1;
+        else if (dx >= SWIPE_THRESHOLD) currentIndex -= 1;
+        track.classList.remove('is-dragging');
+        track.style.transition = '';
+        void track.offsetWidth;
+      }
+
+      update();
+    }
+
+    viewport.classList.toggle('is-swipeable', total > 1);
+    viewport.addEventListener('pointerdown', onPointerDown);
+    viewport.addEventListener('pointermove', onPointerMove, { passive: false });
+    viewport.addEventListener('pointerup', finish);
+    viewport.addEventListener('pointercancel', finish);
+    viewport.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    viewport.addEventListener('click', function (e) {
+      if (!blockClick) return;
+      e.preventDefault();
+      e.stopPropagation();
+      blockClick = false;
+    }, true);
  
     window.addEventListener('resize', function () {
       update(true);
@@ -271,6 +494,101 @@
       if (tween.scrollTrigger) tween.scrollTrigger.kill();
       tween.kill();
       gsap.set(bg, { clearProps: 'transform' });
+    };
+  });
+})();
+
+/* ---------------------------------------
+   Deco images — smooth scroll drift
+   Tweens a CSS variable only, so rotate and
+   existing transforms stay in place.
+--------------------------------------- */
+(function () {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  function drift(el, trigger, from, to) {
+    if (!el || !trigger) return null;
+
+    return gsap.fromTo(el, { '--deco-shift': from }, {
+      '--deco-shift': to,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: trigger,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.7,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+
+  function killTweens(tweens) {
+    tweens.forEach(function (tween) {
+      if (tween.scrollTrigger) tween.scrollTrigger.kill();
+      tween.kill();
+    });
+  }
+
+  function clearShift(selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      el.style.removeProperty('--deco-shift');
+    });
+  }
+
+  var mmDeco = gsap.matchMedia();
+
+  mmDeco.add('(min-width: 561px)', function () {
+    var tweens = [];
+
+    document.querySelectorAll('.daily-pour-section').forEach(function (section) {
+      var left = drift(section.querySelector('.dp-deco-left'), section, '-18px', '26px');
+      var right = drift(section.querySelector('.dp-deco-right'), section, '14px', '-22px');
+      if (left) tweens.push(left);
+      if (right) tweens.push(right);
+    });
+
+    return function () {
+      killTweens(tweens);
+      clearShift('.dp-deco-left, .dp-deco-right');
+    };
+  });
+
+  mmDeco.add('(min-width: 421px)', function () {
+    var tweens = [];
+
+    document.querySelectorAll('.dpq-banner').forEach(function (banner) {
+      var left = drift(banner.querySelector('.dpq-deco-left'), banner, '12px', '-14px');
+      var right = drift(banner.querySelector('.dpq-deco-right'), banner, '-12px', '14px');
+      if (left) tweens.push(left);
+      if (right) tweens.push(right);
+    });
+
+    return function () {
+      killTweens(tweens);
+      clearShift('.dpq-deco-left, .dpq-deco-right');
+    };
+  });
+
+  mmDeco.add('all', function () {
+    var tweens = [];
+
+    document.querySelectorAll('.belongs-section').forEach(function (section) {
+      var splash = drift(section.querySelector('.belongs-bg-corner'), section, '-16px', '20px');
+      if (splash) tweens.push(splash);
+    });
+
+    document.querySelectorAll('.daily-pour-cta-section').forEach(function (section) {
+      var cup = drift(section.querySelector('.dp-cta-deco-right'), section, '10px', '-16px');
+      if (cup) tweens.push(cup);
+    });
+
+    return function () {
+      killTweens(tweens);
+      clearShift('.belongs-bg-corner, .dp-cta-deco-right');
     };
   });
 })();
