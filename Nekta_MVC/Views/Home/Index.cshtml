@@ -1,9 +1,12 @@
 ﻿@using Nekta_MVC.Helpers
+@using Microsoft.Extensions.Configuration
 @model Nekta_BusinessLogic.Entity.HomePageModel
+@inject IConfiguration Configuration
 @{
     ViewData["Title"] = "Nekta";
     Layout = "~/Views/Shared/_Layout_home_page.cshtml";
-       var content = Model?.Home_Content;
+    var content = Model?.Home_Content;
+    var BaseUrl = Configuration["AppSettings:BaseUrl"]?.TrimEnd('/') ?? "";
 }
 
 @section head {
@@ -21,7 +24,7 @@
     <meta property="og:site_name" content="Nekta" />
     <meta property="og:title" content="@(content?.ContTitle)" />
     <meta property="og:description" content="@(content?.cont_metadesc)" />
-    <meta property="og:url" content="https://www.nektafoods.com" />
+    <meta property="og:url" content="@BaseUrl" />
     <meta property="og:image" content="@(content?.cont_meta_image)" />
 
     <meta itemprop="name" content="Nekta" />
@@ -34,7 +37,7 @@
     <meta property="og:title" content="@(content?.ContTitle)" />
     <meta property="og:description" content="@(content?.cont_metadesc)" />
     <meta property="og:image" content="@(content?.cont_meta_image)" />
-    <meta property="og:url" content="https://www.nektafoods.com" />
+    <meta property="og:url" content="@BaseUrl" />
 
     <link rel="canonical" href="https://www.nektafoods.com" />
 }
