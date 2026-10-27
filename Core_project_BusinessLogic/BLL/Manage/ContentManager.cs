@@ -392,7 +392,14 @@ public class ContentManager : Content_DAL
                 objcontent.sequence = ds.Tables[0].Rows[0]["cont_sequence"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["cont_sequence"].ToString());
                 objcontent.displaydate = ds.Tables[0].Rows[0]["cont_displaydate"] == DBNull.Value ? null : Convert.ToDateTime(ds.Tables[0].Rows[0]["cont_displaydate"].ToString());
                 objcontent.search_url = ds.Tables[0].Rows[0]["cont_search_url"].ToString() ?? "";
-                objcontent.isSearch = Convert.ToInt32((bool)ds.Tables[0].Rows[0]["isSearch"] ? 1 : 0);
+                if (ds.Tables[0].Rows[0]["isSearch"] == DBNull.Value)
+                {
+                    objcontent.isSearch = 0;
+                }
+                else
+                {
+                    objcontent.isSearch = Convert.ToInt32((bool)ds.Tables[0].Rows[0]["isSearch"] ? 1 : 0);
+                }
                 objcontent.hmpg_intro = ds.Tables[0].Rows[0]["cont_hmpg_intro"].ToString() ?? "";
                 objcontent.intro = ds.Tables[0].Rows[0]["cont_intro"].ToString() ?? "";
                 objcontent.content = ds.Tables[0].Rows[0]["content"].ToString() ?? "";
