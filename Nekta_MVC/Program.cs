@@ -56,20 +56,20 @@ builder.Services.AddAuthentication("MyCookieAuth")
 builder.Services.AddAuthorization();
 
 //uncomment while live start
-//  builder.Services.AddSession(options =>
-// {
-//      options.IdleTimeout = TimeSpan.FromMinutes(20); // session timeout
-//      options.Cookie.HttpOnly = true;
-//     options.Cookie.IsEssential = true;
-//  });
+builder.Services.AddSession(options =>
+{
+   options.IdleTimeout = TimeSpan.FromMinutes(20); // session timeout
+   options.Cookie.HttpOnly = true;
+   options.Cookie.IsEssential = true;
+});
 
-//  builder.Services.AddAntiforgery(options =>
-//  {
-//     options.Cookie.Name = "SecureToken";
-//     options.Cookie.HttpOnly = true;
-//    options.Cookie.SecurePolicy =
-//         CookieSecurePolicy.Always;  
-// });
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "SecureToken";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy =
+          CookieSecurePolicy.Always;
+});
 //uncomment while live end
 
 builder.Services.AddHttpClient();
@@ -78,7 +78,7 @@ builder.Services.AddHttpClient();
 // Kestrel limit
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 52428800;
+    options.Limits.MaxRequestBodySize = 1073741824;
     options.AddServerHeader = false;
 });
 
@@ -86,6 +86,9 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = 52428800; // 50 MB
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartHeadersLengthLimit = int.MaxValue;
+
 });
 
 var app = builder.Build();
@@ -237,8 +240,8 @@ app.UseSession();
 
 app.UseAuthentication();
 
-app.UseAuthorization(); 
+app.UseAuthorization();
 
-app.RegisterRoutes(); 
+app.RegisterRoutes();
 
-    app.Run();
+app.Run();

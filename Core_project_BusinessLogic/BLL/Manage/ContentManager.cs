@@ -408,11 +408,11 @@ public class ContentManager : Content_DAL
                 objcontent.page_schema = ds.Tables[0].Rows[0]["page_schema"].ToString() ?? "";
                 objcontent.metaexpiry = ds.Tables[0].Rows[0]["cont_metaexpiry"] == DBNull.Value ? null : Convert.ToDateTime(ds.Tables[0].Rows[0]["cont_metaexpiry"].ToString());
                 objcontent.external_url = ds.Tables[0].Rows[0]["cont_external_url"].ToString() ?? "";
-                objcontent.IsExternal = Convert.ToInt32(ds.Tables[0].Rows[0]["cont_IsExternal"].ToString());
+                objcontent.IsExternal = ds.Tables[0].Rows[0]["cont_IsExternal"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["cont_IsExternal"].ToString());
                 objcontent.ByLine = ds.Tables[0].Rows[0]["cont_ByLine"].ToString() ?? "";
                 objcontent.Publication = ds.Tables[0].Rows[0]["Cont_Publication"].ToString() ?? "";
-                objcontent.top_icon = Convert.ToInt32(ds.Tables[0].Rows[0]["cont_top_icon"].ToString());
-                objcontent.Thumb_image_id = ds.Tables[0].Rows[0]["Hmpg_thumbnail_Media_id"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["Hmpg_thumbnail_Media_id"].ToString());
+                objcontent.top_icon = ds.Tables[0].Rows[0]["cont_top_icon"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["cont_top_icon"].ToString());
+                objcontent.Thumb_image_id = ds.Tables[0].Rows[0]["Hmpg_thumbnail_Media_id"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["Hmpg_thumbnail_Media_id"].ToString());                
                 objcontent.Thumb_image_alttext = ds.Tables[0].Rows[0]["Hmpg_thumbnail_alt_text"].ToString() ?? "";
                 objcontent.Small_Icon_Thumb_image_id = ds.Tables[0].Rows[0]["Small_icon_Media_id"] == DBNull.Value ? 0 : Convert.ToInt32(ds.Tables[0].Rows[0]["Small_icon_Media_id"].ToString());
                 objcontent.Small_Icon_alttext = ds.Tables[0].Rows[0]["Small_icon_alt_text"].ToString() ?? "";
