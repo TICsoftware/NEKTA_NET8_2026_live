@@ -7,6 +7,7 @@
 @{
     List<Nekta_BusinessLogic.Entity.CityMaster> cityList;
     List<Nekta_BusinessLogic.Entity.AreaOfInterestMaster> interestList;
+    var captchaPublicKey = ViewBag.captchapublickey as string ?? Configuration["CaptchaKeys:PublicKey"];
 
     using (var enquiryBal = new ContactusEnquiry_BAL(Configuration))
     {
@@ -57,7 +58,13 @@
         <span asp-validation-for="Message" class="field-error"></span>
     </div>
 
-
+    <div class="form-field">
+        <div id="homeRecaptcha" data-sitekey="@captchaPublicKey"></div>
+        <span id="homeCaptchaError" class="field-error"></span>
+        <div class="text-sm italic">
+            (Cannot view the captcha? Please make sure Google and its services are enabled on your system.)
+        </div>
+    </div>
 
     <button type="submit" class="common-btn modal-submit btn-slide-fill">
         <span>Send Enquiry</span>

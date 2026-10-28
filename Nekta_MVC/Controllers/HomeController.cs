@@ -12,18 +12,22 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly Homepage_BAL _bal;
+    private readonly IConfiguration _configuration;
 
     public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
     {
         _logger = logger;
+        _configuration = configuration;
         _bal = new Homepage_BAL(configuration);
 
     }
 
 
+    [HttpGet]
     public IActionResult Index()
     {
         //FileLogger.LogError("/home :", new Exception("Home Controller Index Method Called"));
+        ViewBag.captchapublickey = _configuration["CaptchaKeys:PublicKey"];
 
         try
         {

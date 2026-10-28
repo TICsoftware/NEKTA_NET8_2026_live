@@ -54,7 +54,7 @@ public class ContactUs
 public class CaptchaResponse
 {
     [JsonProperty("success")]
-    public string? Success { get; set; }
+    public bool Success { get; set; }
 
     [JsonProperty("error-codes")]
     public List<string>? ErrorCodes { get; set; }

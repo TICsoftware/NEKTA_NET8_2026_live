@@ -1,8 +1,11 @@
 @using Nekta_MVC.Models
+@using Microsoft.Extensions.Configuration
 @model ContactUsEnquiryModel
+@inject IConfiguration Configuration
 
 @{
     var pageName = ViewBag.ContactUsPageName as string ?? "contact";
+    var captchaPublicKey = ViewBag.captchapublickey as string ?? Configuration["CaptchaKeys:PublicKey"];
 }
 
 <!-- ==================== ENQUIRY FORM ==================== -->
@@ -105,7 +108,19 @@
                             placeholder="Describe your requirement that would help us respond meaningfully."></textarea>
                         <span asp-validation-for="Message" class="cu-field-error"></span>
                     </div>
+
+                    <div class="cu-field cu-field--full">
+                        <div class="g-recaptcha" data-sitekey="@captchaPublicKey" data-theme="dark"></div>
+                        <div class="text-white font-light italic dark-textwhite text-sm">
+                            (Cannot view the captcha? Please make sure Google <br />
+                            and its services are enabled on your system.)
+                        </div>
+                        <span id="captchaError" class="cu-field-error text-red-500"></span>
+                    </div>
                 </div>
+
+
+                
                 <label class="cu-consent">
                     <input asp-for="Consent" type="checkbox" />
                     <span>I agree to be contacted by Nekta regarding my enquiry.</span>

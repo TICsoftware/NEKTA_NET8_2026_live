@@ -32,7 +32,8 @@
   .cu-field--full { grid-column: 1 / -1;}
 }
 
-.cu-field-error {font-size:14px}
+.cu-field-error {font-size:14px; color:#f87171;}
+#captchaError { display:block; margin-top:8px; }
 .cu-field label {  display: block;  font-size: var(--text-small);  font-weight: 500;  color: #f6f6f6;  margin-bottom: 8px;}
 .cu-field label .req {  color: var(--color-primary);}
 .cu-field input,

@@ -4,6 +4,7 @@ using Nekta_BusinessLogic.BAL;
 using Nekta_BusinessLogic.Entity;
 using Nekta_MVC.Classes;
 using Nekta_MVC.Models;
+using Newtonsoft.Json;
 
 namespace Nekta_MVC.Controllers;
 
@@ -12,24 +13,27 @@ public class ContactusController : Controller
     private readonly ILogger<ContactusController> _logger;
     private readonly IConfiguration _configuration;
     private readonly Contactus_BAL _bal;
+     
 
     public ContactusController(ILogger<ContactusController> logger, IConfiguration configuration)
     {
         _logger = logger;
         _configuration = configuration;
         _bal = new Contactus_BAL(configuration);
+        
     }
 
+    [HttpGet]
     public IActionResult Index(string title)
     {
+        ViewBag.captchapublickey = _configuration["CaptchaKeys:PublicKey"];
+
         try
         {
             var data = _bal.GetContactUs_BAL(title, 1, 1);
-
             using var enquiryBal = new ContactusEnquiry_BAL(_configuration);
             ViewBag.CityList = enquiryBal.GetCityList_BAL();
             ViewBag.AreaOfInterestList = enquiryBal.GetAreaOfInterestList_BAL();
-
 
             return View(data);
         }
@@ -48,7 +52,7 @@ public class ContactusController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SubmitEnquiry(ContactUsEnquiryModel model)
+    public async Task<IActionResult> SubmitEnquiry(ContactUsEnquiryModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -56,6 +60,15 @@ public class ContactusController : Controller
             {
                 status = false,
                 message = "Please correct the highlighted fields and try again."
+            });
+        }
+
+        if (!await IsCaptchaValidAsync())
+        {
+            return Json(new
+            {
+                status = false,
+                message = "Please complete the captcha and try again."
             });
         }
 
@@ -126,7 +139,7 @@ public class ContactusController : Controller
     // same model, BAL and DAL.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SubmitSalesEnquiry(SalesEnquiryModel model)
+    public async Task<IActionResult> SubmitSalesEnquiry(SalesEnquiryModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -134,6 +147,15 @@ public class ContactusController : Controller
             {
                 status = false,
                 message = "Please correct the highlighted fields and try again."
+            });
+        }
+
+        if (!await IsCaptchaValidAsync())
+        {
+            return Json(new
+            {
+                status = false,
+                message = "Please complete the captcha and try again."
             });
         }
 
@@ -205,6 +227,38 @@ public class ContactusController : Controller
             return forwardedFor.Split(',')[0].Trim();
 
         return HttpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
+    }
+
+    private async Task<bool> IsCaptchaValidAsync()
+    {
+        var captchaResponse = Request.Form["g-recaptcha-response"].ToString();
+        if (string.IsNullOrWhiteSpace(captchaResponse))
+            return false;
+
+        var secret = _configuration["CaptchaKeys:PrivateKey"];
+        if (string.IsNullOrWhiteSpace(secret))
+            return false;
+
+        try
+        {
+            using var client = new HttpClient();
+            var content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                ["secret"] = secret,
+                ["response"] = captchaResponse
+            });
+
+            var response = await client.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<CaptchaResponse>(json);
+
+            return result?.Success == true;
+        }
+        catch (Exception ex)
+        {
+            FileLogger.LogError($"{nameof(ContactusController)}/{nameof(IsCaptchaValidAsync)}", ex);
+            return false;
+        }
     }
 
     // [HttpPost]
