@@ -58,14 +58,14 @@
         <span asp-validation-for="Message" class="field-error"></span>
     </div>
 
-    <div class="form-field">
-        <div id="homeRecaptcha" data-sitekey="@captchaPublicKey"></div>
-        <span id="homeCaptchaError" class="field-error"></span>
-        <div class="text-sm italic">
+    
+  <div class="form-field">
+                        <div id="homeRecaptcha" class="g-recaptcha" data-sitekey="@captchaPublicKey" data-theme="dark"></div>
+                          <div class="text-sm italic">
             (Cannot view the captcha? Please make sure Google and its services are enabled on your system.)
         </div>
-    </div>
-
+                        <span id="captchaError" class="field-error"></span>
+                    </div>
     <button type="submit" class="common-btn modal-submit btn-slide-fill">
         <span>Send Enquiry</span>
         <span aria-hidden="true">&rarr;</span>
