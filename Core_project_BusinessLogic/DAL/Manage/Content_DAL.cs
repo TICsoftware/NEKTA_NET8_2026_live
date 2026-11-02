@@ -597,7 +597,7 @@ public class Content_DAL : DBHelper
         {
             Sqlparam.Add(new SqlParameter("@cont_pdf", objfile.Filepdf.ToString()));
             Sqlparam.Add(new SqlParameter("@cont_title", objfile.Title.ToString()));
-            Sqlparam.Add(new SqlParameter("@cont_displaydate", objfile.UploadDate.ToString()));
+            Sqlparam.Add(new SqlParameter("@cont_displaydate", objfile.UploadDate));
             Sqlparam.Add(new SqlParameter("@cont_sequence", objfile.Sequence));
             Sqlparam.Add(new SqlParameter("@cont_parent_id", objfile.cont_parent_id));
             Sqlparam.Add(new SqlParameter("@Template_Master_ID", objfile.Template_Master_ID));

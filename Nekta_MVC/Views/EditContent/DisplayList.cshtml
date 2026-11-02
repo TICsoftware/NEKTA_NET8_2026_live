@@ -17,7 +17,7 @@
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th></th>
+                    <th><input type="checkbox"  id="formchkall" /></th>
                     <th>Title</th>
                     <th>Parent title</th>
                     <th>Language</th>
@@ -34,7 +34,7 @@
                     encrypt_cont_id=Core_project_BusinessLogic.CryptoEngine.Encrypt(item.Id.ToString());
                     <tr class="js-pagination-section-item">
                         
-                        <td><input type="checkbox" value="@encrypt_cont_id" name="formchk" /> </td>
+                        <td><input type="checkbox" value="@encrypt_cont_id" name="formchk"  class="formchk"/> </td>
                         <td>@Html.Raw(item.Title)</td>
                         <td>@Html.Raw(item.Parent_title)</td>
                         <td>@(item.Language)</td>
