@@ -39,6 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginationEl = el.querySelector(".swiper-pagination-custom");
     const nextEl = el.querySelector(".swiper-button-next-custom");
     const prevEl = el.querySelector(".swiper-button-prev-custom");
+    const autoplayMs = parseInt(el.dataset.autoplay, 10);
+    const autoplay =
+      Number.isFinite(autoplayMs) && autoplayMs > 0
+        ? {
+            delay: autoplayMs,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }
+        : false;
 
     return new Swiper(el, {
       slidesPerView: "auto",
@@ -47,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       watchOverflow: true,
       observer: false,
       observeParents: false,
+      autoplay,
       pagination: {
         el: paginationEl,
         clickable: true,

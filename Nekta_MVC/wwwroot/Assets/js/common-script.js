@@ -547,7 +547,7 @@ ease:"power2.out"
 })();
 
 // Page intro: hide 3rd+ paragraphs behind Read More
-// Curve intro: show Read More only when there are more than 3 paragraphs
+// Curve intro: keep the first paragraph visible and hide the rest behind Read More
 (function () {
   function meaningfulParas(wrap) {
     var direct = Array.prototype.filter.call(wrap.children, function (el) {
@@ -610,14 +610,14 @@ ease:"power2.out"
     var btn = btnWrap ? btnWrap.querySelector('.read-more-btn') : null;
     var paras = meaningfulParas(wrap);
 
-    if (paras.length <= 3) {
+    if (paras.length < 2) {
       if (btnWrap) btnWrap.classList.add('hidden');
       return;
     }
 
     wrap.setAttribute('data-intro-readmore', 'ready');
 
-    var extra = wrapExtraParas(paras[2], paras.slice(3));
+    var extra = wrapExtraParas(paras[0], paras.slice(1));
     if (btnWrap) btnWrap.classList.remove('hidden');
     if (btn) bindReadMore(btn, extra);
   });

@@ -175,6 +175,15 @@ backface-visibility: hidden;
 /* ==================== 
 7:Testimonial
 ==================== */
+.testimonialSwiper > .swiper-wrapper {
+    align-items: stretch;
+}
+
+.testimonialSwiper .swiper-slide {
+    height: auto;
+    display: flex;
+}
+
 .testimonial-card {
     position: relative;
     height: 100%;
@@ -188,6 +197,19 @@ backface-visibility: hidden;
         filter 0.45s var(--ease-premium),
         background-color var(--motion-base) var(--ease-premium);
 }
+
+.testimonialSwiper .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+}
+
+.testimonialSwiper .testimonial-card > div:last-child {
+    margin-top: auto;
+}
+
 .testimonial-card.is-muted {
     opacity: 0.3;
     filter: blur(1px);
