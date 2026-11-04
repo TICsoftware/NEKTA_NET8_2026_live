@@ -14,7 +14,7 @@
 
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="" />
+    <meta name="twitter:site" content="Nekta" />
     <meta name="twitter:title" content="@Model.Content.ContTitle" />
     <meta name="twitter:description" content="@Model.Content.cont_metadesc" />
 
@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="~/Assets/css/center-mode-slider.css">
     <link rel="stylesheet" href="~/Assets/css/blogs-cards-slider.css">
     <link rel="stylesheet" href="~/Assets/css/thumb-slider.css" />
-    <link rel="stylesheet" href="~/Assets/css/business-corporates.css" />
+    <link rel="stylesheet" href="~/Assets/css/business-corporates.css" asp-append-version="true" />
 }
 
 
@@ -118,6 +118,12 @@
                             class="bc-plate-img" />
                         <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
                             class="bc-plate-mini" aria-hidden="true" />
+                        <div class="bc-clients-patch counter-item">
+                            <p>Clients Serviced</p>
+                            <div class="counter-wrap">
+                                <div class="counter" data-target="50" data-suffix="+">0</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Right: copy -->
@@ -475,6 +481,6 @@
     <script src="~/Assets/js/center-mode-slider.js"></script>
     <script src="~/Assets/js/blogs-cards-slider.js"></script>
     <script src="~/Assets/js/thumb-slider.js"></script>
-    <script src="~/Assets/js/business-corporates.js"></script>
+    <script src="~/Assets/js/business-corporates.js" asp-append-version="true"></script>
     <script src="~/Assets/js/page-intro-leaf.js" asp-append-version="true"></script>
 }

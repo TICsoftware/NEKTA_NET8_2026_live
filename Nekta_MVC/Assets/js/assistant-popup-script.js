@@ -41,6 +41,36 @@ function initContactModal() {
         }
 
         requestAnimationFrame(() => panel.focus());
+
+        renderHomeCaptcha();
+    }
+
+    function renderHomeCaptcha(attempts) {
+        const el = document.getElementById("homeRecaptcha");
+        if (!el) return;
+
+        const remaining = attempts === undefined ? 50 : attempts;
+        if (typeof grecaptcha === "undefined" || typeof grecaptcha.render !== "function") {
+            if (remaining > 0) {
+                setTimeout(() => renderHomeCaptcha(remaining - 1), 100);
+            }
+            return;
+        }
+
+        if (el.getAttribute("data-widget-id")) {
+            try {
+                grecaptcha.reset(Number(el.getAttribute("data-widget-id")));
+            } catch (e) {
+                // Widget not ready yet; ignore.
+            }
+            return;
+        }
+
+        const sitekey = el.getAttribute("data-sitekey");
+        if (!sitekey) return;
+
+        const widgetId = grecaptcha.render(el, { sitekey: sitekey });
+        el.setAttribute("data-widget-id", String(widgetId));
     }
 
     function closeModal() {

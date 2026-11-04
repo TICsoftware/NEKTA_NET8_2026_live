@@ -160,9 +160,10 @@
   gap: 0.7rem;
   margin: 0.85rem 0 0;
   color: #667068;
-  font-size: 0.95rem;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.45;
+  justify-content: center;
 }
 .map-hint-dot {
   position: relative;

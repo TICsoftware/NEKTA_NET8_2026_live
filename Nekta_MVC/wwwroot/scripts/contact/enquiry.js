@@ -25,8 +25,12 @@ $(document).ready(function () {
 
                     // Option 1 - Reset the form
                     $("#contactForm")[0].reset();
+                    if (typeof grecaptcha !== "undefined") {
+                        grecaptcha.reset();
+                    }
 
                     $(".cu-field-error").text("");
+                    $("#captchaError").text("");
 
                     $("#contactMessage").html(
                         `<div class="cu-form-alert cu-form-alert--success">
@@ -40,6 +44,9 @@ $(document).ready(function () {
 
                 }
                 else {
+                    if (typeof grecaptcha !== "undefined") {
+                        grecaptcha.reset();
+                    }
 
                     $("#contactMessage").html(
                         `<div class="cu-form-alert cu-form-alert--error">
@@ -71,6 +78,7 @@ $(document).ready(function () {
     function validateContactForm() {
 
         $(".cu-field-error").text("");
+        $("#captchaError").text("");
     
         let isValid = true;
     
@@ -143,6 +151,12 @@ $(document).ready(function () {
         // Consent
         if (!$("#Consent").prop("checked")) {
             $('[data-valmsg-for="Consent"]').text("Please accept the consent.");
+            isValid = false;
+        }
+
+        var recaptchaResponse = (typeof grecaptcha !== "undefined") ? grecaptcha.getResponse() : "";
+        if (!recaptchaResponse) {
+            $("#captchaError").text("Please complete the captcha.");
             isValid = false;
         }
     

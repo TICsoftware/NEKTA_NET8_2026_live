@@ -32,7 +32,8 @@
   .cu-field--full { grid-column: 1 / -1;}
 }
 
-.cu-field-error {font-size:14px}
+.cu-field-error {font-size:14px; color:#f87171;}
+#captchaError { display:block; margin-top:8px; }
 .cu-field label {  display: block;  font-size: var(--text-small);  font-weight: 500;  color: #f6f6f6;  margin-bottom: 8px;}
 .cu-field label .req {  color: var(--color-primary);}
 .cu-field input,
@@ -979,8 +980,6 @@ position: absolute;
   /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi){
  .cu-follow-section .section-title-outer  {max-width: 55vw}
- /* Email id : */
-.reach-line > h4 {font-size: 1.25rem;}
 }
 
 
@@ -1008,23 +1007,30 @@ position: absolute;
     .reach-card {padding: 36px 35px 44px;}
     .office-card {padding: 33px 28px 40px !important;}
 
-    .reach-line > h4 {font-size: 1.25rem !important;}
-
 
 
 
   }
 
-  .reach-line {
+.reach-line {
+    --reach-label-size: 1.45rem;
     display: flex;
-    align-items: center;
-    gap: 6px;
+    align-items: baseline;
+    gap: 8px;
     width: 100%;
 }
 
 .reach-line > p:first-child {
     flex: 0 0 18px;
+    width: 18px;
     margin: 0;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--reach-label-size);
+    line-height: 1;
+    height: 1em;
 }
 
 .reach-line > p:first-child .reach-icon {
@@ -1033,7 +1039,7 @@ position: absolute;
     display: block;
 }
 
-/* Email id : */
+/* "Email id :" and the address share one baseline */
 .reach-line > h4 {
     display: block !important;
     flex: 0 0 auto !important;
@@ -1042,27 +1048,31 @@ position: absolute;
     margin: 0 !important;
     padding: 0 !important;
     white-space: nowrap !important;
-    font-size: 1.45rem;
-    line-height: 1.2;
+    font-size: var(--reach-label-size);
+    line-height: 1 !important;
 }
 
-/* Email address */
 .reach-line > p:last-child {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
     margin: 0 !important;
-    overflow: hidden;
+    overflow: visible;
+    line-height: 1.35;
 }
 
 .reach-line > p:last-child a {
-    display: block;
-    max-width: 100%;
+    display: inline;
+    line-height: inherit;
 }
 
 .reach-line .reach-value {
-    display: block;
-    max-width: 100%;
-    overflow-wrap: anywhere;
+    display: inline;
+    line-height: inherit;
+    overflow-wrap: break-word;
     word-break: normal;
+}
+
+@media (max-width: 767px) {
+    .reach-line { --reach-label-size: 1.2rem; }
 }

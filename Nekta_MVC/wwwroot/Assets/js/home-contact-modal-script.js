@@ -27,12 +27,14 @@ $(document).ready(function () {
 
                     $form[0].reset();
                     $form.find(".field-error").text("");
+                    resetHomeCaptcha();
 
                     $("#homeContactMessage").html(
                         `<div class="modal-alert modal-alert--success">${response.message}</div>`
                     );
 
                 } else {
+                    resetHomeCaptcha();
                     $("#homeContactMessage").html(
                         `<div class="modal-alert modal-alert--error">${response.message}</div>`
                     );
@@ -57,6 +59,7 @@ $(document).ready(function () {
 
         var $form = $("#homeContactForm");
         $form.find(".field-error").text("");
+        $("#homeCaptchaError").text("");
 
         let isValid = true;
 
@@ -112,9 +115,37 @@ $(document).ready(function () {
             }
         }
 
-       
+        var recaptchaResponse = getHomeCaptchaResponse();
+        if (!recaptchaResponse) {
+            $("#homeCaptchaError").text("Please complete the captcha.");
+            isValid = false;
+        }
 
         return isValid;
+    }
+
+    function getHomeCaptchaWidgetId() {
+        var widgetId = $("#homeRecaptcha").attr("data-widget-id");
+        return widgetId === undefined || widgetId === "" ? null : Number(widgetId);
+    }
+
+    function getHomeCaptchaResponse() {
+        if (typeof grecaptcha === "undefined")
+            return "";
+
+        var widgetId = getHomeCaptchaWidgetId();
+        return widgetId === null ? grecaptcha.getResponse() : grecaptcha.getResponse(widgetId);
+    }
+
+    function resetHomeCaptcha() {
+        if (typeof grecaptcha === "undefined")
+            return;
+
+        var widgetId = getHomeCaptchaWidgetId();
+        if (widgetId === null)
+            grecaptcha.reset();
+        else
+            grecaptcha.reset(widgetId);
     }
 
 });
