@@ -77,11 +77,12 @@
                             class="bc-plate-img" />
                         <img loading="lazy" src="~/Assets/images/business/coriander.svg" alt="" class="bc-plate-mini"
                             aria-hidden="true" />
-                              @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                             
+                    </div>
+                     @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
                         {
                             @Html.Raw(item.HmpgIntro)
                         }
-                    </div>
                 </div>
                 
                 <!-- Right: copy -->
