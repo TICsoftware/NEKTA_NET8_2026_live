@@ -24,8 +24,10 @@
   padding: 18px 22px;
   pointer-events: none;
 }
+.bc-clients-patch .counter-wrap,
 .bc-clients-patch .counter {
-  font-size: var(--text-h2);
+  /* About 24px on a phone and 38px on a wide desktop, so a long number still fits the card. */
+  font-size: var(--text-h2) !important; 
   line-height: 1;
   color: var(--color-green);
   font-weight: 500;
@@ -39,9 +41,9 @@
 .bc-clients-patch .counter-suffix { display: inline-block; margin-left: 0.2ch; font: inherit; line-height: 1; color: var(--color-green); }
 .bc-clients-patch p {
   margin: 0 0 0.15rem;
-  max-width: 7.5em;
-  font-size: var(--text-h4);
-  line-height: 1.15;
+  max-width: 11em;
+  font-size: var(--text-h4) !important;
+  line-height: 1.2;
   color: var(--color-text-heading);
   font-family: var(--font-heading);
   font-weight: 500;
@@ -58,7 +60,5 @@
       right: -1%;
     min-width: 160px;
   }
-  .bc-clients-patch .counter { font-size: 1.45rem; }
-  .bc-clients-patch p { font-size: 14px; line-height: 1.1; margin: 0 0 2px; max-width: 8em; }
-  
+  .bc-clients-patch p { margin: 0 0 2px; }
 }
