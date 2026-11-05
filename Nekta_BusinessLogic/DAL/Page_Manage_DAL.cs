@@ -39,6 +39,32 @@ namespace Nekta_BusinessLogic.DAL
             return GetDataSet("Get_Blogs_List", sqlParams);
         }
 
+        public DataSet GetPdfListing_DAL(int contentId, int pageSize, int pageNumber, int displayYear = 0)
+        {
+            SqlParameter[] sqlParams =
+            {
+                new SqlParameter("@ContentId", contentId),
+                new SqlParameter("@PageSize", pageSize),
+                new SqlParameter("@PageNumber", pageNumber),
+                new SqlParameter("@DisplayYear", SqlDbType.Int)
+                {
+                    Value = displayYear > 0 ? displayYear : DBNull.Value
+                }
+            };
+
+            return GetDataSet("Get_Investor_Pdf_Articles_List", sqlParams);
+        }
+
+        public DataSet GetTabbedPdfPage_DAL(int contentId)
+        {
+            SqlParameter[] sqlParams =
+            {
+                new SqlParameter("@ContentId", contentId)
+            };
+
+            return GetDataSet("Get_Investor_Tabbed_Pdf_Page", sqlParams);
+        }
+
         public DataSet GetContentComponentById_DAL(int ContentID, string Group_Id)
         {
             SqlParameter[] sqlParams =
