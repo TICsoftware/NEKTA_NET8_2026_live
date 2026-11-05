@@ -187,6 +187,7 @@ namespace Nekta_MVC.Routes
                 defaults: new { controller = "Contactus", action = "Index", title = "contact" }
             );
 
+        
             app.MapControllerRoute(
                 name: "legal-disclaimer",
                 pattern: "legal-disclaimer",

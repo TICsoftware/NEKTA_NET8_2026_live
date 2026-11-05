@@ -46,6 +46,8 @@ namespace Nekta_BusinessLogic.Entity
 
         public string Section_title { get; set; }
 
+        public string Component_Landing_Intro {get;set;}
+
         public string Component_right_image { get; set; }
         public string Component_Right_image_alt { get; set; }
         public string Component_Designation { get; set; }

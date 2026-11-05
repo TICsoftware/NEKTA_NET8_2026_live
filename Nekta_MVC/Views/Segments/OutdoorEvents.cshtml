@@ -81,9 +81,13 @@
                         <div class="nourish-photo nourish-photo-front">
                             <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
                         </div>
-
+    @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                        {
+                            @Html.Raw(item.HmpgIntro)
+                        }
                     </div>
                 </div>
+               
                 <!-- Right: copy -->
                 <div class="relative space-y-6 md:space-y-8 ">
                     <div class="section-title-outer mx-auto max-w-2xl">
