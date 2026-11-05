@@ -118,12 +118,11 @@
                             class="bc-plate-img" />
                         <img loading="lazy" src="@item.Component_right_image" alt="@item.Component_Right_image_alt"
                             class="bc-plate-mini" aria-hidden="true" />
-                        <div class="bc-clients-patch counter-item">
-                            <p>Clients Serviced</p>
-                            <div class="counter-wrap">
-                                <div class="counter" data-target="50" data-suffix="+">0</div>
-                            </div>
-                        </div>
+                             @if (!string.IsNullOrWhiteSpace(item.Intro))
+                        {
+                            @Html.Raw(item.HmpgIntro)
+                        }
+                   
                     </div>
                 </div>
                 <!-- Right: copy -->

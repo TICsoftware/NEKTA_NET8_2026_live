@@ -74,6 +74,10 @@
                 <div class="relative">
                     <div class="nourish-media">
                         <img src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText">
+                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                        {
+                            @Html.Raw(item.HmpgIntro)
+                        }
                     </div>
                 </div>
                 <!-- Right: copy -->
