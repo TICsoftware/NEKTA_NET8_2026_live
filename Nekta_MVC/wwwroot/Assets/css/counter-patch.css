@@ -1,0 +1,56 @@
+/* Stat card. Link this with counter-patch.js on any page that uses .bc-clients-patch. */
+.bc-clients-patch {
+  position: absolute;
+  transform: translate(-50%, 55%);
+  left: 50%;
+  bottom: 0;
+  z-index: 5;
+  width: max-content;
+  max-width: 92%;
+  min-width: 200px;
+  border-radius: 20px;
+  background: #fffdf89e;
+  box-shadow: 0 14px 28px rgba(67, 60, 40, 0.16);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 22px;
+  pointer-events: none;
+}
+.bc-clients-patch .counter {
+  font-size: var(--text-h2);
+  line-height: 1;
+  color: var(--color-green);
+  font-weight: 500;
+  font-family: var(--font-body);
+}
+.bc-clients-patch .counter-odometer { display: inline-flex; align-items: baseline; font-variant-numeric: tabular-nums; line-height: 1; overflow: hidden; }
+.bc-clients-patch .odometer-digit { overflow: hidden; display: inline-block; vertical-align: bottom; height: 1em; width: 1ch; text-align: center; font: inherit; }
+.bc-clients-patch .odometer-column { display: block; transform: translateY(0); will-change: transform; }
+.bc-clients-patch .odometer-digit-line { display: block; height: 1em; line-height: 1em; }
+.bc-clients-patch .odometer-separator { display: inline-block; width: 0.4em; text-align: center; line-height: 1; }
+.bc-clients-patch .counter-suffix { display: inline-block; margin-left: 0.2ch; font: inherit; line-height: 1; color: var(--color-green); }
+.bc-clients-patch p {
+  margin: 0 0 0.15rem;
+  max-width: 7.5em;
+  font-size: var(--text-h4);
+  line-height: 1.15;
+  color: var(--color-text-heading);
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+@media (max-width: 991px) {
+  .bc-clients-patch { padding: 16px; }
+}
+@media (max-width: 767px) {
+  .bc-clients-patch {
+    border-radius: 20px;
+    padding: 12px 14px;
+    background: #fffdf8;
+  }
+  .bc-clients-patch .counter { font-size: 1.45rem; }
+  .bc-clients-patch p { font-size: 14px; line-height: 1.1; margin: 0 0 2px; max-width: 8em; }
+}
