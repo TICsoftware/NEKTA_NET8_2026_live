@@ -84,12 +84,28 @@
     return Math.min(index * lim.step, lim.maxScroll);
   }
 
+  function visibleCount(lim) {
+    if (lim.step <= 0) return 1;
+    var width = viewport.getBoundingClientRect().width;
+    return Math.max(1, Math.round(width / lim.step));
+  }
+
+  function syncHeight(lim) {
+    var count = visibleCount(lim);
+    var maxH = 0;
+    for (var i = 0; i < count && (index + i) < cards.length; i++) {
+      maxH = Math.max(maxH, cards[index + i].offsetHeight);
+    }
+    if (maxH > 0) viewport.style.height = maxH + 'px';
+  }
+
   function update() {
     var lim = limits();
     if (index > lim.maxIdx) index = lim.maxIdx;
     if (index < 0) index = 0;
 
     track.style.transform = 'translateX(-' + currentTranslate(lim) + 'px)';
+    syncHeight(lim);
     prevBtn.disabled = index <= 0;
     nextBtn.disabled = index >= lim.maxIdx;
     viewport.classList.toggle('is-swipeable', lim.maxScroll > 1);
@@ -191,6 +207,12 @@
     e.stopPropagation();
     blockClick = false;
   }, true);
+
+  cards.forEach(function (card) {
+    card.querySelectorAll('img').forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', update);
+    });
+  });
 
   window.addEventListener('resize', update);
   update();
@@ -545,15 +567,46 @@
     var tweens = [];
 
     document.querySelectorAll('.daily-pour-section').forEach(function (section) {
-      var left = drift(section.querySelector('.dp-deco-left'), section, '-18px', '26px');
-      var right = drift(section.querySelector('.dp-deco-right'), section, '14px', '-22px');
-      if (left) tweens.push(left);
-      if (right) tweens.push(right);
+      var left = section.querySelector('.dp-deco-left');
+      var right = section.querySelector('.dp-deco-right');
+      var leftDrift = drift(left, section, '-18px', '26px');
+      var rightDrift = drift(right, section, '14px', '-22px');
+      if (leftDrift) tweens.push(leftDrift);
+      if (rightDrift) tweens.push(rightDrift);
+
+      // Slide in from each side when the section enters, same motion as Nekta's Edge.
+      var slide = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      function enter(el, from, at) {
+        if (!el) return;
+        var endOpacity = getComputedStyle(el).opacity;
+        gsap.set(el, { '--deco-slide': from, opacity: 0 });
+        slide.to(el, {
+          '--deco-slide': '0px',
+          opacity: endOpacity,
+          duration: 1.05,
+          ease: 'power3.out'
+        }, at);
+      }
+
+      enter(left, '-140px', 0);
+      enter(right, '140px', 0.12);
+      tweens.push(slide);
     });
 
     return function () {
       killTweens(tweens);
       clearShift('.dp-deco-left, .dp-deco-right');
+      document.querySelectorAll('.dp-deco-left, .dp-deco-right').forEach(function (el) {
+        el.style.removeProperty('--deco-slide');
+        el.style.removeProperty('opacity');
+      });
     };
   });
 
@@ -561,15 +614,45 @@
     var tweens = [];
 
     document.querySelectorAll('.dpq-banner').forEach(function (banner) {
-      var left = drift(banner.querySelector('.dpq-deco-left'), banner, '12px', '-14px');
-      var right = drift(banner.querySelector('.dpq-deco-right'), banner, '-12px', '14px');
-      if (left) tweens.push(left);
-      if (right) tweens.push(right);
+      var left = banner.querySelector('.dpq-deco-left');
+      var right = banner.querySelector('.dpq-deco-right');
+      var leftDrift = drift(left, banner, '12px', '-14px');
+      var rightDrift = drift(right, banner, '-12px', '14px');
+      if (leftDrift) tweens.push(leftDrift);
+      if (rightDrift) tweens.push(rightDrift);
+
+      var slide = gsap.timeline({
+        scrollTrigger: {
+          trigger: banner,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      function enter(el, from, at) {
+        if (!el) return;
+        var endOpacity = getComputedStyle(el).opacity;
+        gsap.set(el, { '--deco-slide': from, opacity: 0 });
+        slide.to(el, {
+          '--deco-slide': '0px',
+          opacity: endOpacity,
+          duration: 1.05,
+          ease: 'power3.out'
+        }, at);
+      }
+
+      enter(left, '-140px', 0);
+      enter(right, '140px', 0.12);
+      tweens.push(slide);
     });
 
     return function () {
       killTweens(tweens);
       clearShift('.dpq-deco-left, .dpq-deco-right');
+      document.querySelectorAll('.dpq-deco-left, .dpq-deco-right').forEach(function (el) {
+        el.style.removeProperty('--deco-slide');
+        el.style.removeProperty('opacity');
+      });
     };
   });
 
@@ -577,18 +660,124 @@
     var tweens = [];
 
     document.querySelectorAll('.belongs-section').forEach(function (section) {
-      var splash = drift(section.querySelector('.belongs-bg-corner'), section, '-16px', '20px');
+      var splashEl = section.querySelector('.belongs-bg-corner');
+      var splash = drift(splashEl, section, '-16px', '20px');
       if (splash) tweens.push(splash);
+      if (!splashEl) return;
+
+      var endOpacity = getComputedStyle(splashEl).opacity;
+      gsap.set(splashEl, { '--deco-slide': '-140px', opacity: 0 });
+      tweens.push(gsap.to(splashEl, {
+        '--deco-slide': '0px',
+        opacity: endOpacity,
+        duration: 1.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: splashEl,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      }));
     });
 
     document.querySelectorAll('.daily-pour-cta-section').forEach(function (section) {
-      var cup = drift(section.querySelector('.dp-cta-deco-right'), section, '10px', '-16px');
+      var cupEl = section.querySelector('.dp-cta-deco-right');
+      var cup = drift(cupEl, section, '10px', '-16px');
       if (cup) tweens.push(cup);
+      if (!cupEl) return;
+
+      var endOpacity = getComputedStyle(cupEl).opacity;
+      gsap.set(cupEl, { '--deco-slide': '140px', opacity: 0 });
+      tweens.push(gsap.to(cupEl, {
+        '--deco-slide': '0px',
+        opacity: endOpacity,
+        duration: 1.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      }));
+    });
+
+    document.querySelectorAll('.menu-slider-viewport').forEach(function (viewport) {
+      var wrap = viewport.closest('.menu-slider-wrap');
+      if (!wrap) return;
+
+      gsap.set(wrap, { y: 48, opacity: 0 });
+      tweens.push(gsap.to(wrap, {
+        y: 0,
+        opacity: 1,
+        duration: 1.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: viewport,
+          start: 'top 82%',
+          toggleActions: 'play none none reverse'
+        }
+      }));
+    });
+
+    document.querySelectorAll('.backbone-collage').forEach(function (collage) {
+      var center = collage.querySelector('.backbone-cell-c');
+      var left = collage.querySelectorAll('.backbone-cell-a, .backbone-cell-b, .backbone-cell-f, .backbone-cell-g');
+      var right = collage.querySelectorAll('.backbone-cell-d, .backbone-cell-e, .backbone-cell-h, .backbone-cell-i');
+      if (!center && !left.length && !right.length) return;
+
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: collage,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      if (center) {
+        gsap.set(center, { scale: 0.84, opacity: 0, transformOrigin: '50% 50%' });
+        tl.to(center, { scale: 1, opacity: 1, duration: 0.9, ease: 'power3.out' }, 0);
+      }
+      if (left.length) {
+        gsap.set(left, { x: -40, opacity: 0 });
+        tl.to(left, { x: 0, opacity: 1, duration: 0.85, stagger: 0.06, ease: 'power3.out' }, 0.1);
+      }
+      if (right.length) {
+        gsap.set(right, { x: 40, opacity: 0 });
+        tl.to(right, { x: 0, opacity: 1, duration: 0.85, stagger: 0.06, ease: 'power3.out' }, 0.1);
+      }
+
+      tweens.push(tl);
+    });
+
+    document.querySelectorAll('.experience-section').forEach(function (section) {
+      var icon = section.querySelector('.experience-divider-icon');
+      if (!icon) return;
+
+      var endOpacity = getComputedStyle(icon).opacity;
+      gsap.set(icon, { '--deco-slide': '140px', opacity: 0 });
+      tweens.push(gsap.to(icon, {
+        '--deco-slide': '0px',
+        opacity: endOpacity,
+        duration: 1.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          toggleActions: 'play none none reverse'
+        }
+      }));
     });
 
     return function () {
       killTweens(tweens);
       clearShift('.belongs-bg-corner, .dp-cta-deco-right');
+      document.querySelectorAll('.belongs-bg-corner, .dp-cta-deco-right, .experience-divider-icon').forEach(function (el) {
+        el.style.removeProperty('--deco-slide');
+        el.style.removeProperty('opacity');
+      });
+      document.querySelectorAll('.menu-slider-wrap, .backbone-collage img').forEach(function (el) {
+        gsap.set(el, { clearProps: 'transform,opacity' });
+      });
     };
   });
 })();

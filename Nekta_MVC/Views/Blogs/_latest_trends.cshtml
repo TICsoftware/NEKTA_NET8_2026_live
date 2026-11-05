@@ -32,33 +32,62 @@
 
             @foreach (var item in articlePosts)
             {
-                <div class="insight-card blogs-cards-wrapper blog-item">
-                    <div class="media-frame blogs-cards-image">
-                        <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
-                        @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
-                        {
-                            <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
-                        }
-                    </div>
-                    <div class="blogs-cards-content">
-                        @if (item.DisplayDate.HasValue)
-                        {
-                            <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
-                        }
-                        <h3 class="insight-title">@item.Title</h3>
-                        @if (!string.IsNullOrWhiteSpace(item.Url))
-                        {
-                            <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
-                                class="link-md link-primary">
+                var hasLink = !string.IsNullOrWhiteSpace(item.Url);
+                var linkTarget = string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget;
+                if (hasLink)
+                {
+                    <a href="@item.Url" target="@linkTarget" class="insight-card blogs-cards-wrapper blog-item">
+                        <div class="media-frame blogs-cards-image">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                            {
+                                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                            }
+                        </div>
+                        <div class="blogs-cards-content">
+                            @if (item.DisplayDate.HasValue)
+                            {
+                                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                            }
+                            <h3 class="insight-title">@item.Title</h3>
+                            <span class="link-md link-primary">
                                 <span class="underline">Read More</span>
-                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
-                            </a>
-                        }
+                                <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="" />
+                            </span>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <div class="insight-card blogs-cards-wrapper blog-item">
+                        <div class="media-frame blogs-cards-image">
+                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
+                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                            {
+                                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                            }
+                        </div>
+                        <div class="blogs-cards-content">
+                            @if (item.DisplayDate.HasValue)
+                            {
+                                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                            }
+                            <h3 class="insight-title">@item.Title</h3>
+                        </div>
                     </div>
-                </div>
+                }
             }
 
 
+        </div>
+
+        <div class="blogs-mobile-nav">
+            <button type="button" class="blogs-mobile-prev" aria-label="Previous">
+                <img src="/Assets/images/arrows/swiperLeft.png" alt="" />
+            </button>
+            <button type="button" class="blogs-mobile-next" aria-label="Next">
+                <img src="/Assets/images/arrows/swiperRight.png" alt="" />
+            </button>
         </div>
 
         @if (Model.TotalCount > 10)

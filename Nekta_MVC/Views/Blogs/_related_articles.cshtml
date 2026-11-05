@@ -7,58 +7,112 @@
     var articlePosts = Model.RelatedArticles_List?
         .OrderBy(x => x.Sequence)
         .ToList() ?? new List<ArticleModel>();
+    var heading = header == null
+        ? null
+        : (!string.IsNullOrWhiteSpace(header.DisplayTitle)
+            ? header.DisplayTitle.CleanParagraphTags()
+            : header.Title);
 }
 
 @if (articlePosts.Any())
 {
-    <section class="section-pb relative overflow-hidden">
+    <section class="section-spacing relative overflow-hidden">
+        <img src="/Assets/images/bg-pattern.webp" alt="" class="w-full h-full absolute top-0 left-0 pointer-events-none" />
+
         <div class="container">
 
-            <div class="section-title-outer text-center max-w-8xl mx-auto">
+            <div class="section-title-outer text-center max-w-6xl mx-auto">
                 <h2 class="title-section text text-h2" data-leaf-target letters-slide-down text-split>
-                    @if (header != null)
+                    @if (!string.IsNullOrWhiteSpace(heading))
                     {
-                        @Html.Raw(
-                            !string.IsNullOrWhiteSpace(header.DisplayTitle)
-                                ? header.DisplayTitle.CleanParagraphTags()
-                                : header.Title)
+                        @Html.Raw(heading)
                     }
                     else
                     {
                         @:Related <span class="text-letters-slide">Case studies</span>
                     }
                 </h2>
-            </div>
 
-            <div class="blogs-cards-grid">
-                @foreach (var item in articlePosts)
+                @if (!string.IsNullOrWhiteSpace(header?.Intro))
                 {
-                    <div class="insight-card blogs-cards-wrapper">
-                        <div class="media-frame blogs-cards-image">
-                            <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" />
-                            @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
-                            {
-                                <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
-                            }
-                        </div>
-                        <div class="blogs-cards-content">
-                            @if (item.DisplayDate.HasValue)
-                            {
-                                <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
-                            }
-                            <h3 class="insight-title">@item.Title</h3>
-                            @if (!string.IsNullOrWhiteSpace(item.Url))
-                            {
-                                <a href="@item.Url" target="@(string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget)"
-                                    class="link-md link-primary">
-                                    <span class="underline">Read More</span>
-                                    <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="rightArrow" />
-                                </a>
-                            }
-                        </div>
-                    </div>
+                    <p>@Html.Raw(header.Intro.CleanParagraphTags())</p>
                 }
             </div>
+
+            <div class="swiper insightsSwiper px-2 md:px-4 blogs-cards-slider">
+                <div class="swiper-wrapper">
+                    @foreach (var item in articlePosts)
+                    {
+                        var hasLink = !string.IsNullOrWhiteSpace(item.Url);
+                        var linkTarget = string.IsNullOrWhiteSpace(item.UrlTarget) ? "_self" : item.UrlTarget;
+                        <div class="swiper-slide h-auto">
+                            @if (hasLink)
+                            {
+                                <a href="@item.Url" target="@linkTarget" class="insight-card group blogs-cards-wrapper case-study-card">
+                                    <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                                        <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" class="w-full object-cover" />
+                                        @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                                        {
+                                            <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                                        }
+                                    </div>
+                                    <div class="py-6 blogs-cards-content">
+                                        @if (item.DisplayDate.HasValue)
+                                        {
+                                            <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                                        }
+                                        <h3 class="insight-title line-clamp-2">@item.Title</h3>
+                                        <span class="link-md link-primary">
+                                            <span class="underline">Read More</span>
+                                            <img loading="lazy" src="/Assets/images/arrows/orangearrow-long-right.png" alt="" />
+                                        </span>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="insight-card group blogs-cards-wrapper">
+                                    <div class="media-frame overflow-hidden rounded-lg ratio-[531/315] blogs-cards-image">
+                                        <img loading="lazy" src="@item.ThumbnailImage" alt="@item.ThumbnailAltText" class="w-full object-cover" />
+                                        @if (!string.IsNullOrWhiteSpace(item.HmpgIntro))
+                                        {
+                                            <span class="pill">@Html.Raw(item.HmpgIntro.CleanParagraphTags())</span>
+                                        }
+                                    </div>
+                                    <div class="py-6 blogs-cards-content">
+                                        @if (item.DisplayDate.HasValue)
+                                        {
+                                            <span class="post-date">@item.DisplayDate.Value.ToString("dd MMMM yyyy")</span>
+                                        }
+                                        <h3 class="insight-title line-clamp-2">@item.Title</h3>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="blogs-slider-nav">
+                    <button type="button" class="blogs-prev" aria-label="Previous">
+                        <img src="/Assets/images/arrows/swiperLeft.png" alt="">
+                    </button>
+                    <button type="button" class="blogs-next" aria-label="Next">
+                        <img src="/Assets/images/arrows/swiperRight.png" alt="">
+                    </button>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(header?.Url))
+            {
+                <div class="flex justify-center mt-6">
+                    <a href="@header.Url" class="common-btn flex items-center gap-2 btn-slide-fill">
+                        <span>
+                            @(string.IsNullOrWhiteSpace(header.Url_Text) ? "View All" : header.Url_Text)
+                        </span>
+                        <img loading="lazy" src="/Assets/images/arrows/creamarrow-long-right.png" alt="" />
+                    </a>
+                </div>
+            }
 
         </div>
     </section>

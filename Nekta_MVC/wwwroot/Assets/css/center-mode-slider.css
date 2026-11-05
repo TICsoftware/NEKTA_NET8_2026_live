@@ -6,6 +6,17 @@
 }
 .swiper.edgeSwiper {padding-top: 25px; position: relative;}
 
+/* Split entrance uses translate and scale so it does not replace the active card scale. */
+.edgeSwiper .edge-card {
+    translate: var(--edge-split, 0px) 0;
+    transition-property: opacity, filter, transform, visibility;
+}
+.edgeSwiper .edge-card-image {
+    scale: var(--edge-pop, 1);
+    opacity: var(--edge-fade, 1);
+    transition-property: border-color, filter, transform;
+}
+
 /* Mute transitions during seamless loop wrap so active scale/blur doesn't re-fire */
 .edgeSwiper.edge-swiper-jumping .swiper-wrapper,
 .edgeSwiper.edge-swiper-jumping .swiper-slide,
@@ -17,9 +28,10 @@
 /* Image aur text ke beech zero gap */
 .edgeSwiper .swiper-slide-active .p-8,
 .edgeSwiper .swiper-slide-active .edge-details {
-    opacity: 1;
+    opacity: var(--edge-caption-fade, 1);
     visibility: visible;
     transform: translateY(0);
+    translate: 0 var(--edge-caption, 0px);
     padding: 0px 5px !important;  
     margin-top: 27px !important;  
 }

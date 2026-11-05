@@ -11,6 +11,7 @@
     left: 0;
     object-fit: cover;
     z-index: 0;
+    pointer-events: none;
 }
 
 
@@ -35,13 +36,93 @@
 }
 
 @media (max-width: 640px) {
-    .blogs-cards-grid { grid-template-columns: 1fr; padding-inline: 0; }
+    .blogs-cards-grid {
+        display: flex;
+        grid-template-columns: none;
+        gap: 1rem;
+        padding-inline: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .blogs-cards-grid::-webkit-scrollbar { display: none; }
+    .blogs-cards-grid > .insight-card {
+        flex: 0 0 86%;
+        min-width: 0;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+}
+
+.blogs-mobile-nav {
+    display: none;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+.blogs-mobile-prev,
+.blogs-mobile-next {
+    width: 52px;
+    height: 52px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: var(--color-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+}
+.blogs-mobile-prev:hover,
+.blogs-mobile-next:hover {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+}
+.blogs-mobile-prev:disabled,
+.blogs-mobile-next:disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+.blogs-mobile-prev img,
+.blogs-mobile-next img {
+    width: 22px;
+    height: auto;
+}
+
+@media (max-width: 640px) {
+    .blogs-mobile-nav { display: flex; }
 }
 
 /* ==================== CARD ==================== */
 .insight-card {
     display: flex;
     flex-direction: column;
+}
+
+a.insight-card {
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.insight-card .link-md,
+a.insight-card .link-md img {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+a.insight-card:hover .link-md,
+a.insight-card:focus-visible .link-md {
+    color: var(--color-green);
+}
+a.insight-card:hover .link-md img,
+a.insight-card:focus-visible .link-md img {
+    transform: translateX(3px);
+}
+a.insight-card:focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 4px;
 }
 
 .media-frame {

@@ -200,7 +200,7 @@
 .media-frame {
     position: relative; /* needed so the pill can anchor to this box */
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 1.5rem;
     aspect-ratio: 531 / 315;
 }
 

@@ -202,6 +202,10 @@
     opacity:0.9;
   }
 
+  .office-card p span {
+    display: block;
+}
+
   /* ---------- Decorative bowl / plate (illustrative, swap for real photography) ---------- */
   .deco-bowl{
     position:absolute;
@@ -419,7 +423,7 @@
     left: -3vw;
     max-width: 26vw;
     z-index: 2;
-    rotate: 34deg;
+    rotate: -10deg;
   }
  
   /* ---------- Copy ---------- */
@@ -822,7 +826,7 @@ position: absolute;
         left: -4%;
         max-width: 68vw;
         z-index: 2;
-        rotate: -32deg !important;
+        rotate: -10deg !important;
 }
   }
  

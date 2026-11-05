@@ -121,7 +121,7 @@
                         <div class="bc-clients-patch counter-item">
                             <p>Clients Serviced</p>
                             <div class="counter-wrap">
-                                <div class="counter" data-target="50" data-suffix="+">0</div>
+                                <div class="counter" data-target="50" data-suffix="+">0     </div>
                             </div>
                         </div>
                     </div>
@@ -200,6 +200,8 @@
             </h2>
         </div>
 
+    
+
         <div class="max-w-3xl bc-dining-intro mx-auto text-center">
             @Html.Raw(item.Intro)
         </div>
@@ -221,9 +223,9 @@
     @foreach (var item in Model.Nektas_Edge_List.Where(x => x.IsBlock == 0))
     {
         <img loading="lazy" src="@item.ComponentThumbnail" alt="@item.ComponentThumbnailAltText"
-            class="bc-deco hidden xl:block -left-22 top-30" aria-hidden="true" />
+            class="bc-deco bc-edge-deco bc-edge-deco--left hidden xl:block -left-22 top-30" aria-hidden="true" />
         <img loading="lazy" src="@item.Component_Icon_Image" alt="@item.Component_Icon_alt_Image"
-            class="bc-deco hidden xl:block -right-0 top-4" aria-hidden="true" />
+            class="bc-deco bc-edge-deco bc-edge-deco--right hidden xl:block -right-0 top-4" aria-hidden="true" />
 
         <div class="container relative z-10 ">
             <div class="section-title-outer text-center max-w-6xl mx-auto">

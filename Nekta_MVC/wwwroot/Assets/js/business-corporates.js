@@ -228,7 +228,46 @@ document.querySelectorAll('.outer-polaroids-icons').forEach((wrapper) => {
     .to(basil, { y: 0, opacity: 1, rotate: 0, duration: 0.8, ease: 'power2.out' }, '<0.1');
 });
 
+// Nekta's Edge decorative images — slide in from each side
+document.querySelectorAll('.bc-edge-section').forEach((section) => {
+    const left = section.querySelectorAll('.bc-edge-deco--left');
+    const right = section.querySelectorAll('.bc-edge-deco--right');
+    if (!left.length && !right.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    gsap.registerPlugin(ScrollTrigger);
+
+    const images = gsap.utils.toArray(left).concat(gsap.utils.toArray(right));
+    gsap.set(left, { x: -140, opacity: 0 });
+    gsap.set(right, { x: 140, opacity: 0 });
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: section,
+            start: 'top 78%',
+            toggleActions: 'play none none reverse'
+        }
+    });
+
+    if (left.length) {
+        tl.to(left, { x: 0, opacity: 1, duration: 1.05, ease: 'power3.out' }, 0);
+    }
+    if (right.length) {
+        tl.to(right, { x: 0, opacity: 1, duration: 1.05, ease: 'power3.out' }, 0.12);
+    }
+
+    // Images are desktop-only. Drop the off-screen start state below xl
+    // so a resize does not leave them invisible if the breakpoint class changes.
+    const desktop = window.matchMedia('(min-width: 1280px)');
+    function syncVisibility() {
+        if (desktop.matches) return;
+        gsap.set(images, { clearProps: 'transform,opacity' });
+    }
+    syncVisibility();
+    if (desktop.addEventListener) {
+        desktop.addEventListener('change', syncVisibility);
+    }
+});
 
 });
 

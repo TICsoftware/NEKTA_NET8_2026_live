@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
   initReachDecos();
   initCuEnquiryPlates();
   initSolutionsMedia();
+  initOfficeFoodDecos();
 });
 
 function initCuFormLeaves() {
@@ -59,6 +60,59 @@ function initCuFormLeaves() {
       toggleActions: "restart none none reverse",
       invalidateOnRefresh: true,
     },
+  });
+}
+
+function initOfficeFoodDecos() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+
+  var mm = gsap.matchMedia();
+
+  mm.add("(min-width: 561px)", function () {
+    var items = [
+      { sel: ".offices-section .deco-avocado", rotation: -14 },
+      { sel: ".offices-section .deco-jam", rotation: 10 },
+      { sel: ".offices-section .deco-lettuce", rotation: 0 },
+    ];
+    var tweens = [];
+
+    items.forEach(function (item) {
+      var el = document.querySelector(item.sel);
+      if (!el) return;
+
+      gsap.set(el, {
+        scale: 0.2,
+        opacity: 0,
+        y: 18,
+        rotation: item.rotation,
+        transformOrigin: "50% 50%",
+      });
+
+      tweens.push(gsap.to(el, {
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        rotation: item.rotation,
+        duration: 0.85,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          toggleActions: "play none none reverse",
+        },
+      }));
+    });
+
+    return function () {
+      tweens.forEach(function (tween) {
+        if (tween.scrollTrigger) tween.scrollTrigger.kill();
+        tween.kill();
+      });
+      document.querySelectorAll(".offices-section .deco-food").forEach(function (el) {
+        gsap.set(el, { clearProps: "transform,opacity" });
+      });
+    };
   });
 }
 
@@ -202,14 +256,22 @@ function initSolutionsMedia() {
     rotation: -28
   });
 
-  gsap.set(salad, {
-    transformOrigin: "50% 50%",
-    force3D: true,
+  gsap.fromTo(salad, {
+    scale: 0.2,
     opacity: 0,
-    scale: 0.9,
-    xPercent: -18,
-    yPercent: 12,
-    rotation: 52
+    rotation: -10
+  }, {
+    scale: 1,
+    opacity: 1,
+    rotation: -10,
+    duration: 0.85,
+    ease: "back.out(1.7)",
+    transformOrigin: "50% 50%",
+    scrollTrigger: {
+      trigger: salad,
+      start: "top 85%",
+      toggleActions: "play none none reverse"
+    }
   });
 
   if (splash) {
@@ -239,13 +301,7 @@ function initSolutionsMedia() {
         { scale: 0.88, opacity: 0, rotation: -28 },
         { scale: 1, opacity: 1, rotation: 0, ease: "power1.inOut", duration: 0.35 },
         0
-      )
-        .fromTo(
-          salad,
-          { xPercent: -18, yPercent: 12, rotation: 32, opacity: 0, scale: 0.9 },
-          { xPercent: 0, yPercent: 0, rotation: 8, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.4 },
-          0.05
-        );
+      );
 
       if (splash) {
         tl.fromTo(
@@ -261,17 +317,10 @@ function initSolutionsMedia() {
           );
       }
 
-      tl.to(circle, { rotation: 18, ease: "none", duration: 0.65 }, 0.35)
-        .to(salad, { yPercent: 6, rotation: 42, ease: "none", duration: 0.65 }, 0.35);
+      tl.to(circle, { rotation: 18, ease: "none", duration: 0.65 }, 0.35);
     },
 
     "(max-width: 900px)": () => {
-      gsap.set(salad, {
-        xPercent: -10,
-        yPercent: 6,
-        rotation: 46
-      });
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -288,14 +337,7 @@ function initSolutionsMedia() {
         { scale: 1, opacity: 1, rotation: 0, ease: "power1.inOut", duration: 0.4 },
         0
       )
-        .fromTo(
-          salad,
-          { xPercent: -10, yPercent: 6, rotation: 46, opacity: 0, scale: 0.92 },
-          { xPercent: 0, yPercent: 0, rotation: 34, opacity: 1, scale: 1, ease: "power1.inOut", duration: 0.45 },
-          0.05
-        )
-        .to(circle, { rotation: 12, ease: "none", duration: 0.55 }, 0.4)
-        .to(salad, { yPercent: 4, rotation: 38, ease: "none", duration: 0.55 }, 0.4);
+        .to(circle, { rotation: 12, ease: "none", duration: 0.55 }, 0.4);
     }
   });
 

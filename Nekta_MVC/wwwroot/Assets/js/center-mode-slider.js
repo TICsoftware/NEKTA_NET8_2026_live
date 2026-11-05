@@ -239,6 +239,7 @@
         if (!edgeSwiper || typeof edgeSwiper.slideNext !== "function") return;
 
         sliderRoot.dataset.edgeSwiperReady = "1";
+        playEdgeEntrance(sliderRoot, edgeSwiper);
         schedulePlaceNav();
         setTimeout(placeNavArrows, 750);
 
@@ -313,6 +314,64 @@
                 { threshold: 0.1 },
             );
             io.observe(sliderRoot);
+        }
+    }
+
+    function playEdgeEntrance(sliderRoot, swiper) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+        if (!swiper || !swiper.slides) return;
+
+        var active = swiper.activeIndex;
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: sliderRoot,
+                start: "top 78%",
+                toggleActions: "play none none reverse",
+            },
+        });
+
+        Array.prototype.forEach.call(swiper.slides, function (slide, i) {
+            var card = slide.querySelector(".edge-card");
+            var image = slide.querySelector(".edge-card-image");
+            if (!card || !image) return;
+
+            var delta = i - active;
+            var distance = Math.min(Math.abs(delta), 2);
+            var from = "0px";
+            if (delta < 0) from = (160 + distance * 36) + "px";
+            if (delta > 0) from = "-" + (160 + distance * 36) + "px";
+
+            gsap.set(card, { "--edge-split": from });
+            gsap.set(image, {
+                "--edge-pop": delta === 0 ? 0.72 : 0.9,
+                "--edge-fade": delta === 0 ? 0 : 0,
+            });
+
+            tl.to(card, {
+                "--edge-split": "0px",
+                duration: delta === 0 ? 0.75 : 1.15,
+                ease: "power4.out",
+            }, delta === 0 ? 0 : 0.08);
+
+            tl.to(image, {
+                "--edge-pop": 1,
+                "--edge-fade": 1,
+                duration: delta === 0 ? 0.95 : 0.9,
+                ease: "power3.out",
+            }, delta === 0 ? 0 : 0.12);
+        });
+
+        var activeSlide = swiper.slides[active];
+        var caption = activeSlide && activeSlide.querySelector(".edge-details");
+        if (caption) {
+            gsap.set(caption, { "--edge-caption": "16px", "--edge-caption-fade": 0 });
+            tl.to(caption, {
+                "--edge-caption": "0px",
+                "--edge-caption-fade": 1,
+                duration: 0.7,
+                ease: "power3.out",
+            }, 0.32);
         }
     }
 
