@@ -170,7 +170,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
  /* Small screen laptop */
  @media all and (max-width: 1440px) {
 .bc-plate-wrap::before {width: 480px;height: 480px;}
-.bc-clients-patch { right: 4%; bottom: 6%; width: clamp(200px, 40%, 250px); }
+.bc-clients-patch { right: -14%; bottom: -4%; width: clamp(200px, 40%, 250px); }
 }
 
 @media (max-width:991px){

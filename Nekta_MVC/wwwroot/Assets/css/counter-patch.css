@@ -1,9 +1,14 @@
 /* Stat card. Link this with counter-patch.js on any page that uses .bc-clients-patch. */
-.bc-clients-patch {
-  position: absolute;
-  transform: translate(-50%, 55%);
+.bc-clients-patch.bc-clients-patch-center{
+    transform: translate(-50%, 55%);
   left: 50%;
   bottom: 0;
+}
+.bc-clients-patch {
+  position: absolute;
+  transform: translate(0%, 0%);
+  right: -10%;
+  bottom: 1%;
   z-index: 5;
   width: max-content;
   max-width: 92%;
@@ -50,7 +55,10 @@
     border-radius: 20px;
     padding: 12px 14px;
     background: #fffdf8;
+      right: -1%;
+    min-width: 160px;
   }
   .bc-clients-patch .counter { font-size: 1.45rem; }
   .bc-clients-patch p { font-size: 14px; line-height: 1.1; margin: 0 0 2px; max-width: 8em; }
+  
 }
