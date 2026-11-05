@@ -514,3 +514,116 @@ document.querySelectorAll('[data-edge-grid]').forEach(function (wrap) {
 
 
 });
+
+/* Same rolling counter used by the Who We Are infographic. Scoped to this page's plate stat. */
+function initBcClientsCounter() {
+    var counterEl = document.querySelector(".bc-clients-patch .counter");
+    if (!counterEl) return;
+
+    var BASE_ROLLS = 2;
+    var EXTRA_ROLLS_PER_POS = 1;
+    var BASE_DURATION = 900;
+    var DURATION_PER_ROLL = 220;
+
+    function formatNumberString(nStr) {
+        var num = Number(nStr);
+        if (isNaN(num)) return "0";
+        var abs = Math.abs(num);
+        var parts = abs.toString().split(".");
+        var intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (!parts[1]) return intPart;
+        var decPart = parts[1].replace(/0+$/, "");
+        return decPart ? intPart + "." + decPart : intPart;
+    }
+
+    function buildOdometer(el) {
+        var targetStr = formatNumberString(el.getAttribute("data-target") || "0");
+        var suffix = el.getAttribute("data-suffix") || "";
+        var chars = targetStr.split("");
+        el.textContent = "";
+
+        var odometer = document.createElement("span");
+        odometer.className = "counter-odometer";
+
+        for (var i = 0; i < chars.length; i++) {
+            var ch = chars[i];
+            if (ch === "," || ch === ".") {
+                var staticChar = document.createElement("span");
+                staticChar.className = "odometer-separator";
+                staticChar.textContent = ch;
+                odometer.appendChild(staticChar);
+                continue;
+            }
+
+            var digit = parseInt(ch, 10);
+            var slot = document.createElement("span");
+            slot.className = "odometer-digit";
+            var column = document.createElement("span");
+            column.className = "odometer-column";
+            var numericIndex = chars.slice(i).filter(function (c) { return c !== "," && c !== "."; }).length - 1;
+            var rolls = BASE_ROLLS + numericIndex * EXTRA_ROLLS_PER_POS;
+
+            for (var r = 0; r <= rolls; r++) {
+                for (var d = 0; d < 10; d++) {
+                    var line = document.createElement("span");
+                    line.className = "odometer-digit-line";
+                    line.textContent = d;
+                    column.appendChild(line);
+                }
+            }
+
+            slot.appendChild(column);
+            odometer.appendChild(slot);
+            slot._finalIndex = rolls * 10 + digit;
+            slot._rolls = rolls;
+        }
+
+        if (suffix) {
+            var suf = document.createElement("span");
+            suf.className = "counter-suffix";
+            suf.textContent = suffix;
+            odometer.appendChild(suf);
+        }
+
+        el.appendChild(odometer);
+        return Array.prototype.slice.call(odometer.querySelectorAll(".odometer-digit"));
+    }
+
+    function animateOdometerSlots(slots) {
+        if (!slots.length) return;
+        var firstLine = slots[0].querySelector(".odometer-digit-line");
+        var digitHeight = firstLine ? firstLine.getBoundingClientRect().height : 0;
+
+        slots.forEach(function (slot, idx) {
+            var column = slot.querySelector(".odometer-column");
+            var duration = BASE_DURATION + slot._rolls * DURATION_PER_ROLL;
+            var delay = Math.round(duration * 0.08 * (slots.length - idx - 1));
+            column.style.transition = "transform " + duration + "ms cubic-bezier(.22,.9,.35,1) " + delay + "ms";
+            column.style.transform = "translateY(0px)";
+            var offset = slot._finalIndex * digitHeight;
+            setTimeout(function () {
+                column.style.transform = "translateY(-" + offset + "px)";
+            }, 20);
+        });
+    }
+
+    var started = false;
+    var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting || started) return;
+            started = true;
+            var slots = buildOdometer(counterEl);
+            void counterEl.offsetHeight;
+            animateOdometerSlots(slots);
+            obs.unobserve(counterEl);
+        });
+    }, { threshold: 0.3 });
+
+    io.observe(counterEl);
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBcClientsCounter);
+} else {
+    initBcClientsCounter();
+}

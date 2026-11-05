@@ -89,9 +89,9 @@
                         <span asp-validation-for="City" class="cu-field-error"></span>
                     </div>
                     <div class="cu-field cu-field--full">
-                        <label asp-for="Interest">Area of Interest <span class="req">*</span></label>
+                        <label asp-for="Interest">Search For An<span class="req">*</span></label>
                         <select asp-for="Interest">
-                            <option value="">Select an area of interest</option>
+                            <option value="">Seach For An</option>
                             @if (ViewBag.AreaOfInterestList != null)
                             {
                                 foreach (var item in ViewBag.AreaOfInterestList)

@@ -4,7 +4,17 @@ body{ overflow-x:hidden;}
 
 .back-to-top.active {opacity: 1 !important; pointer-events: auto !important; transform: translateY(0);}
 .progress-ring-circle {transition: stroke-dashoffset 0.15s ease-out;}
+.blog-cta h4{margin-bottom:0.5rem}
+.blog-cta a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    margin-top: 0.5rem;
+}
 
+.blog-cta a:hover {
+    text-decoration-thickness: 2px;
+}
 /**=====================================
 TITLE ANIMATION
 =====================================**/
@@ -256,7 +266,7 @@ Leaf travel CSS
   background: none;
   border: none;
   cursor: pointer;
-  padding-top:40px;
+  padding-top:20px;
 }
 
 .read-more-plus {

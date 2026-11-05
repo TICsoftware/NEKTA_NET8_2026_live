@@ -735,7 +735,7 @@ public class ContentController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Drafts(string page_no, CMS_pages Model, IFormCollection form, string Command)
-    {
+      {
         if (TempData["alert_message"] != null)
         {
             ViewBag.alert_message = TempData["alert_message"];
