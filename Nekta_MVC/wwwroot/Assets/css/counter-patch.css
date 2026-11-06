@@ -27,7 +27,7 @@
 .bc-clients-patch .counter-wrap,
 .bc-clients-patch .counter {
   /* About 24px on a phone and 38px on a wide desktop, so a long number still fits the card. */
-  font-size: var(--text-h2) !important; 
+  font-size: 4vw  !important;
   line-height: 1;
   color: var(--color-green);
   font-weight: 500;
