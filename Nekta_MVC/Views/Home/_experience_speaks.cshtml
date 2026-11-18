@@ -39,7 +39,7 @@
 
                             <div>
                                 <h5 class="swiper-no-swiping">@item.Title</h5>
-                                <p class="swiper-no-swiping text-14">@item.Designation</p>
+                                <p class="swiper-no-swiping text-14">@Html.Raw(item.Designation.CleanParagraphTags())</p>
                             </div>
                         </div>
                     </div>
