@@ -32,7 +32,7 @@
   pointer-events: none;
 }
 .bc-clients-patch .counter{
-  font-size: var(--text-h2) !important;
+  font-size:30px !important;
   line-height: 1;
   color: var(--color-green);
   font-weight: 500;
@@ -46,7 +46,7 @@
 .bc-clients-patch p{
   margin: 0 0 0.15rem;
   max-width: 7.5em;
-  font-size: var(--text-h4) !important;
+  font-size:26px!important;
   line-height: 1.15;
   color: var(--color-text-heading);
   font-family: var(--font-heading);
@@ -211,6 +211,13 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
     /* .bc-dining-deco--basil { width: 20vw; right: 1vw;} */
     .bc-polaroid--right { width: clamp(210px, 10vw, 449px);}
     .bc-edge-section .section-title-outer {max-width: 58vw;}
+
+    .bc-clients-patch {
+    position: absolute;
+    right: -20%;
+    bottom: 1%;
+    z-index: 5;
+    width: clamp(220px, 28%, 277px);}
     
 
 }

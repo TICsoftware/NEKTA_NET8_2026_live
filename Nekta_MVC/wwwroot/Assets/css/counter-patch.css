@@ -8,7 +8,7 @@
   position: absolute;
   transform: translate(0%, 0%);
   right: -10%;
-  bottom: 1%;
+  bottom: -10%;
   z-index: 5;
   width: max-content;
   max-width: 92%;
@@ -27,7 +27,7 @@
 .bc-clients-patch .counter-wrap,
 .bc-clients-patch .counter {
   /* About 24px on a phone and 38px on a wide desktop, so a long number still fits the card. */
-  font-size: 4vw  !important;
+  font-size: 30px!important;
   line-height: 1;
   color: var(--color-green);
   font-weight: 500;
@@ -42,8 +42,8 @@
 .bc-clients-patch p {
   margin: 0 0 0.15rem;
   max-width: 11em;
-  font-size: var(--text-h4) !important;
-  line-height: 1.2;
+  font-size: 26px;
+  line-height: 1.21;
   color: var(--color-text-heading);
   font-family: var(--font-heading);
   font-weight: 500;
