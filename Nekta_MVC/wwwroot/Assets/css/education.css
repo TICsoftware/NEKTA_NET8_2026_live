@@ -292,6 +292,29 @@ width: 350px;
     .nourish-leaf{ width:40px;}
     .cd-photo-2{ width: 25vw; height: 30vw; margin-left: 28vw; margin-top: 15vw; rotate: -8deg !important; }
   }
+
+ @media (min-width: 1280px) and (max-width: 1440px){
+.cd-photo-3 {
+    width: 280px;
+    height: 400px;
+    right: -60px;}
+
+      .cd-photo-1{
+width: 290px;
+    height: 400px;
+    left: -6vw;
+    top: 8vw;
+    transform: rotate(-9deg);
+    z-index: 15;
+  }
+
+  .cd-stamp .bowl {
+    width: 110px;
+    height: 129px;
+    object-fit: cover;
+}
+ }
+
   
 /* Tab */
  @media (min-width: 1024px) and (max-width: 1080px)

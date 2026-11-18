@@ -38,7 +38,7 @@ box-shadow: 0 24px 45px rgba(67, 60, 40, 0.22); display: none; z-index: 5;}
 .bc-arch-card {position: relative; border: 1px solid var(--color-green); border-radius: 336px 336px 0 0; aspect-ratio: 320 / 416;    display: flex; flex-direction: column; justify-content: flex-end; align-items: center; text-align: center; padding: 1rem 1rem 2.5rem; overflow: hidden; transition: background-color var(--motion-base) var(--ease-premium);}
 
 .bc-arch-card img {width: clamp(52px, 4.6vw, 88px); height: auto; margin-bottom: 12px; transition: transform var(--motion-base) var(--ease-premium);}
-.bc-arch-card h3 {font-family:var(--font-heading); font-weight: 500; font-size: var(--text-h4); line-height: 1.1; max-width: 100%; margin: 0 auto; min-height: 2.2em; display: flex; align-items: flex-start; justify-content: center;}
+.bc-arch-card h3 {font-family:var(--font-heading); font-weight: 500; font-size: var(--text-h4); line-height: 1.1; max-width: 100%; margin: 0 auto; min-height: 2.2em; display: flex; align-items: flex-start; justify-content: center; text-wrap: balance;}
 .bc-arch-copy {display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0; transition: grid-template-rows var(--motion-base) var(--ease-premium), opacity var(--motion-base) var(--ease-premium), margin-top var(--motion-base) var(--ease-premium);}
 .bc-arch-copy p {font-size: 1rem; overflow: hidden; margin: 0; min-height: 0;}
 .bc-arch-card:hover,
@@ -176,9 +176,12 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 @media (min-width: 1280px) {
 .bc-arch-grid {
     display: grid;
-    grid-template-columns: repeat(5, 330px); /* adjust to your card width */
+    /* Five equal columns that shrink to the viewport. 1650px keeps the original 330px card width on large screens. */
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     justify-content: center;
     gap: 0;
+    width: min(100%, 1650px);
+    margin-inline: auto;
 }
 }
 
@@ -274,15 +277,21 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 
 
 
- @media (min-width: 1200px) and (max-width: 1366px) {
-
- }
+@media (min-width: 1280px) and (max-width: 1599px) {
+    .bc-arch-card h3 { font-size: 22px; }
+    .bc-arch-card {
+        padding-left: 0.65rem;
+        padding-right: 0.65rem;
+        /* Narrower columns need a taller arch so the open description stays inside the card. */
+        aspect-ratio: 360 / 520;
+    }
+}
 
 
   /* 125% zoom */
 @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.25),screen and (min-width:1025px) and (min-resolution:120dpi) {
 .bc-dining-deco--basil {width: 22vw;}
-    .bc-arch-grid {grid-template-columns: repeat(5, 280px);}
+    .bc-arch-grid {grid-template-columns: repeat(5, minmax(0, 1fr)); width: min(100%, 1400px);}
 .bc-arch-card h3 {font-size: 22px;}    
 .bc-arch-copy p {font-size: 14px !important;}
 .bc-arch-card img { width: clamp(52px, 3.5vw, 88px);}
@@ -295,7 +304,8 @@ transition: opacity var(--motion-fast) var(--ease-premium), font-weight var(--mo
 
  /* 1920px 150% */
  @media screen and (min-width: 1025px) and (-webkit-min-device-pixel-ratio:1.5),screen and (min-width:1025px) and (min-resolution:144dpi) {
- .bc-arch-grid {grid-template-columns: repeat(5, 240px);}
+ .bc-arch-grid {grid-template-columns: repeat(5, minmax(0, 1fr)); width: min(100%, 1200px);}
+ .bc-arch-card { aspect-ratio: 320 / 520; }
  .bc-arch-card h3 {font-size: 22px;}    
 .bc-arch-copy p {font-size: 14px !important;}
 .bc-arch-card img {width: clamp(52px, 3.5vw, 88px);}
