@@ -96,8 +96,14 @@
 }
 
 
-@media (min-width: 1200px) and (max-width: 1366px) {
+@media (min-width: 1280px) and (max-width: 1460px) {
 /* .merge-imgs img:nth-child(1) {max-width: 30vw;left: -9vw;top: -1vw;z-index: 10;} */
+.merge-imgs img:nth-child(1) {
+    left: -6vw;
+    top: 0vw;
+    z-index: 10;
+    max-width: 16vw;
+}
 
 
  }

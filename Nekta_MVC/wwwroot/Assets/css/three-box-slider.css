@@ -225,7 +225,7 @@
     .feature-card {padding: 1.5rem 2rem;}
     .feature-card .p-6{ padding: 20px 10px;}
 
-    .edge-card-title {font-size: 1.75rem;}
+    .edge-card-title {font-size: 1.75rem !important;}
     .edge-card-text{font-size: 1rem;}
     .underline{font-weight: 300;}
    
