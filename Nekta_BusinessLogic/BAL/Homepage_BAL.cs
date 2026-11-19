@@ -162,7 +162,7 @@ namespace Nekta_BusinessLogic.BAL
                 Component_right_image_alt = Config_Application_Website.GetPath(group, "Component Right image alt"),
                 component_icon_image = Config_Application_Website.GetPath(group, "component icon image"),
                 component_icon_image_alt = Config_Application_Website.GetPath(group, "component icon image alt"),
-                Designation = Config_Application_Website.GetPath(group, "Designation"),
+                Designation = Config_Application_Website.GetValue(dict, "Designation"),
             });
         }
 
