@@ -30,9 +30,10 @@ public class CspMiddleware
             "https://analytics.google.com " +
             "https://www.google.co.in/ads/ga-audiences " +
             "https://code.jquery.com " +
+            "https://cdnjs.cloudflare.com " +
             $"'nonce-{nonce}'; " +
 
-            "style-src 'self' 'unsafe-inline' " +
+            "style-src 'self' " +
             "https://fonts.googleapis.com " +
             "https://cdn.jsdelivr.net; " +
 
@@ -44,6 +45,7 @@ public class CspMiddleware
             "https://i.ytimg.com " +
             "https://www.googletagmanager.com " +
             "data:; " +
+            "https://cdnjs.cloudflare.com " +
 
             "media-src 'self'; " +
 
