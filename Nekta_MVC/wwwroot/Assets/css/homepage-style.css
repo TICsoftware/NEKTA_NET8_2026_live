@@ -270,8 +270,11 @@ background: transparent;
 .insight-card { height: 100%;}
 .insight-card-wrapper{padding-bottom:40px;}
 .insight-card-wrapper a { position: absolute; bottom: 0;}
-h5.swiper-no-swiping {
-    font-size: 26px;
+h5.swiper-no-swiping { font-size: 26px;}
+
+p.swiper-no-swiping.text-14 {
+    margin-top: 0.4rem;
+    line-height: 1.2;
 }
 @media (min-width: 768px) {
     .testimonial-text {
