@@ -36,7 +36,8 @@ public class CspMiddleware
 
             "style-src 'self' " +
             "https://fonts.googleapis.com " +
-            "https://cdn.jsdelivr.net; " +
+            "https://cdn.jsdelivr.net " +
+            $"'nonce-{nonce}'; " +
 
             "font-src 'self' " +
             "https://fonts.gstatic.com " +
