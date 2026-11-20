@@ -19,6 +19,7 @@ public class CspMiddleware
 
         context.Items["CSPNonce"] = nonce;
 
+
         var csp =
             "default-src 'self'; " +
 
@@ -28,14 +29,15 @@ public class CspMiddleware
             "https://www.googletagmanager.com " +
             "https://cdn.jsdelivr.net " +
             "https://analytics.google.com " +
-            "https://www.google.co.in/ads/ga-audiences " +
+            "https://www.google.co.in " +
             "https://code.jquery.com " +
             "https://cdnjs.cloudflare.com " +
             $"'nonce-{nonce}'; " +
 
             "style-src 'self' " +
             "https://fonts.googleapis.com " +
-            "https://cdn.jsdelivr.net; " +
+            "https://cdn.jsdelivr.net " +
+            $"'nonce-{nonce}'; " +
 
             "font-src 'self' " +
             "https://fonts.gstatic.com " +
@@ -44,29 +46,34 @@ public class CspMiddleware
             "img-src 'self' " +
             "https://i.ytimg.com " +
             "https://www.googletagmanager.com " +
-            "data:; " +
+            "https://www.google.com " +
+            "https://www.gstatic.com " +
             "https://cdnjs.cloudflare.com " +
+            "data: blob:; " +
 
             "media-src 'self'; " +
 
             "connect-src 'self' " +
             "https://www.google.com " +
+            "https://www.gstatic.com " +
             "https://www.google-analytics.com " +
             "https://analytics.google.com " +
-            "https://www.google.co.in/ads/ga-audiences " +
+            "https://www.google.co.in " +
             "https://cdn.jsdelivr.net; " +
 
-            "frame-ancestors 'self' " +
+            "frame-ancestors 'self'; " +
 
             "frame-src 'self' " +
             "https://www.google.com " +
-            "https://www.youtube.com " +
+            "https://recaptcha.google.com " +
+            "https://www.youtube.com; " +
 
             "object-src 'none'; " +
             "base-uri 'self'; " +
             "form-action 'self';";
 
         context.Response.Headers["Content-Security-Policy"] = csp;
+
 
         await _next(context);
     }
