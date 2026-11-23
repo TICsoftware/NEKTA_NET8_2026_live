@@ -110,3 +110,81 @@ body.sidebar-collapsed  #sidebar~#main {margin-left: 115px;}
 .image-wrapper.has-image .remove-icon {
     display: block;
 }
+
+.sidebar-input-form-check{
+    cursor: pointer;
+}
+
+.dropdown-menu dropdown-menu-end{
+    min-width: 11rem;
+}
+
+.content-none{
+    display: none;
+}
+
+.optionsBuilder-width50
+{
+    width: 50px;
+}
+
+.upload-example {
+    display: block;
+    margin-top: 5px;
+    padding: 10px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.content-show {
+    display: block;
+}
+
+.status-select {
+    width: 180px;
+}
+
+.validation-clean {
+        display: flex;
+        align-items: center;
+        /* ✅ center alignment */
+        gap: 10px;
+        padding: 10px 14px;
+        background-color: #f8d7da;
+        border: 1px solid #f5c2c7;
+        border-left: 4px solid #dc3545;
+        border-radius: 6px;
+        color: #842029;
+        font-size: 14px;
+    }
+
+    /* 🔴 Fix bullet issue */
+    .validation-clean ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    /* 🔴 Fix spacing */
+    .validation-clean li {
+        margin: 0;
+    }
+
+    /* 🔴 Icon alignment fix */
+    .validation-clean i {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+
+    .password-eye-icon {
+        top: 38px;
+        right: 15px;
+        cursor: pointer;
+    }
+
+    .actions-column {
+    width: 420px;
+}

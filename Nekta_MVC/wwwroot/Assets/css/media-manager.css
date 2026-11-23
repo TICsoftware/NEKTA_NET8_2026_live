@@ -327,3 +327,11 @@
     max-height: 60vh;
     display: block;
 }
+
+.preview-panel{
+    display:none;
+}
+
+.cropImage1-width{
+    max-width:100%;
+}

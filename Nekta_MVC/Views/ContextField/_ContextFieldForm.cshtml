@@ -7,13 +7,13 @@
 
         <div class="mb-3">
             @Html.LabelFor(m => m.name)
-            @Html.TextBoxFor(m => m.name, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.name, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.name)
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(m => m.name_key)
-            @Html.TextBoxFor(m => m.name_key, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.name_key, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.name_key, "", new { @class = "text-danger" })
         </div>
 
@@ -32,13 +32,13 @@
                     new("Image Upload", "8")
                 },
                 "Select Field Type",
-                new { @class="form-control", id="field_type_id" })
+                new { @class = "form-control", id = "field_type_id" })
             @Html.ValidationMessageFor(m => m.field_type_id, "", new { @class = "text-danger" })
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(m => m.order_id)
-            @Html.TextBoxFor(m => m.order_id, new { @class="form-control", type="number" })
+            @Html.TextBoxFor(m => m.order_id, new { @class = "form-control", type = "number" })
             @Html.ValidationMessageFor(m => m.order_id, "", new { @class = "text-danger" })
         </div>
 
@@ -50,7 +50,7 @@
                     new("Yes", "1"),
                     new("No", "0")
                 },
-                new { @class="form-control" })
+                new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.is_required, "", new { @class = "text-danger" })
         </div>
 
@@ -62,59 +62,69 @@
                     new("Active", "1"),
                     new("Inactive", "0")
                 },
-                new { @class="form-control" })
+                new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.status, "", new { @class = "text-danger" })
         </div>
-<div class="mb-3">
-    @Html.Label("Field Category")
-    @Html.DropDownListFor(m => m.is_block,
-        new List<SelectListItem>
-        {
+        <div class="mb-3">
+            @Html.Label("Field Category")
+            @Html.DropDownListFor(m => m.is_block,
+                new List<SelectListItem>
+                {
             new("Main Component Field", "0"),
             new("Block Field (Repeatable)", "1")
-        },
-        new { @class="form-control" })
-    @Html.ValidationMessageFor(m => m.is_block, "", new { @class = "text-danger" })
-</div>
+                },
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.is_block, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <!-- RIGHT COLUMN -->
     <div class="col-md-6">
-<div class="mb-3">
-    @Html.Label("Field Options (JSON)")
-    @Html.TextAreaFor(m => m.field_options, new { @class = "form-control", rows = 4 })
-    <small class="text-muted">
+        <div class="mb-3">
+            @Html.Label("Field Options (JSON)")
+            @Html.TextAreaFor(m => m.field_options, new { @class = "form-control", rows = 4 })
+
+            <small class="text-muted">
+                Example for Image Upload:
+                <pre class="upload-example" >{
+                    "allowed_types": ["jpg", "png", "webp"],
+                    "max_size_kb": 2048,
+                    "multiple": false
+                }</pre>
+            </small>
+
+            @* <small class="text-muted">
         Example for Image Upload: <br />
         {
             "allowed_types": ["jpg","png","webp"],
             "max_size_kb": 2048,
             "multiple": false
         }
-    </small>
-</div>
+    </small> *@
+        </div>
         <div class="mb-3">
             @Html.LabelFor(m => m.field_validation)
-            @Html.TextBoxFor(m => m.field_validation, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.field_validation, new { @class = "form-control" })
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(m => m.validation_script)
-            @Html.TextBoxFor(m => m.validation_script, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.validation_script, new { @class = "form-control" })
         </div>
 
         <div class="mb-3">
-            @Html.LabelFor(m => m.custom_validation) 
-            @Html.TextBoxFor(m => m.custom_validation, new { @class="form-control" })
+            @Html.LabelFor(m => m.custom_validation)
+            @Html.TextBoxFor(m => m.custom_validation, new { @class = "form-control" })
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(m => m.place_holder)
-            @Html.TextBoxFor(m => m.place_holder, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.place_holder, new { @class = "form-control" })
         </div>
 
         <div class="mb-3">
             @Html.LabelFor(m => m.help_text)
-            @Html.TextBoxFor(m => m.help_text, new { @class="form-control" })
+            @Html.TextBoxFor(m => m.help_text, new { @class = "form-control" })
         </div>
 
     </div>
@@ -123,7 +133,7 @@
 <!-- ==========================
      DROPDOWN / CHECKBOX / RADIO OPTIONS
      ========================== -->
-<div id="optionsBuilder" class="border p-3 mb-3" style="display:none;">
+<div id="optionsBuilder" class="border p-3 mb-3 content-none">
     <h5>Options</h5>
 
     <table class="table table-bordered" id="optionsTable">
@@ -131,7 +141,7 @@
             <tr>
                 <th>Label</th>
                 <th>Value</th>
-                <th style="width: 50px;">Action</th>
+                <th class="optionsBuilder-width50">Action</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -139,13 +149,13 @@
 
     <button type="button" class="btn btn-secondary js-add-option">Add Option</button>
 
-    @Html.HiddenFor(m => m.field_options, new { id="field_options" })
+    @Html.HiddenFor(m => m.field_options, new { id = "field_options" })
 </div>
 
 <!-- ==========================
      IMAGE CONFIG BOX
      ========================== -->
-<div id="imageConfigBox" class="border p-3 mb-3" style="display:none;">
+<div id="imageConfigBox" class="border p-3 mb-3 content-none">
     <h5>Image Upload Settings</h5>
 
     <label>Allowed Extensions</label>

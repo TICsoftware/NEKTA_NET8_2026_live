@@ -15,7 +15,7 @@
             <th>👤 User</th>
             <th>🔐 2FA Status</th>
             <th>🕒 Last Login</th>
-            <th style="width:420px">⚙ Actions</th>
+            <th class="actions-column">⚙ Actions</th>
         </tr>
     </thead>
 
@@ -51,20 +51,25 @@
 
                 <td>
 
-                    <button class="btn btn-success btn-sm"
-                        onclick="open2FAPopup('/Manage/Setup2FA?username=@user.username', 'Setup')">
-                        🔐 Setup
-                    </button>
+                    <button type="button"
+        class="btn btn-success btn-sm btn-2fa-action"
+        data-url="@Url.Action("Setup2FA", "Manage", new { username = user.username })"
+        data-title="Setup">
+    🔐 Setup
+</button>
 
-                    <button class="btn btn-warning btn-sm"
-                        onclick="open2FAPopup('/Manage/Reset2FA?username=@user.username', 'Reset')">
-                        🔄 Reset
-                    </button>
+<button type="button"
+        class="btn btn-warning btn-sm btn-2fa-action"
+        data-url="@Url.Action("Reset2FA", "Manage", new { username = user.username })"
+        data-title="Reset">
+    🔄 Reset
+</button>
 
-                    <a asp-action="Disable2FA" asp-route-username="@user.username" class="btn btn-danger btn-sm"
-                        onclick="return confirm('Disable 2FA for this user?')">
-                        ❌ Disable
-                    </a>
+<a asp-action="Disable2FA"
+   asp-route-username="@user.username"
+   class="btn btn-danger btn-sm btn-disable-2fa">
+    ❌ Disable
+</a>
 
                     <a asp-action="LoginLogs" asp-route-email="@user.username" class="btn btn-info btn-sm">
                         📊 Logs
@@ -102,23 +107,4 @@
     </div>
 </div>
 
-<script id="k2l9df">
-    function open2FAPopup(url, title) {
-        document.getElementById("twoFATitle").innerText = title;
-
-        fetch(url)
-            .then(res => {
-                if (!res.ok) throw new Error("Network error");
-                return res.text();
-            })
-            .then(data => {
-                document.getElementById("qrContent").innerHTML = data;
-                var modal = new bootstrap.Modal(document.getElementById('twoFAModal'));
-                modal.show();
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Failed to load 2FA content");
-            });
-    }
-</script>
+<script src="/Assets/scripts//2fa.js" id="k2l9df"></script>

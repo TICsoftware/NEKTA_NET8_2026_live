@@ -20,6 +20,7 @@ public class CspMiddleware
         context.Items["CSPNonce"] = nonce;
 
 
+
         var csp =
             "default-src 'self'; " +
 
@@ -37,10 +38,12 @@ public class CspMiddleware
             "style-src 'self' " +
             "https://fonts.googleapis.com " +
             "https://cdn.jsdelivr.net " +
+            "https://cdnjs.cloudflare.com " +
             $"'nonce-{nonce}'; " +
 
             "font-src 'self' " +
             "https://fonts.gstatic.com " +
+            "https://cdnjs.cloudflare.com " +
             "data:; " +
 
             "img-src 'self' " +
@@ -59,7 +62,8 @@ public class CspMiddleware
             "https://www.google-analytics.com " +
             "https://analytics.google.com " +
             "https://www.google.co.in " +
-            "https://cdn.jsdelivr.net; " +
+            "https://cdn.jsdelivr.net " +
+            "https://cdnjs.cloudflare.com; " +
 
             "frame-ancestors 'self'; " +
 
@@ -73,6 +77,7 @@ public class CspMiddleware
             "form-action 'self';";
 
         context.Response.Headers["Content-Security-Policy"] = csp;
+
 
 
         await _next(context);

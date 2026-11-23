@@ -73,7 +73,7 @@
                             </div>
                         </div> 
                     </div>
-                    <div class="row" id="Divmainenglishsections" style="display:@(Model.language_id == 1 ? "show" : "none")">
+                    <div class="row @(Model.language_id == 1 ? "" : "content-none")" id="Divmainenglishsections" >
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="ddSections" class="form-label">Sections </label> 
@@ -91,7 +91,7 @@
                          
                         
                     </div>
-                    <div class="row" id="div_language_sections" style="display:@(Model.language_id == 1 ? "none" : "show")">
+                    <div class="row @(Model.language_id == 1 ? "content-none" : "")" id="div_language_sections" >
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="ddLanguage_Sections" class="form-label">Language Sections </label> 
