@@ -112,8 +112,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-md-12 col-12" id="div_language_sections"
-                                                 style="display:@(Model.Language_master_id > 1 ? "block": "none");">
+                                            <div class="col-md-12 col-12 @(Model.Language_master_id > 1 ? "content-show" : "content-none")" id="div_language_sections">
                                                 <div class="form-group mb-3">
                                                     <label for="ddLanguage_Sections" class="form-label">Select Section</label>
                                                     <div class="row">

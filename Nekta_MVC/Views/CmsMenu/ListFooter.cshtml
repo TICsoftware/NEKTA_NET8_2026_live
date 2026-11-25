@@ -26,7 +26,7 @@
            maxlength="100" />
 
     <!-- Status Dropdown -->
-    <select name="Status" class="form-select ms-2" style="width: 180px;">
+    <select name="Status" class="form-select ms-2 status-select">
         <option value="">All Status</option>
         <option value="2" selected="@(Status == 2)">Active</option>
         <option value="0" selected="@(Status == 0)">Inactive</option>
@@ -157,5 +157,5 @@
 }
 
 @section Scripts {
-    <script src="~/Assets/scripts/menu_footer_index.js"></script>
+    <script src="/Assets/scripts/menu_footer_index.js"></script>
 }
