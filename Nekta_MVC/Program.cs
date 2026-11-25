@@ -230,7 +230,7 @@ app.Use(async (context, next) =>
     context.Response.Headers["Pragma"] = "no-cache";
     context.Response.Headers["Expires"] = "0";
 
-    context.Response.Headers["Strict-Transport-Security"] = "max-age=31536000";
+    context.Response.Headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains";
 
     // Remove unwanted headers
     context.Response.Headers.Remove("Server");
