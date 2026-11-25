@@ -56,20 +56,20 @@ builder.Services.AddAuthentication("MyCookieAuth")
 builder.Services.AddAuthorization();
 
 //uncomment while live start
-// builder.Services.AddSession(options =>
-// {
-//    options.IdleTimeout = TimeSpan.FromMinutes(20); // session timeout
-//    options.Cookie.HttpOnly = true;
-//    options.Cookie.IsEssential = true;
-// });
+builder.Services.AddSession(options =>
+{
+   options.IdleTimeout = TimeSpan.FromMinutes(20); // session timeout
+   options.Cookie.HttpOnly = true;
+   options.Cookie.IsEssential = true;
+});
 
-// builder.Services.AddAntiforgery(options =>
-// {
-//     options.Cookie.Name = "SecureToken";
-//     options.Cookie.HttpOnly = true;
-//     options.Cookie.SecurePolicy =
-//           CookieSecurePolicy.Always;
-// });
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "SecureToken";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy =
+          CookieSecurePolicy.Always;
+});
 //uncomment while live end
 
 builder.Services.AddHttpClient();
@@ -94,13 +94,25 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(optio
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// if (!app.Environment.IsDevelopment())
-// {
-//     //app.UseExceptionHandler("/Error");
-//      app.UseDeveloperExceptionPage();
-//     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//     app.UseHsts();
-// }
+if (!app.Environment.IsDevelopment())
+{
+    //app.UseExceptionHandler("/Error");
+     app.UseDeveloperExceptionPage();
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+
+app.Use(async (context, next) =>
+{
+    context.Response.OnStarting(() =>
+    {
+        context.Response.Headers.Remove("Server");
+        return Task.CompletedTask;
+    });
+
+    await next();
+});
 
 
 
@@ -132,17 +144,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseStatusCodePagesWithReExecute("/Error");
 
 
-// var rewriteOptions = new RewriteOptions()
 
-//     .AddRedirect("(?i)^/testslist$", "/tests-and-services", 301)
-//     .AddRedirect("(?i)^/joinTeam$", "/clinical-expertise/our-team", 301)
-//     .AddRedirect("(?i)^/antibodies$", "/", 301)
-//     .AddRedirect("(?i)^/trainingAcademy$", "/", 301)
-//     .AddRedirect("(?i)^/researchMaterial$", "/", 301)
-//     .AddRedirect("(?i)^/aboutCOP$", "/about-cop", 301)
-//     .AddRedirect("(?i)^/contactUs$", "/contactus", 301);
-
-//app.UseRewriter(rewriteOptions);
 
 
 var redirects = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -224,7 +226,7 @@ app.Use(async (context, next) =>
     context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
     context.Response.Headers["X-Permitted-Cross-Domain-Policies"] = "none";
     //uncommen for live after ssl
-    //context.Response.Headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains";
+
     context.Response.Headers["Permissions-Policy"] = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), fullscreen=(self)";
     context.Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
     context.Response.Headers["Pragma"] = "no-cache";
