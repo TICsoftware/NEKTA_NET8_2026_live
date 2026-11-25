@@ -211,6 +211,9 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     SupportedCultures = new[] { culture },
     SupportedUICultures = new[] { culture }
 });
+
+
+
 app.Use(async (context, next) =>
 {
     context.Response.Headers["Vary"] = "Accept-Encoding";
@@ -227,17 +230,23 @@ app.Use(async (context, next) =>
     context.Response.Headers["Pragma"] = "no-cache";
     context.Response.Headers["Expires"] = "0";
 
+    context.Response.Headers["Strict-Transport-Security"] = "max-age=31536000";
+
     // Remove unwanted headers
     context.Response.Headers.Remove("Server");
     context.Response.Headers.Remove("X-Powered-By");
     context.Response.Headers.Remove("X-AspNetMvc-Version");
+    context.Response.Headers.Remove("X-AspNet-Version");
 
     await next();
 });
 
+
+
 app.UseCspPolicy();
 
 app.UseRouting();
+
 
 app.UseSession();
 
