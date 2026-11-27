@@ -80,7 +80,7 @@ namespace Nekta_MVC.Routes
               pattern: "segments/horeca",
               defaults: new { controller = "Segments", action = "BusinessCorporates", title = "horeca" }
           );
-
+ 
             app.MapControllerRoute(
                           name: "culinary-excellence",
                           pattern: "solutions/culinary-excellence",

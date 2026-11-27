@@ -194,6 +194,13 @@ var redirects = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 
     // Old 404 URLs
     { @"^our-brands/?$", "/solutions/culinary-excellence" },
+
+    
+     { @"^solutions/?$", "/solutions/culinary-excellence" },
+
+    { @"^segments/?$", "/segments/business-and-corporates" },
+
+
     { @"^giftqlub/?$", "/" }
 };
 
